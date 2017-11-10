@@ -1,19 +1,21 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Bundle from './DynamicRoute';
-
-import Page1 from 'bundle-loader?lazy!../Pages/Page1';
-import Page2 from 'bundle-loader?lazy!../Pages/Page2';
+import Page1 from 'bundle-loader?lazy!../pages/Page2';
+import Page2 from 'bundle-loader?lazy!../pages/Page1';
+import MenuComs from '../components/MenuComs';
 
 
 
 export default (
   <div>
     <BrowserRouter basename={'app'} >
-      <Switch>
+      <div>
+          <MenuComs />
+          <Route path="/" exact={true} component={(props)=>BundleCom(props, Page1)} />
         <Route path="/page1" component={(props)=>BundleCom(props, Page1)} />
         <Route path="/page2" component={(props)=>BundleCom(props, Page2)} />
-      </Switch>
+      </div>
     </BrowserRouter>
   </div>
 )
