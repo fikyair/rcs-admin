@@ -5,7 +5,7 @@
   "main": "app/reactApp.js",
   "scripts": {
     "init": "yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass && yarn",
-    "dev": "NODE_ENV=development TEST_ENV=YES webpack-dev-server --watch --progress --colors --port 4000 --host 0.0.0.0",
+    "dev": "NODE_ENV=development TEST_ENV=YES webpack-dev-server --watch --progress --colors --port 3100 --host 0.0.0.0",
     "testing": "NODE_ENV=production TEST_ENV=YES ./node_modules/.bin/webpack --progress --profile --colors",
     "build": "NODE_ENV=production TEST_ENV=NO ./node_modules/.bin/webpack --progress --profile --colors"
   },
@@ -40,8 +40,10 @@
   "dependencies": {
     "antd": "^2.13.9",
     "bundle-loader": "^0.5.5",
-    "echarts": "^3.8.0",
+    "echarts": "3.8.2",
+    "echarts-for-react": "^2.0.0",
     "history": "^4.7.2",
+    "promise-polyfill": "^6.0.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
@@ -49,7 +51,8 @@
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "^1.0.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",

@@ -41,3 +41,12 @@ export class ProtectedComponent extends React.Component{
 export const PublicContainer = (function(mapStateToProps,mapDispatchToProps,Component) {
   return withRouter(connect(mapStateToProps, mapDispatchToProps)(Component));
 });
+
+export const Containerization = (mapStateToProps) =>(Component)=> {
+  if(mapStateToProps ){
+      return withRouter(connect(mapStateToProps)(Component))
+  } else {
+      return withRouter(Component);
+  }
+
+};

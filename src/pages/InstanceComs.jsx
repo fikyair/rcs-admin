@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {PublicContainer,PublicComponent} from '../ParentComponent/PublicComponent';
+import {PublicContainer,PublicComponent} from '../common/PublicComponent';
 
 const mapStateToProps = (state) => {
     return {
@@ -13,16 +13,16 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-class Page1 extends PublicComponent {
+class Page2 extends PublicComponent {
 
     render() {
 
         return (
             <div>
-                Page1
+                Page2
             </div>
         )
     }
 }
 
-export default PublicContainer(mapStateToProps, mapDispatchToProps,Page1);
+export default PublicContainer(mapStateToProps, mapDispatchToProps,Page2);

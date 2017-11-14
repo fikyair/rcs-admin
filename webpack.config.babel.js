@@ -42,7 +42,7 @@ let plugins = [
         chunks: [ 'main','vendor',],
         filename: process.env.NODE_ENV =='development'?'index.html':'public-html/index.html',
         template: './static/index.html',
-        title: 'sx-webpack',
+        title: '随行付服务监控系统',
         inject: true,
         minify: {
             removeComments: true,
@@ -81,6 +81,7 @@ if(process.env.NODE_ENV =='production'){
 export default {
     entry: {
         main:path.resolve(__dirname, './src/reactApp.jsx'),
+        vendor:['whatwg-fetch'],
     },
     output: {
         path: path.resolve(__dirname, './build'),
@@ -94,7 +95,7 @@ export default {
         jquery: 'jQuery',
         fastclick: 'FastClick',
         lodash: '_',
-        bluebird: 'Promise'
+        moment:'moment'
     },
     module: {
         rules:[
@@ -159,7 +160,7 @@ export default {
     devServer: {
         proxy: {
             '/api':{
-                target: 'http://172.16.136.70:8080',
+                target: 'http://localhost:8080',
                 pathRewrite: {"^/api" : ""}
             },
             '/nfs_data':{

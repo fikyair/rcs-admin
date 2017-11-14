@@ -1,20 +1,23 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Bundle from './DynamicRoute';
-import Page1 from 'bundle-loader?lazy!../pages/Page2';
-import Page2 from 'bundle-loader?lazy!../pages/Page1';
+import TraceComs from '../pages/TraceComs';
+import HomePage from '../pages/HomePage';
+import InstanceComs from '../pages/InstanceComs';
+import ServiceTree from '../pages/ServiceTree';
 import MenuComs from '../components/MenuComs';
 
 
 
 export default (
   <div>
-    <BrowserRouter basename={'app'} >
+    <BrowserRouter basename={''} >
       <div>
           <MenuComs />
-          <Route path="/" exact={true} component={(props)=>BundleCom(props, Page1)} />
-        <Route path="/page1" component={(props)=>BundleCom(props, Page1)} />
-        <Route path="/page2" component={(props)=>BundleCom(props, Page2)} />
+          <Route path="/" exact={true} component={HomePage} />
+          <Route path="/trace" component={TraceComs} />
+          <Route path="/instance" component={InstanceComs} />
+          <Route path="/servicetree" component={ServiceTree} />
       </div>
     </BrowserRouter>
   </div>
