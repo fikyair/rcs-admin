@@ -27,11 +27,13 @@ server.get('/users/:nickname',(req,res,next)=>{
 })
 
 server.post('/users',(req,res,next)=>{
-    db.get('users').push({ num: 3, title: 'lowdb is awesome',author: "jerry"})
+    const data = req.body;
+    console.log(JSON.stringify(data))
+    db.get('users').push(data)
         .last()
         .assign({ id: Date.now().toString() })
         .write()
-    const users = db.get('users').value()
+    const users = db.get('users').filter({userInfo:{nickname:data.userInfo.nickname}}).value()
     res.send(users)
 })
 
