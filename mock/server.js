@@ -33,7 +33,7 @@ server.post('/users',(req,res,next)=>{
         .last()
         .assign({ id: Date.now().toString() })
         .write()
-    const users = db.get('users').filter({userInfo:{nickname:data.userInfo.nickname}}).value()
+    const users = db.get('users').filter(data).value()
     res.send(users)
 })
 
