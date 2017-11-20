@@ -5,9 +5,8 @@
   "main": "app/reactApp.js",
   "scripts": {
     "init": "yarn config set sass-binary-site http://npm.taobao.org/mirrors/node-sass && yarn",
-    "dev": "NODE_ENV=development TEST_ENV=YES webpack-dev-server --watch --progress --colors --port 3100 --host 0.0.0.0",
-    "testing": "NODE_ENV=production TEST_ENV=YES ./node_modules/.bin/webpack --progress --profile --colors",
-    "build": "NODE_ENV=production TEST_ENV=NO ./node_modules/.bin/webpack --progress --profile --colors",
+    "dev": "./node_modules/.bin/webpack-dev-server --watch --progress --colors --port 3100 --host 0.0.0.0",
+    "build": "./node_modules/.bin/webpack --progress --profile --colors --config webpack.production.config.babel.js ",
     "server": "node  ./mock/server.js"
   },
   "keywords": [
@@ -53,6 +52,7 @@
     "react-router-dom": "^4.2.2",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.7.2",
+    "immutable": "^3.8.1",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
@@ -72,14 +72,10 @@
     "file-loader": "^0.11.2",
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "^2.29.0",
-    "immutable": "^3.8.1",
-    "jquery.cookie": "^1.4.1",
     "json-server": "^0.12.1",
     "less": "^2.3.1",
     "less-loader": "^4.0.4",
     "lowdb": "^1.0.0",
-    "markdown-loader": "^2.0.0",
-    "mockserver-grunt": "^1.0.42",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "postcss-pxtorem": "^3.3.1",

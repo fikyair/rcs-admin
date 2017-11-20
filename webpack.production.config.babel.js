@@ -5,8 +5,8 @@ var CompressionPlugin = require("compression-webpack-plugin");
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 const pxtorem = require('postcss-pxtorem');
-var fs = require('fs');
 
+var fs = require('fs');
 export default {
     entry: {
         main:path.resolve(__dirname, './src/reactApp.jsx'),
@@ -19,7 +19,7 @@ export default {
         sourceMapFilename: '[file].map',
         publicPath:'/',
     },
-    devtool: "source-map",
+    devtool: "hidden-source-map",
     externals:{
         jquery: 'jQuery',
         fastclick: 'FastClick',
@@ -102,14 +102,12 @@ export default {
     },
     plugins: [
         new webpack.BannerPlugin('This file is created by Jerry'),
-        new webpack.DefinePlugin({//实现React切换到产品环境的插件
-            'process': {
-                env:{
-                    NODE_ENV: JSON.stringify('development'),
-                }
+        new webpack.DefinePlugin({
+
+            'process.env': {
+                NODE_ENV: JSON.stringify('production'),//实现React切换到产品环境的插件
             },
             //定义全局变量，
-            VERSION: JSON.stringify("1.3.6"),
         }),
         new webpack.LoaderOptionsPlugin({
             ////帮你解决浏览器前缀、IE兼容问题
@@ -131,7 +129,7 @@ export default {
         }),
         new HtmlWebpackPlugin({
             chunks: [ 'main','vendor',],
-            filename: 'index.html',
+            filename: 'public-html/index.html',
             template: './static/index.html',
             title: '随行付服务监控系统',
             inject: true,
@@ -143,5 +141,15 @@ export default {
             // necessary to consistently work with multiple chunks via CommonsChunkPlugin
             chunksSortMode: 'dependency',
         }),
+        new UglifyJSPlugin({
+            compress:{warnings:false},//代码压缩
+        }),
+        new CompressionPlugin({//压缩gzip
+            asset: "[path].gz[query]",
+            algorithm: "gzip",
+            test: /\.(js|html)$/,
+            threshold: 10240,
+            minRatio: 0.8
+        })
     ]
 }
