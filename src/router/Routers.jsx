@@ -5,19 +5,21 @@ import TraceComs from '../pages/TraceComs';
 import HomePage from '../pages/HomePage';
 import InstanceComs from '../pages/InstanceComs';
 import ServiceTree from '../pages/ServiceTree';
+import Login from '../pages/Login';
 import MenuComs from '../components/MenuComs';
-
-
+import { InitComs } from  '../common/PublicComponent'
 
 export default (
   <div>
     <BrowserRouter basename={''} >
       <div>
+          <InitComs />
           <MenuComs />
           <Route path="/" exact={true} component={HomePage} />
           <Route path="/trace" component={TraceComs} />
           <Route path="/instance" component={InstanceComs} />
           <Route path="/servicetree" component={ServiceTree} />
+          <Route path="/login" component={Login} />
       </div>
     </BrowserRouter>
   </div>

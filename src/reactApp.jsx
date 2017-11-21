@@ -12,6 +12,7 @@ import 'whatwg-fetch';
 if (!window.Promise) {
     window.Promise = Promise;
 }
+
 ReactDom.render(
   <Provider store={store()}>
     <Router history={history} >

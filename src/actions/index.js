@@ -1,20 +1,34 @@
 import { checkStatus, parseJSON, headers } from '../utils/fetch-middleware';
 import {
-    queryMyFund_REQUEST,
-    API_GET_ALL_INSTANCE,
-    API_GET_DAGNODEJS_LOAD
+    CLEAR_MSG,
+    API_POST_LOGIN,
+    ASYNC_COOKIE
 } from '../utils/ActionsType';
 
-import  { FetchAPI as FetchPromise } from '../utils/fetch-middleware'
+import  { FetchAPI as FetchPromise } from '../utils/fetch-middleware';
 
 
-export function warnings(err) {
-  return {
-    type:ERROR,
-    payload:err
-  }
+/*
+* 同步本地cookie 信息
+* */
+
+export function asyncCookie(data) {
+    return {
+        type:ASYNC_COOKIE,
+        data:data,
+    }
+
 }
 
+/*
+* 清除错误信息
+* */
+export function clearErrMsg(data) {
+    return {
+        type:CLEAR_MSG,
+        data:data,
+    }
+}
 /*
 *
 * 接口请求
@@ -62,6 +76,27 @@ export function dagNodejsLoad() {
                     method:'GET',
                     headers,
                     credentials:'include'
+                }).then(parseJSON).then((data)=>{
+                    resolve(data);
+                })
+            })
+        }
+    }
+
+}
+
+//登录接口
+export function loginWithUser(data) {
+    const { name,password} = data;
+    return {
+        types:[...API_POST_LOGIN],
+        payload:'',
+        promise:()=>{
+            return new Promise((resolve,reject)=>{
+                fetch(`/api/login?Loginname=${name}&password=${password}`,{
+                    method:'POST',
+                    headers,
+                    credentials:'include',
                 }).then(parseJSON).then((data)=>{
                     resolve(data);
                 })

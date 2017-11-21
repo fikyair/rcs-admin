@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import reducers from '../reducers';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 
 function promiseMiddleware() {
@@ -16,7 +17,12 @@ function promiseMiddleware() {
 
     return promise().then(
       (result) => {
-        next({...rest, result, type: SUCCESS})
+        const { data, code} =  result;
+        if(code  == '200'){
+            next({...rest, data, type: SUCCESS})
+        } else {
+            next({...rest, result, type: FAILURE})
+        }
       },
       (error) => {
         next({...rest, error, type: FAILURE})
@@ -26,9 +32,9 @@ function promiseMiddleware() {
 }
 
 export default function() {
-
-  const finalCreateStore = applyMiddleware(promiseMiddleware)(createStore)
+  const finalCreateStore = composeWithDevTools(applyMiddleware(promiseMiddleware))(createStore)
   return finalCreateStore(reducers)
-
 }
+
+
 
