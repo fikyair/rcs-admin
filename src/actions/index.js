@@ -85,6 +85,10 @@ export function dagNodejsLoad() {
 
 }
 
+export const synchronized = async function(fun) {
+    await fun
+}
+
 //登录接口
 export function loginWithUser(data) {
     const { name,password} = data;

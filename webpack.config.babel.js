@@ -46,6 +46,18 @@ export default {
                             {
                                 "libraryName": "antd",
                                 "style":true
+                            },
+                        ],
+                        [
+                            "transform-runtime",
+                            {
+                                //表示是否开启内联的babel helpers 在调用模块名字(moduleName)时将被替换名字。
+                                "helpers": false,
+                                //表示是否把内置的东西(Promise,Set,Map,tec)转换成非全局污染垫片。
+                                "polyfill": true,
+                                //是否开启generator函数转换成使用regenerator runtime来避免污染全局域。
+                                "regenerator": true,
+                                "moduleName": "babel-runtime"
                             }
                         ],
                         "transform-react-jsx",
@@ -89,7 +101,7 @@ export default {
     devServer: {
         proxy: {
             '/api':{
-                target: 'http://localhost:8080',
+                target: 'http://172.16.40.209:8081',
                 pathRewrite: {"^/api" : ""}
             },
             '/nfs_data':{
