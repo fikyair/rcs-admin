@@ -85,6 +85,7 @@ export function dagNodejsLoad() {
 
 }
 
+//同步方法
 export const synchronized = async function(fun) {
     await fun
 }
