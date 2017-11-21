@@ -10,18 +10,20 @@ export function editLogin(id,data) {
                 fetch(`/api/cuser/2475d376fa634ec884886d8c7c31c3be`,{
                     method:'PUT',
                     headers,
-                    name: data.name,
-                    loginname: data.loginname,
-                    password: data.password,
-                    sex: 0,
-                    age: 0,
-                    email: "string",
-                    mobilephone: data.mobilephone,
-                    telephone: "123456789",
-                    iscancel: 0,
-                    userType: 0,
-                    userState: 0,
-                    remark: "string"
+                    body: {
+                        name: data.name,
+                        loginname: data.loginname,
+                        password: data.password,
+                        sex: 0,
+                        age: 0,
+                        email: "string",
+                        mobilephone: data.mobilephone,
+                        telephone: "123456789",
+                        iscancel: 0,
+                        userType: 0,
+                        userState: 0,
+                        remark: "string"
+                    }
                 }).then(parseJSON).then((data)=>{
                     resolve(data);
                 })
