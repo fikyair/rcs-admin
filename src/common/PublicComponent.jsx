@@ -12,7 +12,7 @@ import { Spin, Alert } from 'antd';
  *
  * ***/
 
-
+/*父级组件*/
 export class PublicComponent extends React.Component{
 
   static loginStatus;
@@ -24,8 +24,7 @@ export class PublicComponent extends React.Component{
   }
 }
 
-
-
+/*登录保护组件*/
 export class ProtectedComponent extends React.Component{
   static loginStatus;
   static userInfo;
@@ -39,11 +38,12 @@ export class ProtectedComponent extends React.Component{
   }
 }
 
-
+/*父级容器*/
 export const PublicContainer = (function(mapStateToProps,mapDispatchToProps,Component) {
   return withRouter(connect(mapStateToProps, mapDispatchToProps)(Component));
 });
 
+/*容器化*/
 export const Containerization = (mapStateToProps) =>(Component)=> {
   if(mapStateToProps ){
       return withRouter(connect(mapStateToProps)(Component))
@@ -98,4 +98,10 @@ export class InitComs extends React.Component{
         </div>)
   }
 
+}
+
+
+/*同步方法*/
+export const synchronized = async function(fun) {
+  await fun
 }
