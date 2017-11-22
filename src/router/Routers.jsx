@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route} from 'react-router-dom';
-import Bundle from './DynamicRoute';
+import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
 import MenuComs from '../components/MenuComs';
 import { InitComs } from  '../common/PublicComponent'
 import { renderRoutes } from 'react-router-config'
@@ -30,9 +29,6 @@ export default (
   </div>
 )
 
-
-
-
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     isLogin ? (
@@ -45,13 +41,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
     )
   )}/>
 )
-const BundleCom = (props,loader) => {
-    return (
-      <Bundle load={loader}>
-        {(Com) => <Com {...props}/>}
-      </Bundle>
-    )
-}
 
 
 
