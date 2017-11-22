@@ -5,7 +5,7 @@ import TraceComs from '../pages/TraceComs';
 import HomePage from '../pages/HomePage';
 import InstanceComs from '../pages/InstanceComs';
 import ServiceTree from '../pages/ServiceTree';
-import Login from '../pages/Login';
+import Login from '../pages/login/Login';
 import MenuComs from '../components/MenuComs';
 import { InitComs } from  '../common/PublicComponent'
 

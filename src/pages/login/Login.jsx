@@ -1,6 +1,6 @@
 import React from 'react';
-import {  loginWithUser} from '../actions/login/LoginEdit';
-import { Containerization } from '../common/PublicComponent';
+import {  loginWithUser} from '../../actions/login/LoginEdit';
+import { Containerization } from '../../common/PublicComponent';
 
 @Containerization((state)=>{
     return ({
