@@ -1,16 +1,15 @@
-import { checkStatus, parseJSON, headers } from '../../utils/fetch-middleware';
+import {  parseJSON, headers } from '../../utils/fetch-middleware';
 
 import {
-    CLEAR_MSG,
-    API_POST_LOGIN,
-    ASYNC_COOKIE
+  API_POST_EDIT,
+  API_POST_LOGIN,
 } from '../../utils/ActionsType';
 
 //登录接口
 export function editLogin(id,data) {
     const { name,password} = data;
     return {
-        types:'EDIT',
+        types:API_POST_EDIT,
         promise:()=>{
             return new Promise((resolve,reject)=>{
                 fetch(`/api/cuser/2475d376fa634ec884886d8c7c31c3be`,{

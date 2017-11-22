@@ -5,7 +5,7 @@ export const LOADING = 'LOADING';
 export const ASYNC_COOKIE='ASYNC_COOKIE';
 
 // 登录修改
-export const EDIT ='EDIT'
+export const API_POST_EDIT = ['REQUEST', 'POST_EDITSUCCESS', 'FAILURE'];
 
 
 export const API_POST_LOGIN = ['REQUEST', 'POST_LOGIN_SUCCESS', 'FAILURE'];

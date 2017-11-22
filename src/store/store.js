@@ -2,7 +2,6 @@ import { createStore, applyMiddleware } from 'redux';
 import reducers from '../reducers';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
-
 function promiseMiddleware() {
   return (next) => (action) => {
     const { promise, types, ...rest } = action
@@ -18,6 +17,7 @@ function promiseMiddleware() {
     return promise().then(
       (result) => {
         const { data, code} =  result;
+        next({...rest, data, type: 'FINISH'})
         if(code  == '200'){
             next({...rest, data, type: SUCCESS})
         } else {

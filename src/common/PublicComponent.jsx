@@ -57,9 +57,9 @@ export const Containerization = (mapStateToProps) =>(Component)=> {
 * 高阶组件用于实现本地状态同步，数据初始化
 * */
 @Containerization((state)=>({
-    loginToken:state.PromiseReducer.loginToken,
-    requestStaus:state.PromiseReducer.requestStaus,
-    errMsg:state.PromiseReducer.errMsg,
+    loginToken:state.LoginEditReducer.loginToken,
+    requestStaus:state.GlobalReducer.requestStaus,
+    errMsg:state.GlobalReducer.errMsg,
 
 }))
 export class InitComs extends React.Component{
@@ -78,6 +78,8 @@ export class InitComs extends React.Component{
       this.timer = setTimeout(()=>{
         this.clearErrMsg('');
       },10000)
+    } else {
+
     }
   }
 

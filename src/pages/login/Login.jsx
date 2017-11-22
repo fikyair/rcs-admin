@@ -4,7 +4,7 @@ import { Containerization } from '../../common/PublicComponent';
 
 @Containerization((state)=>{
     return ({
-        token:state.LoginEdit.loginToken,
+        token:state.LoginEditReducer.loginToken,
     })
 })
 export  default  class  Login extends  React.Component {

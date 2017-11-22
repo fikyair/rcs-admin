@@ -1,15 +1,12 @@
-import {EDIT ,API_POST_LOGIN, ASYNC_COOKIE, CLEAR_MSG } from '../../utils/ActionsType';
+import { API_POST_EDIT ,API_POST_LOGIN } from '../../utils/ActionsType';
 
 const initialState ={
     loginToken:'',
-    requestStaus:false,
-    errMsg:''
-}
+};
 
 export default function (state = initialState,actions ) {
-  //const {payload} = actions;
   switch (actions.type){
-    case EDIT:
+    case API_POST_EDIT:
       return {
         ...state,
         data:actions.data
@@ -20,7 +17,6 @@ export default function (state = initialState,actions ) {
           return {
               ...state,
               loginToken:token,
-              requestStaus:false
           }
     default:
       return state
