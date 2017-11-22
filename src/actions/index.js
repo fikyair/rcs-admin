@@ -90,24 +90,3 @@ export const synchronized = async function(fun) {
     await fun
 }
 
-//登录接口
-export function loginWithUser(data) {
-    const { name,password} = data;
-    return {
-        types:[...API_POST_LOGIN],
-        payload:'',
-        promise:()=>{
-            return new Promise((resolve,reject)=>{
-                fetch(`/api/login?Loginname=${name}&password=${password}`,{
-                    method:'POST',
-                    headers,
-                    credentials:'include',
-                }).then(parseJSON).then((data)=>{
-                    resolve(data);
-                })
-            })
-        }
-    }
-
-}
-

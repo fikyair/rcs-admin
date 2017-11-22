@@ -14,14 +14,6 @@ export default function (state = initialState,actions ) {
                 ...state,
                 requestStaus:true,
             }
-        case API_POST_LOGIN[1]:
-            const { token = '' } = actions.data;
-            $.cookie('token',token,{ expires: 8, path:'/'});
-            return {
-                ...state,
-                loginToken:token,
-                requestStaus:false
-            }
         case 'FAILURE':
             return {
                 ...state,
