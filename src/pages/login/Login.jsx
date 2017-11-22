@@ -3,15 +3,12 @@ import {  loginWithUser} from '../../actions/login/LoginEdit';
 import { Containerization } from '../../common/PublicComponent';
 import {FetchAPI} from '../../utils/fetch-middleware'
 
-@Containerization((state)=>{
-    return ({
-        token:state.LoginEditReducer.loginToken,
-    })
-})
-export  default  class  Login extends  React.Component {
+
+export default class Login extends React.Component {
     state = {
         name:'',
         password:'',
+        token:''
     }
 
     valueChange(v){
@@ -20,9 +17,10 @@ export  default  class  Login extends  React.Component {
     submit(){
         const { name, password} =this.state;
         if(name && password){
-            this.props.dispatch(loginWithUser({...this.state}));
+            // this.props.dispatch(loginWithUser({...this.state}));
             FetchAPI(`/login?Loginname=${name}&password=${password}`,'POST').then((data)=>{
                 console.log(data)
+               this.setState({token:data.token})
             })
         }
 
@@ -35,7 +33,7 @@ export  default  class  Login extends  React.Component {
                 <div>name<input value={name} onChange={(e)=>{this.valueChange({name:e.currentTarget.value})}}></input></div>
                 <div>password<input value={password} onChange={(e)=>{this.valueChange({password:e.currentTarget.value})}}></input></div>
                 <button onClick={()=>{this.submit()}}>登录</button>
-                {this.props.token}
+                {this.state.token}
             </div>
         )
     }
