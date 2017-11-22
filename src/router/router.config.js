@@ -1,13 +1,9 @@
 import React from 'react'
 import TraceComs from 'bundle-loader?lazy!../pages/TraceComs';
-import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import InstanceComs from 'bundle-loader?lazy!../pages/InstanceComs';
 import ServiceTree from 'bundle-loader?lazy!../pages/ServiceTree';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
-import MenuComs from 'bundle-loader?lazy!../components/MenuComs';
-import {InitComs} from 'bundle-loader?lazy!../common/PublicComponent'
-import {renderRoutes} from 'react-router-config'
 import Bundle from './DynamicRoute';
 
 const BundleCom = (props,loader) => {

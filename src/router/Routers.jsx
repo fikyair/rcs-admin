@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import { BrowserRouter, Route, Redirect} from 'react-router-dom';
 import MenuComs from '../components/MenuComs';
 import { InitComs } from  '../common/PublicComponent'
 import { renderRoutes } from 'react-router-config'

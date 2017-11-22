@@ -6,12 +6,15 @@ export const FetchAPI = (url,method,data)=>{
             credentials: 'include',
             headers: {
                 "Content-Type": ' application/json',
+                "auth-token": $.cookie('token'),
             }});
         fetch(req).then((res)=>{
             if(res.ok){
-                return res.json();
+              return res.json();
+            } else {
+              return {err:{msg:'请求异常',code:'6666'}}
             }
-            reject({err:{msg:'网络异常',code:'6666'}})
+
         }).then((result)=>{
             if(result.code == '200'){
                 resolve(result.data)
@@ -19,7 +22,7 @@ export const FetchAPI = (url,method,data)=>{
                 reject(result);
             }
         }).catch((err)=> {
-            reject({err:{msg:'后台异常',code:'6666'}})
+            reject({err:{msg:'网络异常',code:'6666'}})
         });
     })
 }
