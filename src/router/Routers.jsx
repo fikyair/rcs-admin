@@ -6,6 +6,7 @@ import HomePage from '../pages/HomePage';
 import InstanceComs from '../pages/InstanceComs';
 import ServiceTree from '../pages/ServiceTree';
 import Login from '../pages/login/Login';
+import Page from '../pages/Pagination';
 import MenuComs from '../components/MenuComs';
 import { InitComs } from  '../common/PublicComponent'
 
@@ -20,6 +21,7 @@ export default (
           <Route path="/instance" component={InstanceComs} />
           <Route path="/servicetree" component={ServiceTree} />
           <Route path="/login" component={Login} />
+          <Route path="/page" component={Page} />
       </div>
     </BrowserRouter>
   </div>
