@@ -1,14 +1,22 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Bundle from './DynamicRoute';
-import TraceComs from '../pages/TraceComs';
-import HomePage from '../pages/HomePage';
-import InstanceComs from '../pages/InstanceComs';
-import ServiceTree from '../pages/ServiceTree';
-import Login from '../pages/login/Login';
-import Page from '../pages/Pagination';
 import MenuComs from '../components/MenuComs';
 import { InitComs } from  '../common/PublicComponent'
+import { renderRoutes } from 'react-router-config'
+import { root } from './router.config.js'
+
+const routes = [
+    {
+        path: '/',
+        component: ({route}) => (
+            <div>
+                {renderRoutes(route.routes, {someProp: 'these extra props are optional'})}
+            </div>
+        ),
+        routes: [...root]
+    }
+]
 
 export default (
   <div>
@@ -16,16 +24,14 @@ export default (
       <div>
           <InitComs />
           <MenuComs />
-          <Route path="/" exact={true} component={HomePage} />
-          <Route path="/trace" component={TraceComs} />
-          <Route path="/instance" component={InstanceComs} />
-          <Route path="/servicetree" component={ServiceTree} />
-          <Route path="/login" component={Login} />
-          <Route path="/page" component={Page} />
+          {renderRoutes(routes)}
       </div>
     </BrowserRouter>
   </div>
 )
+
+
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (

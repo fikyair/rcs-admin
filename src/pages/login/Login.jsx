@@ -11,6 +11,10 @@ export default class Login extends React.Component {
         token:''
     }
 
+    componentWillMount() {
+        //alert(this.props.match.params.id)
+    }
+
     valueChange(v){
         this.setState(v)
     }
