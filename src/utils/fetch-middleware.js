@@ -13,7 +13,7 @@ export const FetchAPI = (url,method,data)=>{
             }
             reject({err:{msg:'网络异常',code:'6666'}})
         }).then((result)=>{
-            if(result.code == '0000'){
+            if(result.code == '200'){
                 resolve(result.data)
             } else {
                 reject(result);

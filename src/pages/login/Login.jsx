@@ -1,6 +1,7 @@
 import React from 'react';
 import {  loginWithUser} from '../../actions/login/LoginEdit';
 import { Containerization } from '../../common/PublicComponent';
+import {FetchAPI} from '../../utils/fetch-middleware'
 
 @Containerization((state)=>{
     return ({
@@ -20,6 +21,9 @@ export  default  class  Login extends  React.Component {
         const { name, password} =this.state;
         if(name && password){
             this.props.dispatch(loginWithUser({...this.state}));
+            FetchAPI(`/login?Loginname=${name}&password=${password}`,'POST').then((data)=>{
+                console.log(data)
+            })
         }
 
     }
