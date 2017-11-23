@@ -17,25 +17,33 @@ export default class BreadCrumbComs extends React.Component{
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.location.pathname !== this.props.location.pathname){
-      const { location } = nextProps;
-      const pathSnippets = location.pathname.split('/').filter(i => i);
-      const extraBreadcrumbItems = pathSnippets.map((_, index) => {
-        const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
-        return (
-          <Breadcrumb.Item key={url}>
-            <Link to={url}>
-              {breadcrumbNameMap[url]}
-            </Link>
-          </Breadcrumb.Item>
-        );
-      });
-      const breadcrumbItems = [(
-        <Breadcrumb.Item key="home">
-          <Link to="/">Home</Link>
-        </Breadcrumb.Item>
-      )].concat(extraBreadcrumbItems);
-      this.setState({breadcrumbItems:breadcrumbItems})
+      this.setBreadCrumItem(nextProps);
     }
+  }
+
+  componentWillMount(){
+    this.setBreadCrumItem(this.props);
+  }
+
+  setBreadCrumItem(props){
+    const { location } = props;
+    const pathSnippets = location.pathname.split('/').filter(i => i);
+    const extraBreadcrumbItems = pathSnippets.map((_, index) => {
+      const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+      return (
+        <Breadcrumb.Item key={url}>
+          <Link to={url}>
+            {breadcrumbNameMap[url]}
+          </Link>
+        </Breadcrumb.Item>
+      );
+    });
+    const breadcrumbItems = [(
+      <Breadcrumb.Item key="home">
+        <Link to="/">首页</Link>
+      </Breadcrumb.Item>
+    )].concat(extraBreadcrumbItems);
+    this.setState({breadcrumbItems:breadcrumbItems})
   }
 
   render(){

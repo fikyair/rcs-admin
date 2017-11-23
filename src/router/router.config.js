@@ -4,6 +4,7 @@ import InstanceComs from 'bundle-loader?lazy!../pages/InstanceComs';
 import ServiceTree from 'bundle-loader?lazy!../pages/ServiceTree';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
+import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
 
 const BundleCom = (props,loader) => {
@@ -15,6 +16,11 @@ const BundleCom = (props,loader) => {
 }
 
 export const root = [
+  {
+    path: '/',
+    exact: true,
+    component: (props) => BundleCom(props,HomePage),
+  },
     {
         path: '/login',
         exact: true,
