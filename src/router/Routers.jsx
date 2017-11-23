@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Redirect} from 'react-router-dom';
 import MenuComs from '../components/MenuComs';
-import { InitComs } from  '../common/PublicComponent'
-import { renderRoutes } from 'react-router-config'
-import { root } from './router.config.js'
+import { InitComs } from  '../common/PublicComponent';
+import { renderRoutes } from 'react-router-config';
+import { root } from './router.config.js';
+import BreadCrumbComs from '../components/BreadCrumbComs'
 
 const routes = [
     {
@@ -23,6 +24,7 @@ export default (
       <div>
           <InitComs />
           <MenuComs />
+          <BreadCrumbComs />
           {renderRoutes(routes)}
       </div>
     </BrowserRouter>
