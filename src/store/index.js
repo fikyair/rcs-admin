@@ -31,10 +31,10 @@ function promiseMiddleware() {
   }
 }
 
-export default function() {
+ const Storage = ()=> {
   const finalCreateStore = composeWithDevTools(applyMiddleware(promiseMiddleware))(createStore)
   return finalCreateStore(reducers)
 }
 
 
-
+export default Storage();

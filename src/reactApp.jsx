@@ -3,7 +3,7 @@ import ReactDom from 'react-dom'
 import {Provider} from 'react-redux'
 import Router from 'react-router-dom/Router';
 import {history} from './router/History';
-import store from './store/store';
+import store from './store';
 import routes  from './router/Routers';
 import Promise from 'promise-polyfill';
 import 'whatwg-fetch';
@@ -14,7 +14,7 @@ if (!window.Promise) {
 }
 
 ReactDom.render(
-  <Provider store={store()}>
+  <Provider store={store}>
     <Router history={history} >
       {routes}
     </Router>

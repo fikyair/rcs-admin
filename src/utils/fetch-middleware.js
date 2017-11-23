@@ -1,4 +1,6 @@
+import store from '../store';
 export const FetchAPI = (url,method,data)=>{
+  store.dispatch({ type: 'REQUEST'});
     return new Promise((resolve, reject) => {
         const req = new Request(`/api${url}`, {
             method: method,
@@ -8,22 +10,30 @@ export const FetchAPI = (url,method,data)=>{
                 "Content-Type": ' application/json',
                 "auth-token": $.cookie('token'),
             }});
-        fetch(req).then((res)=>{
+        try {
+          fetch(req).then((res)=>{
             if(res.ok){
               return res.json();
             } else {
               return {err:{msg:'请求异常',code:'6666'}}
             }
 
-        }).then((result)=>{
+          }).then((result)=>{
+            store.dispatch({ type: 'FINISH'});
             if(result.code == '200'){
-                resolve(result.data)
+              resolve(result.data)
             } else {
-                reject(result);
+              store.dispatch({ result:{message:"后台异常"},type: 'FAILURE'});
+              reject({err:{msg:'后台异常',code:'9999'}});
             }
-        }).catch((err)=> {
-            reject({err:{msg:'网络异常',code:'6666'}})
-        });
+          }).catch((err)=> {
+            store.dispatch({ result:{message:err.msg},type: 'FAILURE'});
+            reject({err:{msg:'网络异常',code:'6666'}});
+          });
+        } catch (e){
+          store.dispatch({ result:{message:"请检查网络"},type: 'FAILURE'});
+        }
+
     })
 }
 
