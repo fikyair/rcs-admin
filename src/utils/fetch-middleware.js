@@ -12,7 +12,8 @@ export const FetchAPI = (url,method,data)=>{
             }});
         try {
           fetch(req).then((res)=>{
-            if(res.ok){
+            //限额后台，在之前框架中加入http 400 状态码处理
+            if(res.ok || res.status == '400'){
               return res.json();
             } else {
               return {err:{msg:'请求异常',code:'6666'}}
@@ -23,7 +24,7 @@ export const FetchAPI = (url,method,data)=>{
             if(result.code == '200'){
               resolve(result.data)
             } else {
-              store.dispatch({ result:{message:"后台异常"},type: 'FAILURE'});
+              store.dispatch({ result:{message:result.message},type: 'FAILURE'});
               reject({err:{msg:'后台异常',code:'9999'}});
             }
           }).catch((err)=> {
