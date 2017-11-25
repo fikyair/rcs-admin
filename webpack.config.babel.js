@@ -102,7 +102,7 @@ export default {
     devServer: {
         proxy: {
             '/api':{
-                target: 'http://172.16.40.209:8081',
+                target: 'http://172.16.40.209:8001',
                 pathRewrite: {"^/api" : ""}
             },
             '/nfs_data':{

@@ -4,6 +4,7 @@ import InstanceComs from 'bundle-loader?lazy!../pages/InstanceComs';
 import ServiceTree from 'bundle-loader?lazy!../pages/ServiceTree';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
+import Record from 'bundle-loader?lazy!../pages/cardbin/Record';
 import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
 
@@ -46,6 +47,10 @@ export const root = [
         path: '/trace',
         exact: true,
         component: (props) => BundleCom(props,TraceComs),
+    }, {
+        path: '/record',
+        exact: true,
+        component: (props) => BundleCom(props,Record),
     }
 ]
 
