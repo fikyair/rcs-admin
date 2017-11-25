@@ -5,6 +5,7 @@ import Router from 'react-router-dom/Router';
 import { history } from './router/History';
 import store from './store';
 import routes  from './router/Routers';
+import { asyncCookie } from './actions'
 /*
 * whatwg 是fetch API的统一版本，在不支持fetch的浏览器中处理兼容问题，同时引入轻量的promise库
 * */
@@ -23,14 +24,19 @@ if (!window.Promise) {
 /*
 * 与统一门户集成，监听同步信息
 * */
+if(window.addEventListener){
+  window.addEventListener('message',(e)=>{
+    if(e.source!=window.parent) return;
+    debugger;
+    const { data } = e;
+    if(data){
+      setCurrentLoginUser(JSON.parse(data));
+      store.dispatch(asyncCookie(data.authToken))
+    }
+  });
+}
 
-window.addEventListener('message',(e)=>{
-  if(e.source!=window.parent) return;
-  debugger;
-  setCurrentLoginUser(JSON.parse(e.data));
-});
-
-initSysInfo()
+initSysInfo();
 ReactDom.render(
   <Provider store={store}>
     <Router history={history} >
