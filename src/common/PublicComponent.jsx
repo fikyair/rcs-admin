@@ -105,3 +105,16 @@ export class InitComs extends React.Component{
 export const synchronized = async function(fun) {
   await fun
 }
+
+/*
+* 装饰器，检查组件的权限状态
+* */
+export const CheckStatus = (role,roles)=> (wrapCompoent)=>{
+  return class extends React.Component{
+    render(){
+      return roles.concat('-').indexOf(role) > 0 ? wrapCompoent: null
+    }
+
+  }
+
+}

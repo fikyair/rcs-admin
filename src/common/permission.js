@@ -1,10 +1,19 @@
 
-import { setItem, getItem} from '../utils/storage'
+import { setItem, getItem} from '../utils/storage';
+
+/*
+* 设置用户权限，展示相应的视图
+* */
 export const roles = ['admin','user']
-export const permission = (role) => {
-
-
+export const checkPermission = (role,roles) => {
+  if(roles.concat('-').indexOf(role) > 0){
+    return true;
+  } else {
+    return false;
+  }
 }
+
+
 
 
 export function getCurrentLoginUser() {
