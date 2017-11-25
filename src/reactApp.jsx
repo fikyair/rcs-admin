@@ -7,11 +7,18 @@ import store from './store';
 import routes  from './router/Routers';
 import Promise from 'promise-polyfill';
 import 'whatwg-fetch';
+import { setCurrentLoginUser }  from './common/permission'
 
 // To add to window
 if (!window.Promise) {
     window.Promise = Promise;
 }
+window.addEventListener('message',(e)=>{
+  if(e.source!=window.parent) return;
+  debugger;
+  setCurrentLoginUser(JSON.parse(e.data));
+
+})
 
 ReactDom.render(
   <Provider store={store}>
