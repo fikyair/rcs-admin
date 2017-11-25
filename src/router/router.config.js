@@ -6,6 +6,7 @@ import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
 import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
+import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager'
 
 const BundleCom = (props,loader) => {
     return (
@@ -46,6 +47,10 @@ export const root = [
         path: '/trace',
         exact: true,
         component: (props) => BundleCom(props,TraceComs),
+    }, {
+        path: '/limitManager',
+        exact: true,
+        component: (props) => BundleCom(props,LimitManager),
     }
 ]
 
