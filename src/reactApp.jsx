@@ -8,6 +8,7 @@ import routes  from './router/Routers';
 import Promise from 'promise-polyfill';
 import 'whatwg-fetch';
 import { setCurrentLoginUser }  from './common/permission'
+import {initSysInfo} from "./utils/utils";
 
 // To add to window
 if (!window.Promise) {
@@ -20,6 +21,7 @@ window.addEventListener('message',(e)=>{
 
 })
 
+initSysInfo()
 ReactDom.render(
   <Provider store={store}>
     <Router history={history} >

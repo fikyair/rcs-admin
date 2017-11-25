@@ -22,7 +22,13 @@ export const FetchAPI = (url,method,data)=>{
           }).then((result)=>{
             store.dispatch({ type: 'FINISH'});
             if(result.code == '200'){
-              resolve(result.data)
+                resolve(result.data)
+            } else if(result.code === '205'){ // 刷新缓存
+                $.cookie('Version-Token', result.msg, { expires: 8, path: '/'});
+                setTimeout(()=>{
+                    window.location.reload();
+                },1000)
+                throw new Error('请稍候，页面升级中');
             } else {
               store.dispatch({ result:{message:result.message},type: 'FAILURE'});
               reject({err:{msg:'后台异常',code:'9999'}});
