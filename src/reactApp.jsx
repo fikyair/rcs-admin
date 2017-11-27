@@ -27,10 +27,9 @@ if (!window.Promise) {
 if(window.addEventListener){
   window.addEventListener('message',(e)=>{
     if(e.source!=window.parent) return;
-    debugger;
     const { data } = e;
-    if(data){
-      setCurrentLoginUser(JSON.parse(data));
+    if(data && data.authToken){
+      setCurrentLoginUser(data);
       store.dispatch(asyncCookie(data.authToken))
     }
   });

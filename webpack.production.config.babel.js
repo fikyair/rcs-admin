@@ -48,6 +48,14 @@ export default {
                                 "style":true
                             }
                         ],
+                      [
+                        "transform-runtime",
+                        {
+
+                          "regenerator": true,
+                          "moduleName": "babel-runtime"
+                        }
+                      ],
                         "transform-react-jsx",
                         "add-module-exports",
                         "transform-decorators-legacy"

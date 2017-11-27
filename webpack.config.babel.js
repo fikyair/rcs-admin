@@ -52,17 +52,13 @@ export default {
                         [
                             "transform-runtime",
                             {
-                                //表示是否开启内联的babel helpers 在调用模块名字(moduleName)时将被替换名字。
-                                "helpers": false,
-                                //表示是否把内置的东西(Promise,Set,Map,tec)转换成非全局污染垫片。
-                                "polyfill": true,
-                                //是否开启generator函数转换成使用regenerator runtime来避免污染全局域。
+
                                 "regenerator": true,
                                 "moduleName": "babel-runtime"
                             }
                         ],
                         "transform-react-jsx",
-                        "add-module-exports",
+
                         "transform-decorators-legacy"
                     ]
                 },

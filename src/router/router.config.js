@@ -9,7 +9,8 @@ import NewAdded from 'bundle-loader?lazy!../pages/cardbin/NewAdded';
 import Modify from 'bundle-loader?lazy!../pages/cardbin/Modify';
 import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
-import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager'
+import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager';
+import LimitModel from 'bundle-loader?lazy!../pages/limi/LimitModel';
 import Address from 'bundle-loader?lazy!../components/Address'
 
 const BundleCom = (props,loader) => {
@@ -72,6 +73,10 @@ export const root = [
         path: '/Address',
         exact: true,
         component: (props) => BundleCom(props,Address),
-    }
+    }, {
+    path: '/Limitmodel',
+    exact: true,
+    component: (props) => BundleCom(props,LimitModel),
+  }
 ]
 
