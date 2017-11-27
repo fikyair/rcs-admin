@@ -10,6 +10,7 @@ import Modify from 'bundle-loader?lazy!../pages/cardbin/Modify';
 import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
 import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager'
+import Address from 'bundle-loader?lazy!../components/Address'
 
 const BundleCom = (props,loader) => {
     return (
@@ -66,6 +67,11 @@ export const root = [
         path:'/modify',
         exact:true,
         component: (props) => BundleCom(props,Modify),
+    }
+    , {
+        path: '/Address',
+        exact: true,
+        component: (props) => BundleCom(props,Address),
     }
 ]
 
