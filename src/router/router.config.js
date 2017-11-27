@@ -8,6 +8,7 @@ import Record from 'bundle-loader?lazy!../pages/cardbin/Record';
 import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
 import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager'
+import Address from 'bundle-loader?lazy!../components/Address'
 
 const BundleCom = (props,loader) => {
     return (
@@ -56,6 +57,11 @@ export const root = [
         path: '/limitManager',
         exact: true,
         component: (props) => BundleCom(props,LimitManager),
+    }
+    , {
+        path: '/Address',
+        exact: true,
+        component: (props) => BundleCom(props,Address),
     }
 ]
 
