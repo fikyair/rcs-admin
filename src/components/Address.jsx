@@ -1,6 +1,7 @@
 import React from 'react'
 import {Select} from 'antd';
 import {Form} from 'antd'
+
 const FormItem = Form.Item
 const Option = Select.Option;
 @Form.create()
@@ -19,39 +20,39 @@ export default class Address extends React.Component {
 
 
     // 获取省份下拉数据
-    getProvince() {
+    getProvince = () => {
         //　接口返回的数据
         this.setState({provinceData: [{areaId: '1', areaNm: '北京'}, {areaId: '２', areaNm: '黑龙江'},]})
     }
 
     // 获取省份下拉数据
-    getCity(provinceId) {
+    getCity = (provinceId) => {
         //　接口返回的数据
         this.setState({cityData: [{areaId: '1', areaNm: '北京'}, {areaId: '２', areaNm: '黑龙江'},]})
     }
 
 
     // 获取地址区下拉列表
-    getArea(cityId) {
+    getArea = (cityId) => {
         //　接口返回的数据
         this.setState({areaData: [{areaId: '1', areaNm: '北京'}, {areaId: '２', areaNm: '黑龙江'},]})
     }
 
 
     // 渲染地址省下拉列表
-    renderProvince() {
+    renderProvince = () => {
         return this.state.provinceData.map(item => <Option key={item.areaId}
                                                            value={String(item.areaId)}>{item.areaNm}</Option>);
     }
 
     // 渲染地址市下拉列表
-    renderCity() {
+    renderCity = () => {
         return this.state.cityData.map(item => <Option key={item.areaId}
                                                        value={String(item.areaId)}>{item.areaNm}</Option>);
     }
 
     // 渲染地址区下拉列表
-    renderArea() {
+    renderArea = () => {
         return this.state.areaData.map(item => <Option key={item.areaId}
                                                        value={String(item.areaId)}>{item.areaNm}</Option>);
     }
@@ -59,7 +60,6 @@ export default class Address extends React.Component {
     componentWillMount() {
         this.getProvince()
     }
-
 
     render() {
         const formItemLayout = {
@@ -131,7 +131,6 @@ export default class Address extends React.Component {
                         </Select>
                     )}
                 </FormItem>
-
 
 
             </div>
