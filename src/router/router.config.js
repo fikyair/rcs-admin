@@ -5,6 +5,8 @@ import ServiceTree from 'bundle-loader?lazy!../pages/ServiceTree';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
 import Record from 'bundle-loader?lazy!../pages/cardbin/Record';
+import NewAdded from 'bundle-loader?lazy!../pages/cardbin/NewAdded';
+import Modify from 'bundle-loader?lazy!../pages/cardbin/Modify';
 import HomePage from 'bundle-loader?lazy!../pages/HomePage';
 import Bundle from './DynamicRoute';
 import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager'
@@ -56,6 +58,14 @@ export const root = [
         path: '/limitManager',
         exact: true,
         component: (props) => BundleCom(props,LimitManager),
+    },{
+        path:'/newadded',
+        exact:true,
+        component: (props) => BundleCom(props,NewAdded),
+    },{
+        path:'/modify',
+        exact:true,
+        component: (props) => BundleCom(props,Modify),
     }
 ]
 

@@ -50,7 +50,7 @@ export default class Record extends React.Component {
 
     mockData = {
         list:[{
-            label:'銀行卡類型',
+            label:'银行卡类型',
             name:'cardType',
             option:[
                 {
@@ -63,6 +63,18 @@ export default class Record extends React.Component {
                 }
             ],
 
+        },{
+            label:'目标对象',
+            name:'cardObject',
+            option:[
+                {
+                    value:'1',
+                    name:'实体'
+                },{
+                    value:'2',
+                    name:'非实体',
+                }
+            ],
         }],
     }
 
@@ -138,15 +150,20 @@ export default class Record extends React.Component {
         //const { autoCompleteResult } = this.state;
 
         const formItemLayout = {
-            labelCol: {
-                xs: {span: 24},
-                sm: {span: 6},
+            labelCol: {//文字
+                xs: {span: 24},//小于768px
+                sm: {span: 10},//大于768px
             },
-            wrapperCol: {
+            wrapperCol: {//标签
                 xs: {span: 24},
                 sm: {span: 14},
             },
         };
+        const queryItemLayout ={
+            xs: 12,
+            sm: 8,
+            md: 6,
+        }
         const tailFormItemLayout = {
             wrapperCol: {
                 xs: {
@@ -192,30 +209,31 @@ export default class Record extends React.Component {
                             hasFeedback
                         >*/}
 
-                        {
+                        {/*{
                             this.mockData.list.map((v,k)=>{
-                                return <FormItem
-                                    key={k}
-                                    {...formItemLayout}
-                                    label={v.label}
-                                >{
-                                    getFieldDecorator(v.name)(
-                                        <Select labelInValue defaultValue={{key: '1'}}
-                                                style={{width: 120, marginLeft: 30}}>
-                                            {
-                                                v.option.map((va,k)=>{
-                                                    return <Option key={k} value={va.value}>{va.name}</Option>
-                                                })
-                                            }
-                                        </Select>
-                                    )
-                                }</FormItem>
+                                return (
+                                    <FormItem
+                                        key={k}
+                                        {...formItemLayout}
+                                        label={v.label}
+                                    >{
+                                        getFieldDecorator(v.name)(
+                                            <Select labelInValue defaultValue={{key: '1'}}
+                                                    style={{width: 120, marginLeft: 30}}>
+                                                {
+                                                    v.option.map((va,k)=>{
+                                                        return <Option key={k} value={va.value}>{va.name}</Option>
+                                                    })
+                                                }
+                                            </Select>
+                                        )
+                                    }</FormItem>
+                                )
                             })
-                        }
+                        }*/}
 
                         <Row style={{marginTop: 40}}>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="目标群体:"
@@ -232,7 +250,6 @@ export default class Record extends React.Component {
                                         }
 
                                     </FormItem>
-                                </div>
                             </Col>
                             <Col className="gutter-row" span={6}>
                                 <div className="gutter-box">
@@ -252,8 +269,7 @@ export default class Record extends React.Component {
                                     </FormItem>
                                 </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择设备身份:"
@@ -268,11 +284,8 @@ export default class Record extends React.Component {
                                                 </Select>
                                             )
                                         }</FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
-
+                            <Col className="gutter-row" {...queryItemLayout}>
                                       <FormItem
                                     {...formItemLayout}
                                     label="请选择终端:"
@@ -286,13 +299,11 @@ export default class Record extends React.Component {
                                     </Select>
                                         )
                                     }</FormItem>
-                                </div>
                             </Col>
                         </Row>
 
                         <Row gutter={16} style={{marginTop: 40}}>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择风险等级:"
@@ -305,10 +316,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择结算方式:"
@@ -321,10 +330,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择行业大类:"
@@ -337,10 +344,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择行业细类:"
@@ -353,12 +358,10 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
                         </Row>
                         <Row gutter={16} style={{marginTop: 40}}>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择MCC码:"
@@ -371,10 +374,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择交易方式:"
@@ -387,10 +388,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择渠道:"
@@ -403,10 +402,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择扫码方式:"
@@ -419,12 +416,10 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
                         </Row>
                         <Row gutter={16} style={{marginTop: 40}}>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择卡片所属人:"
@@ -437,10 +432,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择卡属性:"
@@ -453,10 +446,8 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
-                            <Col className="gutter-row" span={6}>
-                                <div className="gutter-box">
+                            <Col className="gutter-row" {...queryItemLayout}>
                                     <FormItem
                                         {...formItemLayout}
                                         label="请选择卡介质:"
@@ -469,7 +460,6 @@ export default class Record extends React.Component {
                                         <Option value="1">全部</Option>
                                     </Select>
                                     </FormItem>
-                                </div>
                             </Col>
                         </Row>
                         {/*</FormItem>*/}
