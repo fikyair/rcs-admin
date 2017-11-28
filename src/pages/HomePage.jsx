@@ -1,6 +1,6 @@
 import React from 'react';
 import { Containerization } from '../common/PublicComponent';
-import { Select } from 'antd'
+import SelectComs, {Option} from '../components/SelectComs'
 
 @Containerization()
 export default class HomePage extends React.Component{
@@ -16,16 +16,15 @@ export default class HomePage extends React.Component{
         const {options} =this.state;
         return (
           <div>
-              <Select style={{ width:'50%',marginLeft: '25%', marginTop: '20px' }} placeholder={"查询..."} allowClear={true} showSearch={true}>
+              <SelectComs labelName="中国" style={{ width:'50%',marginLeft: '25%', marginTop: '20px' }} placeholder={"查询..."} allowClear={true} showSearch={true}>
                 {options}
-              </Select>
+              </SelectComs>
               <div>
-              <Select defaultValue="lucy" style={{ width: 120 }} >
-                <Select.Option value="jack">Jack</Select.Option>
-                <Select.Option value="lucy">Lucy</Select.Option>
-                <Select.Option value="disabled" disabled>Disabled</Select.Option>
-                <Select.Option value="Yiminghe">yiminghe</Select.Option>
-              </Select>
+              <SelectComs labelName="中国" defaultValue="lucy" style={{ width: 120 }} >
+                <Option value="jack">Jack</Option>
+                <Option value="lucy">Lucy</Option>
+                <Option value="disabled" disabled>Disabled</Option>
+              </SelectComs>
               </div>
             </div>
         );
