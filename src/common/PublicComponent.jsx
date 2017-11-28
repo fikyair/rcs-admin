@@ -118,3 +118,39 @@ export const CheckStatus = (role,roles)=> (wrapCompoent)=>{
   }
 
 }
+
+/*
+ * 装饰器
+ * 设置头部
+ * */
+export  const setTitle =(name)=>  (Wrapper)=>{
+  return class extends React.Component{
+    componentWillMount () {
+      this.refreshTitle(name);
+    }
+
+
+    refreshTitle(title){
+      if(!title){
+        return;
+      }
+      document.title = title;
+      const iframe = document.createElement('iframe');
+      iframe.style.cssText = 'display: none; width: 0; height: 0;';
+      iframe.src = '';
+      const listener = () => {
+        setTimeout(() => {
+          iframe.removeEventListener('load', listener);
+          setTimeout(() => {
+            document.body.removeChild(iframe);
+          }, 0);
+        }, 0);
+      };
+      iframe.addEventListener('load', listener);
+      document.body.appendChild(iframe);
+    }
+    render() {
+      return <Wrapper {...this.props}></Wrapper>
+    }
+  }
+};

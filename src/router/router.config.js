@@ -1,6 +1,6 @@
 import React from 'react'
 import TraceComs from 'bundle-loader?lazy!../pages/TraceComs';
-import InstanceComs from 'bundle-loader?lazy!../pages/InstanceComs';
+import LimitDetails from 'bundle-loader?lazy!../pages/LimitDetails';
 import ServiceTree from 'bundle-loader?lazy!../pages/ServiceTree';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
@@ -45,9 +45,9 @@ export const root = [
         exact: true,
         component: (props) => BundleCom(props,ServiceTree),
     }, {
-        path: '/instance',
+        path: '/limitdetails',
         exact: true,
-        component: (props) => BundleCom(props,InstanceComs),
+        component: (props) => BundleCom(props,LimitDetails),
     }, {
         path: '/trace',
         exact: true,

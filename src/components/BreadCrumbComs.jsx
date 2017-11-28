@@ -48,9 +48,8 @@ export default class BreadCrumbComs extends React.Component{
 
   render(){
     const { breadcrumbItems } = this.state;
-    return (<div><Breadcrumb>
+    return (<Breadcrumb style={{padding: '10px'}}>
       { breadcrumbItems }
-    </Breadcrumb>
-    </div>)
+    </Breadcrumb>)
   }
 }
