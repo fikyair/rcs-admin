@@ -5,7 +5,6 @@ import { Layout,Table,Button, Icon} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
 
 @setTitle('首页')
-@withRouter
 @Containerization()
 export default class HomePage extends React.Component{
     state = {
@@ -48,6 +47,7 @@ export default class HomePage extends React.Component{
         year:'',
         lifeTime:'',
         interval:'',
+        id:'xxxxxx',
 
       }, {
         key: '2',
@@ -60,6 +60,7 @@ export default class HomePage extends React.Component{
         year:'',
         lifeTime:'',
         interval:'',
+        id:'xxxxxy',
       }, {
         key: '3',
         name: 'John Brown',
@@ -71,13 +72,15 @@ export default class HomePage extends React.Component{
         year:'',
         lifeTime:'',
         interval:'',
+        id:'xxxxxz',
       }],
       columns:[
         {
           title: '限额名称',
           dataIndex: 'name',
           key: 'name',
-          render: text => <a href="#">{text}</a>,
+          render: (text, record) => <Link to={`/limitdetails/${record.id}`} >{text}</Link>
+
         }, {
           title: '单笔',
           dataIndex: 'single',

@@ -3,8 +3,7 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 const breadcrumbNameMap = {
-  '/apps': 'Application List',
-  '/apps/1': 'Application1',
+  '/limitdetails': '限额详情',
   '/apps/2': 'Application2',
   '/apps/1/detail': 'Detail',
   '/apps/2/detail': 'Detail',

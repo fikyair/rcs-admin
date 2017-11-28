@@ -45,7 +45,7 @@ export const root = [
         exact: true,
         component: (props) => BundleCom(props,ServiceTree),
     }, {
-        path: '/limitdetails',
+        path: '/limitdetails/:id',
         exact: true,
         component: (props) => BundleCom(props,LimitDetails),
     }, {
