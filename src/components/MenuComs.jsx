@@ -26,12 +26,12 @@ export default class  extends React.Component {
                     <Icon type="app" />首页
                 </Menu.Item>
                 <Menu.Item key="trace">
-                    <Link to="/trace"/>
-                    <Icon type="trace" />跟踪
+                    <Link to="/limitdetails/xxxxxx"/>
+                    <Icon type="trace" />限额详情
                 </Menu.Item>
                 <Menu.Item key="instance">
-                    <Link to="/instance"/>
-                    <Icon type="instance" />实例概览
+                    <Link to="/operationrecord"/>
+                    <Icon type="instance" />查看操作记录页面
                 </Menu.Item>
                 <Menu.Item key="servicetree">
                     <Link to="/servicetree"/>

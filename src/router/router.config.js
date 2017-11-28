@@ -1,7 +1,7 @@
 import React from 'react'
 import TraceComs from 'bundle-loader?lazy!../pages/TraceComs';
 import LimitDetails from 'bundle-loader?lazy!../pages/LimitDetails';
-import ServiceTree from 'bundle-loader?lazy!../pages/ServiceTree';
+import OperationRecord from 'bundle-loader?lazy!../pages/OperationRecord';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Page from 'bundle-loader?lazy!../pages/Pagination';
 import Record from 'bundle-loader?lazy!../pages/cardbin/Record';
@@ -43,15 +43,15 @@ export const root = [
     }, {
         path: '/servicetree',
         exact: true,
-        component: (props) => BundleCom(props,ServiceTree),
+        component: (props) => BundleCom(props,OperationRecord),
     }, {
         path: '/limitdetails/:id',
         exact: true,
         component: (props) => BundleCom(props,LimitDetails),
     }, {
-        path: '/trace',
+        path: '/operationrecord',
         exact: true,
-        component: (props) => BundleCom(props,TraceComs),
+        component: (props) => BundleCom(props,OperationRecord),
     }, {
         path: '/record',
         exact: true,
