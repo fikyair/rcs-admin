@@ -19,7 +19,9 @@ export default class NewAdded extends React.Component{
                 let data = this.props.form.getFieldsValue();
                 console.log('form数据', data);
                 FetchAPI(`/rcslmainpart`, 'post', data).then((data) => {
-                    console.log(data)
+                    //返回数据列表页
+                    this.props.history.push('/modify')
+                    // console.log(data)
                 })
             }
         });
