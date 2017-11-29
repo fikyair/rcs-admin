@@ -138,7 +138,7 @@ export default {
         }),
         new HtmlWebpackPlugin({
             chunks: [ 'main','vendor',],
-            filename: 'public-html/index.html',
+            filename: 'index.html',
             template: './static/index.html',
             title: '随行付风控限额系统',
             inject: true,
