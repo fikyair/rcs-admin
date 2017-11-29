@@ -116,6 +116,7 @@ export default {
                 NODE_ENV: JSON.stringify('production'),//实现React切换到产品环境的插件
             },
             //定义全局变量，
+          VERSION: JSON.stringify("1.3.6"),
         }),
         new webpack.LoaderOptionsPlugin({
             ////帮你解决浏览器前缀、IE兼容问题
