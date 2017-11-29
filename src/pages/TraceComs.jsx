@@ -2,6 +2,8 @@ import React from 'react';
 
 import {PublicContainer,PublicComponent} from '../common/PublicComponent';
 
+import ExtractData from '../components/ExtractData';
+
 const mapStateToProps = (state) => {
     return {
 
@@ -20,6 +22,7 @@ class Page1 extends PublicComponent {
         return (
             <div>
                 Page1
+                <ExtractData />
             </div>
         )
     }
