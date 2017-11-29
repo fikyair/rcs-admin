@@ -2,7 +2,8 @@ import { checkStatus, parseJSON, headers } from '../utils/fetch-middleware';
 import {
     CLEAR_MSG,
     API_POST_LOGIN,
-    ASYNC_COOKIE
+    ASYNC_COOKIE,
+  API_GET_CARD
 } from '../utils/ActionsType';
 
 import  { FetchAPI as FetchPromise } from '../utils/fetch-middleware';
@@ -35,6 +36,24 @@ export function clearErrMsg(data) {
 *
 * */
 
+//登录接口
+export function getCardBin() {
+  return {
+    types:[...API_GET_CARD],
+    payload:'',
+    promise:()=>{
+      return new Promise((resolve,reject)=>{
+        fetch(`/api/rcslmodelcardbin`,{
+          method:'POST',
+          headers,
+          credentials:'include',
+        }).then(checkStatus).then(parseJSON).then((data)=>{
+          resolve(data);
+        })
+      })
+    }
+  }
 
+}
 
 
