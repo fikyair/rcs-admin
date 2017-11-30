@@ -1,11 +1,29 @@
 import React from 'react';
-import { Table, Input, Icon, Button, Popconfirm } from 'antd';
-
+import { Table, Pagination } from 'antd';
+const datamock=[{
+    key: '1',
+    singleLimit: '12000',
+    dayAmountLimit: '1325',
+    monthAmountLimit: '4532',
+    yearAmountLimit: '781501',
+    lifeAmountLimit: '12452',
+    twoIntervals: '450',
+    strokeCount: '500',
+    stroke: '12330',
+    state: '1',
+    operational: '王永飞',
+    operationTime: '2017-11-29 12:30:12'
+}];
+function showTotal(total) {
+    return `Total ${total} items`;
+}
 export default class EditableTable extends React.Component {
     state = {
         pageNum : 1,
         pageSize: 3,
+        total: 0,
         data: [],
+        key: '1',
     };
     constructor(props) {
         super(props);
@@ -46,12 +64,17 @@ export default class EditableTable extends React.Component {
 
 
     }
+
     render() {
         const { dataSource } = this.state;
         const columns = this.columns;
         return (
             <div>
-                <Table bordered dataSource={dataSource} columns={columns} />
+                <Table bordered dataSource={datamock}  pagination={false} columns={columns} />
+
+                <div style={{textAlign: 'left',marginTop: 20}}>
+                    <Pagination size="large" total={50} showSizeChanger showQuickJumper />
+                </div>
             </div>
         );
     }
