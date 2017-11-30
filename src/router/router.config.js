@@ -6,8 +6,8 @@ import OperationRecord from 'bundle-loader?lazy!../pages/limit/OperationRecord';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import LimitModel from 'bundle-loader?lazy!../pages/limit/LimitModel';
 import LimitHome from 'bundle-loader?lazy!../pages/merchentlimit/LimitHome'
-import LimitDetails from 'bundle-loader?lazy!../pages/merchentlimit/LimitDetails'
-import OperationRecord from 'bundle-loader?lazy!../pages/merchentlimit/OperationRecord'
+import MerchentLimitDetails from 'bundle-loader?lazy!../pages/merchentlimit/MerchentLimitDetails'
+import MerchentOperationRecord from 'bundle-loader?lazy!../pages/merchentlimit/MerchentOperationRecord'
 
 const BundleCom = (props,loader) => {
     return (
@@ -50,6 +50,14 @@ export const root = [
     path: '/merchentlimithome',
     exact: true,
     component: (props) => BundleCom(props,LimitHome),
-  }
+  },{
+        path: '/merchentLimitDetails',
+        exact: true,
+        component: (props) => BundleCom(props,MerchentLimitDetails),
+    },{
+        path: '/MerchentOperationRecord',
+        exact: true,
+        component: (props) => BundleCom(props,MerchentOperationRecord),
+    }
 ]
 
