@@ -12,6 +12,7 @@ import Bundle from './DynamicRoute';
 import LimitManager from 'bundle-loader?lazy!../pages/cardbin/LimitManager';
 import LimitModel from 'bundle-loader?lazy!../pages/limit/LimitModel';
 import Address from 'bundle-loader?lazy!../components/Address'
+import LimitHome from 'bundle-loader?lazy!../pages/merchentlimit/LimitHome'
 
 const BundleCom = (props,loader) => {
     return (
@@ -77,6 +78,10 @@ export const root = [
     path: '/Limitmodel',
     exact: true,
     component: (props) => BundleCom(props,LimitModel),
-  }
+  }, {
+        path: '/MerchentLimitHome',
+        exact: true,
+        component: (props) => BundleCom(props,LimitHome),
+    }
 ]
 
