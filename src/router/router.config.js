@@ -3,11 +3,11 @@ import Bundle from './DynamicRoute';
 import LimitManager from 'bundle-loader?lazy!../pages/limit/LimitManager';
 import LimitDetails from 'bundle-loader?lazy!../pages/limit/LimitDetails';
 import OperationRecord from 'bundle-loader?lazy!../pages/limit/OperationRecord';
-
 import Login from 'bundle-loader?lazy!../pages/login/Login';
-
 import LimitModel from 'bundle-loader?lazy!../pages/limit/LimitModel';
 import LimitHome from 'bundle-loader?lazy!../pages/merchentlimit/LimitHome'
+import LimitDetails from 'bundle-loader?lazy!../pages/merchentlimit/LimitDetails'
+import OperationRecord from 'bundle-loader?lazy!../pages/merchentlimit/OperationRecord'
 
 const BundleCom = (props,loader) => {
     return (
