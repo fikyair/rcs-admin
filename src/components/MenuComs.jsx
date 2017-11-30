@@ -22,8 +22,8 @@ export default class  extends React.Component {
                 mode="horizontal"
             >
                 <Menu.Item key="app">
-                    <Link to="/"/>
-                    <Icon type="app" />首页
+                    <Link to="/limitManager"/>
+                    <Icon type="app" />限额管理
                 </Menu.Item>
                 <Menu.Item key="trace">
                     <Link to="/limitdetails/xxxxxx"/>

@@ -4,7 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 const breadcrumbNameMap = {
   '/limitdetails': '限额详情',
-  '/apps/2': 'Application2',
+  '/limitManager': '限额管理',
   '/apps/1/detail': 'Detail',
   '/apps/2/detail': 'Detail',
 };
