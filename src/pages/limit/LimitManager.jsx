@@ -1,6 +1,6 @@
 import React from 'react';
-import { Containerization, setTitle } from '../common/PublicComponent';
-import SelectComs, {Option} from '../components/SelectComs';
+import { Containerization, setTitle } from '../../common/PublicComponent';
+import SelectComs, {Option} from '../../components/SelectComs';
 import { Layout,Table,Button, Icon} from 'antd';
 import {Link,} from 'react-router-dom';
 

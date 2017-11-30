@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Layout } from 'antd'
-import {Containerization, setTitle} from '../common/PublicComponent';
+import {Containerization, setTitle} from '../../common/PublicComponent';
 
 @setTitle('限额详情页')
 @Containerization()

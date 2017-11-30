@@ -3,7 +3,7 @@ import { Layout,Icon, Table} from 'antd';
 import {Link } from 'react-router-dom';
 
 
-import { Containerization, setTitle } from '../common/PublicComponent';
+import { Containerization, setTitle } from '../../common/PublicComponent';
 
 @setTitle('操作记录')
 @Containerization()
