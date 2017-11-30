@@ -17,8 +17,7 @@ export default class LimitHome extends React.Component {
     constructor(props, state){
         super(props, state);
     }
-
-
+    
     columns = [{
         title: '商户编号',
         dataIndex: 'merchantCode',
