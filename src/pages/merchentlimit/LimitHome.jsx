@@ -1,10 +1,13 @@
 import React from 'react'
-import {Form, Col, Row, Select,Table, Button,Input, Layout} from 'antd'
+import {Form, Col, Row, Select,Table, Button,Input, Layout,} from 'antd'
 import {Link} from 'react-router-dom'
+import { Containerization } from '../../common/PublicComponent';
+
 const FormItem = Form.Item
 const Option = Select.Option
 
 @Form.create()
+@Containerization()
 export default class LimitHome extends React.Component {
 
     state = {
@@ -21,7 +24,7 @@ export default class LimitHome extends React.Component {
     columns = [{
         title: '商户编号',
         dataIndex: 'merchantCode',
-        render: text => <Link href="#">{text}</Link>,
+        render: text => <Link to="#">{text}</Link>,
     }, {
         title: '单笔（金额）',
         dataIndex: 'sigle',
@@ -53,19 +56,24 @@ export default class LimitHome extends React.Component {
             return (
                 <div className="editable-row-operations">
                     {/*<Link to="/">修改</Link>*/}
-                    <span style={{color:'blue', cursor:'pointer'}} onClick={()=>this.props.history.push('/newadded')}>
+                    <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{}}>
                         停用
                     </span>&nbsp;&nbsp;&nbsp;
-                    <span style={{color:'blue', cursor:'pointer'}} onClick={ ()=>{this.showModal(record) }}>
+                    <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{this.edit(record)}}>
                         修改
                     </span>&nbsp;&nbsp;&nbsp;
-                    <span style={{color:'blue', cursor:'pointer'}} onClick={ ()=>{this.showModal(record) }}>
+                    <span style={{color:'blue', cursor:'pointer'}}>
                         操作记录
                     </span>&nbsp;&nbsp;&nbsp;
                 </div>
             );
         },
     }];
+
+
+    edit(record) {
+        this.props.history.push('/merchentlimitadd',{title:'商户修改限额'})
+    }
 
     componentWillMount() {
      let dataSource = [
@@ -96,6 +104,8 @@ export default class LimitHome extends React.Component {
             pageSize,
             ...data,
         }
+
+
 
 
     }
@@ -230,6 +240,9 @@ export default class LimitHome extends React.Component {
 
                     </Form>
 
+                </div>
+                <div style={{marginTop:'15px',marginBottom:'15px'}}>
+                    <Button type="primary" onClick={()=>{this.props.history.push('/merchentlimitadd',{title:'商户添加限额'})}}>添加</Button>
                 </div>
 
                 <Table dataSource={this.state.dataSource} pagination={false} columns={this.columns} ></Table>

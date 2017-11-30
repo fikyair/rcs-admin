@@ -45,7 +45,7 @@ export default class MerchentLimitAdd extends React.Component {
         return (
             <div>
 
-                <h1 style={{textAlign: 'center', marginBottom: 16}}>商户增加限额</h1>
+                <h1 style={{textAlign: 'center', marginBottom: 16}}>{this.props.location.state.title}</h1>
 
                 <Form>
                 <Card title="选择商户属性" style={cardStyle}>
