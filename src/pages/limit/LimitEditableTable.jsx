@@ -10,42 +10,41 @@ export default class EditableTable extends React.Component {
     constructor(props) {
         super(props);
         this.columns = [{
-            title: '卡bin序号',
-            dataIndex: 'cardBinNo',
-            width: '30%',
+            title: '单笔(金额)',
+            dataIndex: 'singleLimit',
         }, {
-            title: '单笔限额',
-            dataIndex: 'singleAmountLimit',
-        }, {
-            title: '日限额',
+            title: '单日(金额)',
             dataIndex: 'dayAmountLimit',
-        }, {
-            title: '月限额',
-            dataIndex: 'dayAmountLimit',
+        },  {
+            title: '单月(金额)',
+            dataIndex: 'monthAmountLimit',
         },{
-            title: '年限额',
-            dataIndex: 'dayAmountLimit',
-        },
-            {
-            title: '操 作',
-            dataIndex: 'operation',
-            render: (text, record) => {
-                return (
-                    this.state.dataSource.length > 1 ?
-                        (
-                            <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(record.key)}>
-                                <a href="#">Delete</a>
-                            </Popconfirm>
-                        ) : null
-                );
-            },
+            title: '年(金额)',
+            dataIndex: 'yearAmountLimit',
+        },{
+            title: '终身(金额)',
+            dataIndex: 'lifeAmountLimit',
+        },{
+            title: '两笔间隔(秒)',
+            dataIndex: 'twoIntervals',
+        },{
+            title: '笔数/分钟',
+            dataIndex: 'strokeCount',
+        },{
+            title: '笔/日',
+            dataIndex: 'stroke',
+        },{
+            title: '状态',
+            dataIndex: 'state',
+        },{
+            title: '操作人',
+            dataIndex: 'operational'
+        },{
+            title: '操作时间',
+            dataIndex: 'operationTime',
         }];
 
 
-    }
-    onDelete = (key) => {
-        const dataSource = [...this.state.dataSource];
-        this.setState({ dataSource: dataSource.filter(item => item.key !== key) });
     }
     render() {
         const { dataSource } = this.state;
