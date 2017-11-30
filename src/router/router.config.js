@@ -43,7 +43,7 @@ export const root = [
     }, {
         path: '/servicetree',
         exact: true,
-        component: (props) => BundleCom(props,OperationRecord),
+        component: (props) => BundleCom(props,TraceComs),
     }, {
         path: '/limitdetails/:id',
         exact: true,

@@ -45,7 +45,7 @@ export const FetchAPI = (url,method,data)=>{
 }
 
 export function checkStatus(response) {
-    if (response.status >= 200 && response.status < 300) {
+    if ((response.status >= 200 && response.status < 300) || response.status == 400 ) {
         return response
     } else {
         var error = new Error(response.statusText)
@@ -55,7 +55,11 @@ export function checkStatus(response) {
 }
 
 export  function parseJSON(response) {
-    return response.json()
+  if(response.ok || response.status == '400'){
+    return response.json();
+  } else {
+    return {err:{msg:'请求异常',code:'6666'}}
+  }
 }
 
 export const headers = ()=> ({

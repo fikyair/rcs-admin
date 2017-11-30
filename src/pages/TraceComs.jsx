@@ -1,28 +1,23 @@
 import React from 'react';
+import { Layout } from 'antd';
+import { Containerization} from '../common/PublicComponent';
+import { getCardBin } from '../actions'
 
-import {PublicContainer,PublicComponent} from '../common/PublicComponent';
 
-const mapStateToProps = (state) => {
+@Containerization((state)=>{
     return {
-
-    };
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
+      cardBInData:state.LoginEditReducer.cardBInData
     }
-};
+})
+export default class TraceComs extends React.Component {
 
-class Page1 extends PublicComponent {
+  componentWillMount(){
+    this.props.dispatch(getCardBin())
+  }
 
-    render() {
+  render(){
+    return (<Layout>
 
-        return (
-            <div>
-                Page1
-            </div>
-        )
-    }
+    </Layout>)
+  }
 }
-
-export default PublicContainer(mapStateToProps, mapDispatchToProps,Page1);
