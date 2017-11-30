@@ -5,6 +5,8 @@ import {InitComs} from "../../common/PublicComponent";
 const FormItem = Form.Item
 const Option = Select.Option
 const TabPane = Tabs.TabPane;
+const InputGroup = Input.Group;
+
 
 @Form.create()
 export default class MerchentLimitAdd extends React.Component {
@@ -250,7 +252,7 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                           <Input/>
+                                           <Input addonAfter="元"/>
                                         )
                                     }
 
@@ -263,7 +265,8 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                            <Input addonAfter="元"/>
+
                                         )
                                     }
 
@@ -276,7 +279,8 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                            <Input addonAfter="元"/>
+
                                         )
                                     }
 
@@ -289,7 +293,8 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                            <Input addonAfter="元"/>
+
                                         )
                                     }
 
@@ -305,7 +310,8 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                            <Input addonAfter="元"/>
+
                                         )
                                     }
 
@@ -318,7 +324,8 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                            <Input addonAfter="元"/>
+
                                         )
                                     }
 
@@ -333,7 +340,11 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                        <InputGroup >
+                                        <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" />
+                                        <Input style={{ width: 24, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff' }} placeholder="/" disabled />
+                                        <Input style={{ width: 100, textAlign: 'center', borderLeft: 0 }} placeholder="Maximum" />
+                                        </InputGroup>
                                         )
                                     }
 
@@ -346,7 +357,8 @@ export default class MerchentLimitAdd extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input/>
+                                            <Input addonAfter="元"/>
+
                                         )
                                     }
 
