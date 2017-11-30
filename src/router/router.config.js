@@ -59,7 +59,7 @@ export const root = [
     }, {
         path: '/limitManager',
         exact: true,
-        component: (props) => BundleCom(props,LimitManager),
+        component: (props) => BundleCom(props,LimitMana),
     },{
         path:'/newadded',
         exact:true,

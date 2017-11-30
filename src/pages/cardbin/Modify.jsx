@@ -1,12 +1,13 @@
 import React from 'react';
-import { Table, Pagination, Modal, Input, Select, Form, Row, Col, Popconfirm } from 'antd';
+import { Table, Pagination, Form, Popconfirm } from 'antd';
 import {FetchAPI} from '../../utils/fetch-middleware';
 //import {Link} from 'react-router-dom'
+import CollectionCreateForm from './CollectionCreateForm'
 
-const FormItem = Form.Item;
-const CollectionCreateForm = Form.create()(
+/*const CollectionCreateForm = Form.create()(
     (props) => {
-        const { visible, onCancel, onCreate, form } = props;
+        const { visible, onCancel, onCreate, form, initdata } = props;
+        console.log('==========>initdata',initdata)
         const { getFieldDecorator } = form;
         return (
             <Modal
@@ -19,6 +20,7 @@ const CollectionCreateForm = Form.create()(
                 <Form layout="vertical">
                     <FormItem label="主体编码">
                         {getFieldDecorator('mainPartCode', {
+                            initialValue:initdata.mainPartCode,
                             rules: [{ required: false, message: 'Please input the title of collection!' }],
                         })(
                             <Input />
@@ -57,25 +59,26 @@ const CollectionCreateForm = Form.create()(
             </Modal>
         );
     }
-);
+);*/
 export default class Modify extends React.Component{
     state={
         data : [],
         pageNum: '1',
-        pageSize: '5',
+        pageSize: '3',
         total: '0',
         visible: false,
+        record:{},
     }
     search(args) {
-        console.log('222')
         const {pageNum,pageSize} = this.state;
         const params = {
             pageNum,
             pageSize,
             ...args,
         }
-
+        //const getFieldsValue=this.props.Form.getFieldsValue();
         FetchAPI(`/rcslmainpart?pageNum=${params.pageNum}&pageSize=${params.pageSize}`, 'GET').then((data) => {
+            console.log('=====>111',data)
             this.setState({
                 pageNum: data.current,
                 total:data.total,
@@ -115,14 +118,13 @@ export default class Modify extends React.Component{
         title: '操作',
         dataIndex: 'operation',
         render: (text, record) => {
-            console.log('=====>',record)
             return (
                 <div className="editable-row-operations">
                     {/*<Link to="/">修改</Link>*/}
                     <span style={{color:'blue', cursor:'pointer'}} onClick={()=>this.props.history.push('/newadded')}>
                         增加
                     </span>&nbsp;&nbsp;&nbsp;
-                    <span style={{color:'blue', cursor:'pointer'}} onClick="()=>this.edit(record);this.showModal;">
+                    <span style={{color:'blue', cursor:'pointer'}} onClick={ ()=>{this.showModal(record) }}>
                         修改
                     </span>&nbsp;&nbsp;&nbsp;
                     <Popconfirm title="Are you sure？" okText="Yes" cancelText="No">
@@ -133,44 +135,62 @@ export default class Modify extends React.Component{
         },
     }];
 
-    edit(obj) {
-        this.props.history.push('/modify',{some:obj})
-    }
+    //  edit(obj) {
+    //     // this.props.history.push('/modify',{some:obj})
+    //     //  console.log('',some)
+    //      this.setState({record:obj})
+    // }
     componentWillMount(){
-        const {data} = this.state
+        this.search();
+    }
+    componentWillReceiveProps(nextProps){
+        this.setState({visible:false})
         this.search();
     }
     onChange = (page) =>{
         //alert(page)
-        this.setState({pageNum:page})
+        //this.setState({pageNum:page})
         this.search({
             pageNum: page
         })
     }
-    showModal = () => {
-        this.setState({ visible: true });
+    showModal = (obj) => {
+        console.log(obj)
+        this.setState({
+            visible: true,
+            record:obj
+        });
     }
     handleCancel = () => {
         this.setState({ visible: false });
     }
-    handleCreate = () => {
-        const form = this.form;
-        form.validateFields((err, values) => {
-            if (err) {
-                return;
-            }
-
-            console.log('Received values of form: ', values);
-            form.resetFields();
-            this.setState({ visible: false });
-        });
-    }
+    // handleCreate = () => {
+    //
+    //     // const form = this.form;
+    //
+    //     this.props.form.validateFields((err, values) => {
+    //         if (err) {
+    //             return;
+    //         }
+    //
+    //         console.log('Received values of form: ', values);
+    //         // form.resetFields();
+    //         this.setState({ visible: false });
+    //         const {record} = this.state;
+    //         let params = {
+    //             ...this.state.record,
+    //             ... this.props.form.getFieldsValue()
+    //         }
+    //         FetchAPI(`/rcslmainpart/${record.id}`, 'put', params).then((data) => {
+    //             // console.log(data)
+    //         })
+    //     });
+    // }
     saveFormRef = (form) => {
-        this.form = form;
+     this.form = form;
     }
     render() {
-        const { visible, confirmLoading, ModalText } = this.state;
-
+        //console.log('======>',this.state.record)
         return (
             <div>
                 <Table bordered dataSource={this.state.data} pagination={false} columns={this.columns} />
@@ -178,7 +198,8 @@ export default class Modify extends React.Component{
                     <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total} onChange={this.onChange} />
                 </div>
                 <CollectionCreateForm
-                    ref={this.saveFormRef}
+                    // ref={this.saveFormRef}
+                    initdata={this.state.record}
                     visible={this.state.visible}
                     onCancel={this.handleCancel}
                     onCreate={this.handleCreate}

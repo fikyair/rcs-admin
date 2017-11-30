@@ -101,9 +101,9 @@ export default class Record extends React.Component {
     search(args) {
         const {pageNum, pageSize} = this.state;
         const {getFieldsValue} =  this.props.form.getFieldsValue();
-        console.log('form屬性值========>',getFieldsValue)
+        //console.log('form屬性值========>',getFieldsValue)
         const params = {
-            ...getFieldsValue,
+            //...getFieldsValue,
             pageNum,
             pageSize,
             ...args,
@@ -138,7 +138,7 @@ export default class Record extends React.Component {
     }
 
     onChange = (page) => {
-        this.setState({pageNum: page})
+        //this.setState({pageNum: page})
         this.search({
             pageNum: page,
         })
