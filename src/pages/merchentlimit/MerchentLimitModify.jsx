@@ -10,7 +10,7 @@ const InputGroup = Input.Group;
 
 
 @Form.create()
-export default class MerchentLimitModify extends React.Component {
+export default class MerchentLimitAdd extends React.Component {
 
     state = {
         data: {},
@@ -195,8 +195,8 @@ export default class MerchentLimitModify extends React.Component {
         };
         const formItemLayout = {
             labelCol: {//文字
-                xs: {span: 24},//小于768px
-                sm: {span: 5},//大于768px
+                xs: {span: 24},
+                sm: {span: 5},
             },
             wrapperCol: {//标签
                 xs: {span: 24},
@@ -205,8 +205,13 @@ export default class MerchentLimitModify extends React.Component {
         };
         const queryItemLayout = {
             xs: 12,
-            sm: 8,
-            md: 6,
+            sm: 7,
+            md: 5,
+        }
+        const tailItemLayout = {
+            xs: 24,
+            sm: 24,
+            md:1
         }
         return (
             <div>
@@ -225,7 +230,6 @@ export default class MerchentLimitModify extends React.Component {
                             </Col>
                         </Row>
                     </Card>
-
                     <Card title="选择商户属性" style={cardStyle}>
                         <Row>
 
@@ -257,60 +261,65 @@ export default class MerchentLimitModify extends React.Component {
                     </Card>
                     <Card title="选择交易属性：" style={cardStyle}>
                         <Row>
-                            <Col span={1} >
-                            <span style={{marginTop: '16px',display: 'inline-block'}}>线下交易：</span>
-                            </Col>
-                            <Col span={23}>
-                            {
-                                this.initData.lineTransaction.map((v, k) => {
+                            <Row>
+                                <Col {...tailItemLayout} >
+                                    <span style={{marginTop: '16px',display: 'inline-block'}}>线下交易：</span>
+                                </Col>
+                                <Col>
+                                    {
+                                        this.initData.lineTransaction.map((v, k) => {
 
-                                        return (
-                                            <Col {...queryItemLayout}>
-                                                {
-                                                    getFieldDecorator(v.labelValue)(
-                                                        <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
-                                                            {
-                                                                v.optionVal.map((i, j) => {
-                                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                                })
-                                                            }
-                                                        </SelectComs>
-                                                    )
-                                                }
-                                            </Col>
+                                                return (
+                                                    <Col {...queryItemLayout}>
+                                                        {
+                                                            getFieldDecorator(v.labelValue)(
+                                                                <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                                    {
+                                                                        v.optionVal.map((i, j) => {
+                                                                            return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                        })
+                                                                    }
+                                                                </SelectComs>
+                                                            )
+                                                        }
+                                                    </Col>
+                                                )
+                                            }
                                         )
                                     }
-                                )
-                            }
-                            </Col>
-                            <Col span={1} >
-                                <span style={{marginTop: '16px',display: 'inline-block'}}>扫码交易：</span>
-                            </Col>
-                            <Col span={23}>
-                            {
-                                this.initData.scanTransaction.map((v, k) => {
+                                </Col>
+                            </Row>
 
-                                        return (
-                                            <Col {...queryItemLayout}>
-                                                {
-                                                    getFieldDecorator(v.labelValue)(
-                                                        <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
-                                                            {
-                                                                v.optionVal.map((i, j) => {
-                                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                                })
-                                                            }
-                                                        </SelectComs>
-                                                    )
-                                                }
-                                            </Col>
+                            <Row>
+                                <Col {...tailItemLayout} >
+                                    <span style={{marginTop: '16px',display: 'inline-block'}}>扫码交易：</span>
+                                </Col>
+                                <Col>
+                                    {
+                                        this.initData.scanTransaction.map((v, k) => {
+
+                                                return (
+                                                    <Col {...queryItemLayout}>
+                                                        {
+                                                            getFieldDecorator(v.labelValue)(
+                                                                <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                                    {
+                                                                        v.optionVal.map((i, j) => {
+                                                                            return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                        })
+                                                                    }
+                                                                </SelectComs>
+                                                            )
+                                                        }
+                                                    </Col>
+                                                )
+                                            }
                                         )
                                     }
-                                )
-                            }
-                            </Col>
-
+                                </Col>
+                            </Row>
                         </Row>
+
 
                     </Card>
                     <Card title="添加限额值" style={cardStyle}>
@@ -336,14 +345,14 @@ export default class MerchentLimitModify extends React.Component {
                             }
                             <Col {...queryItemLayout}>
                                 <Row style={{marginTop: '10px'}}>
-                                    <Col span={5}>
+                                    <Col span={7}>
                                         <span style={{marginTop: '5px', display: 'inline-block'}}>每笔／分钟:</span>
                                     </Col>
-                                    <Col span={14}>
+                                    <Col span={16}>
                                         {
                                             getFieldDecorator('limitType')(
                                                 <InputGroup>
-                                                    <Input style={{width: 100, textAlign: 'center'}}
+                                                    <Input style={{width: 60, textAlign: 'center'}}
                                                            placeholder="Minimum"/>
                                                     <Input style={{
                                                         width: 24,
@@ -351,7 +360,7 @@ export default class MerchentLimitModify extends React.Component {
                                                         pointerEvents: 'none',
                                                         backgroundColor: '#fff'
                                                     }} placeholder="/" disabled/>
-                                                    <Input style={{width: 100, textAlign: 'center', borderLeft: 0}}
+                                                    <Input style={{width: 60, textAlign: 'center', borderLeft: 0}}
                                                            placeholder="Maximum"/>
                                                 </InputGroup>
                                             )
