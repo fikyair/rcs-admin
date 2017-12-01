@@ -12,6 +12,7 @@ import LimitHome from 'bundle-loader?lazy!../pages/merchentlimit/LimitHome'
 import MerchentLimitDetails from 'bundle-loader?lazy!../pages/merchentlimit/MerchentLimitDetails'
 import MerchentOperationRecord from 'bundle-loader?lazy!../pages/merchentlimit/MerchentOperationRecord'
 import MerchentLimitAdd from 'bundle-loader?lazy!../pages/merchentlimit/MerchentLimitAdd'
+import MerchentLimitModify from 'bundle-loader?lazy!../pages/merchentlimit/MerchentLimitModify'
 
 
 const BundleCom = (props,loader) => {
@@ -75,6 +76,10 @@ export const root = [
         path: '/merchentlimitadd',
         exact: true,
         component: (props) => BundleCom(props,MerchentLimitAdd),
+    },{
+        path: '/merchentlimitmodify',
+        exact: true,
+        component: (props) => BundleCom(props,MerchentLimitModify),
     }
 ]
 

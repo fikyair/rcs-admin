@@ -72,7 +72,7 @@ export default class LimitHome extends React.Component {
 
 
     edit(record) {
-        this.props.history.push('/merchentlimitadd',{title:'商户修改限额'})
+        this.props.history.push('/merchentlimitmodify')
     }
 
     componentWillMount() {

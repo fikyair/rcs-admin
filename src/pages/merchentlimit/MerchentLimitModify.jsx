@@ -2,14 +2,14 @@ import React from 'react'
 import {Form, Col, Row, Select,Table, Button,Input, Layout, Tabs,Card} from 'antd'
 import {Link} from 'react-router-dom'
 import {InitComs} from "../../common/PublicComponent";
+import SelectComs, {Option} from '../../components/SelectComs';
 const FormItem = Form.Item
-const Option = Select.Option
 const TabPane = Tabs.TabPane;
 const InputGroup = Input.Group;
 
 
 @Form.create()
-export default class MerchentLimitAdd extends React.Component {
+export default class MerchentLimitModify extends React.Component {
 
     state = {
 
@@ -45,198 +45,167 @@ export default class MerchentLimitAdd extends React.Component {
         return (
             <div>
 
-                <h1 style={{textAlign: 'center', marginBottom: 16}}>{this.props.location.state.title}</h1>
+                <h1 style={{textAlign: 'center', marginBottom: 16}}>商户修改限额</h1>
 
                 <Form>
-                <Card title="选择商户属性" style={cardStyle}>
+                    <Card style={cardStyle} >
                         <Row>
                             <Col {...queryItemLayout}>
                                 <FormItem
-                                    label="结算账户类型"
+                                    label="商户编号"
                                     {...formItemLayout}
                                 >
                                     {
                                         getFieldDecorator('settleType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <Input disabled={true}/>
                                         )
                                     }
 
                                 </FormItem>
                             </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="名单类型"
-                                    {...formItemLayout}
-                                >
-                                    {
+                        </Row>
+                    </Card>
+
+                <Card title="选择商户属性" style={cardStyle}>
+                                  {/*  {
+                                        getFieldDecorator('settleType')(
+                                            <SelectComs key={11} labelName={"结算账户类型"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
+                                        )
+                                    }*/}
+                    <SelectComs key={11} labelName={"结算账户类型"} defaultValue="请选择" style={{ width: 120 }} >
+                        <Option key={23} value={121}>123123</Option>
+                    </SelectComs>
+                    <SelectComs key={11} labelName={"名单类型"} defaultValue="请选择" style={{ width: 120 }} >
+                        <Option key={23} value={121}>123123</Option>
+                    </SelectComs>
+                    <SelectComs key={11} labelName={"结算账户类型"} defaultValue="请选择" style={{ width: 120 }} >
+                        <Option key={23} value={121}>123123</Option>
+                    </SelectComs>
+                    <SelectComs key={11} labelName={"名单类型"} defaultValue="请选择" style={{ width: 120 }} >
+                        <Option key={23} value={121}>123123</Option>
+                    </SelectComs>
+
+                    {/* {
                                         getFieldDecorator('listType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"名单类型"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="是否小额双免"
-                                    {...formItemLayout}
-                                >
                                     {
                                         getFieldDecorator('limitMain')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"是否小额双免"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
-
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="是否有终端"
-                                    {...formItemLayout}
-                                >
                                     {
                                         getFieldDecorator('merchentType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"是否有终端"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
-                                    }
+                                    }*/}
 
-                                </FormItem>
-                            </Col>
-                        </Row>
 
-                        <Row>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="POS商户类型"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitStatus')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
-                                        )
-                                    }
+                        {/*<Row>*/}
+                            {/*<Col {...queryItemLayout}>*/}
+                                    {/*{*/}
+                                        {/*getFieldDecorator('limitStatus')(*/}
+                                           {/*<SelectComs key={11} labelName={"是否有终端"} defaultValue="请选择" style={{ width: 120 }} >*/}
+                                                {/*<Option key={23} value={121}>123123</Option>*/}
+                                            {/*</SelectComs>*/}
+                                        {/*)*/}
+                                    {/*}*/}
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="POS秒到等级"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('merchentCode')(
-                                            <Input />
-                                        )
-                                    }
+                            {/*</Col>*/}
+                            {/*<Col {...queryItemLayout}>*/}
+                                {/*<FormItem*/}
+                                    {/*label="POS秒到等级"*/}
+                                    {/*{...formItemLayout}*/}
+                                {/*>*/}
+                                    {/*{*/}
+                                        {/*getFieldDecorator('merchentCode')(*/}
+                                            {/*<Input />*/}
+                                        {/*)*/}
+                                    {/*}*/}
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="POS结算周期"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('merchentCode')(
-                                            <Input />
-                                        )
-                                    }
+                                {/*</FormItem>*/}
+                            {/*</Col>*/}
+                            {/*<Col {...queryItemLayout}>*/}
+                                {/*<FormItem*/}
+                                    {/*label="POS结算周期"*/}
+                                    {/*{...formItemLayout}*/}
+                                {/*>*/}
+                                    {/*{*/}
+                                        {/*getFieldDecorator('merchentCode')(*/}
+                                            {/*<Input />*/}
+                                        {/*)*/}
+                                    {/*}*/}
 
-                                </FormItem>
-                            </Col>
+                                {/*</FormItem>*/}
+                            {/*</Col>*/}
 
-                        </Row>
+                        {/*</Row>*/}
 
                 </Card>
                 <Card title="选择交易属性：" style={cardStyle}>
                         <Row>
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="卡属性"
-                                    {...formItemLayout}
-                                >
+
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"卡属性"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
-
-                                </FormItem>
                             </Col>
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="卡介质"
-                                    {...formItemLayout}
-                                >
                                     {
                                         getFieldDecorator('limitProperty')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"卡介质"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
 
-                                </FormItem>
                             </Col>
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="消费方式"
-                                    {...formItemLayout}
-                                >
                                     {
                                         getFieldDecorator('limitMain')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"消费方式"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
 
-                                </FormItem>
                             </Col>
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="接触方式"
-                                    {...formItemLayout}
-                                >
                                     {
                                         getFieldDecorator('merchentType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                            <SelectComs key={11} labelName={"接触方式"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
 
-                                </FormItem>
                             </Col>
                         </Row>
 
                         <Row>
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="扫码类型"
-                                    {...formItemLayout}
-                                >
-                                    {
+                                     {
                                         getFieldDecorator('limitStatus')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
+                                             <SelectComs key={11} labelName={"扫码类型"} defaultValue="请选择" style={{ width: 120 }} >
+                                                <Option key={23} value={121}>123123</Option>
+                                            </SelectComs>
                                         )
                                     }
 
-                                </FormItem>
                             </Col>
 
                         </Row>
