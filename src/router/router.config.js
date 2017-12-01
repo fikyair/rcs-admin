@@ -69,7 +69,7 @@ export const root = [
         exact: true,
         component: (props) => BundleCom(props,MerchentLimitDetails),
     },{
-        path: '/MerchentOperationRecord',
+        path: '/merchentOperationRecord',
         exact: true,
         component: (props) => BundleCom(props,MerchentOperationRecord),
     },{
