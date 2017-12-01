@@ -5,8 +5,10 @@ import { withRouter, Link } from 'react-router-dom';
 const breadcrumbNameMap = {
   '/limitdetails': '限额详情',
   '/limitManager': '限额管理',
-  '/apps/1/detail': 'Detail',
-  '/apps/2/detail': 'Detail',
+  '/limitManager/add': '添加限额',
+  '/limitManager/update': '修改限额',
+  '/limitManager/operationrecoerd': '限额操作记录',
+  '/limitManager/personalityset': '设置给性限额',
 };
 
 @withRouter

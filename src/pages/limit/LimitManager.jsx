@@ -13,6 +13,7 @@ export default class LimitManager extends React.Component{
       options:null,
       loading: false,
       visible: false,
+      removeVisible:false,
     }
     mockData = {
       selectsData:[
@@ -202,14 +203,18 @@ export default class LimitManager extends React.Component{
       ]
     }
 
-    timer = null
-    showModal = () => {
-      this.setState({
-       visible: true,
-      });
-    }
+  componentWillMount(){
+  }
 
-    handleOk = () => {
+
+  timer = null
+  showAddModal = () => {
+    this.setState({
+      visible: true,
+    });
+  }
+
+  handleAddOk = () => {
      this.setState({ loading: true });
      this.timer = setTimeout(() => {
         this.setState({ loading: false, visible: false });
@@ -219,27 +224,33 @@ export default class LimitManager extends React.Component{
      this.props.history.push('/newlimitmodel')
     }
 
-    componentWillUnmount(){
-      clearTimeout(this.timer)
-    }
+  componentWillUnmount(){
+    clearTimeout(this.timer)
+  }
 
-    handleCancel = () => {
-     this.setState({ visible: false });
-    }
+  handleAddCancel = () => {
+    this.setState({ visible: false });
+  }
 
-    disableLimitRule(){
-      //TODO 停用限额规则
-    }
+  disableLimitRule(){
+    this.setState({removeVisible:true})
+  }
+  handleRemoveCancel = ()=>{
+    this.setState({removeVisible:false})
+  }
 
-    componentWillMount(){
-    }
+  handleRemoveOk = ()=>{
+    this.setState({removeVisible:false})
+
+    //TODO 删除限额规则
+  }
 
   handleSearch = ()=>{
       //TODO 搜索
   }
 
     render(){
-        const {options, visible, loading} =this.state;
+        const {options, visible, loading, removeVisible} =this.state;
         const {
           selectsData = this.mockData.selectsData,
           columns = this.mockData.columns,
@@ -277,17 +288,17 @@ export default class LimitManager extends React.Component{
               <Button htmlType='submit' icon="search" style={{margin:'10px',width:'100px'}} onClick={this.handleSearch()}>查询</Button>
             </div>
             </Form>
-            <Button  style={{margin:'10px',width:'100px'}} onClick={this.showModal}>添加限额</Button>
+            <Button  style={{margin:'10px',width:'100px'}} onClick={this.showAddModal}>添加限额</Button>
             <Card title="限额列表" bodyStyle={{padding:'0px',}}><Table  columns={columns} dataSource={dataSource}/></Card>
 
             <Modal
               visible={visible}
               title="添加限额"
-              onOk={this.handleOk}
-              onCancel={this.handleCancel}
+              onOk={this.handleAddOk}
+              onCancel={this.handleAddCancel}
               footer={[
-                <Button key="back" size="large" onClick={this.handleCancel}>取消</Button>,
-                <Button key="submit" type="primary" size="large" loading={loading} onClick={this.handleOk}>
+                <Button key="back" size="large" onClick={this.handleAddCancel}>取消</Button>,
+                <Button key="submit" type="primary" size="large" loading={loading} onClick={this.handleAddOk}>
                   下一步
                 </Button>,
               ]}
@@ -304,6 +315,21 @@ export default class LimitManager extends React.Component{
                   )
                 })
               }
+
+            </Modal>
+            <Modal
+              visible={removeVisible}
+              title="删除限额"
+              onOk={this.handleRemoveOk}
+              onCancel={this.handleRemoveCancel}
+              footer={[
+                <Button key="back" size="large" onClick={this.handleRemoveCancel}>取消</Button>,
+                <Button key="submit" type="primary" size="large" loading={loading} onClick={this.handleRemoveOk}>
+                  确认
+                </Button>,
+              ]}
+            >
+              确定删除{'fsdfsdfdsf'}限额
 
             </Modal>
           </div>
