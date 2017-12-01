@@ -3,6 +3,8 @@ import {Form, Col, Row, Select,Table, Button,Input, Layout, Tabs,Card} from 'ant
 import {Link} from 'react-router-dom'
 import {InitComs} from "../../common/PublicComponent";
 import SelectComs, {Option} from '../../components/SelectComs';
+import InputComs from '../../components/InputComs';
+
 const FormItem = Form.Item
 const TabPane = Tabs.TabPane;
 const InputGroup = Input.Group;
@@ -18,6 +20,177 @@ export default class MerchentLimitModify extends React.Component {
 
 
     componentWillMount() {
+
+    }
+
+    initData = {
+        merchantData:[
+            {
+                labelName:'结算账户类型',
+                labelValue: 'settleType',
+                optionVal:[
+                    {value:'1',name:'交易'},
+                    {value:'2',name:'结算'},
+                    {value:'3',name:'全部'},
+                ]
+            },
+            {
+                labelName:'名单类型',
+                labelValue: 'listType',
+                optionVal:[
+                    {value:'1',name:'账户结算类型'},
+                    {value:'2',name:'名单类型'},
+                    {value:'3',name:'行业大类'},
+                    {value:'4',name:'全部'},
+                ]
+            },{
+                labelName:'是否小额双免',
+                labelValue: 'bothFree',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'7',name:'全部'},
+                ]
+            },{
+                labelName:'是否有终端',
+                labelValue: 'isTerminal',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'4',name:'全部'},
+                ]
+            },
+            {
+                labelName:'POS商户类型',
+                labelValue: 'POSMerchantType',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'3',name:'全部'},
+                ]
+            },{
+                labelName:'POS秒到等级',
+                labelValue: 'POSSecondsLevel',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'4',name:'全部'},
+                ]
+            },
+            {
+                labelName:'POS结算周期',
+                labelValue: 'POSBillingCycle',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'3',name:'全部'},
+                ]
+            }
+        ],
+        transactionData:[
+            {
+                labelName:'卡属性',
+                labelValue: 'settleType',
+                optionVal:[
+                    {value:'1',name:'交易'},
+                    {value:'2',name:'结算'},
+                    {value:'3',name:'全部'},
+                ]
+            },
+            {
+                labelName:'卡介质',
+                labelValue: 'listType',
+                optionVal:[
+                    {value:'1',name:'账户结算类型'},
+                    {value:'2',name:'名单类型'},
+                    {value:'3',name:'行业大类'},
+                    {value:'4',name:'全部'},
+                ]
+            },{
+                labelName:'消费方式',
+                labelValue: 'bothFree',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'7',name:'全部'},
+                ]
+            },{
+                labelName:'接触方式',
+                labelValue: 'isTerminal',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'4',name:'全部'},
+                ]
+            },
+            {
+                labelName:'扫码类型',
+                labelValue: 'POSMerchantType',
+                optionVal:[
+                    {value:'1',name:'持卡人银行'},
+                    {value:'2',name:'用户openID'},
+                    {value:'3',name:'全部'},
+                ]
+            }
+        ],
+        inputsData:[
+            {
+                labelName:'商户编号',
+                labelValue: 'merchantCode',
+
+            },
+        ],
+
+
+        columns : [
+            {
+                title: '商户编号',
+                dataIndex: 'merchantCode',
+                render: text => <Link to="#">{text}</Link>,
+            }, {
+                title: '单笔（金额）',
+                dataIndex: 'sigle',
+            }, {
+                title: '单日（金额）',
+                dataIndex: 'oddDay',
+            },{
+                title:'年（金额）',
+                dataIndex:'year',
+            },{
+                title:'终身（金额）',
+                dataIndex:'lifeLong',
+            },{
+                title:'两笔间隔（秒）',
+                dataIndex:'createUserName',
+            },{
+                title:'每笔／分钟',
+                dataIndex:'updateUserId',
+            },{
+                title:'笔／日',
+                dataIndex:'updateUserName',
+            },{
+                title:'状态',
+                dataIndex:'status',
+            },{
+                title: '管理',
+                dataIndex: 'operation',
+                render: (text, record) => {
+                    return (
+                        <div className="editable-row-operations">
+                            {/*<Link to="/">修改</Link>*/}
+                            <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{}}>
+                        停用
+                    </span>&nbsp;&nbsp;&nbsp;
+                            <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{this.edit(record)}}>
+                        修改
+                    </span>&nbsp;&nbsp;&nbsp;
+                            <span style={{color:'blue', cursor:'pointer'}}>
+                        操作记录
+                    </span>&nbsp;&nbsp;&nbsp;
+                        </div>
+                    );
+                },
+            }]
 
     }
 
@@ -51,162 +224,68 @@ export default class MerchentLimitModify extends React.Component {
                     <Card style={cardStyle} >
                         <Row>
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="商户编号"
-                                    {...formItemLayout}
-                                >
                                     {
                                         getFieldDecorator('settleType')(
-                                            <Input disabled={true}/>
+                                            <InputComs labelName="商户编号"  style={{ width: 200 }} disabled={true}/>
                                         )
                                     }
-
-                                </FormItem>
                             </Col>
                         </Row>
                     </Card>
 
                 <Card title="选择商户属性" style={cardStyle}>
-                                  {/*  {
-                                        getFieldDecorator('settleType')(
-                                            <SelectComs key={11} labelName={"结算账户类型"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }*/}
-                    <SelectComs key={11} labelName={"结算账户类型"} defaultValue="请选择" style={{ width: 120 }} >
-                        <Option key={23} value={121}>123123</Option>
-                    </SelectComs>
-                    <SelectComs key={11} labelName={"名单类型"} defaultValue="请选择" style={{ width: 120 }} >
-                        <Option key={23} value={121}>123123</Option>
-                    </SelectComs>
-                    <SelectComs key={11} labelName={"结算账户类型"} defaultValue="请选择" style={{ width: 120 }} >
-                        <Option key={23} value={121}>123123</Option>
-                    </SelectComs>
-                    <SelectComs key={11} labelName={"名单类型"} defaultValue="请选择" style={{ width: 120 }} >
-                        <Option key={23} value={121}>123123</Option>
-                    </SelectComs>
+                    <Row>
 
-                    {/* {
-                                        getFieldDecorator('listType')(
-                                            <SelectComs key={11} labelName={"名单类型"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }
+                        {
+                            this.initData.merchantData.map((v,k) => {
 
-                                    {
-                                        getFieldDecorator('limitMain')(
-                                            <SelectComs key={11} labelName={"是否小额双免"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }
-                                    {
-                                        getFieldDecorator('merchentType')(
-                                            <SelectComs key={11} labelName={"是否有终端"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }*/}
+                                    return (
+                                        <Col {...queryItemLayout}>
+                                            {
+                                                getFieldDecorator(v.labelValue)(
+                                                    <SelectComs key={k} labelName={v.labelName} style={{ width: 120 }} >
+                                                        {
+                                                            v.optionVal.map((i,j)=>{
+                                                                return <Option key={j} value={i.value}>{i.name}</Option>
+                                                            })
+                                                        }
+                                                    </SelectComs>
+                                                )
+                                            }
+                                        </Col>
+                                    )
+                                }
+                            )
+                        }
 
-
-                        {/*<Row>*/}
-                            {/*<Col {...queryItemLayout}>*/}
-                                    {/*{*/}
-                                        {/*getFieldDecorator('limitStatus')(*/}
-                                           {/*<SelectComs key={11} labelName={"是否有终端"} defaultValue="请选择" style={{ width: 120 }} >*/}
-                                                {/*<Option key={23} value={121}>123123</Option>*/}
-                                            {/*</SelectComs>*/}
-                                        {/*)*/}
-                                    {/*}*/}
-
-                            {/*</Col>*/}
-                            {/*<Col {...queryItemLayout}>*/}
-                                {/*<FormItem*/}
-                                    {/*label="POS秒到等级"*/}
-                                    {/*{...formItemLayout}*/}
-                                {/*>*/}
-                                    {/*{*/}
-                                        {/*getFieldDecorator('merchentCode')(*/}
-                                            {/*<Input />*/}
-                                        {/*)*/}
-                                    {/*}*/}
-
-                                {/*</FormItem>*/}
-                            {/*</Col>*/}
-                            {/*<Col {...queryItemLayout}>*/}
-                                {/*<FormItem*/}
-                                    {/*label="POS结算周期"*/}
-                                    {/*{...formItemLayout}*/}
-                                {/*>*/}
-                                    {/*{*/}
-                                        {/*getFieldDecorator('merchentCode')(*/}
-                                            {/*<Input />*/}
-                                        {/*)*/}
-                                    {/*}*/}
-
-                                {/*</FormItem>*/}
-                            {/*</Col>*/}
-
-                        {/*</Row>*/}
+                        </Row>
 
                 </Card>
                 <Card title="选择交易属性：" style={cardStyle}>
                         <Row>
-                            <Col {...queryItemLayout}>
 
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <SelectComs key={11} labelName={"卡属性"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
+
+                            {
+                                this.initData.transactionData.map((v,k) => {
+
+                                        return (
+                                            <Col {...queryItemLayout}>
+                                                {
+                                                    getFieldDecorator(v.labelValue)(
+                                                        <SelectComs key={k} labelName={v.labelName} style={{ width: 120 }} >
+                                                            {
+                                                                v.optionVal.map((i,j)=>{
+                                                                    return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                })
+                                                            }
+                                                        </SelectComs>
+                                                    )
+                                                }
+                                            </Col>
                                         )
                                     }
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                    {
-                                        getFieldDecorator('limitProperty')(
-                                            <SelectComs key={11} labelName={"卡介质"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }
-
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                    {
-                                        getFieldDecorator('limitMain')(
-                                            <SelectComs key={11} labelName={"消费方式"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }
-
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                    {
-                                        getFieldDecorator('merchentType')(
-                                            <SelectComs key={11} labelName={"接触方式"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }
-
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col {...queryItemLayout}>
-                                     {
-                                        getFieldDecorator('limitStatus')(
-                                             <SelectComs key={11} labelName={"扫码类型"} defaultValue="请选择" style={{ width: 120 }} >
-                                                <Option key={23} value={121}>123123</Option>
-                                            </SelectComs>
-                                        )
-                                    }
-
-                            </Col>
+                                )
+                            }
 
                         </Row>
 
@@ -216,12 +295,12 @@ export default class MerchentLimitModify extends React.Component {
                         <Row>
                             <Col {...queryItemLayout}>
                                 <FormItem
-                                    label="单笔（金额）"
+                                    label="单笔"
                                     {...formItemLayout}
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                           <Input addonAfter="元"/>
+                                           <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
                                         )
                                     }
 
@@ -229,26 +308,12 @@ export default class MerchentLimitModify extends React.Component {
                             </Col>
                             <Col {...queryItemLayout}>
                                 <FormItem
-                                    label="单日（金额）"
+                                    label="单日"
                                     {...formItemLayout}
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input addonAfter="元"/>
-
-                                        )
-                                    }
-
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="单月（金额）"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input addonAfter="元"/>
+                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
 
                                         )
                                     }
@@ -257,12 +322,26 @@ export default class MerchentLimitModify extends React.Component {
                             </Col>
                             <Col {...queryItemLayout}>
                                 <FormItem
-                                    label="年（金额）"
+                                    label="单月"
                                     {...formItemLayout}
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input addonAfter="元"/>
+                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
+
+                                        )
+                                    }
+
+                                </FormItem>
+                            </Col>
+                            <Col {...queryItemLayout}>
+                                <FormItem
+                                    label="年"
+                                    {...formItemLayout}
+                                >
+                                    {
+                                        getFieldDecorator('limitType')(
+                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
 
                                         )
                                     }
@@ -274,12 +353,12 @@ export default class MerchentLimitModify extends React.Component {
                         <Row>
                                                      <Col {...queryItemLayout}>
                                 <FormItem
-                                    label="终身（金额）"
+                                    label="终身"
                                     {...formItemLayout}
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input addonAfter="元"/>
+                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
 
                                         )
                                     }
@@ -293,7 +372,7 @@ export default class MerchentLimitModify extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input addonAfter="元"/>
+                                            <Input style={{width: 120}} addonAfter="元"/>
 
                                         )
                                     }
@@ -326,7 +405,7 @@ export default class MerchentLimitModify extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                            <Input addonAfter="元"/>
+                                            <Input style={{width: 120}} addonAfter="元"/>
 
                                         )
                                     }

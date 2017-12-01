@@ -2,10 +2,10 @@ import React from 'react'
 import {Form, Col, Row, Select,Table, Button,Input, Layout,} from 'antd'
 import {Link} from 'react-router-dom'
 import { Containerization } from '../../common/PublicComponent';
+import SelectComs, {Option} from '../../components/SelectComs';
+import InputComs from "../../components/InputComs";
 
-const FormItem = Form.Item
-const Option = Select.Option
-
+const FormItem = Form.Item;
 @Form.create()
 @Containerization()
 export default class LimitHome extends React.Component {
@@ -20,55 +20,124 @@ export default class LimitHome extends React.Component {
     constructor(props, state){
         super(props, state);
     }
-    
-    columns = [{
-        title: '商户编号',
-        dataIndex: 'merchantCode',
-        render: text => <Link to="#">{text}</Link>,
-    }, {
-        title: '单笔（金额）',
-        dataIndex: 'sigle',
-    }, {
-        title: '单日（金额）',
-        dataIndex: 'oddDay',
-    },{
-        title:'年（金额）',
-        dataIndex:'year',
-    },{
-        title:'终身（金额）',
-        dataIndex:'lifeLong',
-    },{
-        title:'两笔间隔（秒）',
-        dataIndex:'createUserName',
-    },{
-        title:'每笔／分钟',
-        dataIndex:'updateUserId',
-    },{
-        title:'笔／日',
-        dataIndex:'updateUserName',
-    },{
-        title:'状态',
-        dataIndex:'status',
-    },{
-        title: '管理',
-        dataIndex: 'operation',
-        render: (text, record) => {
-            return (
-                <div className="editable-row-operations">
-                    {/*<Link to="/">修改</Link>*/}
-                    <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{}}>
+
+    initData = {
+        selectsData:[
+            {
+                labelName:'限额类别',
+                labelValue: 'limitType',
+                optionVal:[
+                    {value:'1',name:'交易'},
+                    {value:'2',name:'结算'},
+                    {value:'3',name:'全部'},
+                ]
+            },
+            {
+                labelName:'限额属性',
+                labelValue: 'limitProperty',
+                optionVal:[
+                    {value:'1',name:'B端'},
+                    {value:'2',name:'C端'},
+                    {value:'3',name:'B-C端'},
+                    {value:'4',name:'全部'},
+                ]
+            },{
+                labelName:'限额主体',
+                labelValue: 'limitMain',
+                optionVal:[
+                    {value:'1',name:'商户'},
+                    {value:'2',name:'结算人证件号'},
+                    {value:'3',name:'持卡人银行卡'},
+                    {value:'4',name:'用户openId'},
+                    {value:'5',name:'用户证件号'},
+                    {value:'6',name:'支付账户'},
+                    {value:'7',name:'全部'},
+                ]
+            },{
+                labelName:'商户类型',
+                labelValue: 'merchantLimit',
+
+
+                optionVal:[
+                    {value:'1',name:'POS商户'},
+                    {value:'2',name:'MPOS商户'},
+                    {value:'3',name:'互联网商户'},
+                    {value:'4',name:'全部'},
+                ]
+            },
+            {
+                labelName:'限额状态',
+                labelValue: 'limitStatus',
+                optionVal:[
+                    {value:'1',name:'启用'},
+                    {value:'2',name:'停用'},
+                    {value:'3',name:'全部'},
+                ]
+            }
+        ],
+        inputsData:[
+            {
+                labelName:'商户编号',
+                labelValue: 'merchantCode',
+
+            },
+        ],
+
+
+        columns : [
+            {
+            title: '商户编号',
+            dataIndex: 'merchantCode',
+            render: text => <Link to="#">{text}</Link>,
+        }, {
+            title: '单笔（金额）',
+            dataIndex: 'sigle',
+        }, {
+            title: '单日（金额）',
+            dataIndex: 'oddDay',
+        },{
+            title:'年（金额）',
+            dataIndex:'year',
+        },{
+            title:'终身（金额）',
+            dataIndex:'lifeLong',
+        },{
+            title:'两笔间隔（秒）',
+            dataIndex:'createUserName',
+        },{
+            title:'每笔／分钟',
+            dataIndex:'updateUserId',
+        },{
+            title:'笔／日',
+            dataIndex:'updateUserName',
+        },{
+            title:'状态',
+            dataIndex:'status',
+        },{
+            title: '管理',
+            dataIndex: 'operation',
+            render: (text, record) => {
+                return (
+                    <div className="editable-row-operations">
+                        {/*<Link to="/">修改</Link>*/}
+                        <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{}}>
                         停用
                     </span>&nbsp;&nbsp;&nbsp;
-                    <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{this.edit(record)}}>
+                        <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{this.edit(record)}}>
                         修改
                     </span>&nbsp;&nbsp;&nbsp;
-                    <span style={{color:'blue', cursor:'pointer'}}>
+                        <span style={{color:'blue', cursor:'pointer'}}>
                         操作记录
                     </span>&nbsp;&nbsp;&nbsp;
-                </div>
-            );
-        },
-    }];
+                    </div>
+                );
+            },
+        }]
+
+    }
+
+
+
 
 
     edit(record) {
@@ -99,6 +168,7 @@ export default class LimitHome extends React.Component {
 
         const {pageNum,pageSize} = this.state;
         let data = this.props.form.getFieldsValue()
+        console.log('=======',data)
         let params = {
             pageNum,
             pageSize,
@@ -143,96 +213,46 @@ export default class LimitHome extends React.Component {
                 }}>
                     <Form>
                         <Row>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="限额类别"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
-                                        )
-                                    }
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="限额属性"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitProperty')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
-                                        )
-                                    }
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="限额主体"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitMain')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
-                                        )
-                                    }
+                            {
+                                this.initData.selectsData.map((v,k) => {
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="商户类型"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('merchentType')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
-                                        )
-                                    }
+                                return (
+                                    <Col {...queryItemLayout}>
+                                        {
+                                            getFieldDecorator(v.labelValue)(
+                                    <SelectComs key={k} labelName={v.labelName} style={{ width: 120 }} >
+                                        {
+                                            v.optionVal.map((i,j)=>{
+                                                return <Option key={j} value={i.value}>{i.name}</Option>
+                                            })
+                                        }
+                                    </SelectComs>
+                                            )
+                                        }
+                                    </Col>
+                                )
+                            }
+                            )
+                            }
+                            {
+                                this.initData.inputsData.map((v,k) => {
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="限额状态"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitStatus')(
-                                            <Select>
-                                                <Option key="12">123</Option>
-                                            </Select>
-                                        )
-                                    }
+                                    return (
+                                        <Col {...queryItemLayout}>
+                                            {
+                                                getFieldDecorator(v.labelValue)(
+                                                   <InputComs labelName={v.labelName} style={{width: 120}}/>
+                                                )
+                                            }
+                                        </Col>
+                                    )
+                                })
+                            }
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="商户编号"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('merchentCode')(
-                                            <Input />
-                                        )
-                                    }
-
-                                </FormItem>
-                            </Col>
                             <Col>
-                                <Button type="primary" style={{marginLeft: '30px'}}>查询</Button>
+                                <Button type="primary" style={{marginLeft: '30px'}} onClick={()=>{this.query()}}>查询</Button>
                             </Col>
                         </Row>
 
@@ -243,7 +263,7 @@ export default class LimitHome extends React.Component {
                     <Button type="primary" onClick={()=>{this.props.history.push('/merchentlimitadd',{title:'商户添加限额'})}}>添加</Button>
                 </div>
 
-                <Table dataSource={this.state.dataSource} pagination={false} columns={this.columns} ></Table>
+                <Table dataSource={this.state.dataSource} pagination={false} columns={this.initData.columns} ></Table>
 
             </div>
         )
