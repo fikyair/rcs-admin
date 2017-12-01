@@ -137,6 +137,46 @@ export default class MerchentLimitModify extends React.Component {
                 ]
             }
         ],
+
+        limitData: [
+            {
+                labelName: '单笔',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元"
+            },
+            {
+                labelName: '单日',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元"
+            }, {
+                labelName: '单日',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元"
+            }, {
+                labelName: '年',
+                labelValue: 'year',
+                addonBefore: "金额",
+                addonAfter: "元"
+            },
+            {
+                labelName: '终身',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元"
+            }, {
+                labelName: '两笔间隔',
+                labelValue: 'sigle',
+                addonAfter: "元"
+            },
+            {
+                labelName: '笔／日',
+                labelValue: 'sigle',
+                addonAfter: "元"
+            }
+        ],
         inputsData: [
             {
                 labelName: '商户编号',
@@ -157,7 +197,7 @@ export default class MerchentLimitModify extends React.Component {
         const formItemLayout = {
             labelCol: {//文字
                 xs: {span: 24},//小于768px
-                sm: {span: 10},//大于768px
+                sm: {span: 5},//大于768px
             },
             wrapperCol: {//标签
                 xs: {span: 24},
@@ -248,126 +288,54 @@ export default class MerchentLimitModify extends React.Component {
                     <Card title="添加限额值" style={cardStyle}>
 
                         <Row>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="单笔"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
+
+
+                            {
+                                this.initData.limitData.map((v, k) => {
+
+                                        return (
+                                            <Col {...queryItemLayout}>
+                                                {
+                                                    getFieldDecorator(v.labelValue)(
+                                                        <InputComs labelName={v.labelName} style={{width: 120}}
+                                                                   addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
+                                                    )
+                                                }
+                                            </Col>
                                         )
                                     }
-
-                                </FormItem>
-                            </Col>
+                                )
+                            }
                             <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="单日"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-                                        )
-                                    }
+                                <Row style={{marginTop: '10px'}}>
+                                    <Col span={5}>
+                                        <span style={{marginTop: '5px',display: 'inline-block'}}>每笔／分钟:</span>
+                                    </Col>
+                                    <Col span={14}>
+                                        {
+                                            getFieldDecorator('limitType')(
+                                                <InputGroup>
+                                                    <Input style={{width: 100, textAlign: 'center'}} placeholder="Minimum"/>
+                                                    <Input style={{
+                                                        width: 24,
+                                                        borderLeft: 0,
+                                                        pointerEvents: 'none',
+                                                        backgroundColor: '#fff'
+                                                    }} placeholder="/" disabled/>
+                                                    <Input style={{width: 100, textAlign: 'center', borderLeft: 0}}
+                                                           placeholder="Maximum"/>
+                                                </InputGroup>
+                                            )
+                                        }
+                                    </Col>
+                                </Row>
 
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="单月"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-                                        )
-                                    }
 
-                                </FormItem>
                             </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="年"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-                                        )
-                                    }
 
-                                </FormItem>
-                            </Col>
                         </Row>
 
                         <Row>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="终身"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-                                        )
-                                    }
-
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="两笔间隔"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonAfter="元"/>
-                                        )
-                                    }
-
-                                </FormItem>
-                            </Col>
-
-
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="笔数／分钟"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <InputGroup>
-                                                <Input style={{width: 100, textAlign: 'center'}} placeholder="Minimum"/>
-                                                <Input style={{
-                                                    width: 24,
-                                                    borderLeft: 0,
-                                                    pointerEvents: 'none',
-                                                    backgroundColor: '#fff'
-                                                }} placeholder="/" disabled/>
-                                                <Input style={{width: 100, textAlign: 'center', borderLeft: 0}}
-                                                       placeholder="Maximum"/>
-                                            </InputGroup>
-                                        )
-                                    }
-
-                                </FormItem>
-                            </Col>
-                            <Col {...queryItemLayout}>
-                                <FormItem
-                                    label="笔／日"
-                                    {...formItemLayout}
-                                >
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <Input style={{width: 120}} addonAfter="元"/>
-                                        )
-                                    }
-
-                                </FormItem>
-                            </Col>
-
                         </Row>
 
 
