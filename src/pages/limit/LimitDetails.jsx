@@ -1,55 +1,106 @@
 import React from 'react';
-import { Table, Layout } from 'antd'
+import { Input, Layout, Form } from 'antd'
 import {Containerization, setTitle} from '../../common/PublicComponent';
-
+const FormItem=Form.Item;
 @setTitle('限额详情页')
 @Containerization()
+@Form.create()
 export default class LimitDetails extends React.Component {
-    mockData = {
-      dataSource:[
-        {
-          key: '1',
-          name: '交易限额',
-          value:'结算限额',
-        }, {
-          key: '2',
-          name: "限额属性",
-          value:'B端',
-        }, {
-          key:'5',
-          name: '商户类型',
-          value: '836商户',
-        }, {
-          key: '3',
-          name: '账户类型',
-          value:'对私-法人',
-        },{
-          key:'4',
-          name:'卡介质',
-          value:'IC卡'
-        },
-      ],
-      columns:[{
 
-          title: '',
-          dataIndex: 'name',
-          key: 'name',
-      },{
 
-        title: '',
-        dataIndex: 'value',
-        key: 'value',
-      }]
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
     }
+
     render() {
-      const { dataSource = this.mockData.dataSource,
-        columns= this.mockData.columns
-      } = this.props;
+        const { getFieldDecorator } = this.props.form;
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 6 },
+            },
+        };
+
         return (
-            <Layout>
-                <Table columns={columns} dataSource={dataSource}/>
-            </Layout>
-        )
+                <Form onSubmit={this.handleSubmit}>
+                    <FormItem
+                        {...formItemLayout}
+                        label="结算账户类型："
+                        hasFeedback
+                    >
+                        { getFieldDecorator('accountType', {
+                            rules: [{
+                                type: 'email', message: 'The input is not valid E-mail!',
+                            }, {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="名单类型："
+                        hasFeedback
+                    >
+                        { getFieldDecorator('listType', {
+                            rules: [ {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="是否优质商户："
+                        hasFeedback
+                    >
+                        { getFieldDecorator('isExcellentClient', {
+                            rules: [ {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="行业大类："
+                        hasFeedback
+                    >
+                        { getFieldDecorator('industryCategory', {
+                            rules: [ {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                        )}
+                    </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="行业大类："
+                        hasFeedback
+                    >
+                        { getFieldDecorator('industryCategory', {
+                            rules: [ {
+                                required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <Input />
+                        )}
+                    </FormItem>
+                </Form>
+               )
     }
 }
 
