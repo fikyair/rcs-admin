@@ -15,6 +15,8 @@ import {initSysInfo} from "./utils/utils";
 
 import { setCurrentLoginUser,checkPermission }  from './common/permission';
 
+import './style/style.less';
+
 // To add to window, 定义全局变量
 if (!window.Promise) {
     window.Promise = Promise;

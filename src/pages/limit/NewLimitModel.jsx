@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Form, Input, Button } from 'antd';
+import { Layout, Form, Input, Button, Card } from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 const FormItem = Form.Item;
 
@@ -189,11 +189,8 @@ export default class NewLimitModel extends React.Component {
     } = this.props;
     const { getFieldDecorator } = this.props.form;
     return (
-      <Layout style={{padding:'10px'}}>
-      <Form  layout="inline" onSubmit={this.handleSubmit}>
-      <Layout >
-        <div style={{fontSize:'20px'}}>选择商户属性</div>
-        <div>
+      <Form className="container"  layout="inline" onSubmit={this.handleSubmit}>
+        <Card title="选择商户属性">
         {
           merchentSelects.map((v,k)=>{
             return <FormItem key={k}>
@@ -212,13 +209,9 @@ export default class NewLimitModel extends React.Component {
               </FormItem>
           })
         }
-        </div>
-      </Layout>
-      <Layout>
-        <div style={{fontSize:'20px'}}>选择交易属性</div>
-        <div>
-          <div style={{fontSize:'15px'}}>线下交易</div>
-          <div>
+        </Card>
+        <Card title="选择交易属性">
+          <Card title="线下交易">
           {
             offline.map((v,k)=>{
             return <FormItem key={k}>
@@ -237,11 +230,8 @@ export default class NewLimitModel extends React.Component {
             </FormItem>
           })
           }
-          </div>
-        </div>
-        <div>
-          <div style={{fontSize:'15px'}}>扫码交易</div>
-          <div>
+          </Card>
+          <Card title="扫码交易">
             {
               online.map((v,k)=>{
                 return <FormItem key={k}>
@@ -259,12 +249,9 @@ export default class NewLimitModel extends React.Component {
                 </FormItem>
               })
             }
-          </div>
-        </div>
-      </Layout>
-      <Layout>
-        <div style={{fontSize:'20px'}}>添加限额值</div>
-        <div>
+          </Card>
+        </Card>
+        <Card title="添加限额值">
           {
             inputLimit.map((v,k)=>{
              return (
@@ -280,17 +267,12 @@ export default class NewLimitModel extends React.Component {
              )
             })
           }
-        </div>
-      </Layout>
-      <Layout>
-        <div style={{fontSize:'20px'}}>添加限额名称</div>
-        <div>
-        <Input placeholder="请输入" addonBefore={(<span style={{minWidth:'70px',display: 'inline-block'}}>限额名称</span>)}  style={{width:'200px',margin:'10px'}}/>
+        </Card>
+        <Card title="添加限额名称">
+          <Input placeholder="请输入" addonBefore={(<span style={{minWidth:'70px',display: 'inline-block'}}>限额名称</span>)}  style={{width:'200px',margin:'10px'}}/>
           <Button style={{margin:'10px'}} onClick={()=>this.props.history.push('/limitManager')}>取消</Button>
           <Button htmlType="submit" style={{margin:'10px'}} >保存</Button>
-      </div>
-      </Layout>
-
-      </Form></Layout>)
+        </Card>
+      </Form>)
   }
 }

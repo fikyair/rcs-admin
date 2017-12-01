@@ -10,7 +10,7 @@ import {Input} from 'antd';
 export default class InputComs extends React.Component {
 
     render() {
-        const {labelName, children, labelNStyles} = this.props;
+        const {labelName, children, labelNStyles, ...rest} = this.props;
         return (<div style={{display: 'inline-block', margin: '10px'}}>
             <span style={{
                 ...labelNStyles,
@@ -19,7 +19,7 @@ export default class InputComs extends React.Component {
                 minWidth: '80px',
                 display: 'inline-block'
             }}>{labelName}:</span>
-            <Input {...this.props} />
+            <Input {...rest} />
         </div>)
     }
 }
