@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Col, Row, Select,Table, Button,Input, Layout, Tabs,Card} from 'antd'
+import {Form, Col, Row, Select, Table, Button, Input, Layout, Tabs, Card} from 'antd'
 import {Link} from 'react-router-dom'
 import {InitComs} from "../../common/PublicComponent";
 import SelectComs, {Option} from '../../components/SelectComs';
@@ -13,10 +13,7 @@ const InputGroup = Input.Group;
 @Form.create()
 export default class MerchentLimitModify extends React.Component {
 
-    state = {
-
-    }
-
+    state = {}
 
 
     componentWillMount() {
@@ -24,125 +21,125 @@ export default class MerchentLimitModify extends React.Component {
     }
 
     initData = {
-        merchantData:[
+        merchantData: [
             {
-                labelName:'结算账户类型',
+                labelName: '结算账户类型',
                 labelValue: 'settleType',
-                optionVal:[
-                    {value:'1',name:'交易'},
-                    {value:'2',name:'结算'},
-                    {value:'3',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '交易'},
+                    {value: '2', name: '结算'},
+                    {value: '3', name: '全部'},
                 ]
             },
             {
-                labelName:'名单类型',
+                labelName: '名单类型',
                 labelValue: 'listType',
-                optionVal:[
-                    {value:'1',name:'账户结算类型'},
-                    {value:'2',name:'名单类型'},
-                    {value:'3',name:'行业大类'},
-                    {value:'4',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '账户结算类型'},
+                    {value: '2', name: '名单类型'},
+                    {value: '3', name: '行业大类'},
+                    {value: '4', name: '全部'},
                 ]
-            },{
-                labelName:'是否小额双免',
+            }, {
+                labelName: '是否小额双免',
                 labelValue: 'bothFree',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'7',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '7', name: '全部'},
                 ]
-            },{
-                labelName:'是否有终端',
+            }, {
+                labelName: '是否有终端',
                 labelValue: 'isTerminal',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'4',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '4', name: '全部'},
                 ]
             },
             {
-                labelName:'POS商户类型',
+                labelName: 'POS商户类型',
                 labelValue: 'POSMerchantType',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'3',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '3', name: '全部'},
                 ]
-            },{
-                labelName:'POS秒到等级',
+            }, {
+                labelName: 'POS秒到等级',
                 labelValue: 'POSSecondsLevel',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'4',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '4', name: '全部'},
                 ]
             },
             {
-                labelName:'POS结算周期',
+                labelName: 'POS结算周期',
                 labelValue: 'POSBillingCycle',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'3',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '3', name: '全部'},
                 ]
             }
         ],
-        transactionData:[
+        transactionData: [
             {
-                labelName:'卡属性',
+                labelName: '卡属性',
                 labelValue: 'settleType',
-                optionVal:[
-                    {value:'1',name:'交易'},
-                    {value:'2',name:'结算'},
-                    {value:'3',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '交易'},
+                    {value: '2', name: '结算'},
+                    {value: '3', name: '全部'},
                 ]
             },
             {
-                labelName:'卡介质',
+                labelName: '卡介质',
                 labelValue: 'listType',
-                optionVal:[
-                    {value:'1',name:'账户结算类型'},
-                    {value:'2',name:'名单类型'},
-                    {value:'3',name:'行业大类'},
-                    {value:'4',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '账户结算类型'},
+                    {value: '2', name: '名单类型'},
+                    {value: '3', name: '行业大类'},
+                    {value: '4', name: '全部'},
                 ]
-            },{
-                labelName:'消费方式',
+            }, {
+                labelName: '消费方式',
                 labelValue: 'bothFree',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'7',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '7', name: '全部'},
                 ]
-            },{
-                labelName:'接触方式',
+            }, {
+                labelName: '接触方式',
                 labelValue: 'isTerminal',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'4',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '4', name: '全部'},
                 ]
             },
             {
-                labelName:'扫码类型',
+                labelName: '扫码类型',
                 labelValue: 'POSMerchantType',
-                optionVal:[
-                    {value:'1',name:'持卡人银行'},
-                    {value:'2',name:'用户openID'},
-                    {value:'3',name:'全部'},
+                optionVal: [
+                    {value: '1', name: '持卡人银行'},
+                    {value: '2', name: '用户openID'},
+                    {value: '3', name: '全部'},
                 ]
             }
         ],
-        inputsData:[
+        inputsData: [
             {
-                labelName:'商户编号',
+                labelName: '商户编号',
                 labelValue: 'merchantCode',
 
             },
         ],
 
 
-        columns : [
+        columns: [
             {
                 title: '商户编号',
                 dataIndex: 'merchantCode',
@@ -153,38 +150,41 @@ export default class MerchentLimitModify extends React.Component {
             }, {
                 title: '单日（金额）',
                 dataIndex: 'oddDay',
-            },{
-                title:'年（金额）',
-                dataIndex:'year',
-            },{
-                title:'终身（金额）',
-                dataIndex:'lifeLong',
-            },{
-                title:'两笔间隔（秒）',
-                dataIndex:'createUserName',
-            },{
-                title:'每笔／分钟',
-                dataIndex:'updateUserId',
-            },{
-                title:'笔／日',
-                dataIndex:'updateUserName',
-            },{
-                title:'状态',
-                dataIndex:'status',
-            },{
+            }, {
+                title: '年（金额）',
+                dataIndex: 'year',
+            }, {
+                title: '终身（金额）',
+                dataIndex: 'lifeLong',
+            }, {
+                title: '两笔间隔（秒）',
+                dataIndex: 'createUserName',
+            }, {
+                title: '每笔／分钟',
+                dataIndex: 'updateUserId',
+            }, {
+                title: '笔／日',
+                dataIndex: 'updateUserName',
+            }, {
+                title: '状态',
+                dataIndex: 'status',
+            }, {
                 title: '管理',
                 dataIndex: 'operation',
                 render: (text, record) => {
                     return (
                         <div className="editable-row-operations">
                             {/*<Link to="/">修改</Link>*/}
-                            <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{}}>
+                            <span style={{color: 'blue', cursor: 'pointer'}} onClick={() => {
+                            }}>
                         停用
                     </span>&nbsp;&nbsp;&nbsp;
-                            <span style={{color:'blue', cursor:'pointer'}} onClick={()=>{this.edit(record)}}>
+                            <span style={{color: 'blue', cursor: 'pointer'}} onClick={() => {
+                                this.edit(record)
+                            }}>
                         修改
                     </span>&nbsp;&nbsp;&nbsp;
-                            <span style={{color:'blue', cursor:'pointer'}}>
+                            <span style={{color: 'blue', cursor: 'pointer'}}>
                         操作记录
                     </span>&nbsp;&nbsp;&nbsp;
                         </div>
@@ -195,7 +195,7 @@ export default class MerchentLimitModify extends React.Component {
     }
 
 
-    render(){
+    render() {
         const {getFieldDecorator} = this.props.form;
         const cardStyle = {
             marginBottom: 16,
@@ -210,7 +210,7 @@ export default class MerchentLimitModify extends React.Component {
                 sm: {span: 14},
             },
         };
-        const queryItemLayout ={
+        const queryItemLayout = {
             xs: 12,
             sm: 8,
             md: 6,
@@ -221,60 +221,31 @@ export default class MerchentLimitModify extends React.Component {
                 <h1 style={{textAlign: 'center', marginBottom: 16}}>商户修改限额</h1>
 
                 <Form>
-                    <Card style={cardStyle} >
+                    <Card style={cardStyle}>
                         <Row>
                             <Col {...queryItemLayout}>
-                                    {
-                                        getFieldDecorator('settleType')(
-                                            <InputComs labelName="商户编号"  style={{ width: 200 }} disabled={true}/>
-                                        )
-                                    }
+                                {
+                                    getFieldDecorator('settleType')(
+                                        <InputComs labelName="商户编号" style={{width: 200}} disabled={true}/>
+                                    )
+                                }
                             </Col>
                         </Row>
                     </Card>
 
-                <Card title="选择商户属性" style={cardStyle}>
-                    <Row>
-
-                        {
-                            this.initData.merchantData.map((v,k) => {
-
-                                    return (
-                                        <Col {...queryItemLayout}>
-                                            {
-                                                getFieldDecorator(v.labelValue)(
-                                                    <SelectComs key={k} labelName={v.labelName} style={{ width: 120 }} >
-                                                        {
-                                                            v.optionVal.map((i,j)=>{
-                                                                return <Option key={j} value={i.value}>{i.name}</Option>
-                                                            })
-                                                        }
-                                                    </SelectComs>
-                                                )
-                                            }
-                                        </Col>
-                                    )
-                                }
-                            )
-                        }
-
-                        </Row>
-
-                </Card>
-                <Card title="选择交易属性：" style={cardStyle}>
+                    <Card title="选择商户属性" style={cardStyle}>
                         <Row>
 
-
                             {
-                                this.initData.transactionData.map((v,k) => {
+                                this.initData.merchantData.map((v, k) => {
 
                                         return (
                                             <Col {...queryItemLayout}>
                                                 {
                                                     getFieldDecorator(v.labelValue)(
-                                                        <SelectComs key={k} labelName={v.labelName} style={{ width: 120 }} >
+                                                        <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
                                                             {
-                                                                v.optionVal.map((i,j)=>{
+                                                                v.optionVal.map((i, j) => {
                                                                     return <Option key={j} value={i.value}>{i.name}</Option>
                                                                 })
                                                             }
@@ -289,8 +260,37 @@ export default class MerchentLimitModify extends React.Component {
 
                         </Row>
 
-                </Card>
-                <Card title="添加限额值" style={cardStyle}>
+                    </Card>
+                    <Card title="选择交易属性：" style={cardStyle}>
+                        <Row>
+
+
+                            {
+                                this.initData.transactionData.map((v, k) => {
+
+                                        return (
+                                            <Col {...queryItemLayout}>
+                                                {
+                                                    getFieldDecorator(v.labelValue)(
+                                                        <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                            {
+                                                                v.optionVal.map((i, j) => {
+                                                                    return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                })
+                                                            }
+                                                        </SelectComs>
+                                                    )
+                                                }
+                                            </Col>
+                                        )
+                                    }
+                                )
+                            }
+
+                        </Row>
+
+                    </Card>
+                    <Card title="添加限额值" style={cardStyle}>
 
                         <Row>
                             <Col {...queryItemLayout}>
@@ -300,7 +300,7 @@ export default class MerchentLimitModify extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                           <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
+                                            <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
                                         )
                                     }
 
@@ -314,7 +314,6 @@ export default class MerchentLimitModify extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-
                                         )
                                     }
 
@@ -328,7 +327,6 @@ export default class MerchentLimitModify extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-
                                         )
                                     }
 
@@ -342,7 +340,6 @@ export default class MerchentLimitModify extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-
                                         )
                                     }
 
@@ -351,7 +348,7 @@ export default class MerchentLimitModify extends React.Component {
                         </Row>
 
                         <Row>
-                                                     <Col {...queryItemLayout}>
+                            <Col {...queryItemLayout}>
                                 <FormItem
                                     label="终身"
                                     {...formItemLayout}
@@ -359,7 +356,6 @@ export default class MerchentLimitModify extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <Input style={{width: 120}} addonBefore="金额" addonAfter="元"/>
-
                                         )
                                     }
 
@@ -373,7 +369,6 @@ export default class MerchentLimitModify extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <Input style={{width: 120}} addonAfter="元"/>
-
                                         )
                                     }
 
@@ -388,11 +383,17 @@ export default class MerchentLimitModify extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('limitType')(
-                                        <InputGroup >
-                                        <Input style={{ width: 100, textAlign: 'center' }} placeholder="Minimum" />
-                                        <Input style={{ width: 24, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff' }} placeholder="/" disabled />
-                                        <Input style={{ width: 100, textAlign: 'center', borderLeft: 0 }} placeholder="Maximum" />
-                                        </InputGroup>
+                                            <InputGroup>
+                                                <Input style={{width: 100, textAlign: 'center'}} placeholder="Minimum"/>
+                                                <Input style={{
+                                                    width: 24,
+                                                    borderLeft: 0,
+                                                    pointerEvents: 'none',
+                                                    backgroundColor: '#fff'
+                                                }} placeholder="/" disabled/>
+                                                <Input style={{width: 100, textAlign: 'center', borderLeft: 0}}
+                                                       placeholder="Maximum"/>
+                                            </InputGroup>
                                         )
                                     }
 
@@ -406,7 +407,6 @@ export default class MerchentLimitModify extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <Input style={{width: 120}} addonAfter="元"/>
-
                                         )
                                     }
 
@@ -416,13 +416,13 @@ export default class MerchentLimitModify extends React.Component {
                         </Row>
 
 
-                </Card>
+                    </Card>
                 </Form>
                 <Row style={{textAlign: 'center'}}>
-                <FormItem>
-                    <Button type="primary" ghost htmlType="submit">取消</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button type="danger" ghost htmlType="submit">保存</Button>
-                </FormItem>
+                    <FormItem>
+                        <Button type="primary" ghost htmlType="submit">取消</Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <Button type="danger" ghost htmlType="submit">保存</Button>
+                    </FormItem>
                 </Row>
             </div>
 
