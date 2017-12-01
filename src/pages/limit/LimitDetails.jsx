@@ -130,7 +130,7 @@ export default class LimitDetails extends React.Component {
                                 this.initData.merchantAttrData.map((v,k)=>{
                                     return(
                                         <Col  {...queryItemLayout}
-                                        >
+                                              key ={k} >
                                             {
                                                getFieldDecorator(v.labelValue)(
                                                    <InputComs  disabled={true} labelName={v.labelName} style={{width: 120}}/>
@@ -144,7 +144,7 @@ export default class LimitDetails extends React.Component {
                     </Card>
                 </Form>
                 <Form>
-                    <Card title="交易属性" border={true}>
+                    <Card title="交易属性" bordered={true}>
                         <Row style={{marginTop: 10}}>
                             <Col {...tailItemLayout}
                             >
