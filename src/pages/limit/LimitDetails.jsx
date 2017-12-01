@@ -155,7 +155,8 @@ export default class LimitDetails extends React.Component {
                                         this.initData.transactionAttrData.map((v,k)=>{
 
                                             return(
-                                                <Col {...queryItemLayout}>
+                                                <Col {...queryItemLayout}
+                                                     key ={k}>
                                                     {
                                                         getFieldDecorator(v.labelValue)(
                                                             <InputComs  disabled={true} labelName={v.labelName} style={{width: 120}}/>
@@ -179,7 +180,8 @@ export default class LimitDetails extends React.Component {
                                     this.initData.scanData.map((v,k)=>{
 
                                         return(
-                                            <Col {...queryItemLayout}>
+                                            <Col {...queryItemLayout}
+                                                 key ={k}>
                                                 {
                                                     getFieldDecorator(v.labelValue)(
                                                         <InputComs  disabled={true} labelName={v.labelName} style={{width: 120}}/>
@@ -202,7 +204,8 @@ export default class LimitDetails extends React.Component {
                             this.initData.modifyLimitData.map((v, k) => {
 
                                     return (
-                                        <Col {...queryItemLayout}>
+                                        <Col {...queryItemLayout}
+                                             key ={k}>
                                             {
                                                 getFieldDecorator(v.labelValue)(
                                                     <InputComs disabled={true} labelName={v.labelName} style={{width: 120}}
