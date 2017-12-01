@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Col, Row, Select, Table, Button, Input, Layout,} from 'antd'
+import {Form, Col, Row, Select, Table, Button, Input, Layout,Pagination} from 'antd'
 import {Link} from 'react-router-dom'
 import {Containerization} from '../../common/PublicComponent';
 import SelectComs, {Option} from '../../components/SelectComs';
@@ -14,7 +14,7 @@ export default class LimitHome extends React.Component {
         dataSource: [],
         pageNum: 1,
         pageSize: 3,
-        total: 0,
+        total: 19,
     }
 
     constructor(props, state) {
@@ -164,11 +164,10 @@ export default class LimitHome extends React.Component {
 
     }
 
-    query() {
+    search() {
 
         const {pageNum, pageSize} = this.state;
         let data = this.props.form.getFieldsValue()
-        console.log('=======', data)
         let params = {
             pageNum,
             pageSize,
@@ -176,6 +175,13 @@ export default class LimitHome extends React.Component {
         }
 
 
+    }
+
+    onChange = (page) => {
+        this.setState({pageNum: page})
+        this.search({
+            pageNum: page,
+        })
     }
 
     render() {
@@ -211,8 +217,6 @@ export default class LimitHome extends React.Component {
                 }}>
                     <Form>
                         <Row>
-
-
                             {
                                 this.initData.selectsData.map((v, k) => {
 
@@ -251,7 +255,7 @@ export default class LimitHome extends React.Component {
 
                             <Col>
                                 <Button type="primary" style={{marginLeft: '30px'}} onClick={() => {
-                                    this.query()
+                                    this.search()
                                 }}>查询</Button>
                             </Col>
                         </Row>
@@ -266,6 +270,10 @@ export default class LimitHome extends React.Component {
                 </div>
 
                 <Table dataSource={this.state.dataSource} pagination={false} columns={this.initData.columns}></Table>
+                <div style={{marginTop: '10px',textAlign:'right',marginRight: '15px'}}>
+                    <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
+                                onChange={this.onChange}/>
+                </div>
 
             </div>
         )
