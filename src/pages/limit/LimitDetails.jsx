@@ -1,6 +1,7 @@
 import React from 'react';
 import {Input, Button, Form, Row, Col, Card} from 'antd'
-import {Containerization, setTitle} from '../../common/PublicComponent';
+import {Containerization, InitComs, setTitle} from '../../common/PublicComponent';
+import InputComs from "../../components/InputComs";
 const InputGroup = Input.Group;
 
 const FormItem = Form.Item;
@@ -58,123 +59,31 @@ export default class LimitDetails extends React.Component {
                 sm: {span: 12},
             },
         };
+        const queryItemLayout = {
+            xs: 12,
+            sm: 8,
+            md: 6,
+        }
         return (
             <div style={{margin: '15px 35px '}}>
                 <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10, fontSize: 16}} > <b>限额名称：POS商户对私结算限额</b> </div>
                 <Form >
                     <Card title="商户属性：" bordered={true}>
                         <Row style={{marginTop: 10}}>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="结算账户类型："
-                                >
-                                    {getFieldDecorator('accountType')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="名单类型："
-                                >
-                                    {getFieldDecorator('listType')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="是否优质商户："
-                                >
-                                    {getFieldDecorator('isExcellentClient')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="行业大类："
-                                >
-                                    {getFieldDecorator('industryCategory')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="细类："
-                                >
-                                    {getFieldDecorator('detailCategory')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="MCC："
-                                >
-                                    {getFieldDecorator('mcc')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="是否小额双免："
-                                >
-                                    {getFieldDecorator('isSmallExemption')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="是否有终端："
-                                >
-                                    {getFieldDecorator('hasTerminal')(
-                                        <Input disabled={true}/>
-
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="POS商户类型："
-                                >
-                                    {getFieldDecorator('posClientType')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="POS秒到等级："
-                                >
-                                    {getFieldDecorator('posSecondRank')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
-                            <Col span={8}>
-                                <FormItem
-                                    {...formItemLayout}
-                                    label="POS结算周期："
-                                >
-                                    {getFieldDecorator('posbalanceTime')(
-                                        <Input disabled={true}/>
-                                    )}
-                                </FormItem>
-                            </Col>
+                            {
+                                this.initData.merchantAttrData.map((v,k)=>{
+                                    return(
+                                        <Col  {...queryItemLayout}
+                                        >
+                                            {
+                                               getFieldDecorator(v.labelValue)(
+                                                   <InputComs  disabled={true} labelName={v.labelName} style={{width: 120}}/>
+                                               )
+                                            }
+                                        </Col>
+                                    )
+                                })
+                            }
                         </Row>
                     </Card>
                 </Form>
