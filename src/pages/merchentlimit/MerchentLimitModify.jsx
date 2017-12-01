@@ -19,11 +19,16 @@ export default class MerchentLimitAdd extends React.Component {
 
     componentWillMount() {
         let data = {
-            settleType: 1,
+            settleType: '1',
             listType: 2,
 
         }
-        this.setState({data: data})
+        this.setInitValue(data)
+    }
+
+    // 初始化表单数据
+    setInitValue = (data) => {
+        this.initData.merchantData[0].initialValue = data.settleType
     }
 
     initData = {
@@ -31,7 +36,6 @@ export default class MerchentLimitAdd extends React.Component {
             {
                 labelName: '结算账户类型',
                 labelValue: 'settleType',
-                initialValue: '1',
                 optionVal: [
                     {value: '1', name: '交易'},
                     {value: '2', name: '结算'},
@@ -91,15 +95,16 @@ export default class MerchentLimitAdd extends React.Component {
                 ]
             }
         ],
-        lineTransaction: [{
-            labelName: '卡属性',
-            labelValue: 'settleType',
-            optionVal: [
-                {value: '1', name: '交易'},
-                {value: '2', name: '结算'},
-                {value: '3', name: '全部'},
-            ]
-        },
+        lineTransaction: [
+            {
+                labelName: '卡属性',
+                labelValue: 'settleType',
+                optionVal: [
+                    {value: '1', name: '交易'},
+                    {value: '2', name: '结算'},
+                    {value: '3', name: '全部'},
+                ]
+            },
             {
                 labelName: '卡介质',
                 labelValue: 'listType',
@@ -211,7 +216,7 @@ export default class MerchentLimitAdd extends React.Component {
         const tailItemLayout = {
             xs: 24,
             sm: 24,
-            md:1
+            md: 1
         }
         return (
             <div>
@@ -263,7 +268,7 @@ export default class MerchentLimitAdd extends React.Component {
                         <Row>
                             <Row>
                                 <Col {...tailItemLayout} >
-                                    <span style={{marginTop: '16px',display: 'inline-block'}}>线下交易：</span>
+                                    <span style={{marginTop: '16px', display: 'inline-block'}}>线下交易：</span>
                                 </Col>
                                 <Col>
                                     {
@@ -273,10 +278,12 @@ export default class MerchentLimitAdd extends React.Component {
                                                     <Col {...queryItemLayout}>
                                                         {
                                                             getFieldDecorator(v.labelValue)(
-                                                                <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                                <SelectComs key={k} labelName={v.labelName}
+                                                                            style={{width: 120}}>
                                                                     {
                                                                         v.optionVal.map((i, j) => {
-                                                                            return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                            return <Option key={j}
+                                                                                           value={i.value}>{i.name}</Option>
                                                                         })
                                                                     }
                                                                 </SelectComs>
@@ -292,7 +299,7 @@ export default class MerchentLimitAdd extends React.Component {
 
                             <Row>
                                 <Col {...tailItemLayout} >
-                                    <span style={{marginTop: '16px',display: 'inline-block'}}>扫码交易：</span>
+                                    <span style={{marginTop: '16px', display: 'inline-block'}}>扫码交易：</span>
                                 </Col>
                                 <Col>
                                     {
@@ -302,10 +309,12 @@ export default class MerchentLimitAdd extends React.Component {
                                                     <Col {...queryItemLayout}>
                                                         {
                                                             getFieldDecorator(v.labelValue)(
-                                                                <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                                <SelectComs key={k} labelName={v.labelName}
+                                                                            style={{width: 120}}>
                                                                     {
                                                                         v.optionVal.map((i, j) => {
-                                                                            return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                            return <Option key={j}
+                                                                                           value={i.value}>{i.name}</Option>
                                                                         })
                                                                     }
                                                                 </SelectComs>
