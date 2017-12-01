@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Select, Row, Col,Button, Card} from 'antd';
 
-
+const InputGroup = Input.Group;
 const FormItem = Form.Item;
 @Form.create()
 export default class MerchentLimitDetails extends React.Component{
@@ -277,7 +277,7 @@ export default class MerchentLimitDetails extends React.Component{
                                 label="笔数/分钟:"
                             >
                                 {getFieldDecorator('merchantAttribute')(
-                                    <Input addonAfter={"笔"} style={{width:80}} disabled={"true"}/>
+                                    <Input addonCenter="/" disabled={"true"}/>
                                 )}
                             </FormItem>
                         </Col>
@@ -287,7 +287,12 @@ export default class MerchentLimitDetails extends React.Component{
                                 label="笔/日:"
                             >
                                 {getFieldDecorator('merchantAttribute')(
-                                    <Input addonAfter={"笔"} disabled={"true"} />
+                                   // <Input addonAfter={"笔"} disabled={"true"} />
+                                    <InputGroup compact>
+                                        <Input style={{ width: '45%' }} addonAfter={"笔"} />
+                                        &nbsp;&nbsp;/&nbsp;&nbsp;
+                                        <Input style={{ width: '45%' }}  addonAfter={"分"} />
+                                    </InputGroup>
                                 )}
                             </FormItem>
                         </Col>
