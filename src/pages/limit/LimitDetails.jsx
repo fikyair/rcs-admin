@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Layout, Form, Row, Col} from 'antd'
+import {Input, Button, Form, Row, Col, Card} from 'antd'
 import {Containerization, setTitle} from '../../common/PublicComponent';
 const InputGroup = Input.Group;
 
@@ -24,58 +24,49 @@ export default class LimitDetails extends React.Component {
         const formItemLayout = {
             labelCol: {
                 xs: {span: 24},
-                sm: {span: 8},
+                sm: {span: 7},
             },
             wrapperCol: {
                 xs: {span: 24},
                 sm: {span: 12},
             },
         };
-       const queryItemLayout ={
-           xs: 12,
-           sm: 8,
-           md: 6,
-        }
         return (
-            <div>
-
-                <Layout>
-                    <h3>限额名称：POS商户对私结算限额</h3>
-                </Layout>
-
-                <h3>商户属性：</h3>
-                <Form onSubmit={this.handleSubmit}>
-                    <Row style={{marginTop: 10}}>
-                        <Col span={8}>
-                            <FormItem
-                                {...formItemLayout}
-                                label="结算账户类型："
-                            >
-                                {getFieldDecorator('accountType')(
-                                    <Input disabled={true}/>
-                                )}
-                            </FormItem>
-                        </Col>
-                        <Col span={8}>
-                            <FormItem
-                                {...formItemLayout}
-                                label="名单类型："
-                            >
-                                {getFieldDecorator('listType')(
-                                    <Input disabled={true}/>
-                                )}
-                            </FormItem>
-                        </Col>
-                        <Col span={8}>
-                            <FormItem
-                                {...formItemLayout}
-                                label="是否优质商户："
-                            >
-                                {getFieldDecorator('isExcellentClient')(
-                                    <Input disabled={true}/>
-                                )}
-                            </FormItem>
-                        </Col>
+            <div style={{margin: '15px 35px '}}>
+                <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10, fontSize: 16}} > <b>限额名称：POS商户对私结算限额</b> </div>
+                <Form >
+                    <Card title="商户属性：" bordered={true}>
+                        <Row style={{marginTop: 10}}>
+                            <Col span={8}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="结算账户类型："
+                                >
+                                    {getFieldDecorator('accountType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={8}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="名单类型："
+                                >
+                                    {getFieldDecorator('listType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={8}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="是否优质商户："
+                                >
+                                    {getFieldDecorator('isExcellentClient')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
                             <Col span={8}>
                                 <FormItem
                                     {...formItemLayout}
@@ -157,100 +148,104 @@ export default class LimitDetails extends React.Component {
                                     )}
                                 </FormItem>
                             </Col>
-                    </Row>
+                        </Row>
+                    </Card>
                 </Form>
-                <div style={{backgroundColor: '#DBDBDB',height: 0.5, width: '100%', marginBottom: 10}}></div>
-                <h3>交易属性：</h3>
-                <h4>线下交易：</h4>
                 <Form>
-                      <Row style={{marginTop: 10}}>
-                          <Col span={6}>
-                              <FormItem
-                                  {...formItemLayout}
-                                  label="卡属性："
-                              >
+                    <Card title="交易属性" border={true}>
+                        <Row style={{marginTop: 10}}>
+                            <Col span={2}>
+                                线下交易：
+                            </Col>
 
-                                  {getFieldDecorator('carType')(
-                                      <Input disabled={true}/>
-                                  )}
-                              </FormItem>
-                          </Col>
-                          <Col span={6}>
-                              <FormItem
-                                  {...formItemLayout}
-                                  label="卡介质："
-                              >
+                            <Col span={6}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="卡属性："
+                                >
 
-                                  {getFieldDecorator('media')(
-                                      <Input disabled={true}/>
-                                  )}
-                              </FormItem>
-                          </Col>
-                          <Col span={6}>
-                              <FormItem
-                                  {...formItemLayout}
-                                  label="消费方式："
-                              >
+                                    {getFieldDecorator('carType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={6}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="卡介质："
+                                >
 
-                                  {getFieldDecorator('consumeType')(
-                                      <Input disabled={true}/>
-                                  )}
-                              </FormItem>
-                          </Col>
-                          <Col span={6}>
-                              <FormItem
-                                  {...formItemLayout}
-                                  label="接触方式："
-                              >
+                                    {getFieldDecorator('media')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={5}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="消费方式："
+                                >
 
-                                  {getFieldDecorator('contactType')(
-                                      <Input disabled={true}/>
-                                  )}
-                              </FormItem>
-                          </Col>
-                      </Row>
+                                    {getFieldDecorator('consumeType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={5}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="接触方式："
+                                >
+
+                                    {getFieldDecorator('contactType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                        </Row>
+
+                        <Row style={{marginTop: 10}}>
+                            <Col span={2}>
+                                扫码交易：
+                            </Col>
+                            <Col span={6}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="扫码类型："
+                                >
+
+                                    {getFieldDecorator('scanType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={6}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="扫码类型："
+                                >
+
+                                    {getFieldDecorator('scanType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={5}>
+                                <FormItem
+                                    {...formItemLayout}
+                                    label="扫码类型："
+                                >
+
+                                    {getFieldDecorator('scanType')(
+                                        <Input disabled={true}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                        </Row>
+                    </Card>
                 </Form>
-                <h4>扫码交易：</h4>
                 <Form>
-                    <Row style={{marginTop: 10}}>
-                        <Col span={6}>
-                            <FormItem
-                                {...formItemLayout}
-                                label="扫码类型："
-                            >
-
-                                {getFieldDecorator('scanType')(
-                                    <Input disabled={true}/>
-                                )}
-                            </FormItem>
-                        </Col>
-                        <Col span={6}>
-                            <FormItem
-                                {...formItemLayout}
-                                label="扫码类型："
-                            >
-
-                                {getFieldDecorator('scanType')(
-                                    <Input disabled={true}/>
-                                )}
-                            </FormItem>
-                        </Col>
-                        <Col span={6}>
-                            <FormItem
-                                {...formItemLayout}
-                                label="扫码类型："
-                            >
-
-                                {getFieldDecorator('scanType')(
-                                    <Input disabled={true}/>
-                                )}
-                            </FormItem>
-                        </Col>
-                    </Row>
-                </Form>
-                <div style={{backgroundColor: '#DBDBDB',height: 0.5, width: '100%', marginBottom: 10}}></div>
-                <h3>修改限额值：</h3>
-                <Form>
+                    <Card title={"修改限额值"} bordered={true}>
                     <Row style={{marginTop: 10}}>
                         <Col span={6}>
                             <FormItem
@@ -297,8 +292,7 @@ export default class LimitDetails extends React.Component {
                             </FormItem>
                         </Col>
                     </Row>
-                </Form>
-                <Form>
+
                     <Row style={{marginTop: 10}}>
                         <Col span={6}>
                             <FormItem
@@ -318,11 +312,11 @@ export default class LimitDetails extends React.Component {
                             >
 
                                 {getFieldDecorator('countByMinute')(
-                                        <InputGroup compact >
-                                            <Input disabled={true} style={{width: 70}}addonAfter={'笔'} />
-                                            <Input style={{width: 24, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff' }} placeholder="/" disabled />
-                                            <Input disabled={true} style={{width: 70, borderLeft: 0}} addonAfter={'分'} />
-                                        </InputGroup>
+                                    <InputGroup compact >
+                                        <Input disabled={true} style={{width: 65}}addonAfter={'笔'} />
+                                        <Input style={{width: 20, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff' }} placeholder="/" disabled />
+                                        <Input disabled={true} style={{width: 65, borderLeft: 0}} addonAfter={'分'} />
+                                    </InputGroup>
                                 )}
                             </FormItem>
                         </Col>
@@ -338,7 +332,9 @@ export default class LimitDetails extends React.Component {
                             </FormItem>
                         </Col>
                     </Row>
+                    </Card>
                 </Form>
+                <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}><Button type={"primary"}>关闭</Button></div>
             </div>
         )
     }
