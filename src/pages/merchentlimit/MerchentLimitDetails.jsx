@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Select, Row, Col,Button, Card} from 'antd';
+import { Form, Input, Row, Col,Button, Card} from 'antd';
 
 const InputGroup = Input.Group;
 const FormItem = Form.Item;
@@ -33,6 +33,8 @@ export default class MerchentLimitDetails extends React.Component{
 
         return(
             <Form>
+                <h2 style={{textAlign:'center'}}>商户限额详情</h2>
+                <br/><br/>
                 <Card bordered={true}>
                     <Row>
                         <Col span={3}>
@@ -289,9 +291,9 @@ export default class MerchentLimitDetails extends React.Component{
                                 {getFieldDecorator('merchantAttribute')(
                                    // <Input addonAfter={"笔"} disabled={"true"} />
                                     <InputGroup compact>
-                                        <Input style={{ width: '45%' }} addonAfter={"笔"} />
+                                        <Input style={{ width: '45%' }} disabled={'true'} addonAfter={"笔"} />
                                         &nbsp;&nbsp;/&nbsp;&nbsp;
-                                        <Input style={{ width: '45%' }}  addonAfter={"分"} />
+                                        <Input style={{ width: '45%' }} disabled={'true'} addonAfter={"分"} />
                                     </InputGroup>
                                 )}
                             </FormItem>

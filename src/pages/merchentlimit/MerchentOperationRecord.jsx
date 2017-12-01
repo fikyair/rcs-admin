@@ -102,7 +102,7 @@ export default class MerchentOperationRecord extends React.Component{
         return(
             <div>
                 <Form>
-                    <h2 style={{textAlign:'center'}}>操作记录</h2>
+                    <h2 style={{textAlign:'center'}}>商户限额管理操作记录</h2>
                     <br/><br/>
                         <Row>
                             <Col span={3}>
