@@ -91,16 +91,15 @@ export default class MerchentLimitAdd extends React.Component {
                 ]
             }
         ],
-        transactionData: [
-            {
-                labelName: '卡属性',
-                labelValue: 'settleType',
-                optionVal: [
-                    {value: '1', name: '交易'},
-                    {value: '2', name: '结算'},
-                    {value: '3', name: '全部'},
-                ]
-            },
+        lineTransaction: [{
+            labelName: '卡属性',
+            labelValue: 'settleType',
+            optionVal: [
+                {value: '1', name: '交易'},
+                {value: '2', name: '结算'},
+                {value: '3', name: '全部'},
+            ]
+        },
             {
                 labelName: '卡介质',
                 labelValue: 'listType',
@@ -126,7 +125,8 @@ export default class MerchentLimitAdd extends React.Component {
                     {value: '2', name: '用户openID'},
                     {value: '4', name: '全部'},
                 ]
-            },
+            },],
+        scanTransaction: [
             {
                 labelName: '扫码类型',
                 labelValue: 'POSMerchantType',
@@ -137,7 +137,6 @@ export default class MerchentLimitAdd extends React.Component {
                 ]
             }
         ],
-
         limitData: [
             {
                 labelName: '单笔',
@@ -212,7 +211,7 @@ export default class MerchentLimitAdd extends React.Component {
         return (
             <div>
 
-                <h1 style={{textAlign: 'center', marginBottom: 16}}>商户修改增加</h1>
+                <h1 style={{textAlign: 'center', marginBottom: 16}}>商户增加限额</h1>
 
                 <Form>
                     <Card title="选择商户属性" style={cardStyle}>
@@ -246,29 +245,58 @@ export default class MerchentLimitAdd extends React.Component {
                     </Card>
                     <Card title="选择交易属性：" style={cardStyle}>
                         <Row>
+                            <Col span={1} >
+                                <span style={{marginTop: '16px',display: 'inline-block'}}>线下交易：</span>
+                            </Col>
+                            <Col span={23}>
+                                {
+                                    this.initData.lineTransaction.map((v, k) => {
 
+                                            return (
+                                                <Col {...queryItemLayout}>
+                                                    {
+                                                        getFieldDecorator(v.labelValue)(
+                                                            <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                                {
+                                                                    v.optionVal.map((i, j) => {
+                                                                        return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                    })
+                                                                }
+                                                            </SelectComs>
+                                                        )
+                                                    }
+                                                </Col>
+                                            )
+                                        }
+                                    )
+                                }
+                            </Col>
+                            <Col span={1} >
+                                <span style={{marginTop: '16px',display: 'inline-block'}}>扫码交易：</span>
+                            </Col>
+                            <Col span={23}>
+                                {
+                                    this.initData.scanTransaction.map((v, k) => {
 
-                            {
-                                this.initData.transactionData.map((v, k) => {
-
-                                        return (
-                                            <Col {...queryItemLayout}>
-                                                {
-                                                    getFieldDecorator(v.labelValue)(
-                                                        <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
-                                                            {
-                                                                v.optionVal.map((i, j) => {
-                                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                                })
-                                                            }
-                                                        </SelectComs>
-                                                    )
-                                                }
-                                            </Col>
-                                        )
-                                    }
-                                )
-                            }
+                                            return (
+                                                <Col {...queryItemLayout}>
+                                                    {
+                                                        getFieldDecorator(v.labelValue)(
+                                                            <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
+                                                                {
+                                                                    v.optionVal.map((i, j) => {
+                                                                        return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                    })
+                                                                }
+                                                            </SelectComs>
+                                                        )
+                                                    }
+                                                </Col>
+                                            )
+                                        }
+                                    )
+                                }
+                            </Col>
 
                         </Row>
 
