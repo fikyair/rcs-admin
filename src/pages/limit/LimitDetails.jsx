@@ -9,14 +9,41 @@ const FormItem = Form.Item;
 @Form.create()
 export default class LimitDetails extends React.Component {
 
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-        });
+    initData = {
+        merchantAttrData: [{
+            labelName: '结算账户类型',
+            labelValue: 'accountType',
+        },{
+            labelName: '名单类型',
+            labelValue: 'listType'
+        },{
+            labelName: '是否优质商户',
+            labelValue: 'isExcellentClient',
+        },{
+            labelName: '行业大类',
+            labelValue: 'industryCategory'
+        },{
+            labelName: '细类',
+            labelValue: 'detailCategory',
+        },{
+            labelName: 'MCC',
+            labelValue: 'mcc',
+        },{
+            labelName: '是否小额双免',
+            labelValue: 'isSmallExemption',
+        },{
+            labelName: '是否有终端',
+            labelValue: 'hasTerminal',
+        },{
+            labelName: 'POS商户类型',
+            labelValue: 'posClientType',
+        },{
+            labelName: 'POS秒到等级',
+            labelValue: 'posSecondRank',
+        },{
+            labelName: 'POS结算周期',
+            labelValue: 'posbalanceTime',
+        }],
     }
 
     render() {
