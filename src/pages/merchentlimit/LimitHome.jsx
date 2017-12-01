@@ -203,9 +203,6 @@ export default class LimitHome extends React.Component {
 
                                 </FormItem>
                             </Col>
-                        </Row>
-
-                        <Row>
                             <Col {...queryItemLayout}>
                                 <FormItem
                                     label="限额状态"
@@ -234,8 +231,9 @@ export default class LimitHome extends React.Component {
 
                                 </FormItem>
                             </Col>
-                            <Button type="primary" style={{marginLeft: '30px'}}>查询</Button>
-
+                            <Col>
+                                <Button type="primary" style={{marginLeft: '30px'}}>查询</Button>
+                            </Col>
                         </Row>
 
                     </Form>

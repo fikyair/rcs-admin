@@ -48,6 +48,24 @@ export default class MerchentLimitAdd extends React.Component {
                 <h1 style={{textAlign: 'center', marginBottom: 16}}>{this.props.location.state.title}</h1>
 
                 <Form>
+                    <Card style={cardStyle} >
+                        <Row>
+                            <Col {...queryItemLayout}>
+                                <FormItem
+                                    label="商户编号"
+                                    {...formItemLayout}
+                                >
+                                    {
+                                        getFieldDecorator('settleType')(
+                                            <Input disabled={true}/>
+                                        )
+                                    }
+
+                                </FormItem>
+                            </Col>
+                        </Row>
+                    </Card>
+
                 <Card title="选择商户属性" style={cardStyle}>
                         <Row>
                             <Col {...queryItemLayout}>
