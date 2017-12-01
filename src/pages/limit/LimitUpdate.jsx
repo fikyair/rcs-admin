@@ -1,8 +1,11 @@
 import React from 'react';
 import { Layout, Form, Input, Button, Card } from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
+import { setTitle, Containerization } from '../../common/PublicComponent';
 const FormItem = Form.Item;
 
+@setTitle('限额修改页')
+@Containerization()
 @Form.create()
 export default class LimitUpdate extends React.Component {
 
@@ -212,7 +215,8 @@ export default class LimitUpdate extends React.Component {
               }
             </Card>
           <Card title="选择交易属性">
-            <Card title="线下交易" style={{fontSize:'15px'}}>
+            <div>
+            <FormItem style={{margin:'10px'}} >线下交易:</FormItem>
 
                   {
                     offline.map((v,k)=>{
@@ -234,8 +238,9 @@ export default class LimitUpdate extends React.Component {
                     })
                   }
 
-              </Card>
-            <Card title="扫码交易">
+            </div>
+            <div>
+            <FormItem style={{margin:'10px'}} >扫码交易:</FormItem>
 
                 {
                   online.map((v,k)=>{
@@ -255,8 +260,7 @@ export default class LimitUpdate extends React.Component {
                     </FormItem>
                   })
                 }
-
-            </Card>
+            </div>
           </Card>
           <Card title="添加限额值">
 
