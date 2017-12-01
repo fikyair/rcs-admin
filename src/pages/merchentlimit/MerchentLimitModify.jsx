@@ -6,18 +6,24 @@ import SelectComs, {Option} from '../../components/SelectComs';
 import InputComs from '../../components/InputComs';
 
 const FormItem = Form.Item
-const TabPane = Tabs.TabPane;
 const InputGroup = Input.Group;
 
 
 @Form.create()
 export default class MerchentLimitModify extends React.Component {
 
-    state = {}
+    state = {
+        data: {},
+    }
 
 
     componentWillMount() {
+        let data = {
+            settleType: 1,
+            listType: 2,
 
+        }
+        this.setState({data: data})
     }
 
     initData = {
@@ -25,6 +31,7 @@ export default class MerchentLimitModify extends React.Component {
             {
                 labelName: '结算账户类型',
                 labelValue: 'settleType',
+                initialValue: '1',
                 optionVal: [
                     {value: '1', name: '交易'},
                     {value: '2', name: '结算'},
@@ -139,59 +146,6 @@ export default class MerchentLimitModify extends React.Component {
         ],
 
 
-        columns: [
-            {
-                title: '商户编号',
-                dataIndex: 'merchantCode',
-                render: text => <Link to="#">{text}</Link>,
-            }, {
-                title: '单笔（金额）',
-                dataIndex: 'sigle',
-            }, {
-                title: '单日（金额）',
-                dataIndex: 'oddDay',
-            }, {
-                title: '年（金额）',
-                dataIndex: 'year',
-            }, {
-                title: '终身（金额）',
-                dataIndex: 'lifeLong',
-            }, {
-                title: '两笔间隔（秒）',
-                dataIndex: 'createUserName',
-            }, {
-                title: '每笔／分钟',
-                dataIndex: 'updateUserId',
-            }, {
-                title: '笔／日',
-                dataIndex: 'updateUserName',
-            }, {
-                title: '状态',
-                dataIndex: 'status',
-            }, {
-                title: '管理',
-                dataIndex: 'operation',
-                render: (text, record) => {
-                    return (
-                        <div className="editable-row-operations">
-                            {/*<Link to="/">修改</Link>*/}
-                            <span style={{color: 'blue', cursor: 'pointer'}} onClick={() => {
-                            }}>
-                        停用
-                    </span>&nbsp;&nbsp;&nbsp;
-                            <span style={{color: 'blue', cursor: 'pointer'}} onClick={() => {
-                                this.edit(record)
-                            }}>
-                        修改
-                    </span>&nbsp;&nbsp;&nbsp;
-                            <span style={{color: 'blue', cursor: 'pointer'}}>
-                        操作记录
-                    </span>&nbsp;&nbsp;&nbsp;
-                        </div>
-                    );
-                },
-            }]
-
     }
 
 
@@ -238,11 +192,12 @@ export default class MerchentLimitModify extends React.Component {
 
                             {
                                 this.initData.merchantData.map((v, k) => {
-
                                         return (
                                             <Col {...queryItemLayout}>
                                                 {
-                                                    getFieldDecorator(v.labelValue)(
+                                                    getFieldDecorator(v.labelValue, {
+                                                        initialValue: v.initialValue
+                                                    })(
                                                         <SelectComs key={k} labelName={v.labelName} style={{width: 120}}>
                                                             {
                                                                 v.optionVal.map((i, j) => {
