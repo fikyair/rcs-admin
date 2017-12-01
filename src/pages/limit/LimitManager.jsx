@@ -1,14 +1,16 @@
 import React from 'react';
 import { Containerization, setTitle } from '../../common/PublicComponent';
 import SelectComs, {Option} from '../../components/SelectComs';
-import { Layout,Table,Button, Icon, Input} from 'antd';
+import { Layout,Table,Button, Icon, Input, Modal} from 'antd';
 import {Link,} from 'react-router-dom';
 
 @setTitle('首页')
 @Containerization()
-export default class HomePage extends React.Component{
+export default class LimitManager extends React.Component{
     state = {
-      options:null
+      options:null,
+      loading: false,
+      visible: false,
     }
     mockData = {
       selectsData:[
@@ -157,24 +159,81 @@ export default class HomePage extends React.Component{
             </span>
           ),
         }],
+      modalSelects:[
+        {
+          labelName:'选择限额类型',
+          optionVal:[
+            {value:'1',name:'交易限额'},
+            {value:'2',name:'结算限额'},
+          ]
+        },
+        {
+          labelName:'选择限额属性',
+          optionVal:[
+            {value:'1',name:'B端'},
+            {value:'2',name:'C端'},
+            {value:'3',name:'B-C端'},
+          ]
+        },{
+          labelName:'选择商户主体',
+          optionVal:[
+            {value:'1',name:'商户'},
+            {value:'2',name:'结算人证件号'},
+          ]
+        },{
+          labelName:'选择商户类型',
+          optionVal:[
+            {value:'1',name:'POS商户'},
+            {value:'2',name:'MPOS商户'},
+            {value:'3',name:'互联网商户'},
+          ]
+        },
+      ]
+    }
+
+    timer = null
+    showModal = () => {
+      this.setState({
+       visible: true,
+      });
+    }
+
+    handleOk = () => {
+     this.setState({ loading: true });
+     this.timer = setTimeout(() => {
+        this.setState({ loading: false, visible: false });
+      }, 3000);
+
+     //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
+     this.props.history.push('/newlimitmodel')
+    }
+
+    componentWillUnmount(){
+      clearTimeout(this.timer)
+    }
+
+    handleCancel = () => {
+     this.setState({ visible: false });
     }
 
     disableLimitRule(){
-      //TODO
+      //TODO 停用限额规则
     }
+
     componentWillMount(){
     }
+
     render(){
-        const {options} =this.state;
+        const {options, visible, loading} =this.state;
         const {
           selectsData = this.mockData.selectsData,
           columns = this.mockData.columns,
           dataSource = this.mockData.dataSource,
+          modalSelects = this.mockData.modalSelects
         } = this.props;
         return (
           <Layout>
-
-          <div>
+            <div>
             {
               selectsData.map((v,k)=>{
                 return (<SelectComs key={k} labelName={v.labelName} defaultValue="请选择" style={{ width: 120 }} >
@@ -188,14 +247,40 @@ export default class HomePage extends React.Component{
               })
             }
           </div>
-          <div>
-            <Input addonBefore="限额名称" defaultValue="请输入限额名称" style={{width:'200px',margin:'10px'}}/>
-            <Button icon="search" style={{margin:'10px',width:'100px'}}>查询</Button>
-          </div>
             <div>
-              <Button  style={{margin:'10px',width:'100px'}}>添加限额</Button>
+              <Input addonBefore="限额名称" defaultValue="请输入限额名称" style={{width:'200px',margin:'10px'}}/>
+              <Button icon="search" style={{margin:'10px',width:'100px'}}>查询</Button>
+            </div>
+            <div>
+              <Button  style={{margin:'10px',width:'100px'}} onClick={this.showModal}>添加限额</Button>
               <Table columns={columns} dataSource={dataSource}/>
             </div>
+            <Modal
+              visible={visible}
+              title="添加限额"
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+              footer={[
+                <Button key="back" size="large" onClick={this.handleCancel}>取消</Button>,
+                <Button key="submit" type="primary" size="large" loading={loading} onClick={this.handleOk}>
+                  下一步
+                </Button>,
+              ]}
+            >
+              {
+                modalSelects.map((v,k)=>{
+                  return (<SelectComs key={k} labelName={v.labelName} defaultValue="请选择" style={{ width: 120 }} >
+                      {
+                        v.optionVal.map((i,j)=>{
+                          return <Option key={j} value={i.value}>{i.name}</Option>
+                        })
+                      }
+                    </SelectComs>
+                  )
+                })
+              }
+
+            </Modal>
           </Layout>
         );
     }

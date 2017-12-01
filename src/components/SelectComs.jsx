@@ -13,7 +13,7 @@ export default  class  SelectComs extends React.Component{
   render(){
     const {labelName,children,labelNStyles} = this.props;
     return (<div style={{display:'inline-block',margin:'10px'}} >
-      <span style={{...labelNStyles,marginRight:'10px'}}>{labelName}:</span>
+      <span style={{...labelNStyles,marginRight:'10px',minWidth:'80px',display: 'inline-block'}}>{labelName}:</span>
       <Select {...this.props}>
         {children}
       </Select>

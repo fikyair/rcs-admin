@@ -1,11 +1,13 @@
 import React from 'react';
 import Bundle from './DynamicRoute';
+import Login from 'bundle-loader?lazy!../pages/login/Login';
 import LimitManager from 'bundle-loader?lazy!../pages/limit/LimitManager';
 import LimitDetails from 'bundle-loader?lazy!../pages/limit/LimitDetails';
 import LimitUpdate from 'bundle-loader?lazy!../pages/limit/LimitUpdate';
 import OperationRecord from 'bundle-loader?lazy!../pages/limit/OperationRecord';
-import Login from 'bundle-loader?lazy!../pages/login/Login';
 import LimitModel from 'bundle-loader?lazy!../pages/limit/LimitModel';
+import NewLimitModel from 'bundle-loader?lazy!../pages/limit/NewLimitModel'
+
 import LimitHome from 'bundle-loader?lazy!../pages/merchentlimit/LimitHome'
 import MerchentLimitDetails from 'bundle-loader?lazy!../pages/merchentlimit/MerchentLimitDetails'
 import MerchentOperationRecord from 'bundle-loader?lazy!../pages/merchentlimit/MerchentOperationRecord'
@@ -53,6 +55,10 @@ export const root = [
     path: '/limitmodel',
     exact: true,
     component: (props) => BundleCom(props,LimitModel),
+  },{
+    path:'/newlimitmodel',
+    exact: true,
+    component: props => BundleCom( props, NewLimitModel)
   }, {
     path: '/merchentlimithome',
     exact: true,
