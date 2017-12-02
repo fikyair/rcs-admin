@@ -167,7 +167,7 @@ export default class LimitManager extends React.Component {
               操作记录
              </Button>
               <span className="ant-divider"/>
-              <Button onClick={() => this.props.history.push(`/limitupdate/${record.id}/personal`)}>
+              <Button style={this.state.isMerchant ? {display:'none'} : {}}onClick={() => this.props.history.push(`/limitupdate/${record.id}/personal`)}>
               个性设置
              </Button>
             </span>
@@ -210,6 +210,7 @@ export default class LimitManager extends React.Component {
             this.setState({isMerchant: true})
         }
     }
+
 
 
     timer = null
@@ -255,6 +256,19 @@ export default class LimitManager extends React.Component {
         //TODO 搜索
     }
 
+    isShowMerchant = () => {
+        const {isMerchant} = this.state;
+        if (isMerchant) {
+            return (
+                <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
+            )
+        } else {
+            return (
+                <InputComs className='input-style' labelName="限额名称" placeholder="请选择"/>
+            )
+        }
+
+    }
 
     render() {
         const {options, visible, loading, removeVisible, isMerchant} = this.state;
@@ -292,17 +306,7 @@ export default class LimitManager extends React.Component {
                         }
                     </div>
                     <div>
-                        {/*<InputComs className='input-style' labelName="限额名称" placeholder="请选择"/>*/}
-                        {
-                            isMerchant ?
-                                (
-                                    <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
-
-                                ) :
-                                (
-                                    <InputComs className='input-style' labelName="限额名称" placeholder="请选择"/>
-                                )
-                        }
+                        {this.isShowMerchant()}
                         <Button htmlType='submit' icon="search" style={{margin: '10px', width: '100px'}}
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>
