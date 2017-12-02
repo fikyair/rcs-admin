@@ -216,7 +216,7 @@ export default class MerchentLimitAdd extends React.Component {
         const tailItemLayout = {
             xs: 24,
             sm: 24,
-            md: 1
+            md: 2
         }
         return (
             <div>
