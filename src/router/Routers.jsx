@@ -3,7 +3,9 @@ import { BrowserRouter, Route, Redirect} from 'react-router-dom';
 import MenuComs from '../components/MenuComs';
 import { InitComs } from  '../common/PublicComponent';
 import { renderRoutes } from 'react-router-config';
-import { root } from './router.config.js';
+import { commontLimtRouter } from './common.config.js';
+import { merchantLimitRouter} from "./merchant.router.js";
+import {root} from "./root.config.js"
 import BreadCrumbComs from '../components/BreadCrumbComs'
 
 const routes = [
@@ -14,7 +16,7 @@ const routes = [
                 {renderRoutes(route.routes, {someProp: 'these extra props are optional'})}
             </div>
         ),
-        routes: [...root]
+        routes: [...commontLimtRouter, ...merchantLimitRouter, root]
     }
 ]
 
