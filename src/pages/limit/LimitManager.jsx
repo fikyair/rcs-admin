@@ -159,13 +159,13 @@ export default class LimitManager extends React.Component{
             <span className="ant-divider" />
             <Button onClick={()=>this.disableLimitRule(record.id)}>删除</Button>
               <span className="ant-divider" />
-            <Button onClick={()=>this.props.history.push(`/limitupdate/${record.id}`)}>修改</Button>
+            <Button onClick={()=>this.props.history.push(`/limitupdate/${record.id}/common`)}>修改</Button>
              <span className="ant-divider" />
             <Button onClick={()=>this.props.history.push(`/operationrecord/${record.id}`)}>
               操作记录
              </Button>
               <span className="ant-divider" />
-              <Button onClick={()=>this.props.history.push(`/operationrecord/${record.id}`)}>
+              <Button onClick={()=>this.props.history.push(`/limitupdate/${record.id}/personal`)}>
               个性设置
              </Button>
             </span>

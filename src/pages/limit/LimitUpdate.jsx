@@ -188,8 +188,10 @@ export default class LimitUpdate extends React.Component {
       merchentSelects = this.mockData.merchentSelects,
       online = this.mockData.tradeSelects.online,
       offline = this.mockData.tradeSelects.offline,
-      inputLimit = this.mockData.inputLimit
+      inputLimit = this.mockData.inputLimit,
+      match
     } = this.props;
+    const {type,id} = match.params
     const { getFieldDecorator } = this.props.form;
     return (
         <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
@@ -280,10 +282,25 @@ export default class LimitUpdate extends React.Component {
                 })
               }
           </Card>
-            <Card title="添加限额名称">
-              <Input placeholder="请输入" addonBefore={(<span style={{minWidth:'70px',display: 'inline-block'}}>限额名称</span>)}  style={{width:'200px',margin:'10px'}}/>
-              <Button style={{margin:'10px'}} onClick={()=>this.props.history.push('/limitManager')}>取消</Button>
-              <Button htmlType="submit" style={{margin:'10px'}} >保存</Button>
+            <Card title={type=='personal'?'配置商户':"添加限额名称"}>
+              {
+                type=='common'?
+                  <div>
+                    <Input placeholder="请输入" addonBefore={(<span style={{minWidth:'70px',display: 'inline-block'}}>限额名称</span>)}  style={{width:'200px',margin:'10px'}}/>
+                    <Button style={{margin:'10px'}} onClick={()=>this.props.history.push('/limitManager')}>取消</Button>
+                    <Button htmlType="submit" style={{margin:'10px'}} >保存</Button>
+                  </div>
+                  :
+                  type=='personal'?
+                  <div>
+                    <Input placeholder="请输入" addonBefore={(<span style={{minWidth:'70px',display: 'inline-block'}}>配置商户</span>)}  style={{width:'200px',margin:'10px'}}/>
+                  </div>
+                    :
+                    null
+              }
+
+
+
             </Card>
         </Form>)
   }

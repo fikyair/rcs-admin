@@ -6,7 +6,7 @@ import LimitDetails from 'bundle-loader?lazy!../pages/limit/LimitDetails';
 import LimitUpdate from 'bundle-loader?lazy!../pages/limit/LimitUpdate';
 import OperationRecord from 'bundle-loader?lazy!../pages/limit/OperationRecord';
 import LimitModel from 'bundle-loader?lazy!../pages/limit/LimitModel';
-import NewLimitModel from 'bundle-loader?lazy!../pages/limit/NewLimitModel'
+import NewLimitModel from 'bundle-loader?lazy!../pages/limit/NewLimitModel';
 
 import LimitHome from 'bundle-loader?lazy!../pages/merchentlimit/LimitHome'
 import MerchentLimitDetails from 'bundle-loader?lazy!../pages/merchentlimit/MerchentLimitDetails'
@@ -41,7 +41,7 @@ export const root = [
     exact: true,
     component: (props) => BundleCom(props,LimitManager),
   },{
-    path:'/limitupdate/:id',
+    path:'/limitupdate/:id/:type',
     exact:true,
     component: props => BundleCom(props, LimitUpdate)
   }, {
