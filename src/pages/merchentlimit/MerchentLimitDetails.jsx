@@ -249,7 +249,7 @@ export default class MerchentLimitAdd extends React.Component {
                                                         <SelectComs disabled={true} key={k} labelName={v.labelName} style={{width: 120}}>
                                                             {
                                                                 v.optionVal.map((i, j) => {
-                                                                    return <Option key={j} value={i.value}>{i.name}</Option>
+                                                                    return <Option key={j} value={i.value}> {i.name}</Option>
                                                                 })
                                                             }
                                                         </SelectComs>
@@ -282,8 +282,7 @@ export default class MerchentLimitAdd extends React.Component {
                                                                             style={{width: 120}}>
                                                                     {
                                                                         v.optionVal.map((i, j) => {
-                                                                            return <Option key={j}
-                                                                                           value={i.value}>{i.name}</Option>
+                                                                            return <Option key={j} value={i.value}>{i.name}</Option>
                                                                         })
                                                                     }
                                                                 </SelectComs>
