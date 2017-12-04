@@ -32,6 +32,7 @@ if(window.addEventListener){
     const { data } = e;
     if(data && data.authToken){
       setCurrentLoginUser(data);
+      $.cookie('auth-token',JSON.stringify(data.authToken),{ expires: 2, path: '/' })
       store.dispatch(asyncCookie(data.authToken))
     }
   });

@@ -297,22 +297,28 @@ export default class LimitUpdate extends React.Component {
                             })
 
                         }
-                        <div style={{marginTop: '10px', display: 'inline-block'}}>
-                            {getFieldDecorator('jian', {
+                        {/*<div style={{marginTop: '10px', display: 'inline-block'}}>*/}
+                            <FormItem>
+                                {getFieldDecorator('jian', {
                                 rules: [],
 
-                            })(<Input addonBefore={'两笔间隔'} style={{width: 140, textAlign: 'center'}}
-                                      placeholder="Minimum"/>)
+                            })(<Input addonBefore={(<span
+                                    style={{
+                                        minWidth: '70px',
+                                        display: 'inline-block'
+                                    }}>两笔间隔</span>)} style={{width: 140,marginLeft:'10px', textAlign: 'center'}}
+                                      placeholder="请输入每笔"/>)
                             }
                             <Input style={{width: 24, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff'}}
                                    placeholder="／" disabled/>
                             {getFieldDecorator('ww', {
                                 rules: [],
 
-                            })(<Input style={{width: 100, textAlign: 'center', borderLeft: 0}} placeholder="Maximum"/>
+                            })(<Input style={{width: 60, textAlign: 'center', borderLeft: 0}} placeholder="请输入每分"/>
                             )
                             }
-                        </div>
+                            </FormItem>
+                        {/*</div>*/}
                     </Card>
                     <Card>
                         <Button style={{margin: '10px', verticalAlign: 'top'}}
