@@ -160,7 +160,7 @@ export default class LimitManager extends React.Component {
                     <span>
             <a onClick={() => this.disableLimitRule(record.id)}>删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除</a>
               <span className="ant-divider"/>
-             <Dropdown overlay={this.menu}>
+             <Dropdown overlay={this.menu(record)}>
                 <Link to="/">
                     更多操作<Icon type="down" />
                 </Link>
@@ -200,21 +200,27 @@ export default class LimitManager extends React.Component {
         ]
     }
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.setState({isMerchant: true})
-        }
+
+
     }
-    menu = (
+
+    menu = record=>(
         <Menu>
-            <Menu.Item>
-                <Link to="/limitupdate/${record.id}/common">修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
+            <Menu.Item key='1'>
+
+                <Link to={`/limitupdate/${record.id}/common`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
+
             </Menu.Item>
             <Menu.Item>
-                <Link to="/operationrecord/${record.id}">操作记录</Link>
+                <Link to={`/operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
-            <Menu.Item>
-                <Link to="/limitupdate/${record.id}/personal">个性设置</Link>
-            </Menu.Item>
+            {
+                document.location.href.indexOf('merchant') >0 ? <Menu.Item>
+                    <Link to={`/limitupdate/${record.id}/personal`}>个性设置</Link>
+                </Menu.Item>
+                    :null
+            }
+
         </Menu>
     );
 
