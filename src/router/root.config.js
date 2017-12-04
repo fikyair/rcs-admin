@@ -17,12 +17,15 @@ export const root = [
         path: '/',
         exact: true,
         component: (props) => BundleCom(props, LimitManager),
+        breadcrumbName: '首页',
     }, {
         path: '/login',
         exact: true,
+        breadcrumbName: '登陆',
         component: (props) => BundleCom(props, Login),
     }, {
         path: '/login/:id',
+        breadcrumbName: '登陆',
         exact: true,
         component: (props) => BundleCom(props, Login),
     },]

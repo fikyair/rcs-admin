@@ -20,18 +20,23 @@ export const merchantLimitRouter = [
     {
         path: '/limitManager/merchant',
         exact: true,
+        breadcrumbName: '个性限额首页',
         component: (props) => BundleCom(props, LimitManager),
     }, {
         path: '/limitupdate/merchant/:id/:type',
         exact: true,
+        breadcrumbName: '修改个性限额',
+
         component: props => BundleCom(props, LimitUpdate)
     }, {
         path: '/limitdetails/merchant/:id',
         exact: true,
+        breadcrumbName: '个性限额详情',
         component: (props) => BundleCom(props, LimitDetails),
     }, {
         path: '/operationrecord/merchant',
         exact: true,
+        breadcrumbName: '个性限额操作记录',
         component: (props) => BundleCom(props, OperationRecord),
     }, {
         path: '/limitmodel/merchant',
@@ -40,6 +45,7 @@ export const merchantLimitRouter = [
     }, {
         path: '/newlimitmodel/merchant',
         exact: true,
+        breadcrumbName: '新增个性限额',
         component: props => BundleCom(props, NewLimitModel)
     },
 ]

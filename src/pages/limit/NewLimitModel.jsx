@@ -2,7 +2,6 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
-
 const FormItem = Form.Item;
 
 @setTitle('限额添加页')
