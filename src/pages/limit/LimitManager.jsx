@@ -153,9 +153,9 @@ export default class LimitManager extends React.Component {
             <a onClick={() => this.disableLimitRule(record.id)}>删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除</a>
               <span className="ant-divider"/>
              <Dropdown overlay={this.menu(record)}>
-                <Link to="/">
+                <a >
                     更多操作<Icon type="down" />
-                </Link>
+                </a>
              </Dropdown>
             </span>
                 ),
