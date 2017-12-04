@@ -158,23 +158,11 @@ export default class LimitManager extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-            <span className="ant-divider"/>
-            <a onClick={() => this.disableLimitRule(record.id)}>删除</a>
+            <a onClick={() => this.disableLimitRule(record.id)}>删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除</a>
               <span className="ant-divider"/>
-             {/*onClick={() => this.props.history.push(`/limitupdate/${record.id}/common`)}*/}
-            <Link to="/limitupdate/${record.id}/common">修改</Link>
-             <span className="ant-divider"/>
-            {/*onClick={() => this.props.history.push(`/operationrecord/${record.id}`)}*/}
-            {/*<Link to="/operationrecord/${record.id}">*/}
-              {/*操作记录*/}
-             {/*</Link>*/}
-              {/*<span className="ant-divider"/>*/}
-              {/*<Button style={this.state.isMerchant ? {display:'none'} : {}}onClick={() => this.props.history.push(`/limitupdate/${record.id}/personal`)}>*/}
-              {/*个性设置*/}
-             {/*</Button>*/}
              <Dropdown overlay={this.menu}>
                 <Link to="/">
-                    个性设置
+                    更多操作<Icon type="down" />
                 </Link>
              </Dropdown>
             </span>
@@ -216,11 +204,16 @@ export default class LimitManager extends React.Component {
             this.setState({isMerchant: true})
         }
     }
-
     menu = (
         <Menu>
             <Menu.Item>
-                <Link to="/limitupdate/${record.id}/personal">操作记录</Link>
+                <Link to="/limitupdate/${record.id}/common">修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/operationrecord/${record.id}">操作记录</Link>
+            </Menu.Item>
+            <Menu.Item>
+                <Link to="/limitupdate/${record.id}/personal">个性设置</Link>
             </Menu.Item>
         </Menu>
     );
