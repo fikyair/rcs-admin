@@ -7,12 +7,16 @@ export default class BreadCrumbComs extends React.Component {
     state = {
         routes: []
     }
+
     componentWillMount() {
-
-        this.setPath()
-
+        this.setName()
     }
+
     componentWillReceiveProps(nextProps) {
+        this.setName()
+    }
+
+    setName = () => {
         let name = ''
         let path = ''
         let routes = this.props.routes
@@ -40,7 +44,6 @@ export default class BreadCrumbComs extends React.Component {
     setPath(name, path) {
         let flag = false
         let list = this.state.routes
-        let i = 0
         let route = {
             path: this.props.history.location.pathname.toString().substring(1),
             breadcrumbName: name
@@ -60,15 +63,16 @@ export default class BreadCrumbComs extends React.Component {
     }
 
     itemRender(route, params, routes, paths) {
-        return <Link to={'/' + route.path} style={{color:'red'}}>{route.breadcrumbName}</Link>;
+        return <Link to={'/' + route.path} style={{
+            margin: 10,
+            display: 'inline-block'
+        }}>{route.breadcrumbName}</Link>;
     }
 
     render() {
-        return(
-            <div style={{}}>
-                <Breadcrumb itemRender={this.itemRender} routes={this.state.routes}/>
-            </div>
-            )
+        return (
+            <Breadcrumb itemRender={this.itemRender} routes={this.state.routes}/>
+        )
 
     }
 }
