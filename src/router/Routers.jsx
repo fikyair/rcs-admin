@@ -4,7 +4,7 @@ import MenuComs from '../components/MenuComs';
 import {InitComs} from '../common/PublicComponent';
 import {renderRoutes} from 'react-router-config';
 import {commontLimtRouter} from './common.config.js';
-import {merchantLimitRouter} from "./merchant.router.js";
+import {merchantLimitRouter} from "./merchant.config.js";
 import {root} from "./root.config.js"
 import BreadCrumbComs from '../components/BreadCrumbComs'
 
@@ -26,7 +26,7 @@ export default (
             <div>
                 <InitComs/>
                 <MenuComs/>
-                <BreadCrumbComs/>
+                <BreadCrumbComs routes={commontLimtRouter.concat(merchantLimitRouter).concat(root)}/>
                 {renderRoutes(routes)}
             </div>
         </BrowserRouter>
