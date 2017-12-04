@@ -25,7 +25,7 @@ export default (
         <BrowserRouter basename={''}>
             <div>
                 <InitComs/>
-                <MenuComs/>
+                {/*<MenuComs/>*/}
                 <BreadCrumbComs routes={commontLimtRouter.concat(merchantLimitRouter).concat(root)}/>
                 {renderRoutes(routes)}
             </div>

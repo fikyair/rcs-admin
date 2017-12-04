@@ -60,11 +60,15 @@ export default class BreadCrumbComs extends React.Component {
     }
 
     itemRender(route, params, routes, paths) {
-        return <Link to={'/' + route.path}>{route.breadcrumbName}</Link>;
+        return <Link to={'/' + route.path} style={{color:'red'}}>{route.breadcrumbName}</Link>;
     }
 
     render() {
-        return <Breadcrumb itemRender={this.itemRender} routes={this.state.routes}/>;
+        return(
+            <div style={{}}>
+                <Breadcrumb itemRender={this.itemRender} routes={this.state.routes}/>
+            </div>
+            )
 
     }
 }
