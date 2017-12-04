@@ -59,15 +59,7 @@ export default class LimitManager extends React.Component {
                 ],
                 key: 'tradeType',
             },
-            {
-                labelName: '限额状态',
-                optionVal: [
-                    {value: '1', name: '启用'},
-                    {value: '2', name: '停用'},
-                    {value: '3', name: '全部'},
-                ],
-                key: 'limitStatus',
-            }
+
         ],
         dataSource: [{
             key: '1',
