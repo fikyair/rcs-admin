@@ -2,7 +2,10 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
+import ExtracData from '../../components/ExtractData'
+
 const FormItem = Form.Item;
+
 
 @setTitle('限额添加页')
 @Containerization()
@@ -213,11 +216,10 @@ export default class NewLimitModel extends React.Component {
                     <Input placeholder="请输入"
                            addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
                            style={{width: '200px', margin: '10px'}}/>
-                    <Button style={{margin: '10px'}}
-                            onClick={() => this.props.history.push('/limitManager')}>导入商编</Button>
-                    <Button style={{margin: '10px'}}
+                    <ExtracData/>
+                    <Button style={{margin: '10px', verticalAlign: 'top'}}
                             onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                    <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                    <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>
                 </Card>
             )
         } else {
@@ -245,6 +247,7 @@ export default class NewLimitModel extends React.Component {
         const {getFieldDecorator} = this.props.form;
         return (
             <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
+
                 <Card title="选择商户属性">
                     {
                         merchentSelects.map((v, k) => {
@@ -253,7 +256,8 @@ export default class NewLimitModel extends React.Component {
                                     rules: [],
 
                                 })(
-                                    <SelectComs disabled = {v.disabled} placeholder="请选择" labelName={v.labelName} style={{width: 120}}>
+                                    <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
+                                                style={{width: 120}}>
                                         {
                                             v.optionVal.map((i, j) => {
                                                 return <Option key={j} value={i.value}>{i.name}</Option>
@@ -275,7 +279,8 @@ export default class NewLimitModel extends React.Component {
                                         rules: [],
 
                                     })(
-                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName} style={{width: 120}}>
+                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
+                                                    style={{width: 120}}>
                                             {
                                                 v.optionVal.map((i, j) => {
                                                     return <Option key={j} value={i.value}>{i.name}</Option>
@@ -295,7 +300,8 @@ export default class NewLimitModel extends React.Component {
                                     {getFieldDecorator(v.key, {
                                         rules: [],
                                     })(
-                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName} style={{width: 120}}>
+                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
+                                                    style={{width: 120}}>
                                             {
                                                 v.optionVal.map((i, j) => {
                                                     return <Option key={j} value={i.value}>{i.name}</Option>
