@@ -1,11 +1,10 @@
 import React from 'react';
 import Bundle from './DynamicRoute';
-import LimitManager from 'bundle-loader?lazy!../pages/limit/LimitManager';
-import LimitDetails from 'bundle-loader?lazy!../pages/limit/LimitDetails';
-import LimitUpdate from 'bundle-loader?lazy!../pages/limit/LimitUpdate';
-import OperationRecord from 'bundle-loader?lazy!../pages/limit/OperationRecord';
-import LimitModel from 'bundle-loader?lazy!../pages/limit/LimitModel';
-import NewLimitModel from 'bundle-loader?lazy!../pages/limit/NewLimitModel';
+import LimitManager from 'bundle-loader?lazy!../pages/personal/LimitManager';
+import LimitDetails from 'bundle-loader?lazy!../pages/personal/LimitDetails';
+import LimitUpdate from 'bundle-loader?lazy!../pages/personal/LimitUpdate';
+import OperationRecord from 'bundle-loader?lazy!../pages/personal/OperationRecord';
+import NewLimitModel from 'bundle-loader?lazy!../pages/personal/NewLimitModel';
 
 
 const BundleCom = (props, loader) => {
@@ -16,34 +15,31 @@ const BundleCom = (props, loader) => {
     )
 }
 
+
 export const merchantLimitRouter = [
     {
-        path: '/limitManager/merchant',
+        path: '/merchantlimit',
         exact: true,
         breadcrumbName: '个性限额首页',
         component: (props) => BundleCom(props, LimitManager),
     }, {
-        path: '/limitupdate/merchant/:id/:type',
+        path: '/merchantlimit/+update/:id',
         exact: true,
         breadcrumbName: '修改个性限额',
 
         component: props => BundleCom(props, LimitUpdate)
     }, {
-        path: '/limitdetails/merchant/:id',
+        path: '/merchantlimit/+details/:id',
         exact: true,
         breadcrumbName: '个性限额详情',
         component: (props) => BundleCom(props, LimitDetails),
     }, {
-        path: '/operationrecord/merchant',
+        path: '/merchantlimit/+operationrecoerd/:id',
         exact: true,
         breadcrumbName: '个性限额操作记录',
         component: (props) => BundleCom(props, OperationRecord),
-    }, {
-        path: '/limitmodel/merchant',
-        exact: true,
-        component: (props) => BundleCom(props, LimitModel),
-    }, {
-        path: '/newlimitmodel/merchant',
+    },{
+        path: '/merchantlimit/add',
         exact: true,
         breadcrumbName: '新增个性限额',
         component: props => BundleCom(props, NewLimitModel)

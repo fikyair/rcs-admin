@@ -6,13 +6,15 @@ const breadcrumbNameMap = {
   '/limitManager': '限额管理',
   '/limitManager/add': '添加限额',
   '/limitManager/+update/:params': '修改限额',
-  '/limitManager/operationrecoerd': '限额操作记录',
-  '/limitManager/personalityset': '设置个性限额',
-  '/merchantlimit': '限额管理',
-  '/merchantlimit/add': '添加限额',
-  '/merchantlimit/update': '修改限额',
-  '/merchantlimit/operationrecoerd': '限额操作记录',
-  '/merchantlimit/personalityset': '设置给性限额',
+  '/limitManager/+operationrecoerd/:params': '限额操作记录',
+  '/limitManager/+details/:params': '限额详情',
+
+
+  '/merchantlimit': '个性限额管理',
+  '/merchantlimit/add': '个性限额设置',
+  '/merchantlimit/+update/:params': '修改个性限额',
+  '/merchantlimit/+operationrecoerd/:params': '个性限额操作记录',
+  '/merchantlimit/+details/:params': '个性限额详情',
 };
 
 @withRouter

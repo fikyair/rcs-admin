@@ -104,7 +104,7 @@ export default class LimitManager extends React.Component {
         }],
         columns: [
             {
-                title: '限额名称',
+                title: '商户名称',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => <Link to={`/limitdetails/${record.id}`}>{text}</Link>
@@ -199,15 +199,13 @@ export default class LimitManager extends React.Component {
     menu = record=>(
         <Menu>
             <Menu.Item key='1'>
+
                 <Link to={`/limitManager/+update/${record.id}`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
+
             </Menu.Item>
             <Menu.Item>
                 <Link to={`/operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
-           <Menu.Item>
-               <Link to={`/limitupdate/${record.id}/personal`}>个性设置</Link>
-           </Menu.Item>
-
         </Menu>
     );
 
