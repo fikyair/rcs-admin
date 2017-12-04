@@ -5,7 +5,6 @@ import InputComs from "../../components/InputComs";
 
 const InputGroup = Input.Group;
 
-const FormItem = Form.Item;
 @setTitle('限额详情页')
 @Containerization()
 @Form.create()
@@ -237,10 +236,10 @@ export default class LimitDetails extends React.Component {
                             }
                             <Col {...queryItemLayout}>
                                 <Row style={{marginTop: '10px'}}>
-                                    <Col span={7}>
-                                        <span style={{marginTop: '5px', display: 'inline-block'}}>每笔／分钟:</span>
+                                    <Col span={9}>
+                                        <span style={{marginTop: '5px',marginLeft: '8px', display: 'inline-block'}}>每笔／分钟:</span>
                                     </Col>
-                                    <Col span={16}>
+                                    <Col span={15}>
                                         {
                                             getFieldDecorator('limitType')(
                                                 <InputGroup>

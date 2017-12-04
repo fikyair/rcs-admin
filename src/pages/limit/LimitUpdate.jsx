@@ -221,9 +221,9 @@ export default class LimitUpdate extends React.Component {
         const {type, id} = match.params
         const {getFieldDecorator} = this.props.form;
         const queryItemLayout = {
-            xs: 12, //手机
-            sm: 7,   //平板
-            md: 5,   //pc
+            xs: 12,
+            sm: 7,
+            md: 5,
         };
         return (
             <Form className="container"  layout="inline" onSubmit={this.handleSubmit}>
@@ -305,7 +305,8 @@ export default class LimitUpdate extends React.Component {
                         {
                             inputLimit.map((v, k) => {
                                 return (
-                                    <FormItem key={k}>
+                                    <Col {...queryItemLayout}
+                                        key={k}>
                                         {getFieldDecorator(v.key, {
                                             rules: [],
 
@@ -315,17 +316,17 @@ export default class LimitUpdate extends React.Component {
                                                        addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
                                         )
                                         }
-                                    </FormItem>
+                                    </Col>
                                 )
                             })
                         }
 
                         <Col {...queryItemLayout}>
                             <Row style={{marginTop: '10px'}}>
-                                <Col span={7}>
-                                    <span style={{marginTop: '5px', display: 'inline-block'}}>每笔／分钟:</span>
+                                <Col span={9}>
+                                    <span style={{marginTop: '5px',marginLeft: '8px', display: 'inline-block'}}>每笔／分钟:</span>
                                 </Col>
-                                <Col span={16}>
+                                <Col span={15}>
                                     {
                                         getFieldDecorator('limitType')(
                                             <InputGroup>
