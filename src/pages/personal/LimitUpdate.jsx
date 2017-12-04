@@ -4,14 +4,13 @@ import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 
 const FormItem = Form.Item;
-
+const InputGroup = Input.Group
 @setTitle('限额修改页')
 @Containerization()
 @Form.create()
 export default class LimitUpdate extends React.Component {
 
-    state = {
-    }
+    state = {}
 
 
     mockData = {
@@ -167,9 +166,6 @@ export default class LimitUpdate extends React.Component {
                 labelName: '终身（金额）',
                 key: 'lifetime',
             }, {
-                labelName: '两笔间隔',
-                key: 'interval',
-            }, {
                 labelName: '笔数/分钟',
                 key: 'minutes',
             }, {
@@ -201,122 +197,130 @@ export default class LimitUpdate extends React.Component {
         const {type, id} = match.params
         const {getFieldDecorator} = this.props.form;
         return (
-            <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
-                <Card title="选择商户属性">
-                    {
-                        merchentSelects.map((v, k) => {
-                            return <FormItem key={k}>
-                                {getFieldDecorator(v.key, {
-                                    rules: [],
-                                    initialValue: v.optionVal[0].value
+            <div>
+                <div style={{marginBottom: 10, marginTop: 10, fontSize: 16}}>
+                    <b>商户编号：</b>
+                </div>
+                <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
+                    <Card title="选择商户属性">
+                        {
+                            merchentSelects.map((v, k) => {
+                                return <FormItem key={k}>
+                                    {getFieldDecorator(v.key, {
+                                        rules: [],
+                                        initialValue: v.optionVal[0].value
 
-                                })(
-                                    <SelectComs disabled placeholder="请选择" labelName={v.labelName} style={{width: 120}}>
-                                        {
-                                            v.optionVal.map((i, j) => {
-                                                return <Option key={j} value={i.value}>{i.name}</Option>
-                                            })
+                                    })(
+                                        <SelectComs disabled placeholder="请选择" labelName={v.labelName}
+                                                    style={{width: 120}}>
+                                            {
+                                                v.optionVal.map((i, j) => {
+                                                    return <Option key={j} value={i.value}>{i.name}</Option>
+                                                })
+                                            }
+                                        </SelectComs>
+                                    )}
+                                </FormItem>
+                            })
+                        }
+                    </Card>
+                    <Card title="选择交易属性">
+                        <div>
+                            <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
+
+                            {
+                                offline.map((v, k) => {
+                                    return <FormItem key={k}>
+                                        {getFieldDecorator(v.key, {
+                                            rules: [],
+                                            initialValue: v.optionVal[0].value
+
+                                        })(
+                                            <SelectComs disabled placeholder="请选择" labelName={v.labelName}
+                                                        style={{width: 120}}>
+                                                {
+                                                    v.optionVal.map((i, j) => {
+                                                        return <Option key={j} value={i.value}>{i.name}</Option>
+                                                    })
+                                                }
+                                            </SelectComs>
+                                        )}
+                                    </FormItem>
+                                })
+                            }
+
+                        </div>
+                        <div>
+                            <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+
+                            {
+                                online.map((v, k) => {
+                                    return <FormItem key={k}>
+                                        {getFieldDecorator(v.key, {
+                                            rules: [],
+                                            initialValue: v.optionVal[0].value
+                                        })(
+                                            <SelectComs disabled placeholder="请选择" labelName={v.labelName}
+                                                        style={{width: 120}}>
+                                                {
+                                                    v.optionVal.map((i, j) => {
+                                                        return <Option key={j} value={i.value}>{i.name}</Option>
+                                                    })
+                                                }
+                                            </SelectComs>
+                                        )}
+                                    </FormItem>
+                                })
+                            }
+                        </div>
+                    </Card>
+                    <Card title="添加限额值">
+
+                        {
+                            inputLimit.map((v, k) => {
+                                return (
+                                    <FormItem key={k}>
+                                        {getFieldDecorator(v.key, {
+                                            rules: [],
+
+                                        })(
+                                            <Input placeholder={"请输入"} addonBefore={(<span
+                                                style={{
+                                                    minWidth: '70px',
+                                                    display: 'inline-block'
+                                                }}>{v.labelName}</span>)}
+                                                   style={{width: '200px', margin: '10px'}}/>
+                                        )
                                         }
-                                    </SelectComs>
-                                )}
-                            </FormItem>
-                        })
-                    }
-                </Card>
-                <Card title="选择交易属性">
-                    <div>
-                        <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
-
-                        {
-                            offline.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
-                                        initialValue: v.optionVal[0].value
-
-                                    })(
-                                        <SelectComs disabled placeholder="请选择" labelName={v.labelName}
-                                                    style={{width: 120}}>
-                                            {
-                                                v.optionVal.map((i, j) => {
-                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                })
-                                            }
-                                        </SelectComs>
-                                    )}
-                                </FormItem>
+                                    </FormItem>
+                                )
                             })
+
                         }
+                        <div style={{marginTop: '10px', display: 'inline-block'}}>
+                            {getFieldDecorator('jian', {
+                                rules: [],
 
-                    </div>
-                    <div>
-                        <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+                            })(<Input addonBefore={'两笔间隔'} style={{width: 140, textAlign: 'center'}}
+                                      placeholder="Minimum"/>)
+                            }
+                            <Input style={{width: 24, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff'}}
+                                   placeholder="／" disabled/>
+                            {getFieldDecorator('ww', {
+                                rules: [],
 
-                        {
-                            online.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
-                                        initialValue: v.optionVal[0].value
-                                    })(
-                                        <SelectComs disabled placeholder="请选择" labelName={v.labelName}
-                                                    style={{width: 120}}>
-                                            {
-                                                v.optionVal.map((i, j) => {
-                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                })
-                                            }
-                                        </SelectComs>
-                                    )}
-                                </FormItem>
-                            })
-                        }
-                    </div>
-                </Card>
-                <Card title="添加限额值">
-
-                    {
-                        inputLimit.map((v, k) => {
-                            return (
-                                <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
-
-                                    })(
-                                        <Input placeholder={"请输入"} addonBefore={(<span
-                                            style={{minWidth: '70px', display: 'inline-block'}}>{v.labelName}</span>)}
-                                               style={{width: '200px', margin: '10px'}}/>
-                                    )
-                                    }
-                                </FormItem>
+                            })(<Input style={{width: 100, textAlign: 'center', borderLeft: 0}} placeholder="Maximum"/>
                             )
-                        })
-                    }
-                </Card>
-                <Card title={type == 'personal' ? '配置商户' : "添加限额名称"}>
-                    {
-                        type == 'common' ?
-                            <div>
-                                <Input placeholder="请输入" addonBefore={(
-                                    <span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
-                                       style={{width: '200px', margin: '10px'}}/>
-                                <Button style={{margin: '10px'}}
-                                        onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                                <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
-                            </div>
-                            :
-                            type == 'personal' ?
-                                <div>
-                                    <Input placeholder="请输入" addonBefore={(
-                                        <span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
-                                           style={{width: '200px', margin: '10px'}}/>
-                                </div>
-                                :
-                                null
-                    }
-
-
-                </Card>
-            </Form>)
+                            }
+                        </div>
+                    </Card>
+                    <Card>
+                        <Button style={{margin: '10px', verticalAlign: 'top'}}
+                                onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                        <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>
+                    </Card>
+                </Form>
+            </div>
+        )
     }
 }

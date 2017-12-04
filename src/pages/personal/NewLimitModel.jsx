@@ -168,9 +168,6 @@ export default class NewLimitModel extends React.Component {
                 labelName: '终身（金额）',
                 key: 'lifetime',
             }, {
-                labelName: '两笔间隔',
-                key: 'interval',
-            }, {
                 labelName: '笔数/分钟',
                 key: 'minutes',
             }, {
@@ -286,6 +283,22 @@ export default class NewLimitModel extends React.Component {
                             )
                         })
                     }
+                    <div style={{marginTop: '10px', display: 'inline-block'}}>
+                        {getFieldDecorator('jian', {
+                            rules: [],
+
+                        })(<Input addonBefore={'两笔间隔'} style={{width: 140, textAlign: 'center'}}
+                                  placeholder="Minimum"/>)
+                        }
+                        <Input style={{width: 24, borderLeft: 0, pointerEvents: 'none', backgroundColor: '#fff'}}
+                               placeholder="／" disabled/>
+                        {getFieldDecorator('ww', {
+                            rules: [],
+
+                        })(<Input style={{width: 100, textAlign: 'center', borderLeft: 0}} placeholder="Maximum"/>
+                        )
+                        }
+                    </div>
                 </Card>
                 <Card title="配置商户">
                     <Input placeholder="请输入"

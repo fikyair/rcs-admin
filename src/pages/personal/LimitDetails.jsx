@@ -129,9 +129,9 @@ export default class LimitDetails extends React.Component {
                 <div style={{textAlign:'center',marginBottom: 10, marginTop: 10, fontSize: 16}}> {
                     <b>商户限额详情</b>
                 } </div>
-                <div style={{marginBottom: 10, marginTop: 10, fontSize: 16}}> {
+                <div style={{marginBottom: 10, marginTop: 10, fontSize: 16}}>
                      <b>商户编号：</b>
-                } </div>
+                 </div>
                 <Form>
                     <Card title="商户属性：" bordered={true}>
                         <Row style={{marginTop: 10}}>

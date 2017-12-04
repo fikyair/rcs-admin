@@ -149,7 +149,7 @@ export default class LimitManager extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-            <a onClick={() => this.stop(record.id)}>停用&nbsp;&nbsp;</a>
+            <a onClick={() => this.delete(record.id)}>删除&nbsp;&nbsp;</a>
             <a onClick={() => this.edit(record.id)}>修改&nbsp;&nbsp;</a>
              <a onClick={() => this.showRecord(record.id)}>操作记录&nbsp;&nbsp;</a>
               {/*<span className="ant-divider"/>*/}
@@ -212,11 +212,6 @@ export default class LimitManager extends React.Component {
 
 
     timer = null
-    showAddModal = () => {
-        this.setState({
-            visible: true,
-        });
-    }
 
     handleAddOk = () => {
         this.setState({loading: true});
@@ -236,9 +231,6 @@ export default class LimitManager extends React.Component {
         this.setState({visible: false});
     }
 
-    disableLimitRule() {
-        this.setState({removeVisible: true})
-    }
 
     handleRemoveCancel = () => {
         this.setState({removeVisible: false})
@@ -254,7 +246,7 @@ export default class LimitManager extends React.Component {
         //TODO 搜索
     }
 
-    stop(id) {
+    delete(id) {
 
     }
     edit(id){
@@ -305,7 +297,6 @@ export default class LimitManager extends React.Component {
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
-                <Button style={{margin: '10px', width: '100px'}} onClick={this.showAddModal}>添加限额</Button>
                 <Card title="限额列表" bodyStyle={{padding: '0px',}}><Table columns={columns}
                                                                         dataSource={dataSource}/></Card>
 
