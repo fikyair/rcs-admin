@@ -1,6 +1,7 @@
 import {Breadcrumb} from 'antd';
 import React from 'react';
 import {withRouter, Link} from 'react-router-dom';
+import _ from 'lodash'
 
 const breadcrumbNameMap = {
     // 普通限额
@@ -17,12 +18,10 @@ const breadcrumbNameMap = {
 
 @withRouter
 export default class BreadCrumbComs extends React.Component {
-    state= {
-        routes: [{
-            path: 'limitManager',
-            breadcrumbName: '首页'
-        }]
+    state = {
+        routes: []
     }
+
     /*state = {
         breadcrumbItems: null,
     }
@@ -67,31 +66,48 @@ export default class BreadCrumbComs extends React.Component {
         </Breadcrumb>)
     }*/
 
-     componentWillMount() {
-     }
+    componentWillMount() {
 
-    componentWillReceiveProps(nextProps) {
         this.setPath()
     }
 
-    setPath(){
+    componentWillReceiveProps(nextProps) {
+        debugger
+
+        this.setPath()
+    }
+
+    setPath() {
+        let flag = false
+        debugger;
         let route = {
             path: this.props.history.location.pathname.toString().substring(1),
             breadcrumbName: this.props.history.location.pathname
         }
-       this.state.routes.push(route)
-        this.setState({routes:this.state.routes})
+        if (this.state.routes.length != 0) {
+            this.state.routes.map(data => {
+                if (data.path === route.path) {
+                    flag = true
+                }
+            })
+            if (!flag) {
+                this.state.routes.push(route)
+                this.setState({routes: this.state.routes})
+            }
+        } else {
+            this.state.routes.push(route)
+            this.setState({routes: this.state.routes})
+        }
+        console.log(this.state.routes.length)
     }
 
     itemRender(route, params, routes, paths) {
-        debugger
-        const last = routes.indexOf(route) === routes.length - 1;
-        console.log(params)
-        return  <Link to={'/'+route.path}>{route.breadcrumbName}</Link>;
+        console.log('params====>',params)
+        return <Link to={'/' + route.path}>{route.breadcrumbName}</Link>;
     }
 
     render() {
-        return <Breadcrumb itemRender={this.itemRender}  routes={this.state.routes}/>;
+        return <Breadcrumb itemRender={this.itemRender} routes={this.state.routes}/>;
 
     }
 }
