@@ -21,7 +21,7 @@ export default class BreadCrumbComs extends React.Component {
         let path = ''
         let routes = this.props.routes
         routes.map(data => {
-            if (data.path !== '/') {
+            if (data.path && data.path !== '/') {
                 let a = this.props.history.location.pathname.toString()
                 let b = ''
                 if (data.path.indexOf(':') > 0) {

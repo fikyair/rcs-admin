@@ -2,6 +2,7 @@ import React from 'react'
 import LimitManager from "bundle-loader?lazy!../pages/limit/LimitManager";
 import Login from "bundle-loader?lazy!../pages/login/Login";
 import Bundle from './DynamicRoute';
+import NoMatch from "../pages/NoMatch";
 
 
 const BundleCom = (props, loader) => {
@@ -28,4 +29,6 @@ export const root = [
         breadcrumbName: '登陆',
         exact: true,
         component: (props) => BundleCom(props, Login),
-    },]
+    },{
+        component: NoMatch,
+    }]
