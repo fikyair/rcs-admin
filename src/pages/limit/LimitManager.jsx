@@ -200,17 +200,18 @@ export default class LimitManager extends React.Component {
         <Menu>
             <Menu.Item key='1'>
 
-                <Link to={`/limitupdate/${record.id}/common`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
+                <Link to={`/limitManager/+update/${record.id}`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
 
             </Menu.Item>
             <Menu.Item>
                 <Link to={`/operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
             {
-                document.location.href.indexOf('merchant') >0 ? <Menu.Item>
+                this.props.match.path.indexOf('merchant') >0 ?
+                    null
+                  :<Menu.Item>
                     <Link to={`/limitupdate/${record.id}/personal`}>个性设置</Link>
                 </Menu.Item>
-                    :null
             }
 
         </Menu>
@@ -231,7 +232,7 @@ export default class LimitManager extends React.Component {
         }, 3000);
 
         //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
-        this.props.history.push('/newlimitmodel')
+        this.props.history.push('/limitManager/add')
     }
 
     componentWillUnmount() {

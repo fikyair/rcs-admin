@@ -1,78 +1,77 @@
-import {Breadcrumb} from 'antd';
+import { Breadcrumb } from 'antd';
 import React from 'react';
-import {withRouter, Link} from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+
+const breadcrumbNameMap = {
+  '/limitManager': '限额管理',
+  '/limitManager/add': '添加限额',
+  '/limitManager/+update/:params': '修改限额',
+  '/limitManager/operationrecoerd': '限额操作记录',
+  '/limitManager/personalityset': '设置个性限额',
+  '/merchantlimit': '限额管理',
+  '/merchantlimit/add': '添加限额',
+  '/merchantlimit/update': '修改限额',
+  '/merchantlimit/operationrecoerd': '限额操作记录',
+  '/merchantlimit/personalityset': '设置给性限额',
+};
 
 @withRouter
-export default class BreadCrumbComs extends React.Component {
-    state = {
-        routes: []
+export default class BreadCrumbComs extends React.Component{
+  state = {
+    breadcrumbItems:null,
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.location.pathname !== this.props.location.pathname){
+      this.setBreadCrumItem(nextProps);
     }
+  }
 
-    componentWillMount() {
-        this.setName()
-    }
+  componentWillMount(){
+    this.setBreadCrumItem(this.props);
+  }
 
-    componentWillReceiveProps(nextProps) {
-        this.setName()
-    }
-
-    setName = () => {
-        let name = ''
-        let path = ''
-        let routes = this.props.routes
-        routes.map(data => {
-            if (data.path && data.path !== '/') {
-                let a = this.props.history.location.pathname.toString()
-                let b = ''
-                if (data.path.indexOf(':') > 0) {
-                    b = data.path.split('/:')[0]
-                }
-                else {
-                    b = data.path;
-                }
-                let flag = a.indexOf(b)
-                if (flag >= 0) {
-                    name = data.breadcrumbName
-                    path = b
-                }
-            }
-
-        })
-        this.setPath(name, path)
-    }
-
-    setPath(name, path) {
-        let flag = false
-        let list = this.state.routes
-        let route = {
-            path: this.props.history.location.pathname.toString().substring(1),
-            breadcrumbName: name
-        }
-        if (list.length != 0) {
-            list = list.map(data => {
-                let a = data.path.indexOf(path.substring(1))
-                a >= 0 ? flag = true : null
-                return a >= 0 ? route : data
-            })
-            !flag ? list.push(route) : null
-            this.setState({routes: list})
+  setBreadCrumItem(props){
+      debugger;
+    const { location } = props;
+    const pathSnippets = location.pathname.split('/').filter(i => i);
+    const extraBreadcrumbItems = pathSnippets.map((v, index) => {
+        if(v.indexOf('+') >= 0 ){
+            return null;
+        } else if( index > 0 && pathSnippets[index-1].indexOf('+')>=0){
+          const url1 = `/${pathSnippets.slice(0, index ).join('/')}/:params`;
+          const url2 = `/${pathSnippets.slice(0, index+1 ).join('/')}`;
+          return (
+            <Breadcrumb.Item key={url2}>
+                <Link to={url2}>
+                  {breadcrumbNameMap[url1]}
+                </Link>
+            </Breadcrumb.Item>
+          );
         } else {
-            list.push(route)
-            this.setState({routes: list})
+          const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+          return (
+            <Breadcrumb.Item key={url}>
+                <Link to={url}>
+                  {breadcrumbNameMap[url]}
+                </Link>
+            </Breadcrumb.Item>
+          );
         }
-    }
 
-    itemRender(route, params, routes, paths) {
-        return <Link to={'/' + route.path} style={{
-            margin: 10,
-            display: 'inline-block'
-        }}>{route.breadcrumbName}</Link>;
-    }
 
-    render() {
-        return (
-            <Breadcrumb itemRender={this.itemRender} routes={this.state.routes}/>
-        )
+    });
+    const breadcrumbItems = [(
+      <Breadcrumb.Item key="home">
+          <Link to="/">首页</Link>
+      </Breadcrumb.Item>
+    )].concat(extraBreadcrumbItems);
+    this.setState({breadcrumbItems:extraBreadcrumbItems})
+  }
 
-    }
+  render(){
+    const { breadcrumbItems } = this.state;
+    return (<Breadcrumb style={{padding: '10px'}}>
+      { breadcrumbItems }
+    </Breadcrumb>)
+  }
 }

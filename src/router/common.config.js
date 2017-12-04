@@ -19,30 +19,25 @@ export const commontLimtRouter = [
    {
         path: '/limitManager',
         exact: true,
-       breadcrumbName: '限额首页',
         component: (props) => BundleCom(props, LimitManager),
     }, {
-        path: '/limitupdate/:id/:type',
+        path: '/limitManager/+update/:id',
         exact: true,
-        breadcrumbName: '限额添加',
         component: props => BundleCom(props, LimitUpdate)
     }, {
         path: '/limitdetails/:id',
         exact: true,
-        breadcrumbName: '限额详情',
         component: (props) => BundleCom(props, LimitDetails),
     }, {
         path: '/operationrecord',
         exact: true,
-        breadcrumbName: '操作记录',
         component: (props) => BundleCom(props, OperationRecord),
     }, {
         path: '/limitmodel',
         exact: true,
         component: (props) => BundleCom(props, LimitModel),
     }, {
-        path: '/newlimitmodel',
-        breadcrumbName: '增加',
+        path: '/limitManager/add',
         exact: true,
         component: props => BundleCom(props, NewLimitModel)
     }
