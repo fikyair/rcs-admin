@@ -15,7 +15,6 @@ export default class LimitManager extends React.Component {
         loading: false,
         visible: false,
         removeVisible: false,
-        isMerchant: false,
     }
     mockData = {
         selectsData: [
@@ -104,10 +103,10 @@ export default class LimitManager extends React.Component {
         }],
         columns: [
             {
-                title: '商户名称',
+                title: '商户编号',
                 dataIndex: 'name',
                 key: 'name',
-                render: (text, record) => <Link to={`/limitdetails/${record.id}`}>{text}</Link>
+                render: (text, record) => <Link to={`/merchantlimit/+details/${record.id}`}>{text}</Link>
 
             }, {
                 title: '单笔(金额)',
@@ -150,13 +149,15 @@ export default class LimitManager extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-            <a onClick={() => this.disableLimitRule(record.id)}>删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除</a>
-              <span className="ant-divider"/>
-             <Dropdown overlay={this.menu(record)}>
-                <a >
-                    更多操作<Icon type="down" />
-                </a>
-             </Dropdown>
+            <a onClick={() => this.stop(record.id)}>停用&nbsp;&nbsp;</a>
+            <a onClick={() => this.edit(record.id)}>修改&nbsp;&nbsp;</a>
+             <a onClick={() => this.showRecord(record.id)}>操作记录&nbsp;&nbsp;</a>
+              {/*<span className="ant-divider"/>*/}
+             {/*<Dropdown overlay={this.menu(record)}>*/}
+                {/*<a >*/}
+                    {/*更多操作<Icon type="down" />*/}
+                {/*</a>*/}
+             {/*</Dropdown>*/}
             </span>
                 ),
             }],
@@ -253,22 +254,18 @@ export default class LimitManager extends React.Component {
         //TODO 搜索
     }
 
-    isShowMerchant = () => {
-        const {isMerchant} = this.state;
-        if (isMerchant) {
-            return (
-                <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
-            )
-        } else {
-            return (
-                <InputComs className='input-style' labelName="限额名称" placeholder="请选择"/>
-            )
-        }
+    stop(id) {
 
     }
+    edit(id){
+        this.props.history.push(`/merchantlimit/+update/${id}`)
+    }
 
+    showRecord(id){
+        this.props.history.push(`/merchantlimit/+operationrecoerd/${id}`)
+    }
     render() {
-        const {options, visible, loading, removeVisible, isMerchant} = this.state;
+        const {options, visible, loading, removeVisible} = this.state;
         const {
             selectsData = this.mockData.selectsData,
             columns = this.mockData.columns,
@@ -303,7 +300,7 @@ export default class LimitManager extends React.Component {
                         }
                     </div>
                     <div>
-                        {this.isShowMerchant()}
+                        <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
                         <Button htmlType='submit' icon="search" style={{margin: '10px', width: '100px'}}
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>

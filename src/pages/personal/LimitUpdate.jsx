@@ -11,7 +11,6 @@ const FormItem = Form.Item;
 export default class LimitUpdate extends React.Component {
 
     state = {
-        isMerchant: false,
     }
 
 
@@ -182,9 +181,6 @@ export default class LimitUpdate extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.setState({isMerchant: true})
-        }
     }
 
     handleSubmit = () => {

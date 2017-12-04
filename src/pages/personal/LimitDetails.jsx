@@ -11,10 +11,6 @@ const FormItem = Form.Item;
 @Form.create()
 export default class LimitDetails extends React.Component {
 
-    state = {
-        isMerchant: false,
-    }
-
     initData = {
         merchantAttrData: [{
             labelName: '结算账户类型',
@@ -104,14 +100,10 @@ export default class LimitDetails extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.setState({isMerchant: true})
-        }
     }
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        const {isMerchant} = this.state;
         const formItemLayout = {
             labelCol: {
                 xs: {span: 24},
@@ -134,8 +126,11 @@ export default class LimitDetails extends React.Component {
         };
         return (
             <div>
-                <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10, fontSize: 16}}> {
-                    isMerchant ? <b>商户编号：</b> : <b>限额名称：POS商户对私结算限额</b>
+                <div style={{textAlign:'center',marginBottom: 10, marginTop: 10, fontSize: 16}}> {
+                    <b>商户限额详情</b>
+                } </div>
+                <div style={{marginBottom: 10, marginTop: 10, fontSize: 16}}> {
+                     <b>商户编号：</b>
                 } </div>
                 <Form>
                     <Card title="商户属性：" bordered={true}>

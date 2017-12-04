@@ -13,7 +13,6 @@ const FormItem = Form.Item;
 export default class NewLimitModel extends React.Component {
 
     state = {
-        isMerchant: false, // 判断是否是商户限额路由跳转进来的，默认否
     }
 
     mockData = {
@@ -182,59 +181,14 @@ export default class NewLimitModel extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.isdisabled()
-            this.setState({isMerchant: true})
-        }
     }
 
-    isdisabled() {
-        this.mockData.merchentSelects.map(data => {
-            data.disabled = true
-        })
-        this.mockData.tradeSelects.offline.map(data => {
-            data.disabled = true
-        })
-        this.mockData.tradeSelects.online.map(data => {
-            data.disabled = true
-        })
-
-    }
 
     handleSubmit = () => {
         const {getFieldsValue} = this.props.form;
         const val = getFieldsValue();
         // TODO 提交表单
         debugger;
-    }
-
-    isShowMerchant = () => {
-        const {isMerchant} = this.state;
-        if (isMerchant) {
-            return (
-                <Card title="配置商户">
-                    <Input placeholder="请输入"
-                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
-                           style={{width: '200px', margin: '10px'}}/>
-                    <ExtracData/>
-                    <Button style={{margin: '10px', verticalAlign: 'top'}}
-                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                    <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>
-                </Card>
-            )
-        } else {
-            return (
-                <Card title="添加限额名称">
-                    <Input placeholder="请输入"
-                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
-                           style={{width: '200px', margin: '10px'}}/>
-                    <Button style={{margin: '10px'}}
-                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                    <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
-                </Card>
-            )
-        }
-
     }
 
     render() {
@@ -248,7 +202,7 @@ export default class NewLimitModel extends React.Component {
         return (
             <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
 
-                <Card title="选择商户属性">
+                <Card title="商户属性">
                     {
                         merchentSelects.map((v, k) => {
                             return <FormItem key={k}>
@@ -256,7 +210,7 @@ export default class NewLimitModel extends React.Component {
                                     rules: [],
 
                                 })(
-                                    <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
+                                    <SelectComs disabled={true} placeholder="请选择" labelName={v.labelName}
                                                 style={{width: 120}}>
                                         {
                                             v.optionVal.map((i, j) => {
@@ -269,7 +223,7 @@ export default class NewLimitModel extends React.Component {
                         })
                     }
                 </Card>
-                <Card title="选择交易属性">
+                <Card title="交易属性">
                     <div>
                         <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
                         {
@@ -279,7 +233,7 @@ export default class NewLimitModel extends React.Component {
                                         rules: [],
 
                                     })(
-                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
+                                        <SelectComs disabled={true} placeholder="请选择" labelName={v.labelName}
                                                     style={{width: 120}}>
                                             {
                                                 v.optionVal.map((i, j) => {
@@ -300,7 +254,7 @@ export default class NewLimitModel extends React.Component {
                                     {getFieldDecorator(v.key, {
                                         rules: [],
                                     })(
-                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
+                                        <SelectComs disabled={true} placeholder="请选择" labelName={v.labelName}
                                                     style={{width: 120}}>
                                             {
                                                 v.optionVal.map((i, j) => {
@@ -333,7 +287,15 @@ export default class NewLimitModel extends React.Component {
                         })
                     }
                 </Card>
-                {this.isShowMerchant()}
+                <Card title="配置商户">
+                    <Input placeholder="请输入"
+                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
+                           style={{width: '200px', margin: '10px'}}/>
+                    <ExtracData/>
+                    <Button style={{margin: '10px', verticalAlign: 'top'}}
+                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                    <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>
+                </Card>
             </Form>)
     }
 }
