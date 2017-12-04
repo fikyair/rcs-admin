@@ -1,4 +1,6 @@
 import store from '../store';
+import {getCurrentLoginUser} from '../common/permission';
+
 export const FetchAPI = (url,method,data)=>{
   store.dispatch({ type: 'REQUEST'});
     return new Promise((resolve, reject) => {
@@ -66,6 +68,8 @@ export const headers = ()=> ({
     headers:{
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': '*',
+        'auth-token':JSON.stringify($.cookie()),
+        'roles':JSON.stringify(getCurrentLoginUser),
         "Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
     },
