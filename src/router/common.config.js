@@ -29,7 +29,7 @@ export const commontLimtRouter = [
         exact: true,
         component: (props) => BundleCom(props, LimitDetails),
     }, {
-        path: '/+operationrecoerd／:id',
+        path: '/limitManager/+operationrecord/:id',
         exact: true,
         component: (props) => BundleCom(props, OperationRecord),
     }, {

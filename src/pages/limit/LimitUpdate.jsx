@@ -205,7 +205,8 @@ export default class LimitUpdate extends React.Component {
         const {type, id} = match.params
         const {getFieldDecorator} = this.props.form;
         return (
-            <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
+            <Form className="container"  layout="inline" onSubmit={this.handleSubmit}>
+                <h1>836商户限额</h1>
                 <Card title="选择商户属性">
                     {
                         merchentSelects.map((v, k) => {
@@ -297,30 +298,17 @@ export default class LimitUpdate extends React.Component {
                         })
                     }
                 </Card>
-                <Card title={type == 'personal' ? '配置商户' : "添加限额名称"}>
-                    {
-                        type == 'common' ?
-                            <div>
-                                <Input placeholder="请输入" addonBefore={(
-                                    <span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
-                                       style={{width: '200px', margin: '10px'}}/>
+                <div >
+
+                            <div style={{textAlign:'center'}}>
                                 <Button style={{margin: '10px'}}
                                         onClick={() => this.props.history.push('/limitManager')}>取消</Button>
                                 <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
                             </div>
-                            :
-                            type == 'personal' ?
-                                <div>
-                                    <Input placeholder="请输入" addonBefore={(
-                                        <span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
-                                           style={{width: '200px', margin: '10px'}}/>
-                                </div>
-                                :
-                                null
-                    }
 
 
-                </Card>
+
+                </div>
             </Form>)
     }
 }

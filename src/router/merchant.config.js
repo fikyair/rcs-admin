@@ -39,7 +39,7 @@ export const merchantLimitRouter = [
         breadcrumbName: '个性限额操作记录',
         component: (props) => BundleCom(props, OperationRecord),
     },{
-        path: '/merchantlimit/add',
+        path: '/merchantlimit/+add/:id',
         exact: true,
         breadcrumbName: '新增个性限额',
         component: props => BundleCom(props, NewLimitModel)

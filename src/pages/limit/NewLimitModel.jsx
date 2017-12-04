@@ -207,36 +207,6 @@ export default class NewLimitModel extends React.Component {
         // TODO 提交表单
         debugger;
     }
-
-    isShowMerchant = () => {
-        const {isMerchant} = this.state;
-        if (isMerchant) {
-            return (
-                <Card title="配置商户">
-                    <Input placeholder="请输入"
-                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
-                           style={{width: '200px', margin: '10px'}}/>
-                    <ExtracData/>
-                    <Button style={{margin: '10px', verticalAlign: 'top'}}
-                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                    <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>
-                </Card>
-            )
-        } else {
-            return (
-                <Card title="添加限额名称">
-                    <Input placeholder="请输入"
-                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
-                           style={{width: '200px', margin: '10px'}}/>
-                    <Button style={{margin: '10px'}}
-                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                    <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
-                </Card>
-            )
-        }
-
-    }
-
     render() {
         const {
             merchentSelects = this.mockData.merchentSelects,
@@ -333,7 +303,14 @@ export default class NewLimitModel extends React.Component {
                         })
                     }
                 </Card>
-                {this.isShowMerchant()}
+                <Card title="添加限额名称">
+                    <Input placeholder="请输入"
+                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
+                           style={{width: '200px', margin: '10px'}}/>
+                    <Button style={{margin: '10px'}}
+                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                    <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                </Card>
             </Form>)
     }
 }

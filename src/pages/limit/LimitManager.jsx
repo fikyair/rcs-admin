@@ -202,10 +202,10 @@ export default class LimitManager extends React.Component {
                 <Link to={`/limitManager/+update/${record.id}`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
             </Menu.Item>
             <Menu.Item>
-                <Link to={`/operationrecord/${record.id}`}>操作记录 </Link>
+                <Link to={`/limitManager/+operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
            <Menu.Item>
-               <Link to={`/limitupdate/${record.id}/personal`}>个性设置</Link>
+               <Link to={`/merchantlimit/+add/${record.id}`}>个性设置</Link>
            </Menu.Item>
 
         </Menu>
