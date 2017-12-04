@@ -7,16 +7,12 @@ import InputComs from '../../components/InputComs';
 
 const FormItem = Form.Item
 const InputGroup = Input.Group;
-
-
 @Form.create()
 export default class MerchentLimitAdd extends React.Component {
 
     state = {
         data: {},
     }
-
-
     componentWillMount() {
         let data = {
             settleType: '1',
@@ -191,8 +187,6 @@ export default class MerchentLimitAdd extends React.Component {
 
 
     }
-
-
     render() {
         const {getFieldDecorator} = this.props.form;
         const cardStyle = {

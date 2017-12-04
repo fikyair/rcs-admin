@@ -16,7 +16,6 @@ export default class OperationRecord extends React.Component {
             this.setState({isMerchant: true})
         }
     }
-
     render() {
         const {isMerchant} = this.state;
         return (
