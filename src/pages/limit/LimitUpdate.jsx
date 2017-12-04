@@ -1,7 +1,10 @@
 import React from 'react';
-import {Layout, Form, Input, Button, Card} from 'antd';
+import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
+const InputGroup = Input.Group;
+import InputComs from "../../components/InputComs";
+
 
 const FormItem = Form.Item;
 
@@ -156,26 +159,39 @@ export default class LimitUpdate extends React.Component {
         },
         inputLimit: [
             {
-                labelName: '单日（金额）',
+                labelName: '单日',
                 key: 'singleDay',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元",
             }, {
-                labelName: '单月（金额）',
+                labelName: '单月',
                 key: 'singleMonth',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元",
             }, {
-                labelName: '年（金额）',
+                labelName: '年',
                 key: 'singleYear',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元",
             }, {
-                labelName: '终身（金额）',
+                labelName: '终身',
                 key: 'lifetime',
+                labelValue: 'sigle',
+                addonBefore: "金额",
+                addonAfter: "元",
             }, {
                 labelName: '两笔间隔',
                 key: 'interval',
-            }, {
-                labelName: '笔数/分钟',
-                key: 'minutes',
+                labelValue: 'sigle',
+                addonAfter: "元"
             }, {
                 labelName: '笔/日',
                 key: 'oneTime',
+                labelValue: 'sigle',
+                addonAfter: "元"
             }
         ]
 
@@ -204,6 +220,11 @@ export default class LimitUpdate extends React.Component {
         } = this.props;
         const {type, id} = match.params
         const {getFieldDecorator} = this.props.form;
+        const queryItemLayout = {
+            xs: 12, //手机
+            sm: 7,   //平板
+            md: 5,   //pc
+        };
         return (
             <Form className="container"  layout="inline" onSubmit={this.handleSubmit}>
                 <h1>836商户限额</h1>
@@ -280,23 +301,53 @@ export default class LimitUpdate extends React.Component {
                 </Card>
                 <Card title="添加限额值">
 
-                    {
-                        inputLimit.map((v, k) => {
-                            return (
-                                <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
+                    <Row>
+                        {
+                            inputLimit.map((v, k) => {
+                                return (
+                                    <FormItem key={k}>
+                                        {getFieldDecorator(v.key, {
+                                            rules: [],
 
-                                    })(
-                                        <Input placeholder={"请输入"} addonBefore={(<span
-                                            style={{minWidth: '70px', display: 'inline-block'}}>{v.labelName}</span>)}
-                                               style={{width: '200px', margin: '10px'}}/>
-                                    )
+                                        })(
+                                            <InputComs disabled={true} labelName={v.labelName}
+                                                       style={{width: 120}}
+                                                       addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
+                                        )
+                                        }
+                                    </FormItem>
+                                )
+                            })
+                        }
+
+                        <Col {...queryItemLayout}>
+                            <Row style={{marginTop: '10px'}}>
+                                <Col span={7}>
+                                    <span style={{marginTop: '5px', display: 'inline-block'}}>每笔／分钟:</span>
+                                </Col>
+                                <Col span={16}>
+                                    {
+                                        getFieldDecorator('limitType')(
+                                            <InputGroup>
+                                                <Input disabled={true} style={{width: 60, textAlign: 'center'}}
+                                                />
+                                                <Input style={{
+                                                    width: 24,
+                                                    borderLeft: 0,
+                                                    pointerEvents: 'none',
+                                                    backgroundColor: '#fff'
+                                                }} placeholder="/" disabled/>
+                                                <Input disabled={true}
+                                                       style={{width: 60, textAlign: 'center', borderLeft: 0}}
+                                                />
+                                            </InputGroup>
+                                        )
                                     }
-                                </FormItem>
-                            )
-                        })
-                    }
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
+
                 </Card>
                 <div >
 
