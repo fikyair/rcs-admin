@@ -1,8 +1,8 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import SelectComs, {Option} from '../../components/SelectComs';
-import {Layout, Table, Button, Card, Icon, Input, Modal, Form} from 'antd';
-import {Link,} from 'react-router-dom';
+import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown } from 'antd';
+import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
 
 const FormItem = Form.Item;
@@ -159,17 +159,24 @@ export default class LimitManager extends React.Component {
                 render: (text, record) => (
                     <span>
             <span className="ant-divider"/>
-            <Button onClick={() => this.disableLimitRule(record.id)}>删除</Button>
+            <a onClick={() => this.disableLimitRule(record.id)}>删除</a>
               <span className="ant-divider"/>
-            <Button onClick={() => this.props.history.push(`/limitupdate/${record.id}/common`)}>修改</Button>
+             {/*onClick={() => this.props.history.push(`/limitupdate/${record.id}/common`)}*/}
+            <Link to="/limitupdate/${record.id}/common">修改</Link>
              <span className="ant-divider"/>
-            <Button onClick={() => this.props.history.push(`/operationrecord/${record.id}`)}>
-              操作记录
-             </Button>
-              <span className="ant-divider"/>
-              <Button style={this.state.isMerchant ? {display:'none'} : {}}onClick={() => this.props.history.push(`/limitupdate/${record.id}/personal`)}>
-              个性设置
-             </Button>
+            {/*onClick={() => this.props.history.push(`/operationrecord/${record.id}`)}*/}
+            {/*<Link to="/operationrecord/${record.id}">*/}
+              {/*操作记录*/}
+             {/*</Link>*/}
+              {/*<span className="ant-divider"/>*/}
+              {/*<Button style={this.state.isMerchant ? {display:'none'} : {}}onClick={() => this.props.history.push(`/limitupdate/${record.id}/personal`)}>*/}
+              {/*个性设置*/}
+             {/*</Button>*/}
+             <Dropdown overlay={this.menu}>
+                <Link to="/">
+                    个性设置
+                </Link>
+             </Dropdown>
             </span>
                 ),
             }],
@@ -204,13 +211,19 @@ export default class LimitManager extends React.Component {
             },
         ]
     }
-
     componentWillMount() {
         if (this.props.match.path.indexOf('merchant') > 0) {
             this.setState({isMerchant: true})
         }
     }
 
+    menu = (
+        <Menu>
+            <Menu.Item>
+                <Link to="/limitupdate/${record.id}/personal">操作记录</Link>
+            </Menu.Item>
+        </Menu>
+    );
 
 
     timer = null
