@@ -6,10 +6,6 @@ import './style.less';
 
 export default class NoMatch extends React.Component {
 
-    state = {
-        url: null,
-    }
-
     render() {
         return (
             <div>
