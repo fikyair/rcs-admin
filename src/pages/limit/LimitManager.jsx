@@ -1,7 +1,7 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import SelectComs, {Option} from '../../components/SelectComs';
-import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination} from 'antd';
+import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
 import MapSelectComs from '../../components/MapSelectComs';
@@ -308,16 +308,25 @@ export default class LimitManager extends React.Component {
             modalSelects = this.mockData.modalSelects
         } = this.props;
         const {getFieldDecorator} = this.props.form;
+        const layout = {
+            xs: 6,
+            sm: 15,
+            md :22
+        }
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs style={{}} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
+                        <MapSelectComs  wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
                     </div>
-                    <div className="selBtn">
-                        <Button className="btn" type='primary' icon="search"
-                                onClick={() => this.handleSearch()}>查询</Button>
-                    </div>
+                    <Row>
+                        <Col {...layout} style={{marginLeft:6}}>
+                        <div className="selBtn" style={{textAlign:'right'}}>
+                            <Button className="btn" type='primary' icon="search"
+                                    onClick={() => this.handleSearch()}>查询</Button>
+                        </div>
+                    </Col>
+                    </Row>
                 </Form>
                 <Button className="addBtn" onClick={this.showAddModal} type="primary" ghost>添加限额</Button>
 

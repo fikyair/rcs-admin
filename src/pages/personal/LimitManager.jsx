@@ -1,6 +1,6 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
-import {Table, Button, Card, Input, Modal, Form, Menu} from 'antd';
+import {Table, Button, Card, Input, Modal, Form, Row, Col} from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
 import MapSelectComs from '../../components/MapSelectComs'
@@ -233,6 +233,11 @@ export default class LimitManager extends React.Component {
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects
         } = this.props;
+        const layout = {
+            xs: 6,
+            sm: 15,
+            md :22
+        }
         const {getFieldDecorator} = this.props.form;
         return (
             <div>
@@ -241,10 +246,14 @@ export default class LimitManager extends React.Component {
                         <MapSelectComs style={{}} ref="selectsData" data={selectsData}/>
                         {/*<InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>*/}
                     </div>
-                    <div className="selBtn">
+                    <Row>
+                        <Col {...layout} style={{marginLeft:6}}>
+                    <div className="selBtn" style={{textAlign:'right'}}>
                         <Button className="btn" type='primary' icon="search"
                                 onClick={() => this.handleSearch()}>查询</Button>
                     </div>
+                        </Col>
+                    </Row>
                 </Form>
                 <Card noHovering={true} title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
                     <Table
