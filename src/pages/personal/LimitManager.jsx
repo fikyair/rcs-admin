@@ -1,10 +1,9 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
-import SelectComs, {Option} from '../../components/SelectComs';
-import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown} from 'antd';
+import {Table, Button, Card, Input, Modal, Form, Menu} from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
-
+import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 @setTitle('首页')
 @Containerization()
@@ -26,6 +25,7 @@ export default class LimitManager extends React.Component {
                     {value: '3', name: '全部'},
                 ],
                 key: 'limitType',
+                type: 'select'
             },
             {
                 labelName: '限额属性',
@@ -36,6 +36,7 @@ export default class LimitManager extends React.Component {
                     {value: '4', name: '全部'},
                 ],
                 key: 'limitProperty',
+                type: 'select'
             }, {
                 labelName: '限额主体',
                 optionVal: [
@@ -48,6 +49,7 @@ export default class LimitManager extends React.Component {
                     {value: '7', name: '全部'},
                 ],
                 key: 'limitBody',
+                type: 'select'
             }, {
                 labelName: '商户类型',
                 optionVal: [
@@ -56,7 +58,16 @@ export default class LimitManager extends React.Component {
                     {value: '3', name: '互联网商户'},
                     {value: '4', name: '全部'},
                 ],
+                type: 'select',
                 key: 'tradeType',
+            }, {
+                labelName: '商户编号',
+                type: 'input',
+                key: 'limitName',
+                rules: [{required: true, message: 'Please input your E-mail!'}, {max: 3, message: '超长'}],
+                // body: {style:{marginTop: 100}}
+                // body: {addonBefore: "金额", addonAfter: "元",},
+                body :{style:{width:120}}
             },
 
         ],
@@ -193,42 +204,10 @@ export default class LimitManager extends React.Component {
 
 
     }
-
-    menu = record => (
-        <Menu>
-            <Menu.Item key='1'>
-
-                <Link to={`/limitManager/+update/${record.id}`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
-
-            </Menu.Item>
-            <Menu.Item>
-                <Link to={`/operationrecord/${record.id}`}>操作记录 </Link>
-            </Menu.Item>
-        </Menu>
-    );
-
-
     timer = null
-
-    handleAddOk = () => {
-        this.setState({loading: true});
-        this.timer = setTimeout(() => {
-            this.setState({loading: false, visible: false});
-        }, 3000);
-
-        //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
-        this.props.history.push('/limitManager/add')
-    }
-
     componentWillUnmount() {
         clearTimeout(this.timer)
     }
-
-    handleAddCancel = () => {
-        this.setState({visible: false});
-    }
-
-
     handleRemoveCancel = () => {
         this.setState({removeVisible: false})
     }
@@ -246,17 +225,8 @@ export default class LimitManager extends React.Component {
     delete(id) {
 
     }
-
-    edit(id) {
-        this.props.history.push(`/merchantlimit/+update/${id}`)
-    }
-
-    showRecord(id) {
-        this.props.history.push(`/merchantlimit/+operationrecoerd/${id}`)
-    }
-
     render() {
-        const {options, visible, loading, removeVisible} = this.state;
+        const {loading, removeVisible} = this.state;
         const {
             selectsData = this.mockData.selectsData,
             columns = this.mockData.columns,
@@ -268,32 +238,12 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        {
-                            selectsData.map((v, k) => {
-                                return <FormItem key={k} style={{paddingLeft:4}}>
-                                    {
-                                        getFieldDecorator(v.key, {
-                                            rule: [],
-                                        })(
-                                            <SelectComs labelName={v.labelName} placeholder="请选择"
-                                                        className="selects-style">
-                                                {
-                                                    v.optionVal.map((i, j) => {
-                                                        return <Option key={j} value={i.value}>{i.name}</Option>
-                                                    })
-                                                }
-                                            </SelectComs>
-                                        )
-                                    }
-                                </FormItem>
-
-                            })
-                        }
-                        <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
+                        <MapSelectComs style={{}} ref="selectsData" data={selectsData}/>
+                        {/*<InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>*/}
                     </div>
                     <div className="selBtn">
-                        <Button className="btn" htmlType='submit' icon="search" type='primary' style={{marginLeft:1102}}
-                                onClick={this.handleSearch()}>查询</Button>
+                        <Button className="btn" type='primary' icon="search"
+                                onClick={() => this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
                 <Card noHovering={true} title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
@@ -302,33 +252,6 @@ export default class LimitManager extends React.Component {
                     dataSource={dataSource}
                     className="btl"
                     /></Card>
-
-                <Modal
-                    visible={visible}
-                    title="添加限额"
-                    onOk={this.handleAddOk}
-                    onCancel={this.handleAddCancel}
-                    footer={[
-                        <Button key="back" size="large" onClick={this.handleAddCancel}>取消</Button>,
-                        <Button key="submit" type="primary" size="large" loading={loading} onClick={this.handleAddOk}>
-                            下一步
-                        </Button>,
-                    ]}
-                >
-                    {
-                        modalSelects.map((v, k) => {
-                            return (<SelectComs key={k} labelName={v.labelName} defaultValue="请选择" style={{width: 120}}>
-                                    {
-                                        v.optionVal.map((i, j) => {
-                                            return <Option key={j} value={i.value}>{i.name}</Option>
-                                        })
-                                    }
-                                </SelectComs>
-                            )
-                        })
-                    }
-
-                </Modal>
                 <Modal
                     visible={removeVisible}
                     title="删除限额"
