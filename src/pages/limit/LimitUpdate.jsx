@@ -298,8 +298,10 @@ export default class LimitUpdate extends React.Component {
         };
         return (
             <div>
+                <div className={"title-style"}><b>836商户限额:</b></div>
+
                 <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
-                    <h1>836商户限额</h1>
+
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
