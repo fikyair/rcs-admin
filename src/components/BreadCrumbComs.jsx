@@ -11,7 +11,7 @@ const breadcrumbNameMap = {
 
 
   '/merchantlimit': '个性限额管理',
-  '/merchantlimit/add': '个性限额设置',
+  '/merchantlimit/+add/:params': '个性限额设置',
   '/merchantlimit/+update/:params': '修改个性限额',
   '/merchantlimit/+operationrecoerd/:params': '个性限额操作记录',
   '/merchantlimit/+details/:params': '个性限额详情',
