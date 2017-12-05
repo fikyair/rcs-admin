@@ -301,7 +301,6 @@ export default class LimitDetails extends React.Component {
         return (
             <div>
                 <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
-
                 <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
 
                     <Card title="选择商户属性" noHovering={true}
@@ -358,15 +357,8 @@ export default class LimitDetails extends React.Component {
                         </Row>
 
                     </Card>
-                    <div>
-                        <div style={{textAlign: 'center'}}>
-                            <Button style={{margin: '10px'}}
-                                    onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                            <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                        <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}><Button type={"primary"}>关闭</Button>
                         </div>
-
-
-                    </div>
                 </Form>
             </div>
         )
