@@ -123,7 +123,7 @@ export default class LimitManager extends React.Component {
                 title: '限额名称',
                 dataIndex: 'name',
                 key: 'name',
-                render: (text, record) => <Link to={`/limitdetails/${record.id}`}>{text}</Link>
+                render: (text, record) => <Link to={`/limitManager/+details/${record.id}`}>{text}</Link>
 
             }, {
                 title: '单笔(金额)',
