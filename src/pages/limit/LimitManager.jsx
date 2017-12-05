@@ -166,7 +166,7 @@ export default class LimitManager extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-            <Link to='/limitManager/+update/${record.id}'>修改</Link>
+            <Link to={`/limitManager/+update/${record.id}`}>修改</Link>
               <span className="ant-divider"/>
             <Link to={`/merchantlimit/+add/${record.id}`}>个性设置</Link>
                         <span className="ant-divider"/>
