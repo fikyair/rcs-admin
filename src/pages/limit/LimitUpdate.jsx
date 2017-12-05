@@ -298,7 +298,7 @@ export default class LimitUpdate extends React.Component {
         };
         return (
             <div>
-                <div className={"title-style"}><b>836商户限额:</b></div>
+                <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
 
                 <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
 

@@ -126,13 +126,8 @@ export default class LimitDetails extends React.Component {
         };
         return (
             <div>
-                <div style={{textAlign:'center',marginBottom: 10, marginTop: 10, fontSize: 16}}> {
-                    <b>商户限额详情</b>
-                } </div>
-                <div style={{marginBottom: 10, marginTop: 10, fontSize: 16}}>
-                     <b>商户编号：</b>
-                 </div>
-                <Form>
+                <div  className={"title-style"}> <b>商户编号：</b></div>
+                <Form className="container-body" layout="inline">
                     <Card noHovering={true} title="商户属性：" bordered={true}>
                         <Row style={{marginTop: 10}}>
                             {
@@ -152,9 +147,7 @@ export default class LimitDetails extends React.Component {
                             }
                         </Row>
                     </Card>
-                </Form>
-                <Form>
-                    <Card title="交易属性" bordered={true}>
+                    <Card style={{marginTop: 6}} noHovering={true} title="交易属性" bordered={true}>
                         <Row style={{marginTop: 10}}>
                             <Col {...tailItemLayout}
                             >
@@ -208,9 +201,7 @@ export default class LimitDetails extends React.Component {
                             </Col>
                         </Row>
                     </Card>
-                </Form>
-                <Form>
-                    <Card title={"修改限额值"} bordered={true}>
+                    <Card style={{marginTop: 6}} noHovering={true} title={"修改限额值"} bordered={true}>
                         <Row style={{marginTop: 10}}>
                             {
                                 this.initData.modifyLimitData.map((v, k) => {

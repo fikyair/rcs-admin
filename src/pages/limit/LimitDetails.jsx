@@ -1,9 +1,14 @@
 import React from 'react';
-import {Input, Button, Form, Row, Col, Card} from 'antd'
-import {Containerization, InitComs, setTitle} from '../../common/PublicComponent';
-import InputComs from "../../components/InputComs";
+import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
+import SelectComs, {Option} from '../../components/SelectComs';
+import {setTitle, Containerization} from '../../common/PublicComponent';
 
 const InputGroup = Input.Group;
+import InputComs from "../../components/InputComs";
+import MapSelectComs from '../../components/MapSelectComs'
+
+
+const FormItem = Form.Item;
 
 @setTitle('限额详情页')
 @Containerization()
@@ -14,92 +19,255 @@ export default class LimitDetails extends React.Component {
         isMerchant: false,
     }
 
-    initData = {
-        merchantAttrData: [{
-            labelName: '结算账户类型',
-            labelValue: 'accountType',
-        }, {
-            labelName: '名单类型',
-            labelValue: 'listType'
-        }, {
-            labelName: '是否优质商户',
-            labelValue: 'isExcellentClient',
-        }, {
-            labelName: '行业大类',
-            labelValue: 'industryCategory'
-        }, {
-            labelName: '细类',
-            labelValue: 'detailCategory',
-        }, {
-            labelName: 'MCC',
-            labelValue: 'mcc',
-        }, {
-            labelName: '是否小额双免',
-            labelValue: 'isSmallExemption',
-        }, {
-            labelName: '是否有终端',
-            labelValue: 'hasTerminal',
-        }, {
-            labelName: 'POS商户类型',
-            labelValue: 'posClientType',
-        }, {
-            labelName: 'POS秒到等级',
-            labelValue: 'posSecondRank',
-        }, {
-            labelName: 'POS结算周期',
-            labelValue: 'posbalanceTime',
-        }],
-        transactionAttrData: [{
-            labelName: '卡属性',
-            labelValue: 'carType',
-        }, {
-            labelName: '卡介质',
-            labelValue: 'media'
-        }, {
-            labelName: '消费方式',
-            labelValue: 'consumeType'
-        }, {
-            labelName: '接触方式',
-            labelValue: 'contactType'
-        }],
-        scanData: [{
-            labelName: '扫码类型',
-            labelValue: 'scanType'
-        }],
-        modifyLimitData: [{
-            labelName: '单笔',
-            labelValue: 'sigle',
-            addonBefore: "金额",
-            addonAfter: "元"
+
+    mockData = {
+        merchentSelects: [
+            {
+                labelName: '结算账户类型',
+                optionVal: [
+                    {value: '1', name: '对公'},
+                    {value: '2', name: '对私-法人'},
+                    {value: '3', name: '对私'},
+                ],
+                key: 'accountType',
+                type: 'select',
+                body: {'disabled': true},
+                initialValue: '1'
+            }, {
+                labelName: '名单类型',
+                optionVal: [
+                    {value: '1', name: '白名单类型'},
+                    {value: '2', name: '非白名单类型'},
+                ],
+                key: 'listType',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: '是否优质商户',
+                optionVal: [
+                    {value: '1', name: '是'},
+                    {value: '2', name: '否'},
+                ],
+                key: 'isPerfect',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: '行业大类',
+                optionVal: [
+                    {value: '1', name: '是'},
+                    {value: '2', name: '否'},
+                ],
+                key: 'category',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: '细类',
+                optionVal: [
+                    {value: '1', name: '是'},
+                    {value: '2', name: '否'},
+                ],
+                key: 'xcategory',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: 'MCC',
+                optionVal: [
+                    {value: '1', name: '是'},
+                    {value: '2', name: '否'},
+                ],
+                key: 'mcc',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: '是否小额双免',
+                optionVal: [
+                    {value: '1', name: '是'},
+                    {value: '2', name: '否'},
+                ],
+                key: 'doublefree',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: '是否有终端',
+                optionVal: [
+                    {value: '1', name: '是'},
+                    {value: '2', name: '否'},
+                ],
+                key: 'isTermial',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: 'POS商户类型',
+                optionVal: [
+                    {value: '1', name: '小微一'},
+                    {value: '2', name: '小微二'},
+                ],
+                key: 'postType',
+                type: 'select',
+                body: {'disabled': true},
+            }, {
+                labelName: 'POS秒到等级',
+                optionVal: [
+                    {value: '1', name: '1'},
+                    {value: '2', name: '2'},
+                ],
+                key: 'postLevel',
+                type: 'select',
+                body: {'disabled': true},
+            }
+        ],
+        tradeSelects: {
+            offline: [
+                {
+                    labelName: '卡属性',
+                    optionVal: [
+                        {value: '1', name: '贷记卡'},
+                        {value: '2', name: '借记卡'},
+                        {value: '3', name: '准贷记卡'},
+                    ],
+                    key: 'cardProperty',
+                    type: 'select',
+                    body: {'disabled': true},
+                }, {
+                    labelName: '卡介质',
+                    optionVal: [
+                        {value: '1', name: 'IC卡'},
+                        {value: '2', name: '非IC卡'},
+                    ],
+                    key: 'cardLand',
+                    type: 'select',
+                    body: {'disabled': true},
+                }, {
+                    labelName: '消费方式',
+                    optionVal: [
+                        {value: '1', name: '预授权'},
+                        {value: '2', name: '预授权完成'},
+                        {value: '3', name: '消费'},
+                    ],
+                    key: 'salesMethod',
+                    type: 'select',
+                    body: {'disabled': true},
+                }, {
+                    labelName: '接触方式',
+                    optionVal: [
+                        {value: '1', name: '挥卡'},
+                        {value: '2', name: '云闪付'},
+                    ],
+                    key: 'touchMethod',
+                    type: 'select',
+                    body: {'disabled': true},
+                },
+            ],
+            online: [
+                {
+                    labelName: '扫码终端',
+                    optionVal: [
+                        {value: '1', name: '台卡'},
+                        {value: '2', name: 'APP'},
+                    ],
+                    key: 'qrTerminal',
+                    type: 'select',
+                    body: {'disabled': true},
+                }, {
+                    labelName: '扫码支付渠道',
+                    optionVal: [
+                        {value: '1', name: '支付宝'},
+                        {value: '2', name: '微信'},
+                        {value: '3', name: '百度'},
+                        {value: '4', name: '银联二维码'},
+                        {value: '5', name: 'QQ'},
+                        {value: '6', name: '京东'},
+                        {value: '7', name: '其他'},
+                    ],
+                    key: 'qrChannel',
+                    type: 'select',
+                    body: {'disabled': true},
+                }, {
+                    labelName: '扫码类型',
+                    optionVal: [
+                        {value: '1', name: '二维码-主扫'},
+                        {value: '2', name: '二维码-被扫'},
+                    ],
+                    key: 'qrType',
+                    type: 'select',
+                    body: {'disabled': true},
+                },
+            ],
         },
+        inputLimit: [
             {
                 labelName: '单日',
+                key: 'singleDay',
                 labelValue: 'sigle',
                 addonBefore: "金额",
-                addonAfter: "元"
+                addonAfter: "元",
+                type: 'input',
+                body: {
+                    style: {width: 120},
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                    disabled: true,
+                },
+
             }, {
                 labelName: '单月',
+                key: 'singleMonth',
                 labelValue: 'sigle',
-                addonBefore: "金额",
-                addonAfter: "元"
-            },
-            {
+
+                type: 'input',
+                body: {
+                    style: {width: 120},
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                    disabled: true,
+                },
+
+            }, {
+                labelName: '年',
+                key: 'singleYear',
+                labelValue: 'sigle',
+                body: {
+                    style: {width: 120},
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                    disabled: true,
+                },
+                type: 'input',
+            }, {
                 labelName: '终身',
+                key: 'lifetime',
                 labelValue: 'sigle',
-                addonBefore: "金额",
-                addonAfter: "元"
+                body: {
+                    style: {width: 120},
+                    disabled: true,
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                },
+                type: 'input',
             }, {
                 labelName: '两笔间隔',
+                key: 'interval',
                 labelValue: 'sigle',
-                addonAfter: "元"
-            },
-            {
-                labelName: '笔／日',
-                labelValue: 'sigle',
-                addonAfter: "元"
-            }
+                body: {
+                    disabled: true,
+                    addonAfter: "元",
+                    style: {width: 120},
 
+                },
+                type: 'input',
+            }, {
+                labelName: '笔/日',
+                key: 'oneTime',
+                labelValue: 'sigle',
+                type: 'input',
+                body: {
+                    style: {width: 120},
+                    disabled: true,
+                },
+
+            }
         ]
+
     }
 
     componentWillMount() {
@@ -108,165 +276,99 @@ export default class LimitDetails extends React.Component {
         }
     }
 
+    handleSubmit = () => {
+        const {getFieldsValue} = this.props.form;
+        const val = getFieldsValue();
+        // TODO 提交表单
+        debugger;
+    }
+
     render() {
+        const {
+            merchentSelects = this.mockData.merchentSelects,
+            online = this.mockData.tradeSelects.online,
+            offline = this.mockData.tradeSelects.offline,
+            inputLimit = this.mockData.inputLimit,
+            match
+        } = this.props;
+        const {type, id} = match.params
         const {getFieldDecorator} = this.props.form;
-        const {isMerchant} = this.state;
-        const formItemLayout = {
-            labelCol: {
-                xs: {span: 24},
-                sm: {span: 7},
-            },
-            wrapperCol: {
-                xs: {span: 24},
-                sm: {span: 12},
-            },
-        };
         const queryItemLayout = {
-            xs: 12, //手机
-            sm: 7,   //平板
-            md: 5,   //pc
-        };
-        const tailItemLayout = {
-            xs: 24,
-            sm: 24,    //平板的时候占一行，因为一行有24格
-            md: 1       //在PC上的时候分一格  ，剩下的23格input组件来分
+            xs: 12,
+            sm: 7,
+            md: 5,
         };
         return (
             <div>
-                <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10, fontSize: 16}}> {
-                    isMerchant ? <b>商户编号：</b> : <b>限额名称：POS商户对私结算限额</b>
-                } </div>
-                <Form>
-                    <Card title="商户属性：" bordered={true} noHovering={true}>
-                        <Row style={{marginTop: 10}}>
-                            {
-                                this.initData.merchantAttrData.map((v, k) => {
-                                    return (
-                                        <Col  {...queryItemLayout}
-                                              key={k}>
-                                            {
-                                                getFieldDecorator(v.labelValue)(
-                                                    <InputComs disabled={true} labelName={v.labelName}
-                                                               style={{width: 120}}/>
-                                                )
-                                            }
-                                        </Col>
-                                    )
-                                })
-                            }
-                        </Row>
+                <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
+
+                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
+
+                    <Card title="选择商户属性" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
+                        <MapSelectComs data={merchentSelects}/>
                     </Card>
-                </Form>
-                <Form>
-                    <Card noHovering={true} title="交易属性" bordered={true}>
-                        <Row style={{marginTop: 10}}>
-                            <Col {...tailItemLayout}
-                            >
-                                <span style={{marginTop: 16, display: 'inline-block'}}> 线下交易:</span>
-                            </Col>
-                            <Col>
-                                {
-                                    this.initData.transactionAttrData.map((v, k) => {
+                    <Card title="选择交易属性" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
+                        <div>
+                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>线下交易</b></div></FormItem>
+                            <MapSelectComs data={offline}/>
+                        </div>
+                        <div>
+                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>扫码交易</b></div></FormItem>
+                            <MapSelectComs data={online}/>
+                        </div>
+                    </Card>
+                    <Card title="添加限额值" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
 
-                                        return (
-                                            <Col {...queryItemLayout}
-                                                 key={k}>
-                                                {
-                                                    getFieldDecorator(v.labelValue)(
-                                                        <InputComs disabled={true} labelName={v.labelName}
-                                                                   style={{width: 120}}/>
-                                                    )
-                                                }
-                                            </Col>
-
-                                        )
-                                    })
-                                }
-
-                            </Col>
-                        </Row>
                         <Row>
-                            <Col {...tailItemLayout}
-                            >
-                                <span style={{marginTop: 16, display: 'inline-block'}}> 扫码交易:</span>
-                            </Col>
-                            <Col>
-                                {
-                                    this.initData.scanData.map((v, k) => {
+                            <MapSelectComs data={inputLimit}>
+                                <FormItem>
+                                 <span style={{
+                                     marginRight: '10px',
+                                     minWidth: '80px',
+                                     display: 'inline-block',
+                                     marginTop: 10,
+                                     verticalAlign: 'top',
+                                 }}>每笔／分钟:</span>
+                                    <div style={{display: 'inline-block', margin: '10px'}}>
 
-                                        return (
-                                            <Col {...queryItemLayout}
-                                                 key={k}>
-                                                {
-                                                    getFieldDecorator(v.labelValue)(
-                                                        <InputComs disabled={true} labelName={v.labelName}
-                                                                   style={{width: 120}}/>
-                                                    )
-                                                }
-                                            </Col>
+                                        <InputGroup>
+                                            <Input  disabled={true} style={{width: 50, textAlign: 'center'}}
+                                            />
+                                            <Input style={{
+                                                width: 24,
+                                                borderLeft: 0,
+                                                pointerEvents: 'none',
+                                                backgroundColor: '#fff'
+                                            }} placeholder="/" disabled/>
+                                            <Input
+                                                disabled={true}  style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                            />
+                                        </InputGroup>
+                                    </div>
+                                </FormItem>
 
-                                        )
-                                    })
-                                }
+                            </MapSelectComs>
 
-                            </Col>
                         </Row>
-                    </Card>
-                </Form>
-                <Form>
-                    <Card noHovering={true} title={"修改限额值"} bordered={true}>
-                        <Row style={{marginTop: 10}}>
-                            {
-                                this.initData.modifyLimitData.map((v, k) => {
 
-                                        return (
-                                            <Col {...queryItemLayout}
-                                                 key={k}>
-                                                {
-                                                    getFieldDecorator(v.labelValue)(
-                                                        <InputComs disabled={true} labelName={v.labelName}
-                                                                   style={{width: 120}}
-                                                                   addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
-                                                    )
-                                                }
-                                            </Col>
-                                        )
-                                    }
-                                )
-                            }
-                            <Col {...queryItemLayout}>
-                                <Row style={{marginTop: '10px'}}>
-                                    <Col span={9}>
-                                        <span style={{marginTop: '5px',marginLeft: '8px', display: 'inline-block'}}>每笔／分钟:</span>
-                                    </Col>
-                                    <Col span={15}>
-                                        {
-                                            getFieldDecorator('limitType')(
-                                                <InputGroup>
-                                                    <Input disabled={true} style={{width: 50, textAlign: 'center'}}
-                                                    />
-                                                    <Input style={{
-                                                        width: 24,
-                                                        borderLeft: 0,
-                                                        pointerEvents: 'none',
-                                                        backgroundColor: '#fff'
-                                                    }} placeholder="/" disabled/>
-                                                    <Input disabled={true}
-                                                           style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                                    />
-                                                </InputGroup>
-                                            )
-                                        }
-                                    </Col>
-                                </Row>
-                            </Col>
-                        </Row>
                     </Card>
+                    <div>
+                        <div style={{textAlign: 'center'}}>
+                            <Button style={{margin: '10px'}}
+                                    onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                            <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                        </div>
+
+
+                    </div>
                 </Form>
-                <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}><Button type={"primary"}>关闭</Button>
-                </div>
             </div>
         )
     }
 }
-
