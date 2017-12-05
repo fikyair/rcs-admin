@@ -292,14 +292,16 @@ export default class LimitManager extends React.Component {
                         <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
                     </div>
                     <div className="selBtn">
-                        <Button className="btn" htmlType='submit' icon="search" type='primary'
+                        <Button className="btn" htmlType='submit' icon="search" type='primary' style={{marginLeft:1102}}
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
                 <Card title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
                     <Table
                     columns={columns}
-                    dataSource={dataSource}/></Card>
+                    dataSource={dataSource}
+                    className="btl"
+                    /></Card>
 
                 <Modal
                     visible={visible}

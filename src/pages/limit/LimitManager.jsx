@@ -325,7 +325,7 @@ export default class LimitManager extends React.Component {
                                                                                               columns={columns}
                                                                                               dataSource={dataSource}
                                                                                               pagination={false}/>
-                    <div style={{margin: 15, textAlign: 'right'}}>
+                    <div style={{margin: 29, textAlign: 'right'}}>
                         <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
                                     onChange={this.changePage}/>
                     </div>
