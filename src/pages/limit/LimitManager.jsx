@@ -4,7 +4,7 @@ import SelectComs, {Option} from '../../components/SelectComs';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown } from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
-
+import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 @setTitle('首页')
 @Containerization()
@@ -27,6 +27,7 @@ export default class LimitManager extends React.Component {
                     {value: '3', name: '全部'},
                 ],
                 key: 'limitType',
+                type: 'select'
             },
             {
                 labelName: '限额属性',
@@ -37,6 +38,7 @@ export default class LimitManager extends React.Component {
                     {value: '4', name: '全部'},
                 ],
                 key: 'limitProperty',
+                type: 'select'
             }, {
                 labelName: '限额主体',
                 optionVal: [
@@ -49,6 +51,7 @@ export default class LimitManager extends React.Component {
                     {value: '7', name: '全部'},
                 ],
                 key: 'limitBody',
+                type: 'select'
             }, {
                 labelName: '商户类型',
                 optionVal: [
@@ -57,7 +60,13 @@ export default class LimitManager extends React.Component {
                     {value: '3', name: '互联网商户'},
                     {value: '4', name: '全部'},
                 ],
+                type: 'select',
                 key: 'tradeType',
+            }, {
+                labelName: '限额名称',
+                type: 'input',
+                key: 'limitName',
+                rules: [{required: true, message: 'Please input your E-mail!',}]
             },
 
         ],
@@ -253,21 +262,15 @@ export default class LimitManager extends React.Component {
 
     handleSearch = () => {
         //TODO 搜索
+        debugger
+        this.refs.selectsData
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
     }
 
-    isShowMerchant = () => {
-        const {isMerchant} = this.state;
-        if (isMerchant) {
-            return (
-                <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
-            )
-        } else {
-            return (
-                <InputComs className='input-style' labelName="限额名称" placeholder="请选择"/>
-            )
-        }
-
-    }
 
     render() {
         const {options, visible, loading, removeVisible, isMerchant} = this.state;
@@ -282,32 +285,33 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        {
-                            selectsData.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {
-                                        getFieldDecorator(v.key, {
-                                            rule: [],
-                                        })(
-                                            <SelectComs labelName={v.labelName} placeholder="请选择"
-                                                        className="selects-style">
-                                                {
-                                                    v.optionVal.map((i, j) => {
-                                                        return <Option key={j} value={i.value}>{i.name}</Option>
-                                                    })
-                                                }
-                                            </SelectComs>
-                                        )
-                                    }
-                                </FormItem>
+                        <MapSelectComs ref="selectsData" data={selectsData}/>
+                        {/*{*/}
+                            {/*selectsData.map((v, k) => {*/}
+                                {/*return <FormItem key={k}>*/}
+                                    {/*{*/}
+                                        {/*getFieldDecorator(v.key, {*/}
+                                            {/*rule: [],*/}
+                                        {/*})(*/}
+                                            {/*<SelectComs labelName={v.labelName} placeholder="请选择"*/}
+                                                        {/*className="selects-style">*/}
+                                                {/*{*/}
+                                                    {/*v.optionVal.map((i, j) => {*/}
+                                                        {/*return <Option key={j} value={i.value}>{i.name}</Option>*/}
+                                                    {/*})*/}
+                                                {/*}*/}
+                                            {/*</SelectComs>*/}
+                                        {/*)*/}
+                                    {/*}*/}
+                                {/*</FormItem>*/}
 
-                            })
-                        }
-                        {this.isShowMerchant()}
+                            {/*})*/}
+                        {/*}*/}
+                        {/*{this.isShowMerchant()}*/}
                     </div>
                     <div className="selBtn">
                         <Button className="btn" htmlType='submit' type='primary' icon="search"
-                                onClick={this.handleSearch()}>查询</Button>
+                                onClick={()=>this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
                 <Button className="addBtn" onClick={this.showAddModal} type="primary" ghost>添加限额</Button>

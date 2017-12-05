@@ -3,6 +3,8 @@ import {Containerization} from '../common/PublicComponent';
 import SelectComs, {Option} from './SelectComs';
 import {Form,} from 'antd';
 import InputComs from './InputComs'
+import '../style/style.less'
+
 
 const FormItem = Form.Item;
 @Containerization()
