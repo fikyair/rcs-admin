@@ -4,11 +4,15 @@ import SelectComs, {Option} from '../../components/SelectComs';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination} from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
-import MapSelectComs from '../../components/MapSelectComs'
+import MapSelectComs from '../../components/MapSelectComs';
+import { getModels, getBussinessType, getMainPart} from '../../actions/limitActions'
 
 const FormItem = Form.Item;
 @setTitle('首页')
-@Containerization()
+@Containerization(state=>({
+  modelsData:state.LimitReducer.modelsData,
+  bussinessType:state.LimitReducer.bussinessType,
+}))
 @Form.create()
 export default class LimitManager extends React.Component {
     state = {
@@ -221,8 +225,8 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
-
-
+      this.props.dispatch(getModels());
+      this.props.dispatch(getMainPart());
     }
 
     menu = record => (
@@ -317,7 +321,7 @@ export default class LimitManager extends React.Component {
                 </Form>
                 <Button className="addBtn" onClick={this.showAddModal} type="primary" ghost>添加限额</Button>
 
-                <Card noHovering={true} className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table className="btl"
+                <Card className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table className="btl"
                                                                                               columns={columns}
                                                                                               dataSource={dataSource}
                                                                                               pagination={false}/>

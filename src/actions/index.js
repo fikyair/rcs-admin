@@ -6,9 +6,12 @@ import {
   API_GET_CARD
 } from '../utils/ActionsType';
 
-import  { FetchAPI as FetchPromise } from '../utils/fetch-middleware';
+import  * as LimitActions from './limitActions';
 
 
+export default {
+  ...LimitActions
+}
 /*
 * 同步本地cookie 信息
 * */
@@ -55,5 +58,4 @@ export function getCardBin() {
   }
 
 }
-
 

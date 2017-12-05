@@ -98,8 +98,10 @@ export default {
     devServer: {
         proxy: {
             '/api':{
-                target: 'http://172.16.42.107:8001',
-                pathRewrite: {"^/api" : ""}
+                target: 'https://rcs-admin-dev.suixingpay.com',
+                pathRewrite: {"^/api" : "/api"},
+                secure:false,
+                changeOrigin: true
             },
             '/nfs_data':{
                 target: 'http://172.16.136.71',
@@ -108,6 +110,7 @@ export default {
         contentBase: [path.join(__dirname, 'public')],//t
         historyApiFallback: true,
         disableHostCheck: true,
+        https:true,
     },
     plugins: [
         new webpack.BannerPlugin('This file is created by Jerry'),
