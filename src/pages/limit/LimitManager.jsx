@@ -1,9 +1,10 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import SelectComs, {Option} from '../../components/SelectComs';
-import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown } from 'antd';
+import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination} from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
+import MapSelectComs from '../../components/MapSelectComs'
 
 const FormItem = Form.Item;
 @setTitle('首页')
@@ -11,6 +12,9 @@ const FormItem = Form.Item;
 @Form.create()
 export default class LimitManager extends React.Component {
     state = {
+        pageNum: 1,
+        pageSize: 3,
+        total: 10,
         options: null,
         loading: false,
         visible: false,
@@ -27,6 +31,7 @@ export default class LimitManager extends React.Component {
                     {value: '3', name: '全部'},
                 ],
                 key: 'limitType',
+                type: 'select'
             },
             {
                 labelName: '限额属性',
@@ -37,6 +42,7 @@ export default class LimitManager extends React.Component {
                     {value: '4', name: '全部'},
                 ],
                 key: 'limitProperty',
+                type: 'select'
             }, {
                 labelName: '限额主体',
                 optionVal: [
@@ -49,6 +55,7 @@ export default class LimitManager extends React.Component {
                     {value: '7', name: '全部'},
                 ],
                 key: 'limitBody',
+                type: 'select'
             }, {
                 labelName: '商户类型',
                 optionVal: [
@@ -57,7 +64,13 @@ export default class LimitManager extends React.Component {
                     {value: '3', name: '互联网商户'},
                     {value: '4', name: '全部'},
                 ],
+                type: 'select',
                 key: 'tradeType',
+            }, {
+                labelName: '限额名称',
+                type: 'input',
+                key: 'limitName',
+                rules: [{required: true, message: 'Please input your E-mail!'}, {max: 3, message: '超长'}]
             },
 
         ],
@@ -153,8 +166,8 @@ export default class LimitManager extends React.Component {
             <a onClick={() => this.disableLimitRule(record.id)}>删&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;除</a>
               <span className="ant-divider"/>
              <Dropdown overlay={this.menu(record)}>
-                <a >
-                    更多操作<Icon type="down" />
+                <a>
+                    更多操作<Icon type="down"/>
                 </a>
              </Dropdown>
             </span>
@@ -166,7 +179,9 @@ export default class LimitManager extends React.Component {
                 optionVal: [
                     {value: '1', name: '交易限额'},
                     {value: '2', name: '结算限额'},
-                ]
+                ],
+                key: 'limitType',
+                type: 'select',
             },
             {
                 labelName: '选择限额属性',
@@ -174,29 +189,39 @@ export default class LimitManager extends React.Component {
                     {value: '1', name: 'B端'},
                     {value: '2', name: 'C端'},
                     {value: '3', name: 'B-C端'},
-                ]
+                ],
+                key: 'limitProperty',
+                type: 'select',
+
             }, {
                 labelName: '选择商户主体',
                 optionVal: [
                     {value: '1', name: '商户'},
                     {value: '2', name: '结算人证件号'},
-                ]
+                ],
+                key: 'limitBody',
+                type: 'select',
+
             }, {
                 labelName: '选择商户类型',
                 optionVal: [
                     {value: '1', name: 'POS商户'},
                     {value: '2', name: 'MPOS商户'},
                     {value: '3', name: '互联网商户'},
-                ]
+                ],
+                key: 'tradeType',
+                type: 'select',
+
             },
         ]
     }
+
     componentWillMount() {
 
 
     }
 
-    menu = record=>(
+    menu = record => (
         <Menu>
             <Menu.Item key='1'>
                 <Link to={`/limitManager/+update/${record.id}`}>修&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;改</Link>
@@ -204,9 +229,9 @@ export default class LimitManager extends React.Component {
             <Menu.Item>
                 <Link to={`/limitManager/+operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
-           <Menu.Item>
-               <Link to={`/merchantlimit/+add/${record.id}`}>个性设置</Link>
-           </Menu.Item>
+            <Menu.Item>
+                <Link to={`/merchantlimit/+add/${record.id}`}>个性设置</Link>
+            </Menu.Item>
 
         </Menu>
     );
@@ -251,22 +276,27 @@ export default class LimitManager extends React.Component {
         //TODO 删除限额规则
     }
 
-    handleSearch = () => {
+    handleSearch = (args) => {
         //TODO 搜索
+        // this.refs.selectsData.validateFields((err, values) => {
+        //     if (!err) {
+        //         console.log('Received values of form: ', values);
+        //     }
+        // });
+
+        let getFieldsValue = this.refs.selectsData.getFieldsValue()
+        const {pageNum, pageSize} = this.state
+        let params = {
+            ...getFieldsValue,
+            pageNum,
+            pageSize,
+            ...args,
+        };
+        //调用接口
     }
 
-    isShowMerchant = () => {
-        const {isMerchant} = this.state;
-        if (isMerchant) {
-            return (
-                <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
-            )
-        } else {
-            return (
-                <InputComs className='input-style' labelName="限额名称" placeholder="请选择"/>
-            )
-        }
-
+    changePage = (page) =>{
+        this.handleSearch({pageNum: page})
     }
 
     render() {
@@ -281,38 +311,25 @@ export default class LimitManager extends React.Component {
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
-                    <div>
-                        {
-                            selectsData.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {
-                                        getFieldDecorator(v.key, {
-                                            rule: [],
-                                        })(
-                                            <SelectComs labelName={v.labelName} placeholder="请选择"
-                                                        className="selects-style">
-                                                {
-                                                    v.optionVal.map((i, j) => {
-                                                        return <Option key={j} value={i.value}>{i.name}</Option>
-                                                    })
-                                                }
-                                            </SelectComs>
-                                        )
-                                    }
-                                </FormItem>
-
-                            })
-                        }
+                    <div className="select">
+                        <MapSelectComs ref="selectsData" data={selectsData}/>
                     </div>
-                    <div>
-                        {this.isShowMerchant()}
-                        <Button htmlType='submit' icon="search" style={{margin: '10px', width: '100px'}}
-                                onClick={this.handleSearch()}>查询</Button>
+                    <div className="selBtn">
+                        <Button className="btn" type='primary' icon="search"
+                                onClick={() => this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
-                <Button style={{margin: '10px', width: '100px'}} onClick={this.showAddModal}>添加限额</Button>
-                <Card title="限额列表" bodyStyle={{padding: '0px',}}><Table columns={columns}
-                                                                        dataSource={dataSource}/></Card>
+                <Button className="addBtn" onClick={this.showAddModal} type="primary" ghost>添加限额</Button>
+
+                <Card className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table columns={columns}
+                                                                                              dataSource={dataSource}
+                                                                                              pagination={false}/>
+                    <div style={{margin: 15, textAlign: 'right'}}>
+                        <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
+                                    onChange={this.changePage}/>
+                    </div>
+
+                </Card>
 
                 <Modal
                     visible={visible}
@@ -326,18 +343,19 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    {
-                        modalSelects.map((v, k) => {
-                            return (<SelectComs key={k} labelName={v.labelName} defaultValue="请选择" style={{width: 120}}>
-                                    {
-                                        v.optionVal.map((i, j) => {
-                                            return <Option key={j} value={i.value}>{i.name}</Option>
-                                        })
-                                    }
-                                </SelectComs>
-                            )
-                        })
-                    }
+                    <MapSelectComs data={modalSelects} ref="modalSelects"/>
+                    {/*{*/}
+                    {/*modalSelects.map((v, k) => {*/}
+                    {/*return (<SelectComs key={k} labelName={v.labelName} defaultValue="请选择" style={{width: 120}}>*/}
+                    {/*{*/}
+                    {/*v.optionVal.map((i, j) => {*/}
+                    {/*return <Option key={j} value={i.value}>{i.name}</Option>*/}
+                    {/*})*/}
+                    {/*}*/}
+                    {/*</SelectComs>*/}
+                    {/*)*/}
+                    {/*})*/}
+                    {/*}*/}
 
                 </Modal>
                 <Modal

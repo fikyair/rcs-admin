@@ -319,7 +319,7 @@ export default class LimitUpdate extends React.Component {
                                         })(
                                             <InputComs disabled={true} labelName={v.labelName}
                                                        style={{width: 120}}
-                                                       addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
+                                                        addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
                                         )
                                         }
                                     </Col>

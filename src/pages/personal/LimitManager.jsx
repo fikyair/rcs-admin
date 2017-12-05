@@ -1,7 +1,7 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import SelectComs, {Option} from '../../components/SelectComs';
-import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown } from 'antd';
+import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown} from 'antd';
 import {Link} from 'react-router-dom';
 import InputComs from "../../components/InputComs";
 
@@ -152,12 +152,12 @@ export default class LimitManager extends React.Component {
             <a onClick={() => this.delete(record.id)}>删除&nbsp;&nbsp;</a>
             <a onClick={() => this.edit(record.id)}>修改&nbsp;&nbsp;</a>
              <a onClick={() => this.showRecord(record.id)}>操作记录&nbsp;&nbsp;</a>
-              {/*<span className="ant-divider"/>*/}
-             {/*<Dropdown overlay={this.menu(record)}>*/}
-                {/*<a >*/}
-                    {/*更多操作<Icon type="down" />*/}
-                {/*</a>*/}
-             {/*</Dropdown>*/}
+                        {/*<span className="ant-divider"/>*/}
+                        {/*<Dropdown overlay={this.menu(record)}>*/}
+                        {/*<a >*/}
+                        {/*更多操作<Icon type="down" />*/}
+                        {/*</a>*/}
+                        {/*</Dropdown>*/}
             </span>
                 ),
             }],
@@ -192,12 +192,13 @@ export default class LimitManager extends React.Component {
             },
         ]
     }
+
     componentWillMount() {
 
 
     }
 
-    menu = record=>(
+    menu = record => (
         <Menu>
             <Menu.Item key='1'>
 
@@ -249,13 +250,15 @@ export default class LimitManager extends React.Component {
     delete(id) {
 
     }
-    edit(id){
+
+    edit(id) {
         this.props.history.push(`/merchantlimit/+update/${id}`)
     }
 
-    showRecord(id){
+    showRecord(id) {
         this.props.history.push(`/merchantlimit/+operationrecoerd/${id}`)
     }
+
     render() {
         const {options, visible, loading, removeVisible} = this.state;
         const {
@@ -268,10 +271,10 @@ export default class LimitManager extends React.Component {
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
-                    <div>
+                    <div className="select">
                         {
                             selectsData.map((v, k) => {
-                                return <FormItem key={k}>
+                                return <FormItem key={k} style={{paddingLeft:4}}>
                                     {
                                         getFieldDecorator(v.key, {
                                             rule: [],
@@ -290,15 +293,17 @@ export default class LimitManager extends React.Component {
 
                             })
                         }
-                    </div>
-                    <div>
                         <InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>
-                        <Button htmlType='submit' icon="search" style={{margin: '10px', width: '100px'}}
+                    </div>
+                    <div className="selBtn">
+                        <Button className="btn" htmlType='submit' icon="search" type='primary'
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
-                <Card title="限额列表" bodyStyle={{padding: '0px',}}><Table columns={columns}
-                                                                        dataSource={dataSource}/></Card>
+                <Card title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
+                    <Table
+                    columns={columns}
+                    dataSource={dataSource}/></Card>
 
                 <Modal
                     visible={visible}
