@@ -296,7 +296,7 @@ export default class LimitManager extends React.Component {
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
-                <Card title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
+                <Card noHovering={true} title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
                     <Table
                     columns={columns}
                     dataSource={dataSource}

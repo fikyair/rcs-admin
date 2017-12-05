@@ -202,7 +202,7 @@ export default class LimitUpdate extends React.Component {
                     <b>商户编号：</b>
                 </div>
                 <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
-                    <Card title="选择商户属性">
+                    <Card noHovering={true} title="选择商户属性">
                         {
                             merchentSelects.map((v, k) => {
                                 return <FormItem key={k}>
@@ -224,7 +224,7 @@ export default class LimitUpdate extends React.Component {
                             })
                         }
                     </Card>
-                    <Card title="选择交易属性">
+                    <Card noHovering={true} title="选择交易属性">
                         <div>
                             <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
 
@@ -274,7 +274,7 @@ export default class LimitUpdate extends React.Component {
                             }
                         </div>
                     </Card>
-                    <Card title="添加限额值">
+                    <Card noHovering={true} title="添加限额值">
 
                         {
                             inputLimit.map((v, k) => {
@@ -320,7 +320,7 @@ export default class LimitUpdate extends React.Component {
                             </FormItem>
                         {/*</div>*/}
                     </Card>
-                    <Card>
+                    <Card noHovering={true}>
                         <Button style={{margin: '10px', verticalAlign: 'top'}}
                                 onClick={() => this.props.history.push('/limitManager')}>取消</Button>
                         <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>

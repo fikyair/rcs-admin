@@ -234,7 +234,7 @@ export default class LimitUpdate extends React.Component {
                 </div>
                 <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
 
-                    <Card title="选择商户属性"
+                    <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
                         {
@@ -258,7 +258,7 @@ export default class LimitUpdate extends React.Component {
                             })
                         }
                     </Card>
-                    <Card title="选择交易属性"
+                    <Card title="选择交易属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
                         <div>
@@ -312,6 +312,7 @@ export default class LimitUpdate extends React.Component {
                     </Card>
                     <Card title="添加限额值"
                           style={{marginBottom: 6}}
+                          noHovering={true}
                     >
 
                         <Row>

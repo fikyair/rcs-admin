@@ -137,7 +137,7 @@ export default class LimitDetails extends React.Component {
                     isMerchant ? <b>商户编号：</b> : <b>限额名称：POS商户对私结算限额</b>
                 } </div>
                 <Form>
-                    <Card title="商户属性：" bordered={true}>
+                    <Card title="商户属性：" bordered={true} noHovering={true}>
                         <Row style={{marginTop: 10}}>
                             {
                                 this.initData.merchantAttrData.map((v, k) => {
@@ -158,7 +158,7 @@ export default class LimitDetails extends React.Component {
                     </Card>
                 </Form>
                 <Form>
-                    <Card title="交易属性" bordered={true}>
+                    <Card noHovering={true} title="交易属性" bordered={true}>
                         <Row style={{marginTop: 10}}>
                             <Col {...tailItemLayout}
                             >
@@ -214,7 +214,7 @@ export default class LimitDetails extends React.Component {
                     </Card>
                 </Form>
                 <Form>
-                    <Card title={"修改限额值"} bordered={true}>
+                    <Card noHovering={true} title={"修改限额值"} bordered={true}>
                         <Row style={{marginTop: 10}}>
                             {
                                 this.initData.modifyLimitData.map((v, k) => {

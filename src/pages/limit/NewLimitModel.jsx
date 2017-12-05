@@ -237,7 +237,7 @@ export default class NewLimitModel extends React.Component {
         return (
             <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
 
-                <Card title="选择商户属性"
+                <Card title="选择商户属性" noHovering={true}
                       style={{marginBottom: 6}}>
                     {
                         merchentSelects.map((v, k) => {
@@ -261,6 +261,7 @@ export default class NewLimitModel extends React.Component {
                 </Card>
                 <Card title="选择交易属性"
                       style={{marginBottom: 6}}
+                      noHovering={true}
                 >
                     <div>
                         <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
@@ -306,7 +307,7 @@ export default class NewLimitModel extends React.Component {
                         }
                     </div>
                 </Card>
-                <Card title="添加限额值"
+                <Card title="添加限额值" noHovering={true}
                       style={{marginBottom: 6}}
                 >
                     <Row>
@@ -356,7 +357,7 @@ export default class NewLimitModel extends React.Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="添加限额名称">
+                <Card title="添加限额名称" noHovering={true}>
                     <Input placeholder="请输入"
                            addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
                            style={{width: '200px', margin: '10px'}}/>

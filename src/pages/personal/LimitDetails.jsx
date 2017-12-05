@@ -133,7 +133,7 @@ export default class LimitDetails extends React.Component {
                      <b>商户编号：</b>
                  </div>
                 <Form>
-                    <Card title="商户属性：" bordered={true}>
+                    <Card noHovering={true} title="商户属性：" bordered={true}>
                         <Row style={{marginTop: 10}}>
                             {
                                 this.initData.merchantAttrData.map((v, k) => {
