@@ -7,7 +7,6 @@ import '../style/style.less'
 
 
 const FormItem = Form.Item;
-@Containerization()
 @Form.create()
 export default class MapSelectComs extends React.Component {
 
@@ -22,7 +21,7 @@ export default class MapSelectComs extends React.Component {
                         return <FormItem key={k}>
                             {
                                 getFieldDecorator(v.key, {
-                                    rule: v.rules ? [...v.rules] : [],
+                                    rules: v.rules ? [...v.rules] : [],
                                 })(
                                     v.type === 'select' ?
                                         <SelectComs labelName={v.labelName} placeholder="请选择"
