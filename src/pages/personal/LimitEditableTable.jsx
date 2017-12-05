@@ -72,7 +72,7 @@ export default class EditableTable extends React.Component {
         const columns = this.columns;
         return (
             <div className="limitable">
-                <Card noHovering= {true} title={<div>商户&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
+                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
 
                 >
                     <Table className="btl" dataSource={datamock}  pagination={false} columns={columns} />
