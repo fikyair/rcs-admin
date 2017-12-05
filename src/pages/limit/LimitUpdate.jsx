@@ -234,7 +234,6 @@ export default class LimitUpdate extends React.Component {
                 labelName: '终身',
                 key: 'lifetime',
                 labelValue: 'sigle',
-
                 body: {
                     style: {width: 120},
 
@@ -252,7 +251,6 @@ export default class LimitUpdate extends React.Component {
                     style: {width: 120},
 
                 },
-
                 type: 'input',
             }, {
                 labelName: '笔/日',
@@ -326,36 +324,32 @@ export default class LimitUpdate extends React.Component {
                         <Row>
                             <MapSelectComs data={inputLimit} style={{marginRight: 180}}/>
 
-                            <Col {...queryItemLayout}>
-                                <Row style={{marginTop: '10px'}}>
-                                    <Col span={9}>
-                                    <span style={{
-                                        marginTop: '5px',
-                                        marginLeft: '8px',
-                                        display: 'inline-block'
-                                    }}>每笔／分钟:</span>
-                                    </Col>
-                                    <Col span={15}>
-                                        {
-                                            getFieldDecorator('limitType')(
-                                                <InputGroup>
-                                                    <Input style={{width: 50, textAlign: 'center'}}
-                                                    />
-                                                    <Input style={{
-                                                        width: 24,
-                                                        borderLeft: 0,
-                                                        pointerEvents: 'none',
-                                                        backgroundColor: '#fff'
-                                                    }} placeholder="/" disabled/>
-                                                    <Input
-                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                                    />
-                                                </InputGroup>
-                                            )
-                                        }
-                                    </Col>
-                                </Row>
-                            </Col>
+                            <FormItem>
+                                 <span style={{
+                                     marginRight: '10px',
+                                     minWidth: '80px',
+                                     display: 'inline-block',
+                                     marginTop: 10,
+                                     verticalAlign: 'top',
+                                 }}>每笔／分钟:</span>
+                                <div style={{display: 'inline-block', margin: '10px'}}>
+
+                                    <InputGroup>
+                                        <Input style={{width: 50, textAlign: 'center'}}
+                                        />
+                                        <Input style={{
+                                            width: 24,
+                                            borderLeft: 0,
+                                            pointerEvents: 'none',
+                                            backgroundColor: '#fff'
+                                        }} placeholder="/" disabled/>
+                                        <Input
+                                            style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                        />
+                                    </InputGroup>
+                                </div>
+                            </FormItem>
+
                         </Row>
 
                     </Card>
