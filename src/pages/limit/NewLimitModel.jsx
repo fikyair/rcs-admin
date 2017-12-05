@@ -333,7 +333,7 @@ export default class NewLimitModel extends React.Component {
                                     {
                                         getFieldDecorator('limitType')(
                                             <InputGroup>
-                                                <Input style={{width: 60, textAlign: 'center'}}
+                                                <Input style={{width: 50, textAlign: 'center'}}
                                                 />
                                                 <Input style={{
                                                     width: 24,
@@ -341,7 +341,7 @@ export default class NewLimitModel extends React.Component {
                                                     pointerEvents: 'none',
                                                     backgroundColor: '#fff'
                                                 }} placeholder="/" disabled/>
-                                                <Input style={{width: 60, textAlign: 'center', borderLeft: 0}}
+                                                <Input style={{width: 49, textAlign: 'center', borderLeft: 0}}
                                                 />
                                             </InputGroup>
                                         )

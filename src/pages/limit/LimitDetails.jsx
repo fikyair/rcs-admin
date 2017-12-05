@@ -243,7 +243,7 @@ export default class LimitDetails extends React.Component {
                                         {
                                             getFieldDecorator('limitType')(
                                                 <InputGroup>
-                                                    <Input disabled={true} style={{width: 60, textAlign: 'center'}}
+                                                    <Input disabled={true} style={{width: 50, textAlign: 'center'}}
                                                     />
                                                     <Input style={{
                                                         width: 24,
@@ -252,7 +252,7 @@ export default class LimitDetails extends React.Component {
                                                         backgroundColor: '#fff'
                                                     }} placeholder="/" disabled/>
                                                     <Input disabled={true}
-                                                           style={{width: 60, textAlign: 'center', borderLeft: 0}}
+                                                           style={{width: 49, textAlign: 'center', borderLeft: 0}}
                                                     />
                                                 </InputGroup>
                                             )
