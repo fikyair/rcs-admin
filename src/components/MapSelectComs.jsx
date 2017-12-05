@@ -24,8 +24,9 @@ export default class MapSelectComs extends React.Component {
             <div style={{display: 'inline-block'}}>
 
                 {
-                    data.map((v, k) => {
-                        return <FormItem key={k} {...this.props}>
+                  Object.keys(data).map((key, k) => {
+                    const v = data[key];
+                    return <FormItem key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
                                     initialValue: v.initialValue,

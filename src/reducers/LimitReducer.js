@@ -6,7 +6,7 @@ import {  API_GET_MODELS,
 const initialState ={
   modelsData:[],
   bussinessType:{},
-  selectsData:[],
+  selectsData:{},
   cardType:[],
   mainAccount:[],
   bodyProperty:[],
@@ -23,9 +23,9 @@ export default function (state = initialState,actions ) {
 
       return {
         ...state,
-        selectsData:[
+        selectsData:{
           ...state.selectsData,
-          {
+          limitType:{
             labelName: '限额类型',
             optionVal: [
               ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
@@ -36,33 +36,34 @@ export default function (state = initialState,actions ) {
             ],
             key: 'limitType',
             type: 'select'
-        }],
+        }},
         bussinessType:actions.data,
       }
     case API_GET_MAIN_ACCOUNT[1]:
        return {
       ...state,
-         selectsData:[
+         selectsData:{
            ...state.selectsData,
-           {
-             labelName: '限额主体',
-             optionVal: [
-               ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
-               {
-                 value:'all',
-                 name:'全部'
-               }
-             ],
-             key: 'limitBody',
-             type: 'select'
-           }],
+           limitBody:{
+            labelName: '限额主体',
+            optionVal: [
+              ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
+              {
+                value:'all',
+                name:'全部'
+              }
+            ],
+          key: 'limitBody',
+          type: 'select'
+          }
+         },
     }
     case API_GET_BODY_PROPERTY[1]:
       return {
         ...state,
-        selectsData:[
+        selectsData:{
           ...state.selectsData,
-          {
+          limitProperty:{
             labelName: '限额属性',
             optionVal: [
               ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
@@ -73,7 +74,7 @@ export default function (state = initialState,actions ) {
             ],
             key: 'limitProperty',
             type: 'select'
-          }],
+          }},
         bodyProperty:actions.data,
       }
 

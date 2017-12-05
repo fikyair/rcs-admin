@@ -89,8 +89,8 @@ export class InitComs extends React.Component{
   render(){
     const {requestStaus, errMsg } = this.props;
     //请求状态，网络请求错误提示
-    return  (<div>
-        {requestStaus? <Spin></Spin>:null}
+    return  (<div >
+        {requestStaus? <Spin size="large" className="gloabl-loading"></Spin>:null}
         {
             errMsg?
           <Alert message={errMsg} type="error" /> :null

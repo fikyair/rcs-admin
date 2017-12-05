@@ -298,6 +298,7 @@ export default class LimitManager extends React.Component {
             ...args,
         };
         //调用接口
+      this.props.dispatch(getModels({...params}))
     }
 
     changePage = (page) =>{
@@ -347,7 +348,8 @@ export default class LimitManager extends React.Component {
 
                 </Card>
 
-                <Modal
+              {
+                  visible?<Modal
                     visible={visible}
                     title="添加限额"
                     onOk={this.handleAddOk}
@@ -359,8 +361,10 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    <MapSelectComs data={modalSelects} ref="modalSelects"/>
+                    <MapSelectComs data={selectsData} ref="modalSelects"/>
                 </Modal>
+                :null
+              }
                 <Modal
                     visible={removeVisible}
                     title="删除限额"
