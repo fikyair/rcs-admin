@@ -1,17 +1,19 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
-import SelectComs, {Option} from '../../components/SelectComs';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
-import InputComs from "../../components/InputComs";
 import MapSelectComs from '../../components/MapSelectComs';
-import { getModels, getBussinessType, getMainPart} from '../../actions/limitActions'
+import { getModels, getBodyProperty, getBussinessType, getMainPart} from '../../actions/limitActions'
 
 const FormItem = Form.Item;
 @setTitle('首页')
 @Containerization(state=>({
-  modelsData:state.LimitReducer.modelsData,
+  selectsData:state.LimitReducer.selectsData,
   bussinessType:state.LimitReducer.bussinessType,
+  cardType:state.LimitReducer.cardType,
+  bodyProperty:state.LimitReducer.bodyProperty,
+  mainAccount:state.LimitReducer.mainAccount,
+
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -225,8 +227,11 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
-      this.props.dispatch(getModels());
-      this.props.dispatch(getMainPart());
+      this.props.dispatch(getBussinessType());
+      this.props.dispatch(getBodyProperty());
+      //this.props.dispatch(getMainAccount({mainPartTypeEnum:'B'}));
+
+
     }
 
     menu = record => (
@@ -302,7 +307,8 @@ export default class LimitManager extends React.Component {
     render() {
         const {options, visible, loading, removeVisible, isMerchant} = this.state;
         const {
-            selectsData = this.mockData.selectsData,
+            selectsData,
+            selectsData2,
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects

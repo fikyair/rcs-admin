@@ -4,10 +4,17 @@ import SelectComs, {Option} from './SelectComs';
 import {Form,} from 'antd';
 import InputComs from './InputComs'
 import '../style/style.less'
-
+import Storage from '../store';
+import {  getMainPart} from '../actions/limitActions'
 
 const FormItem = Form.Item;
-@Form.create()
+@Form.create({
+  onValuesChange:(props, values)=>{
+      if(values['limitProperty']){
+        Storage.dispatch(getMainPart({mainPartTypeEnum:values['limitProperty']}))
+      }
+  }
+})
 export default class MapSelectComs extends React.Component {
 
     render() {
