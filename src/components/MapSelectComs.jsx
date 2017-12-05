@@ -18,7 +18,7 @@ export default class MapSelectComs extends React.Component {
 
                 {
                     data.map((v, k) => {
-                        return <FormItem key={k}>
+                        return <FormItem key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
                                     rules: v.rules ? [...v.rules] : [],
@@ -33,7 +33,7 @@ export default class MapSelectComs extends React.Component {
                                             }
                                         </SelectComs>
                                         : v.type === 'input' ?
-                                        <InputComs className='input-style' labelName={v.labelName} placeholder="请选择"/>
+                                        <InputComs {...v.body} className='input-style' labelName={v.labelName} placeholder="请选择"/>
                                         : ''
                                 )
                             }

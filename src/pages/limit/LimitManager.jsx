@@ -70,7 +70,8 @@ export default class LimitManager extends React.Component {
                 labelName: '限额名称',
                 type: 'input',
                 key: 'limitName',
-                rules: [{required: true, message: 'Please input your E-mail!'}, {max: 3, message: '超长'}]
+                rules: [{required: true, message: 'Please input your E-mail!'}, {max: 3, message: '超长'}],
+                // body: {style:{marginTop: 100}}
             },
 
         ],
@@ -211,7 +212,6 @@ export default class LimitManager extends React.Component {
                 ],
                 key: 'tradeType',
                 type: 'select',
-
             },
         ]
     }
@@ -312,7 +312,7 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs ref="selectsData" data={selectsData}/>
+                        <MapSelectComs style={{}} ref="selectsData" data={selectsData}/>
                     </div>
                     <div className="selBtn">
                         <Button className="btn" type='primary' icon="search"
