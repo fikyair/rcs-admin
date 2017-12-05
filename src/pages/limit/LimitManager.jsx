@@ -323,7 +323,7 @@ export default class LimitManager extends React.Component {
                 </Form>
                 <Button className="addBtn" onClick={this.showAddModal} type="primary" ghost>添加限额</Button>
 
-                <Card hoverable={false} className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table className="btl"
+                <Card noHovering={true} className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table className="btl"
                                                                                               columns={columns}
                                                                                               dataSource={dataSource}
                                                                                               pagination={false}/>

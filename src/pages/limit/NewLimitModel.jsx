@@ -1,21 +1,24 @@
 import React from 'react';
-import {Row, Col, Form, Input, Button, Card} from 'antd';
+import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
+
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
+import MapSelectComs from '../../components/MapSelectComs'
+
 
 const FormItem = Form.Item;
 
-
-@setTitle('限额添加页')
+@setTitle('限额修改页')
 @Containerization()
 @Form.create()
 export default class NewLimitModel extends React.Component {
 
     state = {
-        isMerchant: false, // 判断是否是商户限额路由跳转进来的，默认否
+        isMerchant: false,
     }
+
 
     mockData = {
         merchentSelects: [
@@ -27,6 +30,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '3', name: '对私'},
                 ],
                 key: 'accountType',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: '名单类型',
                 optionVal: [
@@ -34,6 +39,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '非白名单类型'},
                 ],
                 key: 'listType',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: '是否优质商户',
                 optionVal: [
@@ -41,6 +48,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '否'},
                 ],
                 key: 'isPerfect',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: '行业大类',
                 optionVal: [
@@ -48,6 +57,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '否'},
                 ],
                 key: 'category',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: '细类',
                 optionVal: [
@@ -55,6 +66,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '否'},
                 ],
                 key: 'xcategory',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: 'MCC',
                 optionVal: [
@@ -62,6 +75,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '否'},
                 ],
                 key: 'mcc',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: '是否小额双免',
                 optionVal: [
@@ -69,6 +84,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '否'},
                 ],
                 key: 'doublefree',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: '是否有终端',
                 optionVal: [
@@ -76,6 +93,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '否'},
                 ],
                 key: 'isTermial',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: 'POS商户类型',
                 optionVal: [
@@ -83,6 +102,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '小微二'},
                 ],
                 key: 'postType',
+                type: 'select',
+                body: {'disabled': true},
             }, {
                 labelName: 'POS秒到等级',
                 optionVal: [
@@ -90,6 +111,8 @@ export default class NewLimitModel extends React.Component {
                     {value: '2', name: '2'},
                 ],
                 key: 'postLevel',
+                type: 'select',
+                body: {'disabled': true},
             }
         ],
         tradeSelects: {
@@ -102,6 +125,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '3', name: '准贷记卡'},
                     ],
                     key: 'cardProperty',
+                    type: 'select',
+                    body: {'disabled': true},
                 }, {
                     labelName: '卡介质',
                     optionVal: [
@@ -109,6 +134,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '2', name: '非IC卡'},
                     ],
                     key: 'cardLand',
+                    type: 'select',
+                    body: {'disabled': true},
                 }, {
                     labelName: '消费方式',
                     optionVal: [
@@ -117,6 +144,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '3', name: '消费'},
                     ],
                     key: 'salesMethod',
+                    type: 'select',
+                    body: {'disabled': true},
                 }, {
                     labelName: '接触方式',
                     optionVal: [
@@ -124,6 +153,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '2', name: '云闪付'},
                     ],
                     key: 'touchMethod',
+                    type: 'select',
+                    body: {'disabled': true},
                 },
             ],
             online: [
@@ -134,6 +165,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '2', name: 'APP'},
                     ],
                     key: 'qrTerminal',
+                    type: 'select',
+                    body: {'disabled': true},
                 }, {
                     labelName: '扫码支付渠道',
                     optionVal: [
@@ -146,6 +179,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '7', name: '其他'},
                     ],
                     key: 'qrChannel',
+                    type: 'select',
+                    body: {'disabled': true},
                 }, {
                     labelName: '扫码类型',
                     optionVal: [
@@ -153,6 +188,8 @@ export default class NewLimitModel extends React.Component {
                         {value: '2', name: '二维码-被扫'},
                     ],
                     key: 'qrType',
+                    type: 'select',
+                    body: {'disabled': true},
                 },
             ],
         },
@@ -163,56 +200,77 @@ export default class NewLimitModel extends React.Component {
                 labelValue: 'sigle',
                 addonBefore: "金额",
                 addonAfter: "元",
+                type: 'input',
+                body: {
+                    style: {width: 120},
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                },
+
             }, {
                 labelName: '单月',
                 key: 'singleMonth',
                 labelValue: 'sigle',
-                addonBefore: "金额",
-                addonAfter: "元",
+
+                type: 'input',
+                body: {
+                    style: {width: 120},
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                },
+
             }, {
                 labelName: '年',
                 key: 'singleYear',
                 labelValue: 'sigle',
-                addonBefore: "金额",
-                addonAfter: "元",
+                body: {
+                    style: {width: 120},
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                },
+                type: 'input',
             }, {
                 labelName: '终身',
                 key: 'lifetime',
                 labelValue: 'sigle',
-                addonBefore: "金额",
-                addonAfter: "元",
+                body: {
+                    style: {width: 120},
+
+                    addonBefore: "金额",
+                    addonAfter: "元",
+                },
+                type: 'input',
             }, {
                 labelName: '两笔间隔',
                 key: 'interval',
                 labelValue: 'sigle',
-                addonAfter: "元"
+                addonAfter: "元",
+                body: {
+                    addonAfter: "元",
+                    style: {width: 120},
+
+                },
+                type: 'input',
             }, {
                 labelName: '笔/日',
                 key: 'oneTime',
                 labelValue: 'sigle',
-                addonAfter: "元"
+                addonAfter: "元",
+                type: 'input',
+                body: {
+                    style: {width: 120},
+
+                },
+
             }
         ]
+
     }
 
     componentWillMount() {
         if (this.props.match.path.indexOf('merchant') > 0) {
-            this.isdisabled()
             this.setState({isMerchant: true})
         }
-    }
-
-    isdisabled() {
-        this.mockData.merchentSelects.map(data => {
-            data.disabled = true
-        })
-        this.mockData.tradeSelects.offline.map(data => {
-            data.disabled = true
-        })
-        this.mockData.tradeSelects.online.map(data => {
-            data.disabled = true
-        })
-
     }
 
     handleSubmit = () => {
@@ -221,13 +279,16 @@ export default class NewLimitModel extends React.Component {
         // TODO 提交表单
         debugger;
     }
+
     render() {
         const {
             merchentSelects = this.mockData.merchentSelects,
             online = this.mockData.tradeSelects.online,
             offline = this.mockData.tradeSelects.offline,
-            inputLimit = this.mockData.inputLimit
+            inputLimit = this.mockData.inputLimit,
+            match
         } = this.props;
+        const {type, id} = match.params
         const {getFieldDecorator} = this.props.form;
         const queryItemLayout = {
             xs: 12,
@@ -235,136 +296,71 @@ export default class NewLimitModel extends React.Component {
             md: 5,
         };
         return (
-            <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
+            <div>
+                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
+                    <Card title="选择商户属性" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
+                        <MapSelectComs data={merchentSelects}/>
+                    </Card>
+                    <Card title="选择交易属性" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
+                        <div>
+                            <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
+                            <MapSelectComs data={offline}/>
+                        </div>
+                        <div>
+                            <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+                            <MapSelectComs data={online}/>
+                        </div>
+                    </Card>
+                    <Card title="添加限额值" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
 
-                <Card title="选择商户属性" noHovering={true}
-                      style={{marginBottom: 6}}>
-                    {
-                        merchentSelects.map((v, k) => {
-                            return <FormItem key={k}>
-                                {getFieldDecorator(v.key, {
-                                    rules: [],
+                        <Row>
+                            <MapSelectComs data={inputLimit}/>
 
-                                })(
-                                    <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
-                                                style={{width: 120}}>
-                                        {
-                                            v.optionVal.map((i, j) => {
-                                                return <Option key={j} value={i.value}>{i.name}</Option>
-                                            })
-                                        }
-                                    </SelectComs>
-                                )}
+                            <FormItem>
+                                 <span style={{
+                                     marginRight: '10px',
+                                     minWidth: '80px',
+                                     display: 'inline-block',
+                                     marginTop: 10,
+                                     verticalAlign: 'top',
+                                 }}>每笔／分钟:</span>
+                                <div style={{display: 'inline-block', margin: '10px'}}>
+
+                                    <InputGroup>
+                                        <Input style={{width: 50, textAlign: 'center'}}
+                                        />
+                                        <Input style={{
+                                            width: 24,
+                                            borderLeft: 0,
+                                            pointerEvents: 'none',
+                                            backgroundColor: '#fff'
+                                        }} placeholder="/" disabled/>
+                                        <Input
+                                            style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                        />
+                                    </InputGroup>
+                                </div>
                             </FormItem>
-                        })
-                    }
-                </Card>
-                <Card title="选择交易属性"
-                      style={{marginBottom: 6}}
-                      noHovering={true}
-                >
-                    <div>
-                        <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
-                        {
-                            offline.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
 
-                                    })(
-                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
-                                                    style={{width: 120}}>
-                                            {
-                                                v.optionVal.map((i, j) => {
-                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                })
-                                            }
-                                        </SelectComs>
-                                    )}
-                                </FormItem>
-                            })
-                        }
-                    </div>
-                    <div>
-                        <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
-                        {
-                            online.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
-                                    })(
-                                        <SelectComs disabled={v.disabled} placeholder="请选择" labelName={v.labelName}
-                                                    style={{width: 120}}>
-                                            {
-                                                v.optionVal.map((i, j) => {
-                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                })
-                                            }
-                                        </SelectComs>
-                                    )}
-                                </FormItem>
-                            })
-                        }
-                    </div>
-                </Card>
-                <Card title="添加限额值" noHovering={true}
-                      style={{marginBottom: 6}}
-                >
-                    <Row>
-                        {
-                            inputLimit.map((v, k) => {
-                                return (
-                                    <Col {...queryItemLayout}
-                                         key={k}>
-                                        {getFieldDecorator(v.key, {
-                                            rules: [],
+                        </Row>
 
-                                        })(
-                                            <InputComs  labelName={v.labelName}
-                                                       style={{width: 120}}
-                                                       addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
-                                        )
-                                        }
-                                    </Col>
-                                )
-                            })
-                        }
-
-                        <Col {...queryItemLayout}>
-                            <Row style={{marginTop: '10px'}}>
-                                <Col span={9}>
-                                    <span style={{marginTop: '5px',marginLeft: '8px', display: 'inline-block'}}>每笔／分钟:</span>
-                                </Col>
-                                <Col span={15}>
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <InputGroup>
-                                                <Input style={{width: 50, textAlign: 'center'}}
-                                                />
-                                                <Input style={{
-                                                    width: 24,
-                                                    borderLeft: 0,
-                                                    pointerEvents: 'none',
-                                                    backgroundColor: '#fff'
-                                                }} placeholder="/" disabled/>
-                                                <Input style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                                />
-                                            </InputGroup>
-                                        )
-                                    }
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card title="添加限额名称" noHovering={true}>
-                    <Input placeholder="请输入"
-                           addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
-                           style={{width: '200px', margin: '10px'}}/>
-                    <Button style={{margin: '10px'}}
-                            onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                    <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
-                </Card>
-            </Form>)
+                    </Card>
+                    <Card title="添加限额名称" noHovering={true}>
+                        <Input placeholder="请输入"
+                               addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
+                               style={{width: '200px', margin: '10px'}}/>
+                        <Button style={{margin: '10px'}}
+                                onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                        <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                    </Card>
+                </Form>
+            </div>
+        )
     }
 }
