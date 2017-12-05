@@ -14,17 +14,18 @@ export default class MapSelectComs extends React.Component {
         const {data} = this.props;
         const {getFieldDecorator} = this.props.form
         return (
-            <div>
+            <div style={{display: 'inline-block'}}>
 
                 {
                     data.map((v, k) => {
                         return <FormItem key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
+                                    initialValue: v.initialValue,
                                     rules: v.rules ? [...v.rules] : [],
                                 })(
                                     v.type === 'select' ?
-                                        <SelectComs labelName={v.labelName} placeholder="请选择"
+                                        <SelectComs labelName={v.labelName} placeholder="请选择" {...v.body}
                                                     className="selects-style">
                                             {
                                                 v.optionVal.map((i, j) => {
