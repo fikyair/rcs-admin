@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Layout} from 'antd';
+import {Card} from 'antd';
 import EditableTable from '../../pages/limit/LimitEditableTable';
 
 import {Containerization, setTitle} from '../../common/PublicComponent';
@@ -13,12 +13,12 @@ export default class OperationRecord extends React.Component {
     render() {
 
         return (
-            <div style={{ marginLeft: 10}}>
+            <div style={{ marginLeft: 0}}>
 
-                <div style={{marginBottom: 10}}>
-                      <h2>限额名称XXXXXXXXXXXXXXX</h2>
-                </div>
-                <EditableTable/>
+                    <EditableTable/>
+
+
+
             </div>
         )
     }
