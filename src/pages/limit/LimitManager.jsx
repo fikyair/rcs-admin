@@ -73,7 +73,7 @@ export default class LimitManager extends React.Component {
                 rules: [{required: true, message: 'Please input your E-mail!'}, {max: 3, message: '超长'}],
                 // body: {style:{marginTop: 100}}
                 // body: {addonBefore: "金额", addonAfter: "元",},
-
+                body :{style:{width:120}}
             },
 
         ],

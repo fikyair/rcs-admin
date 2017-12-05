@@ -322,7 +322,7 @@ export default class LimitUpdate extends React.Component {
                     >
 
                         <Row>
-                            <MapSelectComs data={inputLimit} style={{marginRight: 180}}/>
+                            <MapSelectComs data={inputLimit}/>
 
                             <FormItem>
                                  <span style={{
