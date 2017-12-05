@@ -235,9 +235,10 @@ export default class NewLimitModel extends React.Component {
             md: 5,
         };
         return (
-            <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
+            <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
 
-                <Card title="选择商户属性">
+                <Card title="选择商户属性"
+                      style={{marginBottom: 6}}>
                     {
                         merchentSelects.map((v, k) => {
                             return <FormItem key={k}>
@@ -258,7 +259,9 @@ export default class NewLimitModel extends React.Component {
                         })
                     }
                 </Card>
-                <Card title="选择交易属性">
+                <Card title="选择交易属性"
+                      style={{marginBottom: 6}}
+                >
                     <div>
                         <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
                         {
@@ -303,7 +306,9 @@ export default class NewLimitModel extends React.Component {
                         }
                     </div>
                 </Card>
-                <Card title="添加限额值">
+                <Card title="添加限额值"
+                      style={{marginBottom: 6}}
+                >
                     <Row>
                         {
                             inputLimit.map((v, k) => {
