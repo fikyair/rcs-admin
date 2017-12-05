@@ -281,7 +281,7 @@ export default class LimitManager extends React.Component {
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
-                    <div>
+                    <div className="select">
                         {
                             selectsData.map((v, k) => {
                                 return <FormItem key={k}>
@@ -303,15 +303,16 @@ export default class LimitManager extends React.Component {
 
                             })
                         }
-                    </div>
-                    <div>
                         {this.isShowMerchant()}
-                        <Button htmlType='submit' icon="search" style={{margin: '10px', width: '100px'}}
+                    </div>
+                    <div className="selBtn">
+                        <Button className="btn" htmlType='submit' type='primary' icon="search"
                                 onClick={this.handleSearch()}>查询</Button>
                     </div>
                 </Form>
-                <Button style={{margin: '10px', width: '100px'}} onClick={this.showAddModal}>添加限额</Button>
-                <Card title="限额列表" bodyStyle={{padding: '0px',}}><Table columns={columns}
+                <Button className="addBtn" onClick={this.showAddModal} type="primary" ghost>添加限额</Button>
+
+                <Card className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table columns={columns}
                                                                         dataSource={dataSource}/></Card>
 
                 <Modal
