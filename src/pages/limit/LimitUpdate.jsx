@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
+
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
 
@@ -226,39 +227,18 @@ export default class LimitUpdate extends React.Component {
             md: 5,
         };
         return (
-            <Form className="container-body"  layout="inline" onSubmit={this.handleSubmit}>
-                <h1>836商户限额</h1>
-                <Card title="选择商户属性"
-                      style={{marginBottom: 6}}
-                >
-                    {
-                        merchentSelects.map((v, k) => {
-                            return <FormItem key={k}>
-                                {getFieldDecorator(v.key, {
-                                    rules: [],
-                                    initialValue: v.optionVal[0].value
 
-                                })(
-                                    <SelectComs disabled placeholder="请选择" labelName={v.labelName} style={{width: 120}}>
-                                        {
-                                            v.optionVal.map((i, j) => {
-                                                return <Option key={j} value={i.value}>{i.name}</Option>
-                                            })
-                                        }
-                                    </SelectComs>
-                                )}
-                            </FormItem>
-                        })
-                    }
-                </Card>
-                <Card title="选择交易属性"
-                      style={{marginBottom: 6}}
-                >
-                    <div>
-                        <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
+            <div>
+                <div className="title-style">
+                    <b>836商户限额:</b>
+                </div>
+                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
 
+                    <Card title="选择商户属性"
+                          style={{marginBottom: 6}}
+                    >
                         {
-                            offline.map((v, k) => {
+                            merchentSelects.map((v, k) => {
                                 return <FormItem key={k}>
                                     {getFieldDecorator(v.key, {
                                         rules: [],
@@ -277,96 +257,124 @@ export default class LimitUpdate extends React.Component {
                                 </FormItem>
                             })
                         }
+                    </Card>
+                    <Card title="选择交易属性"
+                          style={{marginBottom: 6}}
+                    >
+                        <div>
+                            <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
 
-                    </div>
-                    <div>
-                        <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
-
-                        {
-                            online.map((v, k) => {
-                                return <FormItem key={k}>
-                                    {getFieldDecorator(v.key, {
-                                        rules: [],
-                                        initialValue: v.optionVal[0].value
-                                    })(
-                                        <SelectComs disabled placeholder="请选择" labelName={v.labelName}
-                                                    style={{width: 120}}>
-                                            {
-                                                v.optionVal.map((i, j) => {
-                                                    return <Option key={j} value={i.value}>{i.name}</Option>
-                                                })
-                                            }
-                                        </SelectComs>
-                                    )}
-                                </FormItem>
-                            })
-                        }
-                    </div>
-                </Card>
-                <Card title="添加限额值"
-                      style={{marginBottom: 6}}
-                >
-
-                    <Row>
-                        {
-                            inputLimit.map((v, k) => {
-                                return (
-                                    <Col {...queryItemLayout}
-                                        key={k}>
+                            {
+                                offline.map((v, k) => {
+                                    return <FormItem key={k}>
                                         {getFieldDecorator(v.key, {
                                             rules: [],
+                                            initialValue: v.optionVal[0].value
 
                                         })(
-                                            <InputComs disabled={true} labelName={v.labelName}
-                                                       style={{width: 120}}
-                                                        addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
-                                        )
+                                            <SelectComs disabled placeholder="请选择" labelName={v.labelName}
+                                                        style={{width: 120}}>
+                                                {
+                                                    v.optionVal.map((i, j) => {
+                                                        return <Option key={j} value={i.value}>{i.name}</Option>
+                                                    })
+                                                }
+                                            </SelectComs>
+                                        )}
+                                    </FormItem>
+                                })
+                            }
+
+                        </div>
+                        <div>
+                            <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+
+                            {
+                                online.map((v, k) => {
+                                    return <FormItem key={k}>
+                                        {getFieldDecorator(v.key, {
+                                            rules: [],
+                                            initialValue: v.optionVal[0].value
+                                        })(
+                                            <SelectComs disabled placeholder="请选择" labelName={v.labelName}
+                                                        style={{width: 120}}>
+                                                {
+                                                    v.optionVal.map((i, j) => {
+                                                        return <Option key={j} value={i.value}>{i.name}</Option>
+                                                    })
+                                                }
+                                            </SelectComs>
+                                        )}
+                                    </FormItem>
+                                })
+                            }
+                        </div>
+                    </Card>
+                    <Card title="添加限额值"
+                          style={{marginBottom: 6}}
+                    >
+
+                        <Row>
+                            {
+                                inputLimit.map((v, k) => {
+                                    return (
+                                        <Col {...queryItemLayout}
+                                             key={k}>
+                                            {getFieldDecorator(v.key, {
+                                                rules: [],
+
+                                            })(
+                                                <InputComs disabled={true} labelName={v.labelName}
+                                                           style={{width: 120}}
+                                                           addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>
+                                            )
+                                            }
+                                        </Col>
+                                    )
+                                })
+                            }
+
+                            <Col {...queryItemLayout}>
+                                <Row style={{marginTop: '10px'}}>
+                                    <Col span={9}>
+                                        <span style={{marginTop: '5px', marginLeft: '8px', display: 'inline-block'}}>每笔／分钟:</span>
+                                    </Col>
+                                    <Col span={15}>
+                                        {
+                                            getFieldDecorator('limitType')(
+                                                <InputGroup>
+                                                    <Input disabled={true} style={{width: 50, textAlign: 'center'}}
+                                                    />
+                                                    <Input style={{
+                                                        width: 24,
+                                                        borderLeft: 0,
+                                                        pointerEvents: 'none',
+                                                        backgroundColor: '#fff'
+                                                    }} placeholder="/" disabled/>
+                                                    <Input disabled={true}
+                                                           style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                    />
+                                                </InputGroup>
+                                            )
                                         }
                                     </Col>
-                                )
-                            })
-                        }
+                                </Row>
+                            </Col>
+                        </Row>
 
-                        <Col {...queryItemLayout}>
-                            <Row style={{marginTop: '10px'}}>
-                                <Col span={9}>
-                                    <span style={{marginTop: '5px',marginLeft: '8px', display: 'inline-block'}}>每笔／分钟:</span>
-                                </Col>
-                                <Col span={15}>
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <InputGroup>
-                                                <Input disabled={true} style={{width: 50, textAlign: 'center'}}
-                                                />
-                                                <Input style={{
-                                                    width: 24,
-                                                    borderLeft: 0,
-                                                    pointerEvents: 'none',
-                                                    backgroundColor: '#fff'
-                                                }} placeholder="/" disabled/>
-                                                <Input disabled={true}
-                                                       style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                                />
-                                            </InputGroup>
-                                        )
-                                    }
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
+                    </Card>
+                    <div>
 
-                </Card>
-                <div >
-
-                            <div style={{textAlign:'center'}}>
-                                <Button style={{margin: '10px'}}
-                                        onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                                <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
-                            </div>
+                        <div style={{textAlign: 'center'}}>
+                            <Button style={{margin: '10px'}}
+                                    onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                            <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                        </div>
 
 
-
-                </div>
-            </Form>)
+                    </div>
+                </Form>
+            </div>
+        )
     }
 }

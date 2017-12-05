@@ -198,10 +198,10 @@ export default class LimitUpdate extends React.Component {
         const {getFieldDecorator} = this.props.form;
         return (
             <div>
-                <div style={{marginBottom: 10, marginTop: 10, fontSize: 16}}>
+                <div className="title-style">
                     <b>商户编号：</b>
                 </div>
-                <Form className="container" layout="inline" onSubmit={this.handleSubmit}>
+                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
                     <Card title="选择商户属性">
                         {
                             merchentSelects.map((v, k) => {
