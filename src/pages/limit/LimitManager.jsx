@@ -280,13 +280,7 @@ export default class LimitManager extends React.Component {
 
     handleSearch = (args) => {
         //TODO 搜索
-        // this.refs.selectsData.validateFields((err, values) => {
-        //     if (!err) {
-        //         console.log('Received values of form: ', values);
-        //     }
-        // });
-
-        let getFieldsValue = this.refs.selectsData.getFieldsValue()
+        let getFieldsValue = this.formData.props.form.getFieldsValue()
         const {pageNum, pageSize} = this.state
         let params = {
             ...getFieldsValue,
@@ -314,7 +308,7 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs style={{}} ref="selectsData" data={selectsData}/>
+                        <MapSelectComs style={{}} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
                     </div>
                     <div className="selBtn">
                         <Button className="btn" type='primary' icon="search"
@@ -347,19 +341,6 @@ export default class LimitManager extends React.Component {
                     ]}
                 >
                     <MapSelectComs data={modalSelects} ref="modalSelects"/>
-                    {/*{*/}
-                    {/*modalSelects.map((v, k) => {*/}
-                    {/*return (<SelectComs key={k} labelName={v.labelName} defaultValue="请选择" style={{width: 120}}>*/}
-                    {/*{*/}
-                    {/*v.optionVal.map((i, j) => {*/}
-                    {/*return <Option key={j} value={i.value}>{i.name}</Option>*/}
-                    {/*})*/}
-                    {/*}*/}
-                    {/*</SelectComs>*/}
-                    {/*)*/}
-                    {/*})*/}
-                    {/*}*/}
-
                 </Modal>
                 <Modal
                     visible={removeVisible}
