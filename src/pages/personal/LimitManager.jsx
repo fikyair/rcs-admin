@@ -274,7 +274,7 @@ export default class LimitManager extends React.Component {
                     <div className="select">
                         {
                             selectsData.map((v, k) => {
-                                return <FormItem key={k}>
+                                return <FormItem key={k} style={{paddingLeft:4}}>
                                     {
                                         getFieldDecorator(v.key, {
                                             rule: [],
