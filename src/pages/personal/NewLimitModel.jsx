@@ -320,8 +320,8 @@ export default class NewLimitModel extends React.Component {
                     >
 
                         <Row>
-                            <MapSelectComs data={inputLimit}/>
-                            <FormItem>
+                            <MapSelectComs data={inputLimit}>
+                                <FormItem>
                                  <span style={{
                                      marginRight: '10px',
                                      minWidth: '80px',
@@ -329,23 +329,25 @@ export default class NewLimitModel extends React.Component {
                                      marginTop: 10,
                                      verticalAlign: 'top',
                                  }}>每笔／分钟:</span>
-                                <div style={{display: 'inline-block', margin: '10px'}}>
+                                    <div style={{display: 'inline-block', margin: '10px'}}>
 
-                                    <InputGroup>
-                                        <Input style={{width: 50, textAlign: 'center'}}
-                                        />
-                                        <Input style={{
-                                            width: 24,
-                                            borderLeft: 0,
-                                            pointerEvents: 'none',
-                                            backgroundColor: '#fff'
-                                        }} placeholder="/" disabled/>
-                                        <Input
-                                            style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                        />
-                                    </InputGroup>
-                                </div>
-                            </FormItem>
+                                        <InputGroup>
+                                            <Input style={{width: 50, textAlign: 'center'}}
+                                            />
+                                            <Input style={{
+                                                width: 24,
+                                                borderLeft: 0,
+                                                pointerEvents: 'none',
+                                                backgroundColor: '#fff'
+                                            }} placeholder="/" disabled/>
+                                            <Input
+                                                style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                            />
+                                        </InputGroup>
+                                    </div>
+                                </FormItem>
+                            </MapSelectComs>
+
 
                         </Row>
 
