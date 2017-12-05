@@ -41,7 +41,9 @@ export default class MapSelectComs extends React.Component {
                         </FormItem>
 
                     })
+
                 }
+                {this.props.children}
             </div>
         )
     }

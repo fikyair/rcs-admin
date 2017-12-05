@@ -31,7 +31,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'accountType',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: '名单类型',
                 optionVal: [
@@ -40,7 +39,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'listType',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: '是否优质商户',
                 optionVal: [
@@ -49,7 +47,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'isPerfect',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: '行业大类',
                 optionVal: [
@@ -58,7 +55,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'category',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: '细类',
                 optionVal: [
@@ -67,7 +63,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'xcategory',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: 'MCC',
                 optionVal: [
@@ -76,7 +71,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'mcc',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: '是否小额双免',
                 optionVal: [
@@ -85,7 +79,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'doublefree',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: '是否有终端',
                 optionVal: [
@@ -94,7 +87,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'isTermial',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: 'POS商户类型',
                 optionVal: [
@@ -103,7 +95,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'postType',
                 type: 'select',
-                body: {'disabled': true},
             }, {
                 labelName: 'POS秒到等级',
                 optionVal: [
@@ -112,7 +103,6 @@ export default class NewLimitModel extends React.Component {
                 ],
                 key: 'postLevel',
                 type: 'select',
-                body: {'disabled': true},
             }
         ],
         tradeSelects: {
@@ -126,7 +116,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'cardProperty',
                     type: 'select',
-                    body: {'disabled': true},
                 }, {
                     labelName: '卡介质',
                     optionVal: [
@@ -135,7 +124,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'cardLand',
                     type: 'select',
-                    body: {'disabled': true},
                 }, {
                     labelName: '消费方式',
                     optionVal: [
@@ -145,7 +133,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'salesMethod',
                     type: 'select',
-                    body: {'disabled': true},
                 }, {
                     labelName: '接触方式',
                     optionVal: [
@@ -154,7 +141,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'touchMethod',
                     type: 'select',
-                    body: {'disabled': true},
                 },
             ],
             online: [
@@ -166,7 +152,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'qrTerminal',
                     type: 'select',
-                    body: {'disabled': true},
                 }, {
                     labelName: '扫码支付渠道',
                     optionVal: [
@@ -180,7 +165,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'qrChannel',
                     type: 'select',
-                    body: {'disabled': true},
                 }, {
                     labelName: '扫码类型',
                     optionVal: [
@@ -189,7 +173,6 @@ export default class NewLimitModel extends React.Component {
                     ],
                     key: 'qrType',
                     type: 'select',
-                    body: {'disabled': true},
                 },
             ],
         },
