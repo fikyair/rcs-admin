@@ -1,5 +1,7 @@
 import React from 'react';
-import { Table, Pagination } from 'antd';
+import { Table, Pagination, Card, Input } from 'antd';
+import '../../style/style.less';
+
 const datamock=[{
     key: '1',
     singleLimit: '12000',
@@ -69,12 +71,16 @@ export default class EditableTable extends React.Component {
         const { dataSource } = this.state;
         const columns = this.columns;
         return (
-            <div>
-                <Table bordered dataSource={datamock}  pagination={false} columns={columns} />
+            <div className="limitable">
+                <Card noHovering= {true} title={<div>商户&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
 
-                <div style={{textAlign: 'left',marginTop: 20}}>
-                    <Pagination size="large" total={50} showSizeChanger showQuickJumper />
-                </div>
+                >
+                    <Table className="btl" dataSource={datamock}  pagination={false} columns={columns} />
+
+                    <div style={{textAlign: 'right',margin: 29,}}>
+                        <Pagination size="large" total={50}/>
+                    </div>
+                </Card>
             </div>
         );
     }

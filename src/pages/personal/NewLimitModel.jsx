@@ -10,7 +10,7 @@ import MapSelectComs from '../../components/MapSelectComs'
 
 const FormItem = Form.Item;
 
-@setTitle('限额修改页')
+@setTitle('个性限额添加页')
 @Containerization()
 @Form.create()
 export default class NewLimitModel extends React.Component {
