@@ -3,7 +3,7 @@ import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
 import MapSelectComs from '../../components/MapSelectComs';
-import { getModels, getBodyProperty, getBussinessType, getMainPart} from '../../actions/limitActions'
+import { getModels, getBodyProperty, getBussinessType, getMainPart} from '../../actions/limitActions';
 
 const FormItem = Form.Item;
 @setTitle('首页')

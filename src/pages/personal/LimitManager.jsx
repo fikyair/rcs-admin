@@ -2,11 +2,14 @@ import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Table, Button, Card, Input, Modal, Form, Row, Col} from 'antd';
 import {Link} from 'react-router-dom';
+import { getModels, getBodyProperty, getBussinessType, getMainPart} from '../../actions/limitActions';
 import InputComs from "../../components/InputComs";
 import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 @setTitle('首页')
-@Containerization()
+@Containerization(state=>({
+  selectsData:state.LimitReducer.selectsData,
+}))
 @Form.create()
 export default class LimitManager extends React.Component {
     state = {
@@ -201,7 +204,8 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
-
+      this.props.dispatch(getBussinessType());
+      this.props.dispatch(getBodyProperty());
 
     }
     timer = null
