@@ -203,7 +203,7 @@ export default class LimitUpdate extends React.Component {
                 addonAfter: "元",
                 type: 'input',
                 body: {
-                    style: {width:20},
+                    style: {width: 120},
                     addonBefore: "金额",
                     addonAfter: "元",
                 },
@@ -215,7 +215,7 @@ export default class LimitUpdate extends React.Component {
 
                 type: 'input',
                 body: {
-                    style: {width:20},
+                    style: {width: 120},
                     addonBefore: "金额",
                     addonAfter: "元",
                 },
@@ -225,7 +225,7 @@ export default class LimitUpdate extends React.Component {
                 key: 'singleYear',
                 labelValue: 'sigle',
                 body: {
-                    style: {width:20},
+                    style: {width: 120},
                     addonBefore: "金额",
                     addonAfter: "元",
                 },
@@ -236,6 +236,8 @@ export default class LimitUpdate extends React.Component {
                 labelValue: 'sigle',
 
                 body: {
+                    style: {width: 120},
+
                     addonBefore: "金额",
                     addonAfter: "元",
                 },
@@ -247,7 +249,10 @@ export default class LimitUpdate extends React.Component {
                 addonAfter: "元",
                 body: {
                     addonAfter: "元",
+                    style: {width: 120},
+
                 },
+
                 type: 'input',
             }, {
                 labelName: '笔/日',
@@ -255,6 +260,11 @@ export default class LimitUpdate extends React.Component {
                 labelValue: 'sigle',
                 addonAfter: "元",
                 type: 'input',
+                body: {
+                    style: {width: 120},
+
+                },
+
             }
         ]
 
@@ -289,92 +299,67 @@ export default class LimitUpdate extends React.Component {
             md: 5,
         };
         return (
-            <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
-                <h1>836商户限额</h1>
-                <Card title="选择商户属性" noHovering={true}
-                      style={{marginBottom: 6}}
-                >
-                    <MapSelectComs data={merchentSelects}/>
-                </Card>
-                <Card title="选择交易属性" noHovering={true}
-                      style={{marginBottom: 6}}
-                >
-                    <div>
-                        <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
-                        <MapSelectComs data={offline}/>
-                    </div>
-                    <div>
-                        <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
-                        <MapSelectComs data={online}/>
-                    </div>
-                </Card>
-                <Card title="添加限额值" noHovering={true}
-                      style={{marginBottom: 6}}
-                >
+            <div>
+                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
+                    <h1>836商户限额</h1>
+                    <Card title="选择商户属性" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
+                        <MapSelectComs data={merchentSelects}/>
+                    </Card>
+                    <Card title="选择交易属性" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
+                        <div>
+                            <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
+                            <MapSelectComs data={offline}/>
+                        </div>
+                        <div>
+                            <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+                            <MapSelectComs data={online}/>
+                        </div>
+                    </Card>
+                    <Card title="添加限额值" noHovering={true}
+                          style={{marginBottom: 6}}
+                    >
 
-                    <Row>
-                        <MapSelectComs data={inputLimit} style={{marginRight:140}}/>
+                        <Row>
+                            <MapSelectComs data={inputLimit} style={{marginRight: 180}}/>
 
-                        {/*{*/}
-                        {/*inputLimit.map((v, k) => {*/}
-                        {/*return (*/}
-                        {/*<Col {...queryItemLayout}*/}
-                        {/*key={k}>*/}
-                        {/*{getFieldDecorator(v.key, {*/}
-                        {/*rules: [],*/}
-
-                        {/*})(*/}
-                        {/*<InputComs labelName={v.labelName}*/}
-                        {/*style={{width: 120}}*/}
-                        {/*addonBefore={v.addonBefore} addonAfter={v.addonAfter}/>*/}
-                        {/*)*/}
-                        {/*}*/}
-                        {/*</Col>*/}
-                        {/*)*/}
-                        {/*})*/}
-                        {/*}*/}
-
-                        <Col {...queryItemLayout}>
-                            <Row style={{marginTop: '10px'}}>
-                                <Col span={9}>
+                            <Col {...queryItemLayout}>
+                                <Row style={{marginTop: '10px'}}>
+                                    <Col span={9}>
                                     <span style={{
                                         marginTop: '5px',
                                         marginLeft: '8px',
                                         display: 'inline-block'
                                     }}>每笔／分钟:</span>
-                                </Col>
-                                <Col span={15}>
-                                    {
-                                        getFieldDecorator('limitType')(
-                                            <InputGroup>
-                                                <Input style={{width: 50, textAlign: 'center'}}
-                                                />
-                                                <Input style={{
-                                                    width: 24,
-                                                    borderLeft: 0,
-                                                    pointerEvents: 'none',
-                                                    backgroundColor: '#fff'
-                                                }} placeholder="/" disabled/>
-                                                <Input
-                                                    style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                                />
-                                            </InputGroup>
-                                        )
-                                    }
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
+                                    </Col>
+                                    <Col span={15}>
+                                        {
+                                            getFieldDecorator('limitType')(
+                                                <InputGroup>
+                                                    <Input style={{width: 50, textAlign: 'center'}}
+                                                    />
+                                                    <Input style={{
+                                                        width: 24,
+                                                        borderLeft: 0,
+                                                        pointerEvents: 'none',
+                                                        backgroundColor: '#fff'
+                                                    }} placeholder="/" disabled/>
+                                                    <Input
+                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                    />
+                                                </InputGroup>
+                                            )
+                                        }
+                                    </Col>
+                                </Row>
+                            </Col>
+                        </Row>
 
-                </Card>
-                <div>
-
-                    <div style={{textAlign: 'center'}}>
-                        <Button style={{margin: '10px'}}
-                                onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                        <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
-                    </div>
-
+                    </Card>
+                    <div>
                         <div style={{textAlign: 'center'}}>
                             <Button style={{margin: '10px'}}
                                     onClick={() => this.props.history.push('/limitManager')}>取消</Button>
