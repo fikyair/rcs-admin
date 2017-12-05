@@ -226,7 +226,7 @@ export default class LimitUpdate extends React.Component {
                     </Card>
                     <Card noHovering={true} title="选择交易属性">
                         <div>
-                            <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
+                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>线下交易</b></div></FormItem>
 
                             {
                                 offline.map((v, k) => {
@@ -251,7 +251,7 @@ export default class LimitUpdate extends React.Component {
 
                         </div>
                         <div>
-                            <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>扫码交易</b></div></FormItem>
 
                             {
                                 online.map((v, k) => {

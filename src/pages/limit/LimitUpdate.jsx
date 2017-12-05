@@ -309,11 +309,11 @@ export default class LimitUpdate extends React.Component {
                           style={{marginBottom: 6}}
                     >
                         <div>
-                            <FormItem style={{margin: '10px'}}>线下交易:</FormItem>
+                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>线下交易</b></div></FormItem>
                             <MapSelectComs data={offline}/>
                         </div>
                         <div>
-                            <FormItem style={{margin: '10px'}}>扫码交易:</FormItem>
+                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>扫码交易</b></div></FormItem>
                             <MapSelectComs data={online}/>
                         </div>
                     </Card>
