@@ -149,15 +149,11 @@ export default class LimitManager extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-            <a onClick={() => this.delete(record.id)}>删除&nbsp;&nbsp;</a>
-            <a onClick={() => this.edit(record.id)}>修改&nbsp;&nbsp;</a>
-             <a onClick={() => this.showRecord(record.id)}>操作记录&nbsp;&nbsp;</a>
-                        {/*<span className="ant-divider"/>*/}
-                        {/*<Dropdown overlay={this.menu(record)}>*/}
-                        {/*<a >*/}
-                        {/*更多操作<Icon type="down" />*/}
-                        {/*</a>*/}
-                        {/*</Dropdown>*/}
+                        <Link to={`/merchantlimit/+update/${record.id}`}>修改</Link>
+                        <span className="ant-divider"/>
+            <a onClick={() => this.delete(record.id)}>删除</a>
+                        <span className="ant-divider"/>
+             <Link to={`/merchantlimit/+operationrecoerd/${record.id}`} >操作记录</Link>
             </span>
                 ),
             }],
