@@ -258,9 +258,9 @@ export default class NewLimitModel extends React.Component {
 
     handleSubmit = () => {
         debugger
-        this.formData.props.form.getFieldsValue();
-        const {getFieldsValue} = this.props.form;
-        const val = getFieldsValue();
+
+                const getFieldsValue = this.formData.props.form.getFieldsValue();
+        const val = getFieldsValue;
         console.log("表单的数据",val)
         this.props.dispatch(addModel(val)).then(data=>{
             console.log("----->",data);

@@ -36,7 +36,7 @@ export const getModels =(data)=>  ActionCreator(API_GET_MODELS,`/api/rcslmodel${
 
 //新增Models
 
-export const addModel =(data) => ActionCreator(API_POST_MODEL,`/api/rcslmodel`,'PUT',data)();
+export const addModel =(data) => ActionCreator(API_POST_MODEL,`/api/rcslmodel`,'POST',data)();
 
 //GET /type/businesstype 查找限额业务类型（限额类型）
 export const getBussinessType =  ActionCreator(API_GET_BUSSINESS_TYPE,`/api/type/businesstype`,'GET');
