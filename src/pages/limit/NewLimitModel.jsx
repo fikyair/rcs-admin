@@ -6,12 +6,12 @@ import {setTitle, Containerization} from '../../common/PublicComponent';
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
 import MapSelectComs from '../../components/MapSelectComs'
-
+import {addModel} from "../../actions/limitActions";
 
 const FormItem = Form.Item;
 
 @setTitle('限额修改页')
-@Containerization()
+@Containerization(state=>({}))
 @Form.create()
 export default class NewLimitModel extends React.Component {
 
@@ -259,6 +259,10 @@ export default class NewLimitModel extends React.Component {
     handleSubmit = () => {
         const {getFieldsValue} = this.props.form;
         const val = getFieldsValue();
+
+        this.props.dispatch(addModel(val)).then(data=>{
+            console.log("----->",data);
+        })
         // TODO 提交表单
         debugger;
     }
@@ -280,7 +284,7 @@ export default class NewLimitModel extends React.Component {
         };
         return (
             <div>
-                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
+                <Form className="container-body" layout="inline" >
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
@@ -340,7 +344,7 @@ export default class NewLimitModel extends React.Component {
                                style={{width: '200px', margin: '10px'}}/>
                         <Button style={{margin: '10px'}}
                                 onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                        <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                        <Button htmlType="submit" style={{margin: '10px'}} onClick={this.handleSubmit}>保存</Button>
                     </Card>
                 </Form>
             </div>

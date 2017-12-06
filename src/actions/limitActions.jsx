@@ -5,10 +5,11 @@ import {
   API_GET_MODELS,
   API_GET_MAIN_ACCOUNT,
   API_GET_BODY_PROPERTY,
-  API_UPDATE_MODEL
+  API_UPDATE_MODEL,
+    API_POST_MODEL,
 } from '../utils/ActionsType';
 
-const ActionCreator = (type,url,method)=>{
+const ActionCreator = (type,url,method,data)=>{
   return  ()=>{
     return {
       types:[...type],
@@ -18,6 +19,7 @@ const ActionCreator = (type,url,method)=>{
           fetch(url,{
             method:method,
             headers,
+              body: JSON.stringify(data),
           }).then(checkStatus).then(parseJSON).then((data)=>{
             resolve(data);
           })
@@ -29,6 +31,10 @@ const ActionCreator = (type,url,method)=>{
 
 //查询所有的Models
 export const getModels =(data)=>  ActionCreator(API_GET_MODELS,`/api/rcslmodel${queryData(data)}`,'GET')();
+
+//新增Models
+
+export const addModel =(data) => ActionCreator(API_POST_MODEL,`/api/rcslmodel`,'PUT',data)();
 
 //GET /type/businesstype 查找限额业务类型（限额类型）
 export const getBussinessType =  ActionCreator(API_GET_BUSSINESS_TYPE,`/api/type/businesstype`,'GET');
