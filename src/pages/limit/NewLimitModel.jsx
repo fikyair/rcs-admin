@@ -257,10 +257,12 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
-        debugger
-
-                const getFieldsValue = this.formData.props.form.getFieldsValue();
-        const val = getFieldsValue;
+        const formDataMerchent = this.formDataMerchent.props.form.getFieldsValue();
+        const formDataOffLine = this.formDataOffLine.props.form.getFieldsValue();
+        const formDataOnLine = this.formDataOnLine.props.form.getFieldsValue();
+        const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
+        const getValues= {...formDataMerchent,...formDataOffLine ,...formDataOnLine, ...formDataInputLimit}
+        const val = getValues;
         console.log("表单的数据",val)
         this.props.dispatch(addModel(val)).then(data=>{
             console.log("----->",data);
@@ -290,18 +292,18 @@ export default class NewLimitModel extends React.Component {
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
-                        <MapSelectComs wrappedComponentRef={(inst) => this.formData = inst} data={merchentSelects}/>
+                        <MapSelectComs wrappedComponentRef={(inst) => this.formDataMerchent = inst} data={merchentSelects}/>
                     </Card>
                     <Card title="选择交易属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
                         <div>
                             <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>线下交易</b></div></FormItem>
-                            <MapSelectComs data={offline}/>
+                            <MapSelectComs wrappedComponentRef={(inst) => this.formDataOffLine = inst} data={offline}/>
                         </div>
                         <div>
                             <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>扫码交易</b></div></FormItem>
-                            <MapSelectComs data={online}/>
+                            <MapSelectComs wrappedComponentRef={(inst) => this.formDataOnLine = inst} data={online}/>
                         </div>
                     </Card>
                     <Card title="添加限额值" noHovering={true}
@@ -309,7 +311,7 @@ export default class NewLimitModel extends React.Component {
                     >
 
                         <Row>
-                            <MapSelectComs data={inputLimit}>
+                            <MapSelectComs data={inputLimit} wrappedComponentRef={(inst) => this.formDataInputLimit = inst}>
                                 <FormItem>
                                  <span style={{
                                      marginRight: '10px',

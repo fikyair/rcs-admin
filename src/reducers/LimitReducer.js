@@ -3,6 +3,7 @@ import {  API_GET_MODELS,
   API_GET_MAIN_ACCOUNT,
   API_GET_BODY_PROPERTY,
     API_UPDATE_MODEL,
+    API_POST_MODEL,
 } from '../utils/ActionsType';
 const initialState ={
   modelsData:[],
@@ -100,6 +101,12 @@ export default function (state = initialState,actions ) {
               },
               bodyProperty: actions.data,
           }
+      case API_POST_MODEL[1]:
+          return{
+              ...state,
+
+          }
+
     default:
       return state
   }
