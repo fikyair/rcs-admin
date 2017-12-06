@@ -30,10 +30,13 @@ if(window.addEventListener){
   window.addEventListener('message',(e)=>{
     if(e.source!=window.parent) return;
     const { data } = e;
-    if(data && data.authToken){
-      setCurrentLoginUser(data);
-      $.cookie('auth-token',JSON.stringify(data.authToken),{ expires: 2, path: '/' })
-      store.dispatch(asyncCookie(data.authToken))
+    if(data && typeof data == 'String'){
+      let dataObj = JSON.parse(data);
+      if(dataObj && dataObj.authToken){
+        setCurrentLoginUser(dataObj);
+        $.cookie('auth-token',dataObj.authToken,{ expires: 2, path: '/' })
+        store.dispatch(asyncCookie(dataObj.authToken))
+      }
     }
   });
 }

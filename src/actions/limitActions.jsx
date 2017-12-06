@@ -1,4 +1,4 @@
-import { checkStatus, parseJSON, headers } from '../utils/fetch-middleware';
+import { checkStatus, parseJSON, headers, filterResponse } from '../utils/fetch-middleware';
 import  { queryData } from '../utils/dataConvert';
 import {
   API_GET_BUSSINESS_TYPE,
@@ -20,9 +20,11 @@ const ActionCreator = (type,url,method,data)=>{
             method:method,
             headers,
               body: JSON.stringify(data),
-          }).then(checkStatus).then(parseJSON).then((data)=>{
+          }).then(checkStatus).then(parseJSON).then(filterResponse).then((data)=>{
             resolve(data);
-          })
+          }).catch((err)=> {
+            reject({err:{message:'网络异常',code:'6666'}});
+          });
         })
       }
     }
