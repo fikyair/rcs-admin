@@ -284,7 +284,7 @@ export default class NewLimitModel extends React.Component {
         };
         return (
             <div>
-                <Form className="container-body" layout="inline" >
+                <Form className="form-body" layout="inline" >
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >

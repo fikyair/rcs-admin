@@ -50,9 +50,10 @@ export function checkStatus(response) {
     if ((response.status >= 200 && response.status < 300) || response.status == 400 ) {
         return response
     } else {
-        var error = new Error(response.statusText)
-        error.response = response
-        throw error
+        var err = new Error(response.statusText)
+        err.response = response
+      err.message = response.statusText
+        throw err
     }
 }
 
@@ -74,3 +75,14 @@ export const headers = ()=> ({
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
     },
 })
+
+export function filterResponse (data) {
+  if(data.success){
+    return data
+  } else{
+    var error = new Error(response.statusText)
+    error.message = response.statusText
+    throw error
+  }
+
+}

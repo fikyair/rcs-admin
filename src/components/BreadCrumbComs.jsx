@@ -1,4 +1,4 @@
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Card } from 'antd';
 import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
@@ -21,6 +21,7 @@ const breadcrumbNameMap = {
 export default class BreadCrumbComs extends React.Component{
   state = {
     breadcrumbItems:null,
+    docTitle:'',
   }
   componentWillReceiveProps(nextProps){
     if(nextProps.location.pathname !== this.props.location.pathname){
@@ -43,7 +44,7 @@ export default class BreadCrumbComs extends React.Component{
           const url1 = `/${pathSnippets.slice(0, index ).join('/')}/:params`;
           const url2 = `/${pathSnippets.slice(0, index+1 ).join('/')}`;
           return (
-            <Breadcrumb.Item key={url2}>
+            <Breadcrumb.Item key={url2} name={breadcrumbNameMap[url1]}>
                 <Link to={url2}>
                   {breadcrumbNameMap[url1]}
                 </Link>
@@ -52,7 +53,7 @@ export default class BreadCrumbComs extends React.Component{
         } else {
           const url = `/${pathSnippets.slice(0, index + 1).join('/')}`;
           return (
-            <Breadcrumb.Item key={url}>
+            <Breadcrumb.Item key={url} name={breadcrumbNameMap[url]}>
                 <Link to={url}>
                   {breadcrumbNameMap[url]}
                 </Link>
@@ -67,13 +68,20 @@ export default class BreadCrumbComs extends React.Component{
           <Link to="/">首页</Link>
       </Breadcrumb.Item>
     )].concat(extraBreadcrumbItems);
-    this.setState({breadcrumbItems:extraBreadcrumbItems})
+    debugger;
+    if(extraBreadcrumbItems.length >0){
+      this.setState({breadcrumbItems:extraBreadcrumbItems,docTitle:extraBreadcrumbItems[extraBreadcrumbItems.length-1].props.name})
+    }
+
   }
 
   render(){
-    const { breadcrumbItems } = this.state;
-    return (<Breadcrumb style={{padding: '10px'}}>
+    const { breadcrumbItems, docTitle } = this.state;
+    return (
+      <Card noHovering={true} style={{marginBottom: '10px'}} bodyStyle={{padding:'10px',marginBottom:'10px'}}><Breadcrumb >
       { breadcrumbItems }
-    </Breadcrumb>)
+    </Breadcrumb>
+        <h2>{docTitle}</h2>
+      </Card>)
   }
 }

@@ -260,7 +260,7 @@ export default class LimitDetails extends React.Component {
         return (
             <div>
                 <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
-                <Form className="container-body" layout="inline" onSubmit={this.handleSubmit}>
+                <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
 
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}

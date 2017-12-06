@@ -21,7 +21,7 @@ export default function (state = initialState,actions ) {
         case 'FAILURE':
             return {
                 ...state,
-                errMsg:actions.result.message,
+                errMsg:actions.error.err.message,
                 requestStaus:false,
             };
         case ASYNC_COOKIE:
