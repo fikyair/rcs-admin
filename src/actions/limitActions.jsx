@@ -7,6 +7,7 @@ import {
   API_GET_BODY_PROPERTY,
   API_UPDATE_MODEL,
     API_POST_MODEL,
+  API_GET_MERCHT_TYPE,
 } from '../utils/ActionsType';
 
 const ActionCreator = (type,url,method,data)=>{
@@ -48,3 +49,9 @@ export const getMainPart = (data)=>  ActionCreator(API_GET_MAIN_ACCOUNT,`/api/ty
 
 //GET /type/mainparttype 查找限额主体属性（限额属性）
 export const getBodyProperty =  ActionCreator(API_GET_BODY_PROPERTY,`/api/type/mainparttype`,'GET');
+// /rcslproperty/detail 查看维度明细
+
+export const getMerchtType = (data)=> ActionCreator(API_GET_MERCHT_TYPE,`/api/rcslproperty/detail/${queryData(data)}`,'GET')();
+
+
+export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL,`/api/rcslmodel`, 'PUT')

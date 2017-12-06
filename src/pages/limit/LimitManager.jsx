@@ -3,7 +3,7 @@ import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
 import MapSelectComs from '../../components/MapSelectComs';
-import { getModels, getBodyProperty, getBussinessType, getMainPart} from '../../actions/limitActions';
+import { getModels, getBodyProperty, getBussinessType, getMerchtType, getMainPart} from '../../actions/limitActions';
 
 const FormItem = Form.Item;
 @setTitle('首页')
@@ -230,6 +230,7 @@ export default class LimitManager extends React.Component {
         //页面发起数据请求
       this.props.dispatch(getBussinessType());
       this.props.dispatch(getBodyProperty());
+      this.props.dispatch(getMerchtType({propertyEnum:'MERCH_TYPE'}));
       //this.props.dispatch(getMainAccount({mainPartTypeEnum:'B'}));
 
 
@@ -328,7 +329,7 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs  wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
+                        <MapSelectComs selectedAll={true} initial={true} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
                     </div>
                     <Row>
                         <Col {...layout} style={{marginLeft:6}}>

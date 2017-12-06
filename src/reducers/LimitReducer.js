@@ -3,12 +3,18 @@ import {  API_GET_MODELS,
   API_GET_MAIN_ACCOUNT,
   API_GET_BODY_PROPERTY,
     API_UPDATE_MODEL,
+  API_GET_MERCHT_TYPE,
     API_POST_MODEL,
 } from '../utils/ActionsType';
 const initialState ={
   modelsData:[],
   bussinessType:{},
-  selectsData:{},
+  selectsData:{
+    limitType:{},
+    limitProperty:{},
+    limitBody:{},
+    tradeType:{},
+  },
   cardType:[],
   mainAccount:[],
   bodyProperty:[],
@@ -30,11 +36,7 @@ export default function (state = initialState,actions ) {
           limitType:{
             labelName: '限额类型',
             optionVal: [
-              ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
-              {
-                value:'all',
-                name:'全部'
-              }
+              ..._.map(actions.data,(v,k)=>{ return {value:String(v.key),name:String(v.value)}}),
             ],
             key: 'limitType',
             type: 'select'
@@ -47,18 +49,15 @@ export default function (state = initialState,actions ) {
          selectsData:{
            ...state.selectsData,
            limitBody:{
-            labelName: '限额主体',
-            optionVal: [
-              ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
-              {
-                value:'all',
-                name:'全部'
-              }
-            ],
-          key: 'limitBody',
-          type: 'select'
-          }
-         },
+
+             labelName: '限额主体',
+             optionVal: [
+               ..._.map(actions.data,(v,k)=>{ return {value:String(v.key),name:String(v.value)}}),
+             ],
+             key: 'limitBody',
+             type: 'select'
+           }
+         }
     }
     case API_GET_BODY_PROPERTY[1]:
       return {
@@ -68,16 +67,31 @@ export default function (state = initialState,actions ) {
           limitProperty:{
             labelName: '限额属性',
             optionVal: [
-              ..._.map(actions.data,(v,k)=>{ return {value:v.key,name:v.value}}),
-              {
-                value:'all',
-                name:'全部'
-              }
+              ..._.map(actions.data,(v,k)=>{ return {value:String(v.key),name:String(v.value)}}),
             ],
             key: 'limitProperty',
             type: 'select'
           }},
         bodyProperty:actions.data,
+      }
+    case API_GET_MERCHT_TYPE[1]:
+      return {
+        ...state,
+        selectsData: {
+          ...state.selectsData,
+          merchType: {
+            index:'4',
+            labelName: '商户类型',
+            optionVal: [
+              ..._.map(actions.data, (v, k) => {
+                return {value: v.propertyDetailCode, name: v.propertyDetailName}
+              }),
+            ],
+            key: 'merchType',
+            type: 'select'
+          }
+        },
+        bodyProperty: actions.data,
       }
     default:
       return state

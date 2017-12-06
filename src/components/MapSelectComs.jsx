@@ -11,6 +11,7 @@ const FormItem = Form.Item;
 @Form.create({
   onValuesChange:(props, values)=>{
       if(values['limitProperty']){
+        props.data.limitBody = null;
         Storage.dispatch(getMainPart({mainPartTypeEnum:values['limitProperty']}))
       }
   }
@@ -18,7 +19,7 @@ const FormItem = Form.Item;
 export default class MapSelectComs extends React.Component {
 
     render() {
-        const {data} = this.props;
+        const {data,initial = false, selectedAll= false } = this.props;
         const {getFieldDecorator} = this.props.form
         return (
             <div style={{display: 'inline-block'}}>
@@ -26,17 +27,23 @@ export default class MapSelectComs extends React.Component {
                 {
                   Object.keys(data).map((key, k) => {
                     const v = data[key];
+                    if(!v || Object.keys(v).length == 0) return null;
+                    const option = initial?{initialValue:'all'} :{};
+                    const optionVal = selectedAll?v.optionVal.concat([{
+                      value:'all',
+                      name:'全部'
+                    }]):v.optionVal
                     return <FormItem key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
-                                    initialValue: '全部',
+                                    ...option,
                                     rules: v.rules ? [...v.rules] : [],
                                 })(
                                     v.type === 'select' ?
                                         <SelectComs labelName={v.labelName} placeholder="请选择" {...v.body}
                                                     className="selects-style">
                                             {
-                                                v.optionVal.map((i, j) => {
+                                              optionVal.map((i, j) => {
                                                     return <Option key={j} value={i.value}>{i.name}</Option>
                                                 })
                                             }
