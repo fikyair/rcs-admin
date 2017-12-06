@@ -9,7 +9,7 @@ import MapSelectComs from '../../components/MapSelectComs'
 
 
 const FormItem = Form.Item;
-
+const {TextArea} = Input
 @setTitle('个性限额添加页')
 @Containerization()
 @Form.create()
@@ -359,6 +359,12 @@ export default class NewLimitModel extends React.Component {
                                addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
                                style={{width: '200px', margin: '10px'}}/>
                         <ExtracData/>
+                        <FormItem
+                        label="备注"
+                        >
+                            {getFieldDecorator('remark')( <TextArea></TextArea>)}
+
+                        </FormItem>
                         <Button style={{margin: '10px', verticalAlign: 'top'}}
                                 onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
                         <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>

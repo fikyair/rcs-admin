@@ -159,6 +159,10 @@ export default class LimitManager extends React.Component {
                 dataIndex: 'status',
                 key: 'status',
             }, {
+                title: '备注',
+                dataIndex: 'remark',
+                key: 'remark',
+            }, {
                 title: '管理',
                 key: 'action',
                 render: (text, record) => (

@@ -298,7 +298,9 @@ export default class LimitManager extends React.Component {
             ...args,
         };
         //调用接口
-      this.props.dispatch(getModels({...params}))
+      this.props.dispatch(getModels({...params})).then(data=>{
+          console.log('====>',data)
+      })
     }
 
     changePage = (page) =>{
