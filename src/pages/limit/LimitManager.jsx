@@ -227,6 +227,7 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
+        //页面发起数据请求
       this.props.dispatch(getBussinessType());
       this.props.dispatch(getBodyProperty());
       //this.props.dispatch(getMainAccount({mainPartTypeEnum:'B'}));
@@ -308,6 +309,7 @@ export default class LimitManager extends React.Component {
     }
 
     render() {
+        debugger;
         const {options, visible, loading, removeVisible, isMerchant} = this.state;
         const {
             selectsData,
@@ -341,7 +343,7 @@ export default class LimitManager extends React.Component {
 
                 <Card noHovering="true" className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table className="btl"
                                                                                               columns={columns}
-                                                                                              dataSource={dataSource}
+                                                                                              data={selectsData}
                                                                                               pagination={false}/>
                     <div style={{margin: 29, textAlign: 'right'}}>
                         <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}

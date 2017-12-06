@@ -29,7 +29,7 @@ export default class MapSelectComs extends React.Component {
                     return <FormItem key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
-                                    initialValue: v.initialValue,
+                                    initialValue: '全部',
                                     rules: v.rules ? [...v.rules] : [],
                                 })(
                                     v.type === 'select' ?

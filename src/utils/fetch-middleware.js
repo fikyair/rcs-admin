@@ -50,7 +50,7 @@ export function checkStatus(response) {
     if ((response.status >= 200 && response.status < 300) || response.status == 400 ) {
         return response
     } else {
-        var err = new Error(response.statusText)
+        var err = new Error("网络异常")
         err.response = response
       err.message = response.statusText
         throw err
