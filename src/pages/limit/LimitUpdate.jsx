@@ -17,8 +17,17 @@ export default class LimitUpdate extends React.Component {
 
     state = {
         isMerchant: false,
+        data : {cardProperty: '1',cardLand:'1',salesMethod:'1',touchMethod:'1'}
     }
 
+
+    setInitialValue = (data, selectData) => {
+        let list = selectData.map(v => {
+            v.initialValue =data[v.key]
+           return v
+        })
+        return list
+    }
 
     mockData = {
         merchentSelects: [
@@ -268,10 +277,14 @@ export default class LimitUpdate extends React.Component {
 
     }
 
+
+    componentDidMount() {
+
+    }
+
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.setState({isMerchant: true})
-        }
+        // 在这调用方法初始化数据
+        this.mockData.tradeSelects.offline = this.setInitialValue(this.state.data,this.mockData.tradeSelects.offline)
     }
 
     handleSubmit = () => {
