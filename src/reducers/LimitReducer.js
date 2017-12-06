@@ -2,6 +2,7 @@ import {  API_GET_MODELS,
           API_GET_BUSSINESS_TYPE,
   API_GET_MAIN_ACCOUNT,
   API_GET_BODY_PROPERTY,
+    API_UPDATE_MODEL,
 } from '../utils/ActionsType';
 const initialState ={
   modelsData:[],
@@ -77,7 +78,28 @@ export default function (state = initialState,actions ) {
           }},
         bodyProperty:actions.data,
       }
-
+      case API_UPDATE_MODEL[1]:
+          return {
+              ...state,
+              selectsData: {
+                  ...state.selectsData,
+                  limitProperty: {
+                      labelName: '限额属性',
+                      optionVal: [
+                          ..._.map(actions.data, (v, k) => {
+                              return {value: v.key, name: v.value}
+                          }),
+                          {
+                              value: 'all',
+                              name: '全部'
+                          }
+                      ],
+                      key: 'limitProperty',
+                      type: 'select'
+                  }
+              },
+              bodyProperty: actions.data,
+          }
     default:
       return state
   }

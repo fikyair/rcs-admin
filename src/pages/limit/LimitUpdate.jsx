@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
+import {getLimitInitData, getBodyProperty, getBussinessType, getMainPart, getModels} from '../../actions/limitActions';
 
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
@@ -11,7 +12,14 @@ import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 
 @setTitle('限额修改页')
-@Containerization()
+@Containerization(state=>({
+    selectsData:state.LimitReducer.selectsData,
+    bussinessType:state.LimitReducer.bussinessType,
+    cardType:state.LimitReducer.cardType,
+    bodyProperty:state.LimitReducer.bodyProperty,
+    mainAccount:state.LimitReducer.mainAccount,
+
+}))
 @Form.create()
 export default class LimitUpdate extends React.Component {
 
@@ -283,6 +291,8 @@ export default class LimitUpdate extends React.Component {
     }
 
     componentWillMount() {
+        let data= {id: '11'}
+       // this.props.dispatch(getLimitInitData(data))
         // 在这调用方法初始化数据
         this.mockData.tradeSelects.offline = this.setInitialValue(this.state.data,this.mockData.tradeSelects.offline)
     }
