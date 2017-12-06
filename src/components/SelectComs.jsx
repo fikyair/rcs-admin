@@ -10,6 +10,11 @@ export class Option extends Select.Option{}
 * */
 export default  class  SelectComs extends React.Component{
 
+
+    check(){
+        console.log(1111111)
+    }
+
   render(){
     const {labelName,children,labelNStyles} = this.props;
     return (<div style={{display:'inline-block',margin:'10px'}} >

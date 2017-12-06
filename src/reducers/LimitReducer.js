@@ -79,34 +79,6 @@ export default function (state = initialState,actions ) {
           }},
         bodyProperty:actions.data,
       }
-      case API_UPDATE_MODEL[1]:
-          return {
-              ...state,
-              selectsData: {
-                  ...state.selectsData,
-                  limitProperty: {
-                      labelName: '限额属性',
-                      optionVal: [
-                          ..._.map(actions.data, (v, k) => {
-                              return {value: v.key, name: v.value}
-                          }),
-                          {
-                              value: 'all',
-                              name: '全部'
-                          }
-                      ],
-                      key: 'limitProperty',
-                      type: 'select'
-                  }
-              },
-              bodyProperty: actions.data,
-          }
-      case API_POST_MODEL[1]:
-          return{
-              ...state,
-
-          }
-
     default:
       return state
   }

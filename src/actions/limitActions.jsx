@@ -48,5 +48,3 @@ export const getMainPart = (data)=>  ActionCreator(API_GET_MAIN_ACCOUNT,`/api/ty
 
 //GET /type/mainparttype 查找限额主体属性（限额属性）
 export const getBodyProperty =  ActionCreator(API_GET_BODY_PROPERTY,`/api/type/mainparttype`,'GET');
-
-export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL,`/api/rcslmodel`, 'PUT')

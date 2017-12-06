@@ -3,6 +3,7 @@ import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getLimitInitData, getBodyProperty, getBussinessType, getMainPart, getModels} from '../../actions/limitActions';
+import {FetchAPI} from '../../utils/fetch-middleware'
 
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
@@ -12,32 +13,25 @@ import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 
 @setTitle('限额修改页')
-@Containerization(state=>({
-    selectsData:state.LimitReducer.selectsData,
-    bussinessType:state.LimitReducer.bussinessType,
-    cardType:state.LimitReducer.cardType,
-    bodyProperty:state.LimitReducer.bodyProperty,
-    mainAccount:state.LimitReducer.mainAccount,
-
-}))
+@Containerization()
 @Form.create()
 export default class LimitUpdate extends React.Component {
 
     state = {
         isMerchant: false,
-        data : {cardProperty: '1',cardLand:'1',salesMethod:'1',touchMethod:'1'}
+        initData: {}
     }
 
 
     setInitialValue = (data, selectData) => {
         let list = selectData.map(v => {
-            v.initialValue =data[v.key]
-           return v
+            v.initialValue = data[v.key]
+            return v
         })
         return list
     }
 
-    mockData = {
+    initData = {
         merchentSelects: [
             {
                 labelName: '结算账户类型',
@@ -48,7 +42,7 @@ export default class LimitUpdate extends React.Component {
                 ],
                 key: 'accountType',
                 type: 'select',
-                body: {'disabled': true},
+                // body: {'disabled': true},
                 initialValue: '1'
             }, {
                 labelName: '名单类型',
@@ -214,7 +208,7 @@ export default class LimitUpdate extends React.Component {
         inputLimit: [
             {
                 labelName: '单日',
-                key: 'singleDay',
+                key: 'dayAmountLimit',
                 labelValue: 'sigle',
                 addonBefore: "金额",
                 addonAfter: "元",
@@ -227,7 +221,7 @@ export default class LimitUpdate extends React.Component {
 
             }, {
                 labelName: '单月',
-                key: 'singleMonth',
+                key: 'monthAmountLimit',
                 labelValue: 'sigle',
 
                 type: 'input',
@@ -239,7 +233,7 @@ export default class LimitUpdate extends React.Component {
 
             }, {
                 labelName: '年',
-                key: 'singleYear',
+                key: 'yearAmountLimit',
                 labelValue: 'sigle',
                 body: {
                     style: {width: 120},
@@ -249,7 +243,7 @@ export default class LimitUpdate extends React.Component {
                 type: 'input',
             }, {
                 labelName: '终身',
-                key: 'lifetime',
+                key: 'lifeAmountLimit',
                 labelValue: 'sigle',
                 body: {
                     style: {width: 120},
@@ -260,7 +254,7 @@ export default class LimitUpdate extends React.Component {
                 type: 'input',
             }, {
                 labelName: '两笔间隔',
-                key: 'interval',
+                key: 'intervalSecondsLimit',
                 labelValue: 'sigle',
                 addonAfter: "元",
                 body: {
@@ -272,7 +266,7 @@ export default class LimitUpdate extends React.Component {
             }, {
                 labelName: '笔/日',
                 key: 'oneTime',
-                labelValue: 'sigle',
+                labelValue: 'dayCountLimit',
                 addonAfter: "元",
                 type: 'input',
                 body: {
@@ -291,25 +285,44 @@ export default class LimitUpdate extends React.Component {
     }
 
     componentWillMount() {
-        let data= {id: '11'}
-       // this.props.dispatch(getLimitInitData(data))
-        // 在这调用方法初始化数据
-        this.mockData.tradeSelects.offline = this.setInitialValue(this.state.data,this.mockData.tradeSelects.offline)
+        this.setState({initData: this.initData})
+        let id= '21'
+        this.getinitData(id)
+
+    }
+
+
+    getinitData = (id) => {
+        let data = {}
+        FetchAPI(`/rcslmodel/${id}`, 'GET').then((data) => {
+            debugger;
+            console.log(data)
+            let list = this.setInitialValue(data, this.initData.inputLimit)
+            let initData= this.state.initData
+            initData.inputLimit = list
+            this.setState({initData: initData})
+           // this.initData.inputLimit = this.setInitialValue(data, this.initData.inputLimit)
+        })
     }
 
     handleSubmit = () => {
-        const {getFieldsValue} = this.props.form;
-        const val = getFieldsValue();
-        // TODO 提交表单
+        debugger
+        const value = this.formData.props.form.getFieldsValue()
+        value.id = '22'
+        FetchAPI(`/rcslmodel`, 'PUT',value).then((data) => {
+            debugger;
+            console.log(data)
+
+            // this.initData.inputLimit = this.setInitialValue(data, this.initData.inputLimit)
+        })
+
         debugger;
+
+
     }
 
     render() {
         const {
-            merchentSelects = this.mockData.merchentSelects,
-            online = this.mockData.tradeSelects.online,
-            offline = this.mockData.tradeSelects.offline,
-            inputLimit = this.mockData.inputLimit,
             match
         } = this.props;
         const {type, id} = match.params
@@ -319,27 +332,32 @@ export default class LimitUpdate extends React.Component {
             sm: 7,
             md: 5,
         };
+        debugger
         return (
             <div>
                 <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
 
-                <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
+                <Form className="form-body" layout="inline" >
 
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
-                        <MapSelectComs data={merchentSelects}/>
+                        <MapSelectComs data={this.state.initData.merchentSelects}/>
                     </Card>
                     <Card title="选择交易属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
                         <div>
-                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>线下交易</b></div></FormItem>
-                            <MapSelectComs data={offline}/>
+                            <FormItem style={{margin: '10px'}}>
+                                <div style={{fontSize: 13}}><b>线下交易</b></div>
+                            </FormItem>
+                            <MapSelectComs data={this.state.initData.tradeSelects.offline}/>
                         </div>
                         <div>
-                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>扫码交易</b></div></FormItem>
-                            <MapSelectComs data={online}/>
+                            <FormItem style={{margin: '10px'}}>
+                                <div style={{fontSize: 13}}><b>扫码交易</b></div>
+                            </FormItem>
+                            <MapSelectComs data={this.state.initData.tradeSelects.online}/>
                         </div>
                     </Card>
                     <Card title="添加限额值" noHovering={true}
@@ -347,7 +365,7 @@ export default class LimitUpdate extends React.Component {
                     >
 
                         <Row>
-                            <MapSelectComs data={inputLimit}>
+                            <MapSelectComs data={this.state.initData.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
                                 <FormItem>
                                  <span style={{
                                      marginRight: '10px',
@@ -383,7 +401,7 @@ export default class LimitUpdate extends React.Component {
                         <div style={{textAlign: 'center'}}>
                             <Button style={{margin: '10px'}}
                                     onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                            <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                            <Button htmlType="submit" style={{margin: '10px'}} onClick={()=>this.handleSubmit()}>保存</Button>
                         </div>
 
 
