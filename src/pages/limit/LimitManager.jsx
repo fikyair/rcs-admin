@@ -258,13 +258,18 @@ export default class LimitManager extends React.Component {
     }
 
     handleAddOk = () => {
-        this.setState({loading: true});
-        this.timer = setTimeout(() => {
-            this.setState({loading: false, visible: false});
-        }, 3000);
+        this.addFormData.props.form.validateFields((err, values) => {
+          if (!err) {
+            this.setState({loading: true});
+            this.timer = setTimeout(() => {
+              this.setState({loading: false, visible: false});
+            }, 3000);
 
-        //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
-        this.props.history.push('/limitManager/add')
+            //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
+            this.props.history.push('/limitManager/add')
+          }
+        });
+
     }
 
     componentWillUnmount() {
@@ -329,7 +334,7 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs selectedAll={true} initial={true} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
+                        <MapSelectComs  selectedAll={true} initial={true} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
                     </div>
                     <Row>
                         <Col {...layout} style={{marginLeft:6}}>
@@ -366,13 +371,16 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    <MapSelectComs data={selectsData} ref="modalSelects"/>
+                      <Form layout='inline'>
+                          <MapSelectComs wrappedComponentRef={(inst) => this.addFormData = inst} matchIs={true} data={selectsData} ref="modalSelects"/>
+                      </Form>
                 </Modal>
                 :null
               }
                 <Modal
                     visible={removeVisible}
                     title="删除限额"
+                    bodyStyle={{backgroundColor:'red'}}
                     onOk={this.handleRemoveOk}
                     onCancel={this.handleRemoveCancel}
                     footer={[

@@ -39,7 +39,7 @@ export default function (state = initialState,actions ) {
               ..._.map(actions.data,(v,k)=>{ return {value:String(v.key),name:String(v.value)}}),
             ],
             key: 'limitType',
-            type: 'select'
+            type: 'select',
         }},
         bussinessType:actions.data,
       }
