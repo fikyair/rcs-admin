@@ -257,9 +257,11 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
+        debugger
+        this.formData.props.form.getFieldsValue();
         const {getFieldsValue} = this.props.form;
         const val = getFieldsValue();
-
+        console.log("表单的数据",val)
         this.props.dispatch(addModel(val)).then(data=>{
             console.log("----->",data);
         })
@@ -288,7 +290,7 @@ export default class NewLimitModel extends React.Component {
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
                     >
-                        <MapSelectComs data={merchentSelects}/>
+                        <MapSelectComs wrappedComponentRef={(inst) => this.formData = inst} data={merchentSelects}/>
                     </Card>
                     <Card title="选择交易属性" noHovering={true}
                           style={{marginBottom: 6}}
@@ -344,7 +346,7 @@ export default class NewLimitModel extends React.Component {
                                style={{width: '200px', margin: '10px'}}/>
                         <Button style={{margin: '10px'}}
                                 onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                        <Button htmlType="submit" style={{margin: '10px'}} onClick={this.handleSubmit}>保存</Button>
+                        <Button htmlType="submit" style={{margin: '10px'}} onClick={()=>this.handleSubmit()}>保存</Button>
                     </Card>
                 </Form>
             </div>
