@@ -2,13 +2,14 @@ import React from 'react';
 import {Input, Button, Form, Row, Col, Card} from 'antd'
 import {Containerization, InitComs, setTitle} from '../../common/PublicComponent';
 import InputComs from "../../components/InputComs";
-import MapSelectComs from '../../components/MapSelectComs'
+import MapSelectComs from '../../components/MapSelectComs';
+import { getPersonalDetial} from '../../actions/limitActions';
 
 const InputGroup = Input.Group;
 
 const FormItem = Form.Item;
 @setTitle('限额详情页')
-@Containerization()
+@Containerization(state=>({}))
 @Form.create()
 export default class LimitDetails extends React.Component {
 
@@ -227,6 +228,7 @@ export default class LimitDetails extends React.Component {
     }
 
     componentWillMount() {
+        this.props.dispatch(getPersonalDetial('11'))
     }
 
     render() {

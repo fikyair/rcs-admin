@@ -9,7 +9,8 @@ import {
     API_POST_MODEL,
     API_GET_MERCHT_TYPE,
     API_MODIFY_MODEL,
-    API_INIT_POST_MODEL
+    API_INIT_POST_MODEL,
+  API_GET_PERSONAL_LIMIT
 } from '../utils/ActionsType';
 
 const ActionCreator = (type,url,method,data)=>{
@@ -54,7 +55,6 @@ export const getBodyProperty =  ActionCreator(API_GET_BODY_PROPERTY,`/api/type/m
 // /rcslproperty/detail 查看维度明细
 
 // GET /rcslmodelcascade/merchtype 查询商户类型下拉数据(新增时)
-
 export const getMerchtType = (data)=> ActionCreator(API_GET_MERCHT_TYPE,`/api/rcslmodelcascade/merchtype/${queryData(data)}`,'GET')();
 
 
@@ -64,3 +64,8 @@ export const editLimit = (data) => ActionCreator(API_MODIFY_MODEL, `/api/rcslmod
 
 //查询新增的下拉选项等数据
 export const getSelectDdata = (data) => ActionCreator(API_INIT_POST_MODEL, `/api/rcslmodelcascade/propertylist?limitType=1&limitProperty=1&mainPartCodeGroup=M101&merchType=P1011001`, 'GET')()
+
+
+
+//查询个性限额明细 GET /rcslmodelprivate/{id}查询明细
+export const  getPersonalDetial = (data)=> ActionCreator(API_GET_PERSONAL_LIMIT,`/api/rcslmodelprivate/${data}`,'GET')();

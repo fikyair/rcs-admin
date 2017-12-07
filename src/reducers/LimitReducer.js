@@ -7,7 +7,7 @@ import {
     API_GET_MERCHT_TYPE,
     API_POST_MODEL,
     API_MODIFY_MODEL,
-    API_INIT_POST_MODEL
+    API_INIT_POST_MODEL,
 } from '../utils/ActionsType';
 
 const initialState = {

@@ -251,7 +251,7 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs style={{}} ref="selectsData" data={selectsData}/>
+                        <MapSelectComs  selectedAll={true} initial={true} style={{}} ref="selectsData" data={selectsData}/>
                         {/*<InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>*/}
                     </div>
                     <Row>
