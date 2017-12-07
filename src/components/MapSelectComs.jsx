@@ -27,21 +27,16 @@ export default class MapSelectComs extends React.Component {
                   Object.keys(data).map((key, k) => {
                     const v = data[key];
                     if(!v || Object.keys(v).length == 0) return null;
-                    const option = initial?{initialValue:'all'} :{};
-                    const optionVal = selectedAll?v.optionVal.concat([{
-                      value:'all',
-                      name:'全部'
-                    }]):v.optionVal;
+                    const optionVal = v.optionVal;
 
                     return <FormItem  label={(<div className="label-class">{v.labelName}</div>)} style={{display: 'inline-block',margin:'10px'}}   key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
-                                    ...option,
                                     rules: matchIs ? [{required:true,message:'请勾选'}] : [],
                                   help:'11111',
                                 })(
                                     v.type === 'select' ?
-                                        <Select style={{width:'120px'}} labelName={v.labelName} placeholder="请选择" {...v.body}
+                                        <Select style={{width:'120px'}} labelName={v.labelName} placeholder={selectedAll?"全部":"请选择"} {...v.body}
                                                     >
                                             {
                                               optionVal.map((i, j) => {
