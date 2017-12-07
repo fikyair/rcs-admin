@@ -251,9 +251,6 @@ export default class NewLimitModel extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.setState({isMerchant: true})
-        }
     }
 
     handleSubmit = () => {
@@ -268,7 +265,6 @@ export default class NewLimitModel extends React.Component {
             console.log("----->",data);
         })
         // TODO 提交表单
-        debugger;
     }
 
     render() {

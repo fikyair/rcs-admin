@@ -6,7 +6,8 @@ import {
     API_UPDATE_MODEL,
     API_GET_MERCHT_TYPE,
     API_POST_MODEL,
-    API_MODIFY_MODEL
+    API_MODIFY_MODEL,
+    API_INIT_POST_MODEL
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -99,7 +100,6 @@ export default function (state = initialState, actions) {
         },
         bodyProperty: actions.data,
       }
-
       case API_UPDATE_MODEL[1]:
             return {
                 ...state,
@@ -125,6 +125,32 @@ export default function (state = initialState, actions) {
                 }),
 
             }
+        case API_INIT_POST_MODEL[1]:
+            return {
+                ...state,
+                entryData: actions.data,
+                initdata: _.map(actions.data.propertyList, (v, k) => {
+                    return {
+                        value: v.value.map((v, k) => {
+                            return {
+                                labelName: v.name,
+                                initialValue: v.value.name,
+                                key: v.code,
+                                body: {
+                                    style: {width: 150},
+                                    disabled: true
+                                }
+                            }
+                        }),
+                        name: v.name,
+                        code: v.code,
+
+
+                    }
+                }),
+
+            }
+
         case API_MODIFY_MODEL[1]:
             return {
                 ...state,

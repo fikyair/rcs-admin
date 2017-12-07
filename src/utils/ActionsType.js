@@ -35,6 +35,8 @@ export const API_GET_MERCHT_TYPE = ['REQUEST', 'GET_MERCHT_TYPE_SUCCESS', 'FAILU
 * */
 //查询限额模型列表
 export const API_GET_MODELS = ['REQUEST', 'GET_MODELS_SUCCESS', 'FAILURE'];
+//新增初始化数据 ---下拉选项等
+export const API_INIT_POST_MODEL = ['REQUEST', 'POST_MODEL_SUCCESS', 'FAILURE'];
 //新增
 export const API_POST_MODEL = ['REQUEST', 'POST_MODEL_SUCCESS', 'FAILURE'];
 //修改回显
