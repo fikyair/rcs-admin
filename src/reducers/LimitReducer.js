@@ -6,10 +6,11 @@ import {
     API_UPDATE_MODEL,
     API_GET_MERCHT_TYPE,
     API_POST_MODEL,
+    API_MODIFY_MODEL
 } from '../utils/ActionsType';
 
 const initialState = {
-    modelsData: [],
+    modelsData: {},
     bussinessType: {},
     selectsData: {
         limitType: {},
@@ -20,6 +21,9 @@ const initialState = {
     cardType: [],
     mainAccount: [],
     bodyProperty: [],
+    initdata: [],
+    entryData:{},
+    editsuccess:{}
 };
 //全局状态信息，数据信息存储
 export default function (state = initialState, actions) {
@@ -99,6 +103,7 @@ export default function (state = initialState, actions) {
       case API_UPDATE_MODEL[1]:
             return {
                 ...state,
+                entryData: actions.data,
                 initdata: _.map(actions.data.propertyList, (v, k) => {
                     return {
                         value: v.value.map((v, k) => {
@@ -117,7 +122,13 @@ export default function (state = initialState, actions) {
 
 
                     }
-                })
+                }),
+
+            }
+        case API_MODIFY_MODEL[1]:
+            return {
+                ...state,
+                editsuccess: actions.data
             }
     default:
       return state

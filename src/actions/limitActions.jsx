@@ -8,6 +8,7 @@ import {
   API_UPDATE_MODEL,
     API_POST_MODEL,
   API_GET_MERCHT_TYPE,
+    API_MODIFY_MODEL
 } from '../utils/ActionsType';
 
 const ActionCreator = (type,url,method,data)=>{
@@ -55,3 +56,5 @@ export const getMerchtType = (data)=> ActionCreator(API_GET_MERCHT_TYPE,`/api/rc
 
 
 export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL,`/api/rcslmodel/22`, 'GET')()
+
+export const editLimit = (data) => ActionCreator(API_MODIFY_MODEL,`/api/rcslmodel`, 'PUT',data)()
