@@ -17,12 +17,12 @@ const FormItem = Form.Item;
     initdata: state.LimitReducer.initdata,
     entryData: state.LimitReducer.entryData,
     editsuccess: state.LimitReducer.editsuccess
-})) @Form.create()
+}))
+@Form.create()
 export default class LimitUpdate extends React.Component {
 
     state = {
         isMerchant: false,
-        initData: {}
     }
 
 
@@ -110,6 +110,7 @@ export default class LimitUpdate extends React.Component {
             id: 22
         }
         this.props.dispatch(editLimit(params))
+        this.props.history.push('/limitManager')
     }
 
 
