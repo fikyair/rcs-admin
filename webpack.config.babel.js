@@ -98,8 +98,8 @@ export default {
     devServer: {
         proxy: {
             '/api':{
-                target: 'https://rcs-admin-dev.suixingpay.com',
-                pathRewrite: {"^/api" : "/api"},
+                target: 'http://172.16.42.96:8001',
+                pathRewrite: {"^/api" : ""},
                 secure:false,
                 changeOrigin: true
             },

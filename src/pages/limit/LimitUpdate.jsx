@@ -7,28 +7,22 @@ import {FetchAPI} from '../../utils/fetch-middleware'
 
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
-import MapSelectComs from '../../components/MapSelectComs'
+import MapModifyCom from '../../components/MapModifyCom'
 
 
 const FormItem = Form.Item;
 
 @setTitle('限额修改页')
-@Containerization()
-@Form.create()
+@Containerization(state => ({
+    initdata: state.LimitReducer.initdata,
+
+
+})) @Form.create()
 export default class LimitUpdate extends React.Component {
 
     state = {
         isMerchant: false,
         initData: {}
-    }
-
-
-    setInitialValue = (data, selectData) => {
-        let list = selectData.map(v => {
-            v.initialValue = data[v.key]
-            return v
-        })
-        return list
     }
 
     initData = {
@@ -40,8 +34,8 @@ export default class LimitUpdate extends React.Component {
                     {value: '2', name: '对私-法人'},
                     {value: '3', name: '对私'},
                 ],
-                key: 'accountType',
-                type: 'select',
+                key: 'accountType', type: 'select',
+
                 // body: {'disabled': true},
                 initialValue: '1'
             }, {
@@ -214,7 +208,7 @@ export default class LimitUpdate extends React.Component {
                 addonAfter: "元",
                 type: 'input',
                 body: {
-                    style: {width: 120},
+                    style: {width: 140},
                     addonBefore: "金额",
                     addonAfter: "元",
                 },
@@ -276,7 +270,6 @@ export default class LimitUpdate extends React.Component {
 
             }
         ]
-
     }
 
 
@@ -285,123 +278,42 @@ export default class LimitUpdate extends React.Component {
     }
 
     componentWillMount() {
-        this.setState({initData: this.initData})
-        let id= '21'
-        this.getinitData(id)
-
+        let data = {id: 22}
+        this.props.dispatch(getLimitInitData(data));
     }
 
-
-    getinitData = (id) => {
-        let data = {}
-        FetchAPI(`/rcslmodel/${id}`, 'GET').then((data) => {
-            debugger;
-            console.log(data)
-            let list = this.setInitialValue(data, this.initData.inputLimit)
-            let initData= this.state.initData
-            initData.inputLimit = list
-            this.setState({initData: initData})
-           // this.initData.inputLimit = this.setInitialValue(data, this.initData.inputLimit)
-        })
-    }
 
     handleSubmit = () => {
-        debugger
         const value = this.formData.props.form.getFieldsValue()
-        value.id = '22'
-        FetchAPI(`/rcslmodel`, 'PUT',value).then((data) => {
-            debugger;
-            console.log(data)
-
-            // this.initData.inputLimit = this.setInitialValue(data, this.initData.inputLimit)
-        })
-
-        debugger;
-
-
     }
+
 
     render() {
         const {
-            match
+            match,
+            initdata = [],
         } = this.props;
-        const {type, id} = match.params
-        const {getFieldDecorator} = this.props.form;
-        const queryItemLayout = {
-            xs: 12,
-            sm: 7,
-            md: 5,
-        };
-        debugger
         return (
             <div>
                 <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
 
-                <Form className="form-body" layout="inline" >
+                <Form className="form-body" layout="inline">
+                    {
+                        initdata.map((v, k) => {
+                            <Card title={v.name} noHovering={true}
+                                  style={{marginBottom: 6}}
+                            >
+                                <MapModifyCom data={v.value}/>
+                            </Card>
+                        })
+                    }
 
-                    <Card title="选择商户属性" noHovering={true}
-                          style={{marginBottom: 6}}
-                    >
-                        <MapSelectComs data={this.state.initData.merchentSelects}/>
-                    </Card>
-                    <Card title="选择交易属性" noHovering={true}
-                          style={{marginBottom: 6}}
-                    >
-                        <div>
-                            <FormItem style={{margin: '10px'}}>
-                                <div style={{fontSize: 13}}><b>线下交易</b></div>
-                            </FormItem>
-                            <MapSelectComs data={this.state.initData.tradeSelects.offline}/>
-                        </div>
-                        <div>
-                            <FormItem style={{margin: '10px'}}>
-                                <div style={{fontSize: 13}}><b>扫码交易</b></div>
-                            </FormItem>
-                            <MapSelectComs data={this.state.initData.tradeSelects.online}/>
-                        </div>
-                    </Card>
-                    <Card title="添加限额值" noHovering={true}
-                          style={{marginBottom: 6}}
-                    >
-
-                        <Row>
-                            <MapSelectComs data={this.state.initData.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <FormItem>
-                                 <span style={{
-                                     marginRight: '10px',
-                                     minWidth: '80px',
-                                     display: 'inline-block',
-                                     marginTop: 10,
-                                     verticalAlign: 'top',
-                                 }}>每笔／分钟:</span>
-                                    <div style={{display: 'inline-block', margin: '10px'}}>
-
-                                        <InputGroup>
-                                            <Input style={{width: 50, textAlign: 'center'}}
-                                            />
-                                            <Input style={{
-                                                width: 24,
-                                                borderLeft: 0,
-                                                pointerEvents: 'none',
-                                                backgroundColor: '#fff'
-                                            }} placeholder="/" disabled/>
-                                            <Input
-                                                style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                            />
-                                        </InputGroup>
-                                    </div>
-                                </FormItem>
-
-                            </MapSelectComs>
-
-                        </Row>
-
-                    </Card>
                     <div>
                         <div style={{textAlign: 'center'}}>
                             <Button style={{margin: '10px'}}
                                     onClick={() => this.props.history.push('/limitManager')}>取消</Button>
-                            <Button htmlType="submit" style={{margin: '10px'}} onClick={()=>this.handleSubmit()}>保存</Button>
+                            <Button htmlType="submit" style={{margin: '10px'}}
+                                    onClick={() => this.handleSubmit()}>保存</Button>
                         </div>
 
 

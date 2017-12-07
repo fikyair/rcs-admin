@@ -54,4 +54,4 @@ export const getBodyProperty =  ActionCreator(API_GET_BODY_PROPERTY,`/api/type/m
 export const getMerchtType = (data)=> ActionCreator(API_GET_MERCHT_TYPE,`/api/rcslproperty/detail/${queryData(data)}`,'GET')();
 
 
-export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL,`/api/rcslmodel`, 'PUT')
+export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL,`/api/rcslmodel/22`, 'GET')()
