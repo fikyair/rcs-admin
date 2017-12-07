@@ -296,10 +296,12 @@ export default class LimitManager extends React.Component {
 
     handleSearch = (args) => {
         //TODO 搜索
-        let getFieldsValue = this.formData.props.form.getFieldsValue()
+        let getFieldsValue = this.formData.props.form.getFieldsValue();
+        const modelName = this.props.form.getFieldValue('modelName')
         const {pageNum, pageSize} = this.state
         let params = {
             ...getFieldsValue,
+          modelName,
             pageNum,
             pageSize,
             ...args,
@@ -337,8 +339,17 @@ export default class LimitManager extends React.Component {
                         <MapSelectComs  selectedAll={true} initial={true} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
                     </div>
                     <Row>
+
                         <Col {...layout} style={{marginLeft:6}}>
+
                         <div className="selBtn" style={{textAlign:'right'}}>
+                            <FormItem style={{margin:"10px",float:'left'}} label={(<div className="label-class">限额名称</div>)}>
+                          {
+                            getFieldDecorator('modelName',{})(
+                              <Input placeholder="请输入" />
+                            )
+                          }
+                            </FormItem>
                             <Button className="btn" type='primary' icon="search"
                                     onClick={() => this.handleSearch()}>查询</Button>
                         </div>
