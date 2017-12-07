@@ -16,7 +16,8 @@ const initialState = {
     selectsData: {
         limitType: {},
         limitProperty: {},
-        limitBody: {},
+        limitBodyB: {},
+        limitBodyC:{},
         tradeType: {},
     },
     cardType: [],
@@ -50,20 +51,22 @@ export default function (state = initialState, actions) {
         }},
         bussinessType:actions.data,
       }
-    case API_GET_MAIN_ACCOUNT[1]:
+      case API_GET_MAIN_ACCOUNT[1]:
+
        return {
       ...state,
          selectsData:{
            ...state.selectsData,
-           limitBody:{
-
-             labelName: '限额主体',
-             optionVal: [
-               ..._.map(actions.data,(v,k)=>{ return {value:String(v.key),name:String(v.value)}}),
-             ],
-             key: 'limitBody',
-             type: 'select'
-           }
+           ... _.keyBy(actions.data.map((v,k)=>{
+             return {
+               labelName: v.name,
+               optionVal: [
+                 ..._.map(v.value,(v,k)=>{ return {value:String(v.code),name:String(v.name)}}),
+               ],
+               key: v.code == 1?"limitBodyC":'limitBodyB',
+               type: 'select'
+             }
+           }),'key')
          }
     }
     case API_GET_BODY_PROPERTY[1]:

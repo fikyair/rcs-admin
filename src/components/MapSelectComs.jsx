@@ -9,14 +9,15 @@ import {  setTemp } from '../actions/index'
 
 const FormItem = Form.Item;
 
-@Containerization(()=>(state=>({formTemp:state.GlobalReducer.formTemp})))
+
 @Form.create({
   onValuesChange:(props, values)=>{
     Storage.dispatch(setTemp({...values}))
     if(values['limitProperty'] || values['limitType'] ){
       const {formTemp} = props;
       const { limitProperty, limitType } = {...formTemp,...values}
-      props.data.limitBody = null;
+      props.data.limitBodyB = null;
+      props.data.limitBodyC = null;
       if(limitProperty && limitType) Storage.dispatch(getMainPart({limitProperty,limitType}))
     }
   }
