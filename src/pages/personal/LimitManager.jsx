@@ -2,7 +2,7 @@ import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Table, Button, Card, Input, Modal, Form, Row, Col} from 'antd';
 import {Link} from 'react-router-dom';
-import { getModels, getBodyProperty, getBussinessType, getMainPart} from '../../actions/limitActions';
+import { getModels, getBodyProperty, getBussinessType, getMainPart,detelePersionalLimit} from '../../actions/limitActions';
 import InputComs from "../../components/InputComs";
 import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
@@ -17,6 +17,7 @@ export default class LimitManager extends React.Component {
         loading: false,
         visible: false,
         removeVisible: false,
+        merchantId: ''
     }
     mockData = {
         selectsData: [
@@ -222,7 +223,8 @@ export default class LimitManager extends React.Component {
 
     handleRemoveOk = () => {
         this.setState({removeVisible: false})
-
+     let id = '11'
+        this.props.dispatch(detelePersionalLimit(id))
         //TODO 删除限额规则
     }
 
@@ -231,7 +233,9 @@ export default class LimitManager extends React.Component {
     }
 
     delete(id) {
+        this.setState({removeVisible: true})
 
+        this.setState({merchantId:id})
     }
     render() {
         const {loading, removeVisible} = this.state;
@@ -279,12 +283,11 @@ export default class LimitManager extends React.Component {
                 <Modal
                     visible={removeVisible}
                     title="删除限额"
-                    onOk={this.handleRemoveOk}
                     onCancel={this.handleRemoveCancel}
                     footer={[
                         <Button key="back" size="large" onClick={this.handleRemoveCancel}>取消</Button>,
                         <Button key="submit" type="primary" size="large" loading={loading}
-                                onClick={this.handleRemoveOk}>
+                                onClick={()=>this.handleRemoveOk()}>
                             确认
                         </Button>,
                     ]}

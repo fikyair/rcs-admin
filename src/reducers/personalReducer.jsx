@@ -1,6 +1,7 @@
 import {
   API_GET_PERSONAL_LIMIT,
-    API_UPDATE_LIMIT,
+    API_UPDATE_PERSONAL_LIMIT,
+    API_DELETE_PERSIONAL_MODEL,
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -36,10 +37,15 @@ export default function (state = initialState, actions) {
         }),
 
       }
-      case API_UPDATE_LIMIT[1]:
+      case API_UPDATE_PERSONAL_LIMIT[1]:
           return {
               ...state,
               editsuccess: actions.data
+          }
+      case API_DELETE_PERSIONAL_MODEL[1]:
+          return {
+              ...state,
+              detelesuccess: actions.data
           }
     default:
       return state;
