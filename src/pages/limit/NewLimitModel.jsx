@@ -98,7 +98,7 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
-        debugger
+
         // const formDataMerchent = this.formsIns[1].props.form.getFieldsValue();
         let formDataMerchent = {};
             Object.keys(this.formsIns).map(v=>{
@@ -139,7 +139,7 @@ export default class NewLimitModel extends React.Component {
                             >
                                 <MapSelectComs data={v.value}
                                                wrappedComponentRef={(inst) => {
-                                                   debugger;
+
                                                    this.formsIns[v.code] = inst
                                                }}
                                 />

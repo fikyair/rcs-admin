@@ -31,7 +31,7 @@ const FormItem = Form.Item;
           ||(selectsC&&limitBodyC&&!selectsB)
         )
       ){
-        debugger;
+
         Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB?`${limitBodyB}_`:''}${limitBodyC?limitBodyC:''}`}));}
     }
 

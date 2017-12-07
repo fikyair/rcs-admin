@@ -23,7 +23,7 @@ export default class ExtractData extends React.Component {
         const reader = new FileReader();
         reader.readAsText(e.target.files[0], "UTF-8");
         reader.onload = (event) => {
-            debugger;
+
             console.log(event.currentTarget.result);
         }
     }

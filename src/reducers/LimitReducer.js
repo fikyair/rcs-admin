@@ -86,7 +86,7 @@ export default function (state = initialState, actions) {
         bodyProperty:actions.data,
       }
     case API_GET_MERCHT_TYPE[1]:
-      debugger;
+
       return {
         ...state,
         selectsData: {
@@ -131,7 +131,7 @@ export default function (state = initialState, actions) {
 
             }
         case API_INIT_POST_MODEL[1]:
-            debugger
+
             return {
                 ...state,
                 selectData: _.map(actions.data, (v, k) => {

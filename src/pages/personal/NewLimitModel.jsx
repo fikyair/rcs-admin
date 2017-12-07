@@ -277,7 +277,7 @@ export default class NewLimitModel extends React.Component {
         const {getFieldsValue} = this.props.form;
         const val = getFieldsValue();
         // TODO 提交表单
-        debugger;
+
     }
 
     render() {

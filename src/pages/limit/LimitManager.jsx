@@ -318,7 +318,7 @@ export default class LimitManager extends React.Component {
     }
 
     render() {
-        debugger;
+
         const {options, visible, loading, removeVisible, isMerchant} = this.state;
         const {
             selectsData,

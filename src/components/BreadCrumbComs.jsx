@@ -34,7 +34,7 @@ export default class BreadCrumbComs extends React.Component{
   }
 
   setBreadCrumItem(props){
-      debugger;
+
     const { location } = props;
     const pathSnippets = location.pathname.split('/').filter(i => i);
     const extraBreadcrumbItems = pathSnippets.map((v, index) => {
@@ -68,7 +68,7 @@ export default class BreadCrumbComs extends React.Component{
           <Link to="/">首页</Link>
       </Breadcrumb.Item>
     )].concat(extraBreadcrumbItems);
-    debugger;
+
     if(extraBreadcrumbItems.length >0){
       this.setState({breadcrumbItems:extraBreadcrumbItems,docTitle:extraBreadcrumbItems[extraBreadcrumbItems.length-1].props.name})
     }
