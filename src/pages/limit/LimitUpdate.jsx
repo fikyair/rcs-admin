@@ -1,16 +1,12 @@
 import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
-import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getLimitInitData, editLimit} from '../../actions/limitActions';
-import {FetchAPI} from '../../utils/fetch-middleware'
-
-const InputGroup = Input.Group;
-import InputComs from "../../components/InputComs";
 import MapModifyCom from '../../components/MapModifyCom'
 
 
 const FormItem = Form.Item;
+const InputGroup = Input.Group;
 
 @setTitle('限额修改页')
 @Containerization(state => ({
@@ -96,18 +92,19 @@ export default class LimitUpdate extends React.Component {
     }
 
     componentWillMount() {
-        let data = {id: 22}
-        this.props.dispatch(getLimitInitData(data));
+        let id = this.props.match.params.id
+        this.props.dispatch(getLimitInitData({id:id}));
     }
 
 
     handleSubmit = () => {
+        let id = this.props.match.params.id
         const value = this.formData.props.form.getFieldsValue()
         const value1 = this.props.form.getFieldsValue()
         const params = {
             ...value,
             ...value1,
-            id: 22
+            id: id
         }
         this.props.dispatch(editLimit(params))
         this.props.history.push('/limitManager')
@@ -131,7 +128,7 @@ export default class LimitUpdate extends React.Component {
                 <Form className="form-body" layout="inline">
                     {
                         initdata.map((v, k) => {
-                            return (<Card title={v.name} noHovering={true}
+                            return (<Card title={v.name} noHovering={true} key={k}
                                           style={{marginBottom: 6}}
                             >
                                 <MapModifyCom data={v.value}/>

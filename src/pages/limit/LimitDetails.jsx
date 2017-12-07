@@ -1,19 +1,15 @@
 import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
-import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getLimitInitData, editLimit} from '../../actions/limitActions';
-
-const InputGroup = Input.Group;
 import MapModifyCom from '../../components/MapModifyCom'
-
+const InputGroup = Input.Group;
 const FormItem = Form.Item;
 
 @setTitle('限额详情页')
 @Containerization(state => ({
     initdata: state.LimitReducer.initdata,
     entryData: state.LimitReducer.entryData,
-    editsuccess: state.LimitReducer.editsuccess
 }))
 @Form.create()
 export default class LimitDetails extends React.Component {
@@ -93,8 +89,8 @@ export default class LimitDetails extends React.Component {
 
 
     componentWillMount() {
-        let data = {id: 22}
-        this.props.dispatch(getLimitInitData(data));
+        let id = this.props.match.params.id
+        this.props.dispatch(getLimitInitData({id: id}));
     }
 
     handleSubmit = () => {
@@ -117,7 +113,7 @@ export default class LimitDetails extends React.Component {
                 <Form className="container-body" layout="inline">
                     {
                         initdata.map((v, k) => {
-                            return (<Card title={v.name} noHovering={true}
+                            return (<Card title={v.name} noHovering={true} key={k}
                                           style={{marginBottom: 6}}
                             >
                                 <MapModifyCom data={v.value}/>
