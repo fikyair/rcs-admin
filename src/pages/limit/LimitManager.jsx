@@ -227,7 +227,6 @@ export default class LimitManager extends React.Component {
         //页面发起数据请求
       this.props.dispatch(getBussinessType());
       this.props.dispatch(getBodyProperty());
-      this.props.dispatch(getMerchtType({propertyEnum:'MERCH_TYPE'}));
       //this.props.dispatch(getMainAccount({mainPartTypeEnum:'B'}));
         const {pageNum, pageSize} = this.state
         let params = {

@@ -4,7 +4,7 @@ import SelectComs, {Option} from './SelectComs';
 import {Form,Select, Input} from 'antd';
 import '../style/style.less'
 import Storage from '../store';
-import {  getMainPart,} from '../actions/limitActions';
+import {  getMainPart, getMerchtType } from '../actions/limitActions';
 import {  setTemp } from '../actions/index'
 
 const FormItem = Form.Item;
@@ -13,13 +13,28 @@ const FormItem = Form.Item;
 @Form.create({
   onValuesChange:(props, values)=>{
     Storage.dispatch(setTemp({...values}))
+    const {formTemp} = Storage.getState().GlobalReducer;
+
     if(values['limitProperty'] || values['limitType'] ){
-      const {formTemp} = props;
-      const { limitProperty, limitType } = {...formTemp,...values}
       props.data.limitBodyB = null;
       props.data.limitBodyC = null;
+      const { limitProperty, limitType } = {...formTemp,...values};
       if(limitProperty && limitType) Storage.dispatch(getMainPart({limitProperty,limitType}))
     }
+    if(values['limitProperty'] || values['limitType'] || values['limitBodyB'] || values['limitBodyC']){
+      props.data.merchType = null;
+      const { limitBodyB:selectsB, limitBodyC:selectsC} = props.data;
+      const { limitProperty, limitType, limitBodyB, limitBodyC } = {...formTemp,...values};
+      if(limitProperty && limitType && (
+          (selectsB&&selectsC&&limitBodyC&&limitBodyB)
+          ||(selectsB&&limitBodyB&&!selectsC)
+          ||(selectsC&&limitBodyC&&!selectsB)
+        )
+      ){
+        debugger;
+        Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB?`${limitBodyB}_`:''}${limitBodyC?limitBodyC:''}`}));}
+    }
+
   }
 })
 export default class MapSelectComs extends React.Component {

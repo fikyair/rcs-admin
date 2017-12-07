@@ -18,7 +18,7 @@ const initialState = {
         limitProperty: {},
         limitBodyB: {},
         limitBodyC:{},
-        tradeType: {},
+      merchType: {},
     },
     cardType: [],
     mainAccount: [],
@@ -86,6 +86,7 @@ export default function (state = initialState, actions) {
         bodyProperty:actions.data,
       }
     case API_GET_MERCHT_TYPE[1]:
+      debugger;
       return {
         ...state,
         selectsData: {
@@ -95,7 +96,7 @@ export default function (state = initialState, actions) {
             labelName: '商户类型',
             optionVal: [
               ..._.map(actions.data, (v, k) => {
-                return {value: v.propertyDetailCode, name: v.propertyDetailName}
+                return {value: v.code, name: v.name}
               }),
             ],
             key: 'merchType',

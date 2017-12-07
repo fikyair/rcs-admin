@@ -53,7 +53,9 @@ export const getMainPart = (data)=>  ActionCreator(API_GET_MAIN_ACCOUNT,`/api/rc
 export const getBodyProperty =  ActionCreator(API_GET_BODY_PROPERTY,`/api/type/mainparttype`,'GET');
 // /rcslproperty/detail 查看维度明细
 
-export const getMerchtType = (data)=> ActionCreator(API_GET_MERCHT_TYPE,`/api/rcslproperty/detail/${queryData(data)}`,'GET')();
+// GET /rcslmodelcascade/merchtype 查询商户类型下拉数据(新增时)
+
+export const getMerchtType = (data)=> ActionCreator(API_GET_MERCHT_TYPE,`/api/rcslmodelcascade/merchtype/${queryData(data)}`,'GET')();
 
 
 export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL, `/api/rcslmodel/${data.id}`, 'GET')()
