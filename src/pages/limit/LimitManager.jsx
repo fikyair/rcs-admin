@@ -389,7 +389,7 @@ export default class LimitManager extends React.Component {
                     ]}
                 >
                       <Form layout='inline'>
-                          <MapSelectComs wrappedComponentRef={(inst) => this.addFormData = inst} matchIs={true} data={selectsData} ref="modalSelects"/>
+                          <MapSelectComs formTemp={formTemp} wrappedComponentRef={(inst) => this.addFormData = inst} matchIs={true} data={selectsData} ref="modalSelects"/>
                       </Form>
                 </Modal>
                 :null
