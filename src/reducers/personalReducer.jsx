@@ -1,5 +1,6 @@
 import {
-  API_GET_PERSONAL_LIMIT
+  API_GET_PERSONAL_LIMIT,
+    API_UPDATE_LIMIT,
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -12,6 +13,11 @@ export default function (state = initialState, actions) {
       return {
         ...state
       }
+      case API_UPDATE_LIMIT[1]:
+          return {
+              ...state,
+              editsuccess: actions.data
+          }
     default:
       return state;
   }
