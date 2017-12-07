@@ -13,7 +13,8 @@ const FormItem = Form.Item;
   cardType:state.LimitReducer.cardType,
   bodyProperty:state.LimitReducer.bodyProperty,
   mainAccount:state.LimitReducer.mainAccount,
-    modelsData: state.LimitReducer.modelsData
+    modelsData: state.LimitReducer.modelsData,
+  formTemp:state.GlobalReducer.formTemp
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -325,7 +326,8 @@ export default class LimitManager extends React.Component {
             modelsData,
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
-            modalSelects = this.mockData.modalSelects
+            modalSelects = this.mockData.modalSelects,
+          formTemp
         } = this.props;
         const {getFieldDecorator} = this.props.form;
         const layout = {
@@ -337,7 +339,7 @@ export default class LimitManager extends React.Component {
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs  selectedAll={true} initial={true} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
+                        <MapSelectComs formTemp={formTemp} selectedAll={true} initial={true} wrappedComponentRef={(inst) => this.formData = inst} data={selectsData}/>
                     </div>
                     <Row>
 

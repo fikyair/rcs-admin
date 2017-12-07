@@ -257,6 +257,13 @@ export default class LimitManager extends React.Component {
                     <Row>
                         <Col {...layout} style={{marginLeft:6}}>
                     <div className="selBtn" style={{textAlign:'right'}}>
+                        <FormItem style={{margin:"10px",float:'left'}} label={(<div className="label-class">商户编号</div>)}>
+                          {
+                            getFieldDecorator('modelName',{})(
+                              <Input placeholder="请输入" />
+                            )
+                          }
+                        </FormItem>
                         <Button className="btn" type='primary' icon="search"
                                 onClick={() => this.handleSearch()}>查询</Button>
                     </div>

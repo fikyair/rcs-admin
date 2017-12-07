@@ -2,6 +2,7 @@ import { checkStatus, parseJSON, headers } from '../utils/fetch-middleware';
 import {
     CLEAR_MSG,
     API_POST_LOGIN,
+  FORM_SET,
     ASYNC_COOKIE,
   API_GET_CARD
 } from '../utils/ActionsType';
@@ -33,6 +34,20 @@ export function clearErrMsg(data) {
         data:data,
     }
 }
+
+/*
+*
+*
+* */
+export function setTemp(data) {
+  return {
+    type:FORM_SET,
+    data:data,
+  }
+
+}
+
+
 /*
 *
 * 接口请求

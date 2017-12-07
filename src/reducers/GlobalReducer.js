@@ -1,8 +1,9 @@
-import {  ASYNC_COOKIE, CLEAR_MSG } from '../utils/ActionsType';
+import {  ASYNC_COOKIE, CLEAR_MSG, FORM_SET } from '../utils/ActionsType';
 const initialState ={
     loginToken:'',
     requestStaus:false,
-    errMsg:''
+    errMsg:'',
+    formTemp:{},
 
 };
 //全局状态信息，数据信息存储
@@ -35,6 +36,14 @@ export default function (state = initialState,actions ) {
                 ...state,
                 errMsg:actions.data,
             }
+      case FORM_SET:
+          return {
+            ...state,
+            formTemp:{
+              ...state.formTemp,
+              ...actions.data,
+            }
+          }
         default:
             return state
     }
