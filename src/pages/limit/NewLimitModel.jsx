@@ -19,7 +19,6 @@ const FormItem = Form.Item;
 export default class NewLimitModel extends React.Component {
 
     state = {
-        // isMerchant: false,
     }
 
     inputLimit = [
@@ -93,16 +92,22 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
-        const formDataMerchent = this.formDataMerchent.props.form.getFieldsValue();
-        const formDataOffLine = this.formDataOffLine.props.form.getFieldsValue();
-        const formDataOnLine = this.formDataOnLine.props.form.getFieldsValue();
+        debugger
+        const formDataMerchent = this.formData.props.form.getFieldsValue();
+        // const formDataOffLine = this.formDataOffLine.props.form.getFieldsValue();
+        // const formDataOnLine = this.formDataOnLine.props.form.getFieldsValue();
+        let modelPropertyVoList =  []
+        for(let key in formDataMerchent){
+            modelPropertyVoList.push({propertyCode:key,propertyDetailCode:formDataMerchent[key]})
+        }
+
+        console.log(modelPropertyVoList)
         const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
-        const getValues = {...formDataMerchent, ...formDataOffLine, ...formDataOnLine, ...formDataInputLimit}
+        const formData = this.props.form.getFieldsValue()
+      /*  const getValues = {...formDataMerchent, ...formDataInputLimit, ...formData}
         const val = getValues;
         console.log("表单的数据", val)
-        this.props.dispatch(addModel(val)).then(data => {
-            console.log("----->", data);
-        })
+        this.props.dispatch(addModel(val))*/
         // TODO 提交表单
     }
 
@@ -111,24 +116,20 @@ export default class NewLimitModel extends React.Component {
             match,
             selectData
         } = this.props;
-        debugger
-        const {type, id} = match.params
-        const {getFieldDecorator} = this.props.form;
-        const queryItemLayout = {
-            xs: 12,
-            sm: 7,
-            md: 5,
-        };
+        const {getFieldDecorator} = this.props.form
         return (
             <div>
                 <Form className="form-body" layout="inline">
 
                     {
+
                         selectData.map((v, k) => {
                             return (<Card title={v.name} noHovering={true} key={k}
                                           style={{marginBottom: 6}}
                             >
-                                <MapSelectComs data={v.value}/>
+                                <MapSelectComs data={v.value}
+                                               wrappedComponentRef={(inst) => this.formData = inst}
+                                />
                             </Card>)
                         })
                     }
@@ -170,9 +171,13 @@ export default class NewLimitModel extends React.Component {
 
                     </Card>
                     <Card title="添加限额名称" noHovering={true}>
-                        <Input placeholder="请输入"
-                               addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
-                               style={{width: '200px', margin: '10px'}}/>
+                        {
+                            getFieldDecorator('modelName')(
+                                <Input placeholder="请输入"
+                                       addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
+                                       style={{width: '200px', margin: '10px'}}/>
+                            )
+                        }
                         <Button style={{margin: '10px'}}
                                 onClick={() => this.props.history.push('/limitManager')}>取消</Button>
                         <Button htmlType="submit" style={{margin: '10px'}}
