@@ -4,6 +4,7 @@ export const TOAST = 'TOAST';
 export const LOADING = 'LOADING';
 export const ASYNC_COOKIE='ASYNC_COOKIE';
 
+export const FORM_SET='FORM_SET';
 // 登录修改
 export const API_POST_EDIT = ['REQUEST', 'POST_EDITSUCCESS', 'FAILURE'];
 
