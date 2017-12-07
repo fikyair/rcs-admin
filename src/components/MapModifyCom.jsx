@@ -12,7 +12,7 @@ const FormItem = Form.Item;
 export default class MapModifyCom extends React.Component {
 
     render() {
-        const {data} = this.props;
+        const {data = []} = this.props;
         const {getFieldDecorator} = this.props.form
         return (
             <div style={{display: 'inline-block'}}>
@@ -25,7 +25,7 @@ export default class MapModifyCom extends React.Component {
                                     initialValue: v.initialValue,
                                     rules: v.rules ? [...v.rules] : [],
                                 })(
-                                    <InputComs {...v.body} className='input-style' labelName={v.labelName}
+                                    <InputComs disabled={v.disabled} {...v.body} className='input-style' labelName={v.labelName}
                                                placeholder="请选择"/>
                                 )
                             }

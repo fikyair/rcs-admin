@@ -1,7 +1,7 @@
 import React from 'react';
 import {Input, Button, Form, Row, Col, Card} from 'antd'
 import {Containerization, InitComs, setTitle} from '../../common/PublicComponent';
-import InputComs from "../../components/InputComs";
+import MapModifyCom from "../../components/MapModifyCom";
 import MapSelectComs from '../../components/MapSelectComs';
 import { getPersonalDetial} from '../../actions/limitActions';
 
@@ -9,7 +9,7 @@ const InputGroup = Input.Group;
 
 const FormItem = Form.Item;
 @setTitle('限额详情页')
-@Containerization(state=>({}))
+@Containerization(state=>({initdata:state.PersonalReducer.initdata,entryData:state.PersonalReducer.entryData}))
 @Form.create()
 export default class LimitDetails extends React.Component {
 
@@ -226,6 +226,76 @@ export default class LimitDetails extends React.Component {
         ]
 
     }
+    inputLimit = [
+    {
+      labelName: '单日',
+      key: 'dayAmountLimit',
+      addonBefore: "金额",
+      addonAfter: "元",
+      type: 'input',
+      disabled:true,
+      body: {
+        style: {width: 140},
+        addonBefore: "金额",
+        addonAfter: "元",
+      },
+
+    }, {
+      labelName: '单月',
+      key: 'monthAmountLimit',
+      type: 'input',
+        disabled:true,
+      body: {
+        style: {width: 120},
+        addonBefore: "金额",
+        addonAfter: "元",
+      },
+
+    }, {
+      labelName: '年',
+        disabled:true,
+      key: 'yearAmountLimit',
+      body: {
+        style: {width: 120},
+        addonBefore: "金额",
+        addonAfter: "元",
+      },
+      type: 'input',
+    }, {
+      labelName: '终身',
+        disabled:true,
+      key: 'lifeAmountLimit',
+      body: {
+        style: {width: 120},
+
+        addonBefore: "金额",
+        addonAfter: "元",
+      },
+      type: 'input',
+    }, {
+      labelName: '两笔间隔',
+        disabled:true,
+      key: 'intervalSecondsLimit',
+      addonAfter: "元",
+      body: {
+        addonAfter: "元",
+        style: {width: 120},
+
+      },
+      type: 'input',
+    }, {
+      labelName: '笔/日',
+        disabled:true,
+      key: 'dayCountLimit',
+      addonAfter: "元",
+      type: 'input',
+      body: {
+        style: {width: 120},
+
+      },
+
+    }
+  ]
 
     componentWillMount() {
         this.props.dispatch(getPersonalDetial('11'))
@@ -237,8 +307,13 @@ export default class LimitDetails extends React.Component {
             online = this.mockData.tradeSelects.online,
             offline = this.mockData.tradeSelects.offline,
             inputLimit = this.mockData.inputLimit,
-            match
+          initdata,
+          entryData
         } = this.props;
+        this.inputLimit.map(data => {
+            data.initialValue = entryData[data.key]
+        })
+        const {getFieldDecorator} = this.props.form
         const formItemLayout = {
             labelCol: {
                 xs: {span: 24},
@@ -264,56 +339,64 @@ export default class LimitDetails extends React.Component {
                 <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
                 <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
 
-                    <Card title="选择商户属性" noHovering={true}
-                          style={{marginBottom: 6}}
-                    >
-                        <MapSelectComs data={merchentSelects}/>
-                    </Card>
-                    <Card title="选择交易属性" noHovering={true}
-                          style={{marginBottom: 6}}
-                    >
-                        <div>
-                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>线下交易</b></div></FormItem>
-                            <MapSelectComs data={offline}/>
-                        </div>
-                        <div>
-                            <FormItem style={{margin: '10px'}}><div style={{fontSize: 13}}><b>扫码交易</b></div></FormItem>
-                            <MapSelectComs data={online}/>
-                        </div>
-                    </Card>
+                  {
+                    initdata.map((v, k) => {
+                      return (<Card title={v.name} noHovering={true} key={k}
+                                    style={{marginBottom: 6}}
+                      >
+                          <MapModifyCom data={v.value}/>
+                      </Card>)
+                    })
+                  }
+
                     <Card title="添加限额值" noHovering={true}
                           style={{marginBottom: 6}}
                     >
 
                         <Row>
-                            <MapSelectComs data={inputLimit}>
+                            <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
                                 <FormItem>
-                                 <span style={{
-                                     marginRight: '10px',
-                                     minWidth: '80px',
-                                     display: 'inline-block',
-                                     marginTop: 10,
-                                     verticalAlign: 'top',
-                                 }}>每笔／分钟:</span>
+                                <span style={{
+                                  marginRight: '10px',
+                                  minWidth: '80px',
+                                  display: 'inline-block',
+                                  marginTop: 10,
+                                  verticalAlign: 'top',
+                                }}>每笔／分钟:</span>
                                     <div style={{display: 'inline-block', margin: '10px'}}>
 
                                         <InputGroup>
-                                            <Input  disabled={true} style={{width: 50, textAlign: 'center'}}
-                                            />
-                                            <Input style={{
-                                                width: 24,
-                                                borderLeft: 0,
-                                                pointerEvents: 'none',
-                                                backgroundColor: '#fff'
+                                          {
+                                            getFieldDecorator('countLimitCountValue', {
+                                              initialValue: entryData.countLimitCountValue
+                                            })(
+                                              <Input disabled={true} style={{width: 50, textAlign: 'center'}}
+                                              />
+                                            )
+                                          }
+
+                                            <Input  style={{
+                                              width: 24,
+                                              borderLeft: 0,
+                                              pointerEvents: 'none',
+                                              backgroundColor: '#fff'
                                             }} placeholder="/" disabled/>
-                                            <Input
-                                                disabled={true}  style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                            />
+                                          {
+                                            getFieldDecorator('countLimitMinuteValue', {
+                                              initialValue: entryData.countLimitMinuteValue
+                                            })(
+                                              <Input
+                                                disabled={true}
+                                                style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                              />
+                                            )
+                                          }
+
                                         </InputGroup>
                                     </div>
                                 </FormItem>
 
-                            </MapSelectComs>
+                            </MapModifyCom>
 
                         </Row>
 

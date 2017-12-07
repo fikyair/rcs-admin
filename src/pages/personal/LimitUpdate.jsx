@@ -4,7 +4,7 @@ import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 
 const InputGroup = Input.Group;
-import InputComs from "../../components/InputComs";
+import MapModifyCom from "../../components/MapModifyCom";
 import MapSelectComs from '../../components/MapSelectComs'
 
 
