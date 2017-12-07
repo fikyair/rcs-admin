@@ -13,14 +13,14 @@ const FormItem = Form.Item;
   cardType:state.LimitReducer.cardType,
   bodyProperty:state.LimitReducer.bodyProperty,
   mainAccount:state.LimitReducer.mainAccount,
-
+    modelsData: state.LimitReducer.modelsData
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
     state = {
         pageNum: 1,
         pageSize: 3,
-        total: 10,
+        total: 0,
         options: null,
         loading: false,
         visible: false,
@@ -127,47 +127,43 @@ export default class LimitManager extends React.Component {
         columns: [
             {
                 title: '限额名称',
-                dataIndex: 'name',
-                key: 'name',
+                dataIndex: 'modelName',
+                key: 'modelName',
                 render: (text, record) => <Link to={`/limitManager/+details/${record.id}`}>{text}</Link>
 
             }, {
                 title: '单笔(金额)',
-                dataIndex: 'single',
-                key: 'single',
+                dataIndex: 'singleAmountLimit',
+                key: 'singleAmountLimit',
             }, {
                 title: '单日(金额)',
-                dataIndex: 'singleDay',
-                key: 'singleDay',
+                dataIndex: 'dayAmountLimit',
+                key: 'dayAmountLimit',
             }, {
                 title: '单月(金额)',
-                dataIndex: 'singleMonth',
-                key: 'singleMonth',
+                dataIndex: 'monthAmountLimit',
+                key: 'monthAmountLimit',
             }, {
                 title: '年(金额)',
-                dataIndex: 'year',
-                key: 'year',
+                dataIndex: 'yearAmountLimit',
+                key: 'yearAmountLimit',
             }, {
                 title: '终身(金额)',
-                dataIndex: 'lifeTime',
-                key: 'lifeTime',
+                dataIndex: 'lifeAmountLimit',
+                key: 'lifeAmountLimit',
             }, {
                 title: '两笔间隔(秒)',
-                dataIndex: 'interval',
-                key: 'interval',
+                dataIndex: 'intervalSecondsLimit',
+                key: 'intervalSecondsLimit',
             }, {
                 title: '笔数(分钟)',
-                dataIndex: 'trades',
-                key: 'trades',
+                dataIndex: 'countLimitCountValue',
+                key: 'countLimitCountValue',
             }, {
                 title: '笔/日',
-                dataIndex: 'one',
-                key: 'one',
-            }, {
-                title: '状态',
-                dataIndex: 'status',
-                key: 'status',
-            }, {
+                dataIndex: 'dayCountLimit',
+                key: 'dayCountLimit',
+            },{
                 title: '管理',
                 key: 'action',
                 render: (text, record) => (
@@ -220,7 +216,7 @@ export default class LimitManager extends React.Component {
                     {value: '2', name: 'MPOS商户'},
                     {value: '3', name: '互联网商户'},
                 ],
-                key: 'tradeType',
+                key: 'merchType',
                 type: 'select',
             },
         ]
@@ -232,10 +228,13 @@ export default class LimitManager extends React.Component {
       this.props.dispatch(getBodyProperty());
       this.props.dispatch(getMerchtType({propertyEnum:'MERCH_TYPE'}));
       //this.props.dispatch(getMainAccount({mainPartTypeEnum:'B'}));
-
-
+        const {pageNum, pageSize} = this.state
+        let params = {
+            pageNum,
+            pageSize,
+        };
+        this.props.dispatch(getModels({...params}))
     }
-
     menu = record => (
         <Menu>
 
@@ -267,6 +266,7 @@ export default class LimitManager extends React.Component {
 
             //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
             this.props.history.push('/limitManager/add')
+
           }
         });
 
@@ -322,6 +322,7 @@ export default class LimitManager extends React.Component {
         const {
             selectsData,
             selectsData2,
+            modelsData,
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects
@@ -360,7 +361,10 @@ export default class LimitManager extends React.Component {
 
                 <Card noHovering="true" className="limitable" title="限额列表" bodyStyle={{padding: '0px',}}><Table className="btl"
                                                                                               columns={columns}
-                                                                                              data={selectsData}
+                                                                                              dataSource={
+                                                                                                  modelsData.records
+
+                                                                                              }
                                                                                               pagination={false}/>
                     <div style={{margin: 29, textAlign: 'right'}}>
                         <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
