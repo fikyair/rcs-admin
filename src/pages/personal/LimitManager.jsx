@@ -2,13 +2,18 @@ import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Table, Button, Card, Input, Modal, Form, Row, Col} from 'antd';
 import {Link} from 'react-router-dom';
-import { getModels, getBodyProperty, getBussinessType, getMainPart,detelePersionalLimit} from '../../actions/limitActions';
-import InputComs from "../../components/InputComs";
+import {
+    getBodyProperty,
+    getBussinessType,
+    detelePersionalLimit
+} from '../../actions/limitActions';
 import MapSelectComs from '../../components/MapSelectComs'
+
 const FormItem = Form.Item;
 @setTitle('首页')
-@Containerization(state=>({
-  selectsData:state.LimitReducer.selectsData,
+@Containerization(state => ({
+    selectsData: state.LimitReducer.selectsData,
+    detelesuccess: state.PersonalReducer.detelesuccess,
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -71,7 +76,7 @@ export default class LimitManager extends React.Component {
                 rules: [{required: true, message: 'Please input your E-mail!'}, {max: 3, message: '超长'}],
                 // body: {style:{marginTop: 100}}
                 // body: {addonBefore: "金额", addonAfter: "元",},
-                body :{style:{width:120}}
+                body: {style: {width: 120}}
             },
 
         ],
@@ -172,7 +177,7 @@ export default class LimitManager extends React.Component {
                         <span className="ant-divider"/>
             <a onClick={() => this.delete(record.id)}>删除</a>
                         <span className="ant-divider"/>
-             <Link to={`/merchantlimit/+operationrecoerd/${record.id}`} >操作记录</Link>
+             <Link to={`/merchantlimit/+operationrecoerd/${record.id}`}>操作记录</Link>
             </span>
                 ),
             }],
@@ -209,22 +214,27 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
-      this.props.dispatch(getBussinessType());
-      this.props.dispatch(getBodyProperty());
+        this.props.dispatch(getBussinessType());
+        this.props.dispatch(getBodyProperty());
 
     }
+
     timer = null
+
     componentWillUnmount() {
         clearTimeout(this.timer)
     }
+
     handleRemoveCancel = () => {
         this.setState({removeVisible: false})
     }
 
     handleRemoveOk = () => {
+        debugger
         this.setState({removeVisible: false})
-     let id = '11'
-        this.props.dispatch(detelePersionalLimit(id))
+        let id = '11'
+        this.props.dispatch(detelePersionalLimit(id)).then(() => {
+        })
         //TODO 删除限额规则
     }
 
@@ -235,8 +245,9 @@ export default class LimitManager extends React.Component {
     delete(id) {
         this.setState({removeVisible: true})
 
-        this.setState({merchantId:id})
+        this.setState({merchantId: id})
     }
+
     render() {
         const {loading, removeVisible} = this.state;
         const {
@@ -248,37 +259,40 @@ export default class LimitManager extends React.Component {
         const layout = {
             xs: 6,
             sm: 15,
-            md :22
+            md: 22
         }
         const {getFieldDecorator} = this.props.form;
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs  selectedAll={true} initial={true} style={{}} ref="selectsData" data={selectsData}/>
+                        <MapSelectComs selectedAll={true} initial={true} style={{}} ref="selectsData"
+                                       data={selectsData}/>
                         {/*<InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>*/}
                     </div>
                     <Row>
-                        <Col {...layout} style={{marginLeft:6}}>
-                    <div className="selBtn" style={{textAlign:'right'}}>
-                        <FormItem style={{margin:"10px",float:'left'}} label={(<div className="label-class">商户编号</div>)}>
-                          {
-                            getFieldDecorator('modelName',{})(
-                              <Input placeholder="请输入" />
-                            )
-                          }
-                        </FormItem>
-                        <Button className="btn" type='primary' icon="search"
-                                onClick={() => this.handleSearch()}>查询</Button>
-                    </div>
+                        <Col {...layout} style={{marginLeft: 6}}>
+                            <div className="selBtn" style={{textAlign: 'right'}}>
+                                <FormItem style={{margin: "10px", float: 'left'}}
+                                          label={(<div className="label-class">商户编号</div>)}>
+                                    {
+                                        getFieldDecorator('modelName', {})(
+                                            <Input placeholder="请输入"/>
+                                        )
+                                    }
+                                </FormItem>
+                                <Button className="btn" type='primary' icon="search"
+                                        onClick={() => this.handleSearch()}>查询</Button>
+                            </div>
                         </Col>
                     </Row>
                 </Form>
-                <Card noHovering={true} title="限额列表" className="limitable" style={{marginTop: 25}} bodyStyle={{padding: '0px',}}>
+                <Card noHovering={true} title="限额列表" className="limitable" style={{marginTop: 25}}
+                      bodyStyle={{padding: '0px',}}>
                     <Table
-                    columns={columns}
-                    dataSource={dataSource}
-                    className="btl"
+                        columns={columns}
+                        dataSource={dataSource}
+                        className="btl"
                     /></Card>
                 <Modal
                     visible={removeVisible}
@@ -287,7 +301,7 @@ export default class LimitManager extends React.Component {
                     footer={[
                         <Button key="back" size="large" onClick={this.handleRemoveCancel}>取消</Button>,
                         <Button key="submit" type="primary" size="large" loading={loading}
-                                onClick={()=>this.handleRemoveOk()}>
+                                onClick={this.handleRemoveOk}>
                             确认
                         </Button>,
                     ]}

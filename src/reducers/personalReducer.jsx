@@ -6,7 +6,9 @@ import {
 
 const initialState = {
   initdata:[],
-  entryData:{}
+  entryData:{},
+    detelesuccess:{},
+    editsuccess:{}
 
 }
 
@@ -40,12 +42,12 @@ export default function (state = initialState, actions) {
       case API_UPDATE_PERSONAL_LIMIT[1]:
           return {
               ...state,
-              editsuccess: actions.data
+              editsuccess: true
           }
       case API_DELETE_PERSIONAL_MODEL[1]:
           return {
               ...state,
-              detelesuccess: actions.data
+              detelesuccess: true
           }
     default:
       return state;

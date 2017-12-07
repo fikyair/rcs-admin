@@ -75,5 +75,4 @@ export const  getPersonalDetial = (data)=> ActionCreator(API_GET_PERSONAL_LIMIT,
 // 修改个性限额
 export const  editPersional = (data)=> ActionCreator(API_UPDATE_PERSONAL_LIMIT,`/api/rcslmodelprivate`,'PUT',data)();
 // 删除个性限额
-
-export const  detelePersionalLimit = (data)=> ActionCreator(API_DELETE_PERSIONAL_MODEL,`/api/rcslmodelprivate`,'PUT',data)();
+export const  detelePersionalLimit = (data)=> ActionCreator(API_DELETE_PERSIONAL_MODEL,`/api/rcslmodelprivate/${data}`,'DELETE')();
