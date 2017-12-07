@@ -1,8 +1,7 @@
 import React from 'react';
 import {Containerization} from '../common/PublicComponent';
 import SelectComs, {Option} from './SelectComs';
-import {Form,} from 'antd';
-import InputComs from './InputComs'
+import {Form,Select, Input} from 'antd';
 import '../style/style.less'
 import Storage from '../store';
 import {  getMainPart} from '../actions/limitActions'
@@ -19,37 +18,34 @@ const FormItem = Form.Item;
 export default class MapSelectComs extends React.Component {
 
     render() {
-        const {data,initial = false, selectedAll= false } = this.props;
+        const {data,initial = false, selectedAll= false, matchIs=false } = this.props;
         const {getFieldDecorator} = this.props.form
         return (
-            <div style={{display: 'inline-block'}}>
+            <div style={{display: 'inline-block',}}>
 
                 {
                   Object.keys(data).map((key, k) => {
                     const v = data[key];
                     if(!v || Object.keys(v).length == 0) return null;
-                    const option = initial?{initialValue:'all'} :{};
-                    const optionVal = selectedAll?v.optionVal.concat([{
-                      value:'all',
-                      name:'全部'
-                    }]):v.optionVal
-                    return <FormItem key={k} {...this.props}>
+                    const optionVal = v.optionVal;
+
+                    return <FormItem  label={(<div className="label-class">{v.labelName}</div>)} style={{display: 'inline-block',margin:'10px'}}   key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
-                                    ...option,
-                                    rules: v.rules ? [...v.rules] : [],
+                                    rules: matchIs ? [{required:true,message:'请勾选'}] : [],
+                                  help:'11111',
                                 })(
                                     v.type === 'select' ?
-                                        <SelectComs labelName={v.labelName} placeholder="请选择" {...v.body}
-                                                    className="selects-style">
+                                        <Select style={{width:'120px'}} labelName={v.labelName} placeholder={selectedAll?"全部":"请选择"} {...v.body}
+                                                    >
                                             {
                                               optionVal.map((i, j) => {
                                                     return <Option key={j} value={i.value}>{i.name}</Option>
                                                 })
                                             }
-                                        </SelectComs>
+                                        </Select>
                                         : v.type === 'input' ?
-                                        <InputComs {...v.body} className='input-style' labelName={v.labelName} placeholder="请选择"/>
+                                        <Input style={{width:'120px'}} {...v.body}   placeholder="请选择"/>
                                         : ''
                                 )
                             }
