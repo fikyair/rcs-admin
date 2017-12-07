@@ -86,6 +86,8 @@ export default class NewLimitModel extends React.Component {
         }
     ]
 
+    formsIns = {}
+
 
     componentWillMount() {
         this.props.dispatch(getSelectDdata({id: 22}))
@@ -93,21 +95,24 @@ export default class NewLimitModel extends React.Component {
 
     handleSubmit = () => {
         debugger
-        const formDataMerchent = this.formData.props.form.getFieldsValue();
-        // const formDataOffLine = this.formDataOffLine.props.form.getFieldsValue();
-        // const formDataOnLine = this.formDataOnLine.props.form.getFieldsValue();
+        // const formDataMerchent = this.formsIns[1].props.form.getFieldsValue();
+        let formDataMerchent = {};
+            Object.keys(this.formsIns).map(v=>{
+                formDataMerchent = {...formDataMerchent,...this.formsIns[v].props.form.getFieldsValue()}
+        })
         let modelPropertyVoList =  []
         for(let key in formDataMerchent){
+            if(formDataMerchent[key]){
             modelPropertyVoList.push({propertyCode:key,propertyDetailCode:formDataMerchent[key]})
+            }
         }
 
-        console.log(modelPropertyVoList)
         const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
         const formData = this.props.form.getFieldsValue()
-      /*  const getValues = {...formDataMerchent, ...formDataInputLimit, ...formData}
+        const getValues = { ...formDataInputLimit, ...formData, modelPropertyVoList:modelPropertyVoList}
         const val = getValues;
         console.log("表单的数据", val)
-        this.props.dispatch(addModel(val))*/
+        this.props.dispatch(addModel(val))
         // TODO 提交表单
     }
 
@@ -124,11 +129,15 @@ export default class NewLimitModel extends React.Component {
                     {
 
                         selectData.map((v, k) => {
+
                             return (<Card title={v.name} noHovering={true} key={k}
                                           style={{marginBottom: 6}}
                             >
                                 <MapSelectComs data={v.value}
-                                               wrappedComponentRef={(inst) => this.formData = inst}
+                                               wrappedComponentRef={(inst) => {
+                                                   debugger;
+                                                   this.formsIns[v.code] = inst
+                                               }}
                                 />
                             </Card>)
                         })
