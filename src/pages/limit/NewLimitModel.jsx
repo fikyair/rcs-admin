@@ -15,6 +15,7 @@ const FormItem = Form.Item;
 @Containerization(state => ({
     selectData: state.LimitReducer.selectData,
     entryData: state.LimitReducer.entryData,
+  formTemp:state.GlobalReducer.formTemp,
 })) @Form.create()
 export default class NewLimitModel extends React.Component {
 
@@ -90,7 +91,10 @@ export default class NewLimitModel extends React.Component {
 
 
     componentWillMount() {
-        this.props.dispatch(getSelectDdata({id: 22}))
+        const { addLimitTemp } = this.props.formTemp;
+        const { limitType, merchType, limitProperty, limitBodyC, limitBodyB} = addLimitTemp;
+
+        this.props.dispatch(getSelectDdata({limitType,merchType,limitProperty,mainPartCodeGroup:`${limitBodyB}${limitBodyB?'_':''}${limitBodyC}`}))
     }
 
     handleSubmit = () => {

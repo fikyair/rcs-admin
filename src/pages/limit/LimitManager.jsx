@@ -3,7 +3,8 @@ import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
 import MapSelectComs from '../../components/MapSelectComs';
-import { getModels, getBodyProperty, getBussinessType, getMerchtType, getMainPart} from '../../actions/limitActions';
+import { getModels, getBodyProperty, getBussinessType, } from '../../actions/limitActions';
+import { setTemp } from '../../actions/index';
 
 const FormItem = Form.Item;
 @setTitle('首页')
@@ -263,7 +264,7 @@ export default class LimitManager extends React.Component {
             this.timer = setTimeout(() => {
               this.setState({loading: false, visible: false});
             }, 3000);
-
+            this.props.dispatch(setTemp({addLimitTemp:values}))
             //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
             this.props.history.push('/limitManager/add')
 

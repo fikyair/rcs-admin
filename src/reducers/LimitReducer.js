@@ -3,7 +3,7 @@ import {
     API_GET_BUSSINESS_TYPE,
     API_GET_MAIN_ACCOUNT,
     API_GET_BODY_PROPERTY,
-    API_UPDATE_MODEL,
+  API_DETAIL_MODEL,
     API_GET_MERCHT_TYPE,
     API_POST_MODEL,
     API_MODIFY_MODEL,
@@ -105,7 +105,7 @@ export default function (state = initialState, actions) {
         },
         bodyProperty: actions.data,
       }
-      case API_UPDATE_MODEL[1]:
+      case API_DETAIL_MODEL[1]:
             return {
                 ...state,
                 entryData: actions.data,
