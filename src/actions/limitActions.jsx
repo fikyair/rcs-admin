@@ -61,4 +61,4 @@ export const getLimitInitData = (data) => ActionCreator(API_UPDATE_MODEL, `/api/
 export const editLimit = (data) => ActionCreator(API_MODIFY_MODEL, `/api/rcslmodel`, 'PUT', data)()
 
 //查询新增的下拉选项等数据
-export const getSelectDdata = (data) => ActionCreator(API_INIT_POST_MODEL, `/api/rcslmodel/${data.id}`, 'GET')()
+export const getSelectDdata = (data) => ActionCreator(API_INIT_POST_MODEL, `/api/rcslmodelcascade/propertylist?limitType=1&limitProperty=1&mainPartCodeGroup=M101&merchType=P1011001`, 'GET')()

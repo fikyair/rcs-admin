@@ -24,7 +24,8 @@ const initialState = {
     bodyProperty: [],
     initdata: [],
     entryData:{},
-    editsuccess:{}
+    editsuccess:{},
+    selectData: []
 };
 //全局状态信息，数据信息存储
 export default function (state = initialState, actions) {
@@ -126,26 +127,21 @@ export default function (state = initialState, actions) {
 
             }
         case API_INIT_POST_MODEL[1]:
+            debugger
             return {
                 ...state,
-                entryData: actions.data,
-                initdata: _.map(actions.data.propertyList, (v, k) => {
+                selectData: _.map(actions.data, (v, k) => {
                     return {
                         value: v.value.map((v, k) => {
                             return {
                                 labelName: v.name,
-                                initialValue: v.value.name,
+                                optionVal: v.value.map(data =>{return {value: data.code, name: data.name}}),
                                 key: v.code,
-                                body: {
-                                    style: {width: 150},
-                                    disabled: true
-                                }
+                                type: 'select'
                             }
                         }),
                         name: v.name,
                         code: v.code,
-
-
                     }
                 }),
 
