@@ -92,14 +92,22 @@ export default class NewLimitModel extends React.Component {
 
     componentWillMount() {
         const { addLimitTemp } = this.props.formTemp;
+        if(!addLimitTemp){
+            this.props.history.push('/limitManager')
+            return
+        }
         const { limitType, merchType, limitProperty, limitBodyC, limitBodyB} = addLimitTemp;
 
-        this.props.dispatch(getSelectDdata({limitType,merchType,limitProperty,mainPartCodeGroup:`${limitBodyB}${limitBodyB?'_':''}${limitBodyC}`}))
+        this.props.dispatch(getSelectDdata({limitType,merchType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}))
     }
 
     handleSubmit = () => {
+        const { addLimitTemp } = this.props.formTemp;
 
-        // const formDataMerchent = this.formsIns[1].props.form.getFieldsValue();
+        const { limitType, merchType, limitProperty, limitBodyC, limitBodyB} = addLimitTemp;
+
+        let mainData = {limitType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}
+
         let formDataMerchent = {};
             Object.keys(this.formsIns).map(v=>{
                 formDataMerchent = {...formDataMerchent,...this.formsIns[v].props.form.getFieldsValue()}
@@ -110,10 +118,9 @@ export default class NewLimitModel extends React.Component {
             modelPropertyVoList.push({propertyCode:key,propertyDetailCode:formDataMerchent[key]})
             }
         }
-
         const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
         const formData = this.props.form.getFieldsValue()
-        const getValues = { ...formDataInputLimit, ...formData, modelPropertyVoList:modelPropertyVoList}
+        const getValues = { ...formDataInputLimit, ...formData,...mainData, modelPropertyVoList:modelPropertyVoList}
         const val = getValues;
         console.log("表单的数据", val)
         this.props.dispatch(addModel(val))

@@ -10,7 +10,8 @@ import {
     API_GET_MERCHT_TYPE,
     API_MODIFY_MODEL,
     API_INIT_POST_MODEL,
-  API_GET_PERSONAL_LIMIT
+  API_GET_PERSONAL_LIMIT,
+    API_UPDATE_LIMIT
 } from '../utils/ActionsType';
 
 const ActionCreator = (type,url,method,data)=>{
@@ -69,3 +70,6 @@ export const getSelectDdata = (data) => ActionCreator(API_INIT_POST_MODEL, `/api
 
 //查询个性限额明细 GET /rcslmodelprivate/{id}查询明细
 export const  getPersonalDetial = (data)=> ActionCreator(API_GET_PERSONAL_LIMIT,`/api/rcslmodelprivate/${data}`,'GET')();
+
+// 修改个性限额
+export const  editPersional = (data)=> ActionCreator(API_UPDATE_LIMIT,`/api/rcslmodelprivate`,'PUT',data)();

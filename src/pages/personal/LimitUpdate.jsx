@@ -2,6 +2,8 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
+import {editLimit, editPersional} from '../../actions/limitActions';
+
 
 const InputGroup = Input.Group;
 import MapModifyCom from "../../components/MapModifyCom";
@@ -11,7 +13,9 @@ import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 
 @setTitle('个性限额修改页')
-@Containerization()
+@Containerization(
+
+)
 @Form.create()
 export default class LimitUpdate extends React.Component {
 
@@ -233,16 +237,19 @@ export default class LimitUpdate extends React.Component {
     }
 
     componentWillMount() {
-        if (this.props.match.path.indexOf('merchant') > 0) {
-            this.setState({isMerchant: true})
-        }
     }
 
     handleSubmit = () => {
-        const {getFieldsValue} = this.props.form;
-        const val = getFieldsValue();
-        // TODO 提交表单
-
+        let id = this.props.match.params.id
+        const value = this.formData.props.form.getFieldsValue()
+        const value1 = this.props.form.getFieldsValue()
+        const params = {
+            ...value,
+            ...value1,
+            id: id
+        }
+        this.props.dispatch(editPersional(params))
+        this.props.history.push('/limitManager')
     }
 
     render() {
@@ -253,18 +260,11 @@ export default class LimitUpdate extends React.Component {
             inputLimit = this.mockData.inputLimit,
             match
         } = this.props;
-        const {type, id} = match.params
-        const {getFieldDecorator} = this.props.form;
-        const queryItemLayout = {
-            xs: 12,
-            sm: 7,
-            md: 5,
-        };
         return (
             <div>
                 <div className={"title-style"}><b>商户编号:</b></div>
 
-                <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
+                <Form className="form-body" layout="inline">
 
                     <Card title="选择商户属性" noHovering={true}
                           style={{marginBottom: 6}}
@@ -288,7 +288,7 @@ export default class LimitUpdate extends React.Component {
                     >
 
                         <Row>
-                            <MapSelectComs data={inputLimit}>
+                            <MapSelectComs data={inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
 
                                 <FormItem>
                                  <span style={{
@@ -327,7 +327,7 @@ export default class LimitUpdate extends React.Component {
                         <div style={{textAlign: 'center'}}>
                             <Button style={{margin: '10px'}}
                                     onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
-                            <Button htmlType="submit" style={{margin: '10px'}}>保存</Button>
+                            <Button htmlType="submit" style={{margin: '10px'}} onClick={()=>{this.handleSubmit()}}>保存</Button>
                         </div>
 
 
