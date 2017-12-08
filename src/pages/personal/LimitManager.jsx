@@ -3,9 +3,11 @@ import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Table, Button, Card, Input, Modal, Form, Row, Col} from 'antd';
 import {Link} from 'react-router-dom';
 import {
-    getBodyProperty,
     getBussinessType,
-    detelePersionalLimit
+    detelePersionalLimit,
+    queryConsumptionType,
+    queryOnlineType,
+    queryOnlinePayType
 } from '../../actions/limitActions';
 import MapSelectComs from '../../components/MapSelectComs'
 
@@ -14,6 +16,7 @@ const FormItem = Form.Item;
 @Containerization(state => ({
     selectsData: state.LimitReducer.selectsData,
     detelesuccess: state.PersonalReducer.detelesuccess,
+    consumptionTypeData: state.PersonalReducer.consumptionTypeData,
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -215,7 +218,8 @@ export default class LimitManager extends React.Component {
 
     componentWillMount() {
         this.props.dispatch(getBussinessType());
-        this.props.dispatch(getBodyProperty());
+        // this.props.dispatch(getBodyProperty());
+        this.props.dispatch(queryConsumptionType())
 
     }
 
@@ -251,7 +255,7 @@ export default class LimitManager extends React.Component {
     render() {
         const {loading, removeVisible} = this.state;
         const {
-            selectsData = this.mockData.selectsData,
+            selectsData,
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects

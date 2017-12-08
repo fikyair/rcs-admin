@@ -2,15 +2,20 @@ import {
     API_GET_PERSONAL_LIMIT,
     API_UPDATE_PERSONAL_LIMIT,
     API_DELETE_PERSIONAL_MODEL,
-    API_POST_PERSIONAL_MODEL
+    API_POST_PERSIONAL_MODEL,
+    API_GET_PERSIONAL_CONSUMPTION,
+    API_GET_PERSIONAL_ONLINE,
+    API_GET_PERSIONAL_ONLINEPAY,
 } from '../utils/ActionsType';
 
 const initialState = {
     initdata: [],
     entryData: {},
     detelesuccess: {},
-    editsuccess: {}
-
+    editsuccess: {},
+    consumptionTypeData: {},
+    onlineData: {},
+    onlinePayData: {},
 }
 
 export default function (state = initialState, actions) {
@@ -54,6 +59,21 @@ export default function (state = initialState, actions) {
             return {
                 ...state,
                 addsuccess: true
+            }
+        case API_GET_PERSIONAL_CONSUMPTION[1]:
+            return {
+                ...state,
+                consumptionTypeData: actions.data
+            }
+        case API_GET_PERSIONAL_ONLINE[1]:
+            return {
+                ...state,
+                onlineData: actions.data,
+            }
+        case API_GET_PERSIONAL_ONLINEPAY[1]:
+            return {
+                ...state,
+                onlinePayData: actions.data
             }
         default:
             return state;
