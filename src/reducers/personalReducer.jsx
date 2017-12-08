@@ -70,19 +70,52 @@ export default function (state = initialState, actions) {
         case API_GET_PERSIONAL_CONSUMPTION[1]:
             return {
                 ...state,
-                consumptionTypeData: actions.data
+                consumptionTypeData:  {
+                    labelName: '消费类型',
+                    key: 'tranCd',
+                    type: 'select',
+                    optionVal: actions.data.map(data => {
+                            return {value: data.propertyDetailCode, name: data.propertyDetailName}
+
+                        }
+                    )
+
+                }
             }
         case API_GET_PERSIONAL_ONLINE[1]:
             return {
                 ...state,
-                onlineData: actions.data,
+                onlineData:  {
+                    labelName: '在线支付类型',
+                    key: 'olPayType',
+                    type: 'select',
+
+                    optionVal: actions.data.map(data => {
+                            return {value: data.propertyDetailCode, name: data.propertyDetailName}
+
+                        }
+                    )
+
+                }
             }
         case API_GET_PERSIONAL_ONLINEPAY[1]:
+            debugger
             return {
                 ...state,
-                onlinePayData: actions.data
-            }
+                onlinePayData:
+                    {
+                        labelName: '在线支付方式',
+                        key: 'olPayWay',
+                        type: 'select',
 
+                        optionVal: actions.data.map(data => {
+                                return {value: data.propertyDetailCode, name: data.propertyDetailName}
+
+                            }
+                        )
+
+                    }
+            }
         default:
             return state;
     }

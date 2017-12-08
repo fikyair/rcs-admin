@@ -90,8 +90,8 @@ export const queryList = (data) => ActionCreator(API_GET_PERSIONAL_HOMELIST, `/a
 // 添加个性限额
 export const addPersionalLimit = (data) => ActionCreator(API_POST_PERSIONAL_MODEL, `/api/rcslmodelprivate`, 'POST', data)();
 // 查询消费类型纬度
-export const queryConsumptionType = (data) => ActionCreator(API_GET_PERSIONAL_CONSUMPTION, `/api/rcslproperty/detail?propertyEnum=${data}`, 'get')();
+export const queryConsumptionType = (data) => ActionCreator(API_GET_PERSIONAL_CONSUMPTION, `/api/rcslproperty/detail?propertyEnum=TRAN_CD`, 'get')();
 // 查看在线交易类型纬度
-export const queryOnlineType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINE, `/api/rcslproperty/detail?propertyEnum=${data}`, 'get')();
+export const queryOnlineType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINE, `/api/rcslproperty/detail?propertyEnum=OL_PAY_TYPE`, 'get')();
 // 查看在线支付类型纬度
-export const queryOnlinePayType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINEPAY, `/api/rcslproperty/detail?propertyEnum=${data}`, 'get')();
+export const queryOnlinePayType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINEPAY, `/api/rcslproperty/detail?propertyEnum=OL_PAY_WAY`, 'get')();

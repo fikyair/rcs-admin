@@ -1,6 +1,6 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
-import {Table, Button, Card, Input, Modal, Form, Row, Col} from 'antd';
+import {Table, Button, Card, Input, Modal, Form, Row, Col, Pagination} from 'antd';
 import {Link} from 'react-router-dom';
 import {
     getBussinessType,
@@ -134,8 +134,8 @@ export default class LimitManager extends React.Component {
         columns: [
             {
                 title: '商户编号',
-                dataIndex: 'tranCd',
-                key: 'tranCd',
+                dataIndex: 'mainPartValue',
+                key: 'mainPartValue',
                 render: (text, record) => <Link to={`/merchantlimit/+details/${record.id}`}>{text}</Link>
 
             }, {
@@ -218,10 +218,20 @@ export default class LimitManager extends React.Component {
     componentWillMount() {
         this.props.dispatch(getBussinessType());
         // this.props.dispatch(getBodyProperty());
-        // this.props.dispatch(queryConsumptionType())
-        // this.props.dispatch(queryOnlineType())
-        // this.props.dispatch(queryOnlinePayType())
-        this.handleSearch()
+        this.props.dispatch(queryConsumptionType())
+        this.props.dispatch(queryOnlineType())
+        this.props.dispatch(queryOnlinePayType())
+        const {pageSize, pageNum} = this.state
+
+        let params = {
+            pageSize,
+            pageNum,
+        }
+
+        this.props.dispatch(queryList(params)).then(() => {
+            const {total, current, size} = this.props.homeListData
+            this.setState({total: total, pageNum: current, pageSize: size})
+        })
     }
 
     timer = null
@@ -245,15 +255,22 @@ export default class LimitManager extends React.Component {
     handleSearch = (args) => {
         //TODO 搜索
         debugger
+        const formData = this.formData.props.form.getFieldsValue()
+        const data = this.props.form.getFieldsValue()
         const {pageSize, pageNum} = this.state
 
         let params = {
             pageSize,
             pageNum,
-            ...args
+            ...args,
+            ...formData,
+            ...data,
         }
 
-        this.props.dispatch(queryList(params))
+        this.props.dispatch(queryList(params)).then(() => {
+            const {total, current, size} = this.props.homeListData
+            this.setState({total: total, pageNum: current, pageSize: size})
+        })
 
     }
 
@@ -263,29 +280,37 @@ export default class LimitManager extends React.Component {
         this.setState({merchantId: id})
     }
 
+    changePage = (page) => {
+        this.handleSearch({pageNum: page})
+    }
+
     render() {
         const {loading, removeVisible} = this.state;
         const {
-            selectsData,
+            selectsData = [],
             homeListData = [],
+            onlineData,
+            onlinePayData,
+            consumptionTypeData,
             columns = this.mockData.columns,
-            dataSource = this.mockData.dataSource,
-            modalSelects = this.mockData.modalSelects
         } = this.props;
         const layout = {
             xs: 6,
             sm: 15,
             md: 22
         }
-        debugger;
         const {getFieldDecorator} = this.props.form;
+        selectsData['tranCd'] = consumptionTypeData
+        selectsData['olPayType'] = onlineData
+        selectsData['olPayWay'] = onlinePayData
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
-                        <MapSelectComs selectedAll={true} initial={true} style={{}} ref="selectsData"
+                        <MapSelectComs selectedAll={true} initial={true} style={{}}
+                                       wrappedComponentRef={(inst) => this.formData = inst}
                                        data={selectsData}/>
-                        {/*<InputComs className='input-style' labelName="商户编号" placeholder="请选择"/>*/}
+
                     </div>
                     <Row>
                         <Col {...layout} style={{marginLeft: 6}}>
@@ -293,7 +318,7 @@ export default class LimitManager extends React.Component {
                                 <FormItem style={{margin: "10px", float: 'left'}}
                                           label={(<div className="label-class">商户编号</div>)}>
                                     {
-                                        getFieldDecorator('modelName', {})(
+                                        getFieldDecorator('mainPartValue', {})(
                                             <Input placeholder="请输入"/>
                                         )
                                     }
@@ -310,8 +335,11 @@ export default class LimitManager extends React.Component {
                         columns={columns}
                         dataSource={homeListData.records}
                         className="btl"
-                    />
-
+                        pagination={false}/>
+                    <div style={{margin: 29, textAlign: 'right'}}>
+                        <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
+                                    onChange={this.changePage}/>
+                    </div>
                 </Card>
                 <Modal
                     visible={removeVisible}
