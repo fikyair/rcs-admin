@@ -36,8 +36,12 @@ export default class ExtractData extends React.Component {
             const wsname = wb.SheetNames[0];
             const ws = wb.Sheets[wsname];
             const data = XLSX.utils.sheet_to_json(ws, {header: 1});
+            let list = []
+            _.compact(data).map((v,k)=>{
+                list.push({mainPartValue:v[0],remark:v[1]})
+            })
             console.log(data)
-            this.setState({data: data, cols: this.make_cols(ws['!ref'])});
+            this.setState({data: list, cols: this.make_cols(ws['!ref'])});
         };
         reader.readAsBinaryString(e.target.files[0]);
 
