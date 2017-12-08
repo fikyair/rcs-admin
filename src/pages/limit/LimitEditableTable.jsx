@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Pagination, Card, Input } from 'antd';
+import { Table, Pagination, Card, Input,Button } from 'antd';
 import '../../style/style.less';
 
 const datamock=[{
@@ -72,6 +72,8 @@ export default class EditableTable extends React.Component {
         const columns = this.columns;
         return (
             <div className="limitable">
+                <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
+
                 <Card noHovering= {true} title={<div>限额名称&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
 
                 >

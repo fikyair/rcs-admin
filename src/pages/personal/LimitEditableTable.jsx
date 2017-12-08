@@ -1,6 +1,7 @@
 import React from 'react';
-import { Table, Pagination, Card, Input } from 'antd';
+import { Table, Pagination, Card, Input, Button} from 'antd';
 import '../../style/style.less';
+import {Containerization} from "../../common/PublicComponent";
 
 const datamock=[{
     key: '1',
@@ -19,6 +20,7 @@ const datamock=[{
 function showTotal(total) {
     return `Total ${total} items`;
 }
+@Containerization()
 export default class EditableTable extends React.Component {
     state = {
         pageNum : 1,
@@ -72,6 +74,7 @@ export default class EditableTable extends React.Component {
         const columns = this.columns;
         return (
             <div className="limitable">
+                <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
                 <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
 
                 >
