@@ -3,8 +3,8 @@ import {Containerization, setTitle} from '../../common/PublicComponent';
 import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
 import MapSelectComs from '../../components/MapSelectComs';
-import { getModels, getBodyProperty, getBussinessType, } from '../../actions/limitActions';
 import { setTemp } from '../../actions/index';
+import { getModels, getBodyProperty, getBussinessType, getMerchtType, getMainPart, deleteModel} from '../../actions/limitActions';
 
 const FormItem = Form.Item;
 @setTitle('首页')
@@ -28,6 +28,7 @@ export default class LimitManager extends React.Component {
         visible: false,
         removeVisible: false,
         isMerchant: false,
+        removeId:''
     }
     mockData = {
         selectsData: [
@@ -248,8 +249,6 @@ export default class LimitManager extends React.Component {
 
         </Menu>
     );
-
-
     timer = null
     showAddModal = () => {
         this.setState({
@@ -272,7 +271,6 @@ export default class LimitManager extends React.Component {
         });
 
     }
-
     componentWillUnmount() {
         clearTimeout(this.timer)
     }
@@ -281,17 +279,17 @@ export default class LimitManager extends React.Component {
         this.setState({visible: false});
     }
 
-    disableLimitRule() {
-        this.setState({removeVisible: true})
+    disableLimitRule(id) {
+        this.setState({removeVisible: true,removeId: id})
     }
 
     handleRemoveCancel = () => {
         this.setState({removeVisible: false})
     }
 
-    handleRemoveOk = () => {
+    handleRemoveOk = (s) => {
         this.setState({removeVisible: false})
-
+        this.delete()
         //TODO 删除限额规则
     }
 
@@ -312,7 +310,11 @@ export default class LimitManager extends React.Component {
           console.log('====>',data)
       })
     }
-
+    delete = () => {
+        //TODO 删除table数据
+        let id = this.state.removeId
+        this.props.dispatch(deleteModel({id:id})).then(data=>{})
+    }
     changePage = (page) =>{
         this.handleSearch({pageNum: page})
     }
@@ -398,12 +400,11 @@ export default class LimitManager extends React.Component {
                     visible={removeVisible}
                     title="删除限额"
                     bodyStyle={{backgroundColor:'red'}}
-                    onOk={this.handleRemoveOk}
                     onCancel={this.handleRemoveCancel}
                     footer={[
                         <Button key="back" size="large" onClick={this.handleRemoveCancel}>取消</Button>,
                         <Button key="submit" type="primary" size="large" loading={loading}
-                                onClick={this.handleRemoveOk}>
+                               onClick={()=>{this.handleRemoveOk()}} >
                             确认
                         </Button>,
                     ]}

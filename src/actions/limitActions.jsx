@@ -12,7 +12,8 @@ import {
     API_INIT_POST_MODEL,
   API_GET_PERSONAL_LIMIT,
     API_UPDATE_PERSONAL_LIMIT,
-    API_DELETE_PERSIONAL_MODEL
+    API_DELETE_PERSIONAL_MODEL,
+    API_DELETE_MODEL
 } from '../utils/ActionsType';
 
 const ActionCreator = (type,url,method,data)=>{
@@ -43,6 +44,9 @@ export const getModels =(data)=>  ActionCreator(API_GET_MODELS,`/api/rcslmodel${
 //新增Models
 
 export const addModel =(data) => ActionCreator(API_POST_MODEL,`/api/rcslmodel`,'POST',data)();
+
+//删除Models
+export const deleteModel = (data) => ActionCreator(API_DELETE_MODEL,`/api/rcslmodel/${data.id}`,'DELETE')();
 
 //GET /type/businesstype 查找限额业务类型（限额类型）
 export const getBussinessType =  ActionCreator(API_GET_BUSSINESS_TYPE,`/api/type/businesstype`,'GET');

@@ -8,6 +8,7 @@ import {
     API_POST_MODEL,
     API_MODIFY_MODEL,
     API_INIT_POST_MODEL,
+    API_DELETE_MODEL
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -36,6 +37,11 @@ export default function (state = initialState, actions) {
                 ...state,
                 modelsData: actions.data
             };
+        case API_DELETE_MODEL[1]:
+            return{
+                ...state,
+                modelData: actions.data
+            }
         case API_GET_BUSSINESS_TYPE[1]:
 
       return {
