@@ -33,6 +33,8 @@ export default class LimitManager extends React.Component {
         total: 0,
         pageNum: 1,
         pageSize: 3,
+        mainPartValue:''
+
     }
     mockData = {
         selectsData: [
@@ -177,7 +179,7 @@ export default class LimitManager extends React.Component {
                     <span>
                         <Link to={`/merchantlimit/+update/${record.id}`}>修改</Link>
                         <span className="ant-divider"/>
-            <a onClick={() => this.delete(record.id)}>删除</a>
+            <a onClick={() => this.delete(record)}>删除</a>
                         <span className="ant-divider"/>
              <Link to={`/merchantlimit/+operationrecoerd/${record.id}`}>操作记录</Link>
             </span>
@@ -274,10 +276,10 @@ export default class LimitManager extends React.Component {
 
     }
 
-    delete(id) {
+    delete(record) {
         this.setState({removeVisible: true})
 
-        this.setState({merchantId: id})
+        this.setState({merchantId: record.id,mainPartValue: record.mainPartValue})
     }
 
     changePage = (page) => {
@@ -353,7 +355,7 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    确定删除{'fsdfsdfdsf'}限额
+                    确定删除{this.state.mainPartValue}限额
 
                 </Modal>
             </div>
