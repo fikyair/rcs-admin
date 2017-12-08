@@ -3,7 +3,7 @@ import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import ExtracData from '../../components/ExtractData'
 const InputGroup = Input.Group;
-import {getPersonalDetial} from "../../actions/limitActions";
+import {getPersonalDetial,addPersionalLimit} from "../../actions/limitActions";
 import MapModifyCom from "../../components/MapModifyCom";
 
 
