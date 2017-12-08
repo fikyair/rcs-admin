@@ -15,7 +15,7 @@ import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 @setTitle('首页')
 @Containerization(state => ({
-    selectsData: state.LimitReducer.selectsData,
+    selectsData: state.LimitReducer.selectsData2,
     detelesuccess: state.PersonalReducer.detelesuccess,
     consumptionTypeData: state.PersonalReducer.consumptionTypeData,
     onlineData: state.PersonalReducer.onlineData,
@@ -302,16 +302,15 @@ export default class LimitManager extends React.Component {
             md: 22
         }
         const {getFieldDecorator} = this.props.form;
-        selectsData['tranCd'] = consumptionTypeData
-        selectsData['olPayType'] = onlineData
-        selectsData['olPayWay'] = onlinePayData
+        const {limitType} = selectsData;
+        const data = {limitType,tranCd:consumptionTypeData,olPayType:onlineData,olPayWay:onlinePayData,}
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
                     <div className="select">
                         <MapSelectComs selectedAll={true} initial={true} style={{}}
                                        wrappedComponentRef={(inst) => this.formData = inst}
-                                       data={selectsData}/>
+                                       data={data}/>
 
                     </div>
                     <Row>
