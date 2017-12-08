@@ -18,7 +18,8 @@ import {
     API_GET_PERSIONAL_CONSUMPTION,
     API_GET_PERSIONAL_ONLINE,
     API_GET_PERSIONAL_ONLINEPAY,
-    API_GET_PERSIONAL_HOMELIST
+    API_GET_PERSIONAL_HOMELIST,
+    API_GET_PERSIONAL_OPTLOG,
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -95,3 +96,5 @@ export const queryConsumptionType = (data) => ActionCreator(API_GET_PERSIONAL_CO
 export const queryOnlineType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINE, `/api/rcslproperty/detail?propertyEnum=OL_PAY_TYPE`, 'get')();
 // 查看在线支付类型纬度
 export const queryOnlinePayType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINEPAY, `/api/rcslproperty/detail?propertyEnum=OL_PAY_WAY`, 'get')();
+//GET GET /rcslmodelprivateoptlog  个性限额操作记录
+export const getOptLog =(data) => ActionCreator(API_GET_PERSIONAL_OPTLOG,`/api/rcslmodelprivateoptlog${queryData(data)}`, 'GET')();

@@ -1,5 +1,4 @@
 import React from 'react';
-import {Card} from 'antd';
 import EditableTable from './LimitEditableTable';
 
 import {Containerization, setTitle} from '../../common/PublicComponent';

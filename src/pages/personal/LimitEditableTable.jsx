@@ -2,29 +2,21 @@ import React from 'react';
 import { Table, Pagination, Card, Input, Button} from 'antd';
 import '../../style/style.less';
 import {Containerization} from "../../common/PublicComponent";
+import {getOptLog} from "../../actions/limitActions";
 
-const datamock=[{
-    key: '1',
-    singleLimit: '12000',
-    dayAmountLimit: '1325',
-    monthAmountLimit: '4532',
-    yearAmountLimit: '781501',
-    lifeAmountLimit: '12452',
-    twoIntervals: '450',
-    strokeCount: '500',
-    stroke: '12330',
-    state: '1',
-    operational: '王永飞',
-    operationTime: '2017-11-29 12:30:12'
-}];
+
 function showTotal(total) {
     return `Total ${total} items`;
 }
-@Containerization()
+@Containerization(state =>({
+    operationData: state.LimitReducer.operationData,
+    paginationData: state.LimitReducer.paginationData,
+    })
+)
 export default class EditableTable extends React.Component {
     state = {
-        pageNum : 1,
-        pageSize: 3,
+        current : 1,
+        size: 3,
         total: 0,
         data: [],
         key: '1',
@@ -33,7 +25,7 @@ export default class EditableTable extends React.Component {
         super(props);
         this.columns = [{
             title: '单笔(金额)',
-            dataIndex: 'singleLimit',
+            dataIndex: 'singleAmountLimit',
         }, {
             title: '单日(金额)',
             dataIndex: 'dayAmountLimit',
@@ -48,40 +40,62 @@ export default class EditableTable extends React.Component {
             dataIndex: 'lifeAmountLimit',
         },{
             title: '两笔间隔(秒)',
-            dataIndex: 'twoIntervals',
+            dataIndex: 'intervalSecondsLimit',
         },{
             title: '笔数/分钟',
-            dataIndex: 'strokeCount',
+            dataIndex: 'countLimitCountValue',
         },{
             title: '笔/日',
-            dataIndex: 'stroke',
-        },{
-            title: '状态',
-            dataIndex: 'state',
+            dataIndex: 'dayCountLimit',
         },{
             title: '操作人',
-            dataIndex: 'operational'
+            dataIndex: 'optUserName'
         },{
             title: '操作时间',
-            dataIndex: 'operationTime',
+            dataIndex: 'optTime',
         }];
 
 
     }
 
+    handleSearch = (arg) => {
+        const {current,size}=this.state;
+
+        const {id}=this.props.match.params;
+        this.props.dispatch(getOptLog({modelPrivateId: '125335780557066240',current,size})).then(()=>{//异步(请求之后)显示数据
+            debugger
+            const {total, current ,size}= this.props.paginationData;
+            this.setState({total:total,current:current,size: size})
+        });
+    }
+
+
+    componentWillMount(){
+
+         this.handleSearch();
+
+    }
+
+    changePage(page){
+        this.handleSearch({current: page});
+    }
     render() {
-        const { dataSource } = this.state;
+        const { operationData:dataSource } = this.props;
         const columns = this.columns;
+        console.log("=====>",dataSource);
+        console.log("dddd",this.state.current)
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
                 <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
 
                 >
-                    <Table className="btl" dataSource={datamock}  pagination={false} columns={columns} />
+                    <Table className="btl" dataSource={dataSource}  pagination={false} columns={columns} />
 
-                    <div style={{textAlign: 'right',margin: 29,}}>
-                        <Pagination size="large" total={50}/>
+                    <div style={{textAlign: 'right',margin: 29}}>
+                        <Pagination pageSize={this.state.size} current={this.state.current}  total={this.state.total}
+                         onChange={this.changePage.bind(this)}
+                        />
                     </div>
                 </Card>
             </div>
