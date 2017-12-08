@@ -124,6 +124,7 @@ export default class NewLimitModel extends React.Component {
         const val = getValues;
         console.log("表单的数据", val)
         this.props.dispatch(addModel(val))
+        this.props.history.push('/limitManager')
         // TODO 提交表单
     }
 
