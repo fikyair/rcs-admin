@@ -28,7 +28,8 @@ export default class LimitManager extends React.Component {
         visible: false,
         removeVisible: false,
         isMerchant: false,
-        removeId:''
+        removeId:'',
+        modelName:''
     }
     mockData = {
         selectsData: [
@@ -247,7 +248,7 @@ export default class LimitManager extends React.Component {
                 <Link to={`/limitManager/+operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
             <Menu.Item key='1'>
-                <a onClick={()=>{this.disableLimitRule(record.id)}}>删除</a>
+                <a onClick={()=>{this.disableLimitRule(record)}}>删除</a>
             </Menu.Item>
 
         </Menu>
@@ -282,8 +283,8 @@ export default class LimitManager extends React.Component {
         this.setState({visible: false});
     }
 
-    disableLimitRule(id) {
-        this.setState({removeVisible: true,removeId: id})
+    disableLimitRule(record) {
+        this.setState({removeVisible: true,removeId: record.id, modelName:record.modelName})
     }
 
     handleRemoveCancel = () => {
@@ -413,7 +414,7 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    确定删除{'fsdfsdfdsf'}限额
+                    确定删除{this.state.modelName}限额
 
                 </Modal>
             </div>
