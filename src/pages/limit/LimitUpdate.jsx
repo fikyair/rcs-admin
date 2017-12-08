@@ -119,12 +119,13 @@ export default class LimitUpdate extends React.Component {
         } = this.props;
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
-        })
+        });
+        const {modelName} = entryData;
         const {getFieldDecorator} = this.props.form
 
         return (
             <div>
-                <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
+                <div className={"title-style"}><b>限额名称：{modelName}</b></div>
                 <Form className="form-body" layout="inline">
                     {
                         initdata.map((v, k) => {
