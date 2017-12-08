@@ -55,7 +55,7 @@ export default class ExtractData extends React.Component {
 
     render() {
         return (
-            <a href="javascript:;" className="file">选择文件
+            <a href="javascript:;" className="file">批量导入
                 <input type="file" id="extract" onChange={(e) => this.handleFile(e)}/>
             </a>
         )

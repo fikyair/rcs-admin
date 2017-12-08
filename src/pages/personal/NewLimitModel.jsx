@@ -192,21 +192,26 @@ export default class NewLimitModel extends React.Component {
                     <Card title="配置商户"
                           noHovering={true}
                     >
-                        {getFieldDecorator('mainPartValue')(
-                            <Input placeholder="请输入"
-                                   addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
-                                   style={{width: '200px', margin: '10px'}}/>
-                        )}
-                        <ExtracData getData={this.getData.bind(this)}/>
-                        <FormItem
-                        label="备注"
-                        >
-                            {getFieldDecorator('remark')( <TextArea></TextArea>)}
+                        <Row>
 
-                        </FormItem>
-                        <Button style={{margin: '10px', verticalAlign: 'top'}}
-                                onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
-                        <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}} onClick={()=>this.handleSubmit()}>保存</Button>
+                            {getFieldDecorator('mainPartValue')(
+                                <Input placeholder="请输入"
+                                       addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
+                                       style={{width: '200px', margin: '10px'}}/>
+                            )}
+                            <FormItem
+                                label="备注"
+                            >
+                                {getFieldDecorator('remark')( <TextArea></TextArea>)}
+
+                            </FormItem>
+                            <Button style={{margin: '10px', verticalAlign: 'top'}}
+                                    onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
+                            <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}} onClick={()=>this.handleSubmit()}>保存</Button>
+                        </Row>
+                        <Row>
+                        <ExtracData getData={this.getData.bind(this)}/>
+                        </Row>
                     </Card>
                 </Form>
             </div>
