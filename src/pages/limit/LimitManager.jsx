@@ -1,6 +1,6 @@
 import React from 'react';
 import {Containerization, setTitle} from '../../common/PublicComponent';
-import {Layout, Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
+import { Table, Button, Card, Icon, Input, Modal, Form, Menu, Dropdown, Pagination,Row,Col} from 'antd';
 import {Link} from 'react-router-dom';
 import MapSelectComs from '../../components/MapSelectComs';
 import { setTemp } from '../../actions/index';
@@ -401,10 +401,11 @@ export default class LimitManager extends React.Component {
                 </Modal>
                 :null
               }
+
                 <Modal
                     visible={removeVisible}
                     title="删除限额"
-                    bodyStyle={{backgroundColor:'red'}}
+                    bodyStyle={{fontSize:14, background:'#FCFCFC'}}
                     onCancel={this.handleRemoveCancel}
                     footer={[
                         <Button key="back" size="large" onClick={this.handleRemoveCancel}>取消</Button>,
@@ -414,7 +415,11 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    确定删除{this.state.modelName}限额
+
+                    确定删除&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style={{fontSize:19}}>{this.state.modelName}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;限额?
+
 
                 </Modal>
             </div>
