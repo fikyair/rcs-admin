@@ -235,7 +235,10 @@ export default class LimitManager extends React.Component {
             pageNum,
             pageSize,
         };
-        this.props.dispatch(getModels({...params}))
+        this.props.dispatch(getModels({...params})).then(()=>{
+            const {total, current,size} = this.props.modelsData
+            this.setState({total: total,pageNum:current,pageSize: size})
+        })
     }
     menu = record => (
         <Menu>
@@ -306,8 +309,9 @@ export default class LimitManager extends React.Component {
             ...args,
         };
         //调用接口
-      this.props.dispatch(getModels({...params})).then(data=>{
-          console.log('====>',data)
+      this.props.dispatch(getModels({...params})).then(()=>{
+          const {total, current,size} = this.props.modelsData
+          this.setState({total: total,pageNum:current,pageSize: size})
       })
     }
     delete = () => {
