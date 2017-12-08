@@ -17,7 +17,8 @@ import {
     API_POST_PERSIONAL_MODEL,
     API_GET_PERSIONAL_CONSUMPTION,
     API_GET_PERSIONAL_ONLINE,
-    API_GET_PERSIONAL_ONLINEPAY
+    API_GET_PERSIONAL_ONLINEPAY,
+    API_GET_PERSIONAL_HOMELIST
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -83,6 +84,9 @@ export const getPersonalDetial = (data) => ActionCreator(API_GET_PERSONAL_LIMIT,
 export const editPersional = (data) => ActionCreator(API_UPDATE_PERSONAL_LIMIT, `/api/rcslmodelprivate`, 'PUT', data)();
 // 删除个性限额
 export const detelePersionalLimit = (data) => ActionCreator(API_DELETE_PERSIONAL_MODEL, `/api/rcslmodelprivate/${data}`, 'DELETE')();
+
+// 查询列表
+export const queryList = (data) => ActionCreator(API_GET_PERSIONAL_HOMELIST, `/api/rcslmodelprivate${queryData(data)}`, 'GET')();
 // 添加个性限额
 export const addPersionalLimit = (data) => ActionCreator(API_POST_PERSIONAL_MODEL, `/api/rcslmodelprivate`, 'POST', data)();
 // 查询消费类型纬度

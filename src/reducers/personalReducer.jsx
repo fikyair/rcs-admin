@@ -6,6 +6,7 @@ import {
     API_GET_PERSIONAL_CONSUMPTION,
     API_GET_PERSIONAL_ONLINE,
     API_GET_PERSIONAL_ONLINEPAY,
+    API_GET_PERSIONAL_HOMELIST
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
     consumptionTypeData: {},
     onlineData: {},
     onlinePayData: {},
+    homeListData: []
 }
 
 export default function (state = initialState, actions) {
@@ -44,6 +46,11 @@ export default function (state = initialState, actions) {
                     }
                 }),
 
+            }
+        case API_GET_PERSIONAL_HOMELIST[1]:
+            return {
+                ...state,
+                homeListData: actions.data
             }
         case API_UPDATE_PERSONAL_LIMIT[1]:
             return {
@@ -75,6 +82,7 @@ export default function (state = initialState, actions) {
                 ...state,
                 onlinePayData: actions.data
             }
+
         default:
             return state;
     }

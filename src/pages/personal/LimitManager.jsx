@@ -7,7 +7,8 @@ import {
     detelePersionalLimit,
     queryConsumptionType,
     queryOnlineType,
-    queryOnlinePayType
+    queryOnlinePayType,
+    queryList
 } from '../../actions/limitActions';
 import MapSelectComs from '../../components/MapSelectComs'
 
@@ -17,6 +18,9 @@ const FormItem = Form.Item;
     selectsData: state.LimitReducer.selectsData,
     detelesuccess: state.PersonalReducer.detelesuccess,
     consumptionTypeData: state.PersonalReducer.consumptionTypeData,
+    onlineData: state.PersonalReducer.onlineData,
+    onlinePayData: state.PersonalReducer.onlinePayData,
+    homeListData: state.PersonalReducer.homeListData,
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -25,7 +29,10 @@ export default class LimitManager extends React.Component {
         loading: false,
         visible: false,
         removeVisible: false,
-        merchantId: ''
+        merchantId: '',
+        total: 0,
+        pageNum: 1,
+        pageSize: 3,
     }
     mockData = {
         selectsData: [
@@ -127,50 +134,42 @@ export default class LimitManager extends React.Component {
         columns: [
             {
                 title: '商户编号',
-                dataIndex: 'name',
-                key: 'name',
+                dataIndex: 'tranCd',
+                key: 'tranCd',
                 render: (text, record) => <Link to={`/merchantlimit/+details/${record.id}`}>{text}</Link>
 
             }, {
                 title: '单笔(金额)',
-                dataIndex: 'single',
-                key: 'single',
+                dataIndex: 'singleAmountLimit',
+                key: 'singleAmountLimit',
             }, {
                 title: '单日(金额)',
-                dataIndex: 'singleDay',
-                key: 'singleDay',
+                dataIndex: 'dayAmountLimit',
+                key: 'dayAmountLimit',
             }, {
                 title: '单月(金额)',
-                dataIndex: 'singleMonth',
-                key: 'singleMonth',
+                dataIndex: 'monthAmountLimit',
+                key: 'monthAmountLimit',
             }, {
                 title: '年(金额)',
-                dataIndex: 'year',
-                key: 'year',
+                dataIndex: 'yearAmountLimit',
+                key: 'yearAmountLimit',
             }, {
                 title: '终身(金额)',
-                dataIndex: 'lifeTime',
-                key: 'lifeTime',
+                dataIndex: 'lifeAmountLimit',
+                key: 'lifeAmountLimit',
             }, {
                 title: '两笔间隔(秒)',
-                dataIndex: 'interval',
-                key: 'interval',
+                dataIndex: 'intervalSecondsLimit',
+                key: 'intervalSecondsLimit',
             }, {
                 title: '笔数(分钟)',
-                dataIndex: 'trades',
-                key: 'trades',
+                dataIndex: 'countLimitCountValue',
+                key: 'countLimitCountValue',
             }, {
                 title: '笔/日',
-                dataIndex: 'one',
-                key: 'one',
-            }, {
-                title: '状态',
-                dataIndex: 'status',
-                key: 'status',
-            }, {
-                title: '备注',
-                dataIndex: 'remark',
-                key: 'remark',
+                dataIndex: 'dayCountLimit',
+                key: 'dayCountLimit',
             }, {
                 title: '管理',
                 key: 'action',
@@ -219,8 +218,10 @@ export default class LimitManager extends React.Component {
     componentWillMount() {
         this.props.dispatch(getBussinessType());
         // this.props.dispatch(getBodyProperty());
-        this.props.dispatch(queryConsumptionType())
-
+        // this.props.dispatch(queryConsumptionType())
+        // this.props.dispatch(queryOnlineType())
+        // this.props.dispatch(queryOnlinePayType())
+        this.handleSearch()
     }
 
     timer = null
@@ -234,7 +235,6 @@ export default class LimitManager extends React.Component {
     }
 
     handleRemoveOk = () => {
-        debugger
         this.setState({removeVisible: false})
         let id = '11'
         this.props.dispatch(detelePersionalLimit(id)).then(() => {
@@ -242,8 +242,19 @@ export default class LimitManager extends React.Component {
         //TODO 删除限额规则
     }
 
-    handleSearch = () => {
+    handleSearch = (args) => {
         //TODO 搜索
+        debugger
+        const {pageSize, pageNum} = this.state
+
+        let params = {
+            pageSize,
+            pageNum,
+            ...args
+        }
+
+        this.props.dispatch(queryList(params))
+
     }
 
     delete(id) {
@@ -256,6 +267,7 @@ export default class LimitManager extends React.Component {
         const {loading, removeVisible} = this.state;
         const {
             selectsData,
+            homeListData = [],
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects
@@ -265,6 +277,7 @@ export default class LimitManager extends React.Component {
             sm: 15,
             md: 22
         }
+        debugger;
         const {getFieldDecorator} = this.props.form;
         return (
             <div>
@@ -295,9 +308,11 @@ export default class LimitManager extends React.Component {
                       bodyStyle={{padding: '0px',}}>
                     <Table
                         columns={columns}
-                        dataSource={dataSource}
+                        dataSource={homeListData.records}
                         className="btl"
-                    /></Card>
+                    />
+
+                </Card>
                 <Modal
                     visible={removeVisible}
                     title="删除限额"
