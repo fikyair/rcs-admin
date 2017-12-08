@@ -15,7 +15,7 @@ import MapSelectComs from '../../components/MapSelectComs'
 const FormItem = Form.Item;
 @setTitle('首页')
 @Containerization(state => ({
-    selectsData: state.LimitReducer.selectsData2,
+    selectsData: state.LimitReducer.selectsData,
     detelesuccess: state.PersonalReducer.detelesuccess,
     consumptionTypeData: state.PersonalReducer.consumptionTypeData,
     onlineData: state.PersonalReducer.onlineData,
