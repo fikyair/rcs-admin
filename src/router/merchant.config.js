@@ -34,7 +34,7 @@ export const merchantLimitRouter = [
         exact: true,
         component: (props) => BundleCom(props, OperationRecord),
     },{
-        path: '/merchantlimit/+add/:id',
+        path: '/merchantlimit/+add/:id/:maincode',
         exact: true,
         component: props => BundleCom(props, NewLimitModel)
     },

@@ -4,6 +4,7 @@ import {Input} from 'antd'
 import './ExtractData.less'
 
 export default class ExtractData extends React.Component {
+    state= {data:''}
     make_cols = refstr => Array(XLSX.utils.decode_range(refstr).e.c + 1).fill(0).map((x, i) => ({
         name: XLSX.utils.encode_col(i),
         key: i
@@ -38,12 +39,17 @@ export default class ExtractData extends React.Component {
             const data = XLSX.utils.sheet_to_json(ws, {header: 1});
             let list = []
             _.compact(data).map((v,k)=>{
-                list.push({mainPartValue:v[0],remark:v[1]})
+                if(v[0]){
+                    list.push({mainPartValue:v[0],remark:v[1]})
+                }
+
             })
             console.log(data)
             this.setState({data: list, cols: this.make_cols(ws['!ref'])});
+            this.props.getData(list)
         };
         reader.readAsBinaryString(e.target.files[0]);
+
 
     };
 

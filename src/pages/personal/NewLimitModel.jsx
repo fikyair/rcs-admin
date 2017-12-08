@@ -19,6 +19,7 @@ const {TextArea} = Input
 export default class NewLimitModel extends React.Component {
 
     state = {
+        list: []
     }
 
     inputLimit = [
@@ -91,15 +92,26 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
+        let mainPartCode =  this.props.match.params.maincode
         const formData = this.formData.props.form.getFieldsValue()
 
-        const value = this.props.form.getFieldsValue()
-
+        const {remark, mainPartValue} = this.props.form.getFieldsValue()
+        let arr = []
+        arr.push({mainPartValue:mainPartValue,remark:remark})
+        let list = this.state.list
+        list.shift()
         let params = {
             ...formData,
-            ...value
+            excelVoList: list.length ?  list : arr,
+            mainPartCode: mainPartCode
         }
+        console.log('=============>',params)
+        this.props.dispatch(addPersionalLimit(params))
 
+    }
+
+    getData(list) {
+        this.setState({list: list})
     }
 
     render() {
@@ -114,7 +126,7 @@ export default class NewLimitModel extends React.Component {
         const {getFieldDecorator} = this.props.form
         return (
             <div>
-                <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
+                <Form className="form-body" layout="inline">
                     {
 
                         initdata.map((v, k) => {
@@ -180,12 +192,12 @@ export default class NewLimitModel extends React.Component {
                     <Card title="配置商户"
                           noHovering={true}
                     >
-                        {getFieldDecorator('merchant')(
+                        {getFieldDecorator('mainPartValue')(
                             <Input placeholder="请输入"
                                    addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
                                    style={{width: '200px', margin: '10px'}}/>
                         )}
-                        <ExtracData/>
+                        <ExtracData getData={this.getData.bind(this)}/>
                         <FormItem
                         label="备注"
                         >
@@ -194,7 +206,7 @@ export default class NewLimitModel extends React.Component {
                         </FormItem>
                         <Button style={{margin: '10px', verticalAlign: 'top'}}
                                 onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
-                        <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}>保存</Button>
+                        <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}} onClick={()=>this.handleSubmit()}>保存</Button>
                     </Card>
                 </Form>
             </div>
