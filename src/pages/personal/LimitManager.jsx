@@ -166,7 +166,7 @@ export default class LimitManager extends React.Component {
                 key: 'intervalSecondsLimit',
             }, {
                 title: '笔数(分钟)',
-                dataIndex: 'countLimitCountValue',
+                dataIndex: 'countLimitMinuteValue',
                 key: 'countLimitCountValue',
             }, {
                 title: '笔/日',

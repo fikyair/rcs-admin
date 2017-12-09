@@ -121,6 +121,7 @@ export default class NewLimitModel extends React.Component {
         }
         console.log('=============>', params)
         this.props.dispatch(addPersionalLimit(params))
+        this.props.history.push('/merchantlimit')
 
     }
 
