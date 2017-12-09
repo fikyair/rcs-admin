@@ -234,6 +234,7 @@ export default class LimitDetails extends React.Component {
             labelName: '单笔',
             key: 'singleAmountLimit',
             type: 'input',
+            disabled: true,
             body: {
                 style: {width: 140},
                 addonBefore: "金额",

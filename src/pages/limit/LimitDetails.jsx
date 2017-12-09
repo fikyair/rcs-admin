@@ -27,6 +27,7 @@ export default class LimitDetails extends React.Component {
                 style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
+                disabled: true,
             },
 
         }, {
