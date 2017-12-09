@@ -21,7 +21,7 @@ export const commontLimtRouter = [
         exact: true,
         component: (props) => BundleCom(props, LimitManager),
     }, {
-        path: '/limitManager/+update/:id',
+        path: '/limitManager/+update/:id/:pageNum',
         exact: true,
         component: props => BundleCom(props, LimitUpdate)
     }, {

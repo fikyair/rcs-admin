@@ -5,14 +5,8 @@ import {Containerization} from '../../common/PublicComponent';
 import {recordData} from '../../actions/limitActions';
 
 @Containerization(state=>({
-    selectsData:state.LimitReducer.selectsData,
-    bussinessType:state.LimitReducer.bussinessType,
-    cardType:state.LimitReducer.cardType,
-    bodyProperty:state.LimitReducer.bodyProperty,
-    mainAccount:state.LimitReducer.mainAccount,
-    modelsData: state.LimitReducer.modelsData,
-    formTemp:state.GlobalReducer.formTemp,
     recordData:state.LimitReducer.recordData,
+    recordType:state.LimitReducer.recordType,
 }))
 // const datamock=[{
 //     key: '1',
@@ -79,6 +73,7 @@ export default class EditableTable extends React.Component {
         this.handleRecord();
     }
     handleRecord = (args) => {
+        //从路由带参数
         const {id} = this.props.match.params;
         const {pageNum, pageSize} = this.state;
         let params = {

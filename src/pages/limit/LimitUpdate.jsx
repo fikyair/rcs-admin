@@ -12,7 +12,9 @@ const InputGroup = Input.Group;
 @Containerization(state => ({
     initdata: state.LimitReducer.initdata,
     entryData: state.LimitReducer.entryData,
-    editsuccess: state.LimitReducer.editsuccess
+    editsuccess: state.LimitReducer.editsuccess,
+    //bussinessType:state.LimitReducer.bussinessType,
+
 }))
 @Form.create()
 export default class LimitUpdate extends React.Component {
@@ -98,16 +100,22 @@ export default class LimitUpdate extends React.Component {
 
 
     handleSubmit = () => {
+        //从路由带参数
         let id = this.props.match.params.id
+        debugger
+        let pageNum = this.props.match.params.pageNum
         const value = this.formData.props.form.getFieldsValue()
+        // value['dayCountLimit'] =  parseInt(value['dayCountLimit'])
         const value1 = this.props.form.getFieldsValue()
         const params = {
             ...value,
             ...value1,
-            id: id
+            id: id,
         }
-        this.props.dispatch(editLimit(params))
-        this.props.history.push('/limitManager')
+        this.props.dispatch(editLimit(params)).then(()=>{
+
+        })
+         this.props.history.push('/limitManager',{pageNum:pageNum})
     }
 
 
