@@ -83,7 +83,7 @@ export const getSelectDdata = (data) => ActionCreator(API_INIT_POST_MODEL, `/api
 
 
 //查询通用限额模型
-export const getPersonalDetial = (data) => ActionCreator(API_GET_PERSONAL_LIMIT, `/api/modeloperate/${data}`, 'GET')();
+export const getPersonalDetial = (data) => ActionCreator(API_GET_PERSONAL_LIMIT, `/api/rcslmodel/${data}`, 'GET')();
 
 // 修改个性限额
 export const editPersional = (data) => ActionCreator(API_UPDATE_PERSONAL_LIMIT, `/api/rcslmodelprivate`, 'PUT', data)();
