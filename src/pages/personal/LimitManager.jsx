@@ -33,7 +33,7 @@ export default class LimitManager extends React.Component {
         total: 0,
         pageNum: 1,
         pageSize: 3,
-        mainPartValue:''
+        mainPartValue: ''
 
     }
     mockData = {
@@ -248,15 +248,26 @@ export default class LimitManager extends React.Component {
 
     handleRemoveOk = () => {
         this.setState({removeVisible: false})
-        let id = '11'
+        let id = this.state.merchantId
         this.props.dispatch(detelePersionalLimit(id)).then(() => {
+            this.props.dispatch(getBussinessType());
+            this.props.dispatch(queryConsumptionType())
+            this.props.dispatch(queryOnlineType())
+            this.props.dispatch(queryOnlinePayType())
+            const {pageSize, pageNum} = this.state
+            let params = {
+                pageSize,
+                pageNum,
+            }
+            this.props.dispatch(queryList(params)).then(() => {
+                const {total, current, size} = this.props.homeListData
+                this.setState({total: total, pageNum: current, pageSize: size})
+            })
         })
-        //TODO 删除限额规则
     }
 
     handleSearch = (args) => {
         //TODO 搜索
-        debugger
         const formData = this.formData.props.form.getFieldsValue()
         const data = this.props.form.getFieldsValue()
         const {pageSize, pageNum} = this.state
@@ -279,7 +290,7 @@ export default class LimitManager extends React.Component {
     delete(record) {
         this.setState({removeVisible: true})
 
-        this.setState({merchantId: record.id,mainPartValue: record.mainPartValue})
+        this.setState({merchantId: record.id, mainPartValue: record.mainPartValue})
     }
 
     changePage = (page) => {
@@ -303,7 +314,7 @@ export default class LimitManager extends React.Component {
         }
         const {getFieldDecorator} = this.props.form;
         const {limitType} = selectsData;
-        const data = {limitType,tranCd:consumptionTypeData,olPayType:onlineData,olPayWay:onlinePayData,}
+        const data = {limitType, tranCd: consumptionTypeData, olPayType: onlineData, olPayWay: onlinePayData,}
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>

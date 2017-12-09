@@ -235,7 +235,6 @@ export default class LimitManager extends React.Component {
 
     componentWillMount() {
         //页面发起数据请求
-        console.log('============11111111111===========')
         this.props.dispatch(getBussinessType());
         this.props.dispatch(getBodyProperty());
         let pageNum1 = this.props.location.state.pageNum
@@ -262,7 +261,6 @@ export default class LimitManager extends React.Component {
                 this.setState({total: total, pageNum: current, pageSize: size})
             })
         }
-
     }
 
     menu = record => (
@@ -346,6 +344,18 @@ export default class LimitManager extends React.Component {
         //TODO 删除table数据
         let id = this.state.removeId
         this.props.dispatch(deleteModel({id: id})).then(data => {
+            //页面发起数据请求
+            this.props.dispatch(getBussinessType());
+            this.props.dispatch(getBodyProperty());
+            const {pageNum, pageSize} = this.state
+            let params = {
+                pageNum,
+                pageSize,
+            };
+            this.props.dispatch(getModels({...params})).then(() => {
+                const {total, current, size} = this.props.modelsData
+                this.setState({total: total, pageNum: current, pageSize: size})
+            })
         })
     }
     changePage = (page) => {
