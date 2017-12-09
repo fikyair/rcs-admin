@@ -58,11 +58,16 @@ export default class EditableTable extends React.Component {
 
     }
 
-    handleSearch = (arg) => {
+    handleSearch = (args) => {
         const {current,size}=this.state;
-
         const {id}=this.props.match.params;
-        this.props.dispatch(getOptLog({modelPrivateId: '125335780557066240',current,size})).then(()=>{//异步(请求之后)显示数据
+        let params = {
+            modelPrivateId: '125335780557066240',
+            current,
+            size,
+            ...args,
+        }
+        this.props.dispatch(getOptLog({...params})).then(()=>{//异步(请求之后)显示数据
             debugger
             const {total, current ,size}= this.props.paginationData;
             this.setState({total:total,current:current,size: size})
@@ -76,14 +81,13 @@ export default class EditableTable extends React.Component {
 
     }
 
-    changePage(page){
+    changePage (page){    //=(page)=>
+        debugger
         this.handleSearch({current: page});
     }
     render() {
         const { operationData:dataSource } = this.props;
         const columns = this.columns;
-        console.log("=====>",dataSource);
-        console.log("dddd",this.state.current)
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
