@@ -9,7 +9,8 @@ import {
     API_MODIFY_MODEL,
     API_INIT_POST_MODEL,
     API_DELETE_MODEL,
-    API_GET_PERSIONAL_OPTLOG
+    API_GET_PERSIONAL_OPTLOG,
+    API_RECORD_MODEL,
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -31,6 +32,7 @@ const initialState = {
     selectData: [],
     operationData:[],
     paginationData:{},
+    reocrdData:[],
 };
 //全局状态信息，数据信息存储
 export default function (state = initialState, actions) {
@@ -44,6 +46,28 @@ export default function (state = initialState, actions) {
             return{
                 ...state,
                 modelData: actions.data
+            }
+        case API_RECORD_MODEL[1]:
+            return{
+                ...state,
+                recordData: _.map(actions.data.records,(v,k)=>{
+                    return{
+                        key: k,
+                        singleAmountLimit: v.singleAmountLimit,
+                        dayAmountLimit: v.dayAmountLimit,
+                        monthAmountLimit: v.monthAmountLimit,
+                        yearAmountLimit: v.yearAmountLimit,
+                        lifeAmountLimit:v.lifeAmountLimit,
+                        intervalSecondsLimit: v.intervalSecondsLimit,
+                        countLimitCountValue: v.countLimitCountValue,
+                        dayCountLimit: v.dayCountLimit,
+                        status:v.status,
+                        optUserName: v.optUserName,
+                        optTime: v.optTime,
+                    }
+
+                }),
+                recordType:actions.data,
             }
         case API_GET_BUSSINESS_TYPE[1]:
 

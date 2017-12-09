@@ -20,6 +20,7 @@ import {
     API_GET_PERSIONAL_ONLINEPAY,
     API_GET_PERSIONAL_HOMELIST,
     API_GET_PERSIONAL_OPTLOG,
+    API_RECORD_MODEL,
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -50,6 +51,9 @@ export const getModels = (data) => ActionCreator(API_GET_MODELS, `/api/rcslmodel
 //新增Models
 
 export const addModel = (data) => ActionCreator(API_POST_MODEL, `/api/rcslmodel`, 'POST', data)();
+
+//普通限额操作记录
+export const recordData = (data) => ActionCreator(API_RECORD_MODEL,`/api/rcslmodeloptlog/list${queryData(data)}`, 'GET')();
 
 //删除Models
 export const deleteModel = (data) => ActionCreator(API_DELETE_MODEL, `/api/rcslmodel/${data.id}`, 'DELETE')();
