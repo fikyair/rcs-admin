@@ -315,6 +315,7 @@ export default class LimitManager extends React.Component {
         const {getFieldDecorator} = this.props.form;
         const {limitType} = selectsData;
         const data = {limitType, tranCd: consumptionTypeData, olPayType: onlineData, olPayWay: onlinePayData,}
+        debugger
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>

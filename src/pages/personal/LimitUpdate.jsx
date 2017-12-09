@@ -2,7 +2,7 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
-import {getPersonalDetial, editPersional} from '../../actions/limitActions';
+import {getPersonalDetial, editPersional,getDetailPersionalForEdit} from '../../actions/limitActions';
 
 
 const InputGroup = Input.Group;
@@ -15,8 +15,8 @@ const FormItem = Form.Item;
 
 @setTitle('个性限额修改页')
 @Containerization(state => ({
-    initdata: state.PersonalReducer.initdata,
-    entryData: state.PersonalReducer.entryData,
+    initdata: state.PersonalReducer.initdataEdit,
+    entryData: state.PersonalReducer.entryDataEdit,
     editsuccess: state.PersonalReducer.editsuccess
 }))
 @Form.create()
@@ -93,7 +93,7 @@ export default class LimitUpdate extends React.Component {
 
     componentWillMount() {
         let id = this.props.match.params.id
-        this.props.dispatch(getPersonalDetial(id))
+        this.props.dispatch(getDetailPersionalForEdit(id))
     }
 
     handleSubmit = () => {
@@ -111,8 +111,8 @@ export default class LimitUpdate extends React.Component {
 
     render() {
         const {
-            initdata,
-            entryData,
+            initdata = [],
+            entryData = [],
             match
         } = this.props;
         this.inputLimit.map(data => {

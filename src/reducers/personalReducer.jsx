@@ -6,7 +6,8 @@ import {
     API_GET_PERSIONAL_CONSUMPTION,
     API_GET_PERSIONAL_ONLINE,
     API_GET_PERSIONAL_ONLINEPAY,
-    API_GET_PERSIONAL_HOMELIST
+    API_GET_PERSIONAL_HOMELIST,
+    API_GET_PERSIONAL_DETAILFOR_EDIT
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -99,7 +100,6 @@ export default function (state = initialState, actions) {
                 }
             }
         case API_GET_PERSIONAL_ONLINEPAY[1]:
-            debugger
             return {
                 ...state,
                 onlinePayData:
@@ -115,6 +115,30 @@ export default function (state = initialState, actions) {
                         )
 
                     }
+            }
+        case API_GET_PERSIONAL_DETAILFOR_EDIT[1]:
+            return {
+                ...state,
+                entryDataEdit: actions.data,
+                initdataEdit: _.map(actions.data.propertyList, (v, k) => {
+                    return {
+                        value: v.value.map((v, k) => {
+                            return {
+                                labelName: v.name,
+                                initialValue: v.value.name,
+                                key: v.code,
+                                body: {
+                                    style: {width: 150},
+                                    disabled: true
+                                }
+                            }
+                        }),
+                        name: v.name,
+                        code: v.code,
+
+
+                    }
+                }),
             }
         default:
             return state;

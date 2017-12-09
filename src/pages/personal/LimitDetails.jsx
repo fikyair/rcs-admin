@@ -3,13 +3,13 @@ import {Input, Button, Form, Row, Col, Card} from 'antd'
 import {Containerization, InitComs, setTitle} from '../../common/PublicComponent';
 import MapModifyCom from "../../components/MapModifyCom";
 import MapSelectComs from '../../components/MapSelectComs';
-import { getPersonalDetial} from '../../actions/limitActions';
+import { getPersonalDetial,getDetailPersionalForEdit} from '../../actions/limitActions';
 
 const InputGroup = Input.Group;
 
 const FormItem = Form.Item;
 @setTitle('限额详情页')
-@Containerization(state=>({initdata:state.PersonalReducer.initdata,entryData:state.PersonalReducer.entryData}))
+@Containerization(state=>({initdata:state.PersonalReducer.initdataEdit,entryData:state.PersonalReducer.entryDataEdit}))
 @Form.create()
 export default class LimitDetails extends React.Component {
 
@@ -298,7 +298,8 @@ export default class LimitDetails extends React.Component {
   ]
 
     componentWillMount() {
-        this.props.dispatch(getPersonalDetial('11'))
+        let id = this.props.match.params.id
+        this.props.dispatch(getDetailPersionalForEdit(id))
     }
 
     render() {
@@ -307,8 +308,8 @@ export default class LimitDetails extends React.Component {
             online = this.mockData.tradeSelects.online,
             offline = this.mockData.tradeSelects.offline,
             inputLimit = this.mockData.inputLimit,
-          initdata,
-          entryData
+          initdata=[],
+          entryData=[],
         } = this.props;
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]

@@ -21,6 +21,7 @@ import {
     API_GET_PERSIONAL_HOMELIST,
     API_GET_PERSIONAL_OPTLOG,
     API_RECORD_MODEL,
+    API_GET_PERSIONAL_DETAILFOR_EDIT
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -102,3 +103,5 @@ export const queryOnlineType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINE,
 export const queryOnlinePayType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINEPAY, `/api/rcslproperty/detail?propertyEnum=OL_PAY_WAY`, 'get')();
 //GET GET /rcslmodelprivateoptlog  个性限额操作记录
 export const getOptLog =(data) => ActionCreator(API_GET_PERSIONAL_OPTLOG,`/api/rcslmodelprivateoptlog${queryData(data)}`, 'GET')();
+// 查询个性限额明细
+export const getDetailPersionalForEdit = (data) => ActionCreator(API_GET_PERSIONAL_DETAILFOR_EDIT, `/api/rcslmodelprivate/${data}`, 'GET')();
