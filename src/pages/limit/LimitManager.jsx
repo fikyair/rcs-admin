@@ -334,7 +334,6 @@ export default class LimitManager extends React.Component {
     delete = () => {
         //TODO 删除table数据
         let id = this.state.removeId
-<<<<<<< HEAD
         this.props.dispatch(deleteModel({id: id})).then(data => {
             //页面发起数据请求
             this.props.dispatch(getBussinessType());
@@ -349,9 +348,6 @@ export default class LimitManager extends React.Component {
                 this.setState({total: total, pageNum: current, pageSize: size})
             })
         })
-=======
-        this.props.dispatch(deleteModel({id:id})).then(data=>{})
->>>>>>> lll
     }
     changePage = (page) =>{
         this.handleSearch({pageNum: page})
