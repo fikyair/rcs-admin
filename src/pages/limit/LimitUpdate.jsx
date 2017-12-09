@@ -105,7 +105,7 @@ export default class LimitUpdate extends React.Component {
         debugger
         let pageNum = this.props.match.params.pageNum
         const value = this.formData.props.form.getFieldsValue()
-        // value['dayCountLimit'] =  parseInt(value['dayCountLimit'])
+        //value['dayCountLimit'] =  parseInt(value['dayCountLimit'])
         const value1 = this.props.form.getFieldsValue()
         const params = {
             ...value,
