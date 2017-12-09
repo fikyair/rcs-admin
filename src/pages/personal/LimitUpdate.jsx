@@ -200,7 +200,7 @@ export default class LimitUpdate extends React.Component {
                     <div>
                         <div style={{textAlign: 'center'}}>
                             <Button style={{margin: '10px'}}
-                                    onClick={() => this.props.history.push('/limitManager')}>取消</Button>
+                                    onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
                             <Button htmlType="submit" style={{margin: '10px'}}
                                     onClick={() => this.handleSubmit()}>保存</Button>
                         </div>
