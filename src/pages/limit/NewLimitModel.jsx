@@ -24,10 +24,18 @@ export default class NewLimitModel extends React.Component {
 
     inputLimit = [
         {
+            labelName: '单笔',
+            key: 'singleAmountLimit',
+            type: 'input',
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+
+        }, {
             labelName: '单日',
             key: 'dayAmountLimit',
-            addonBefore: "金额",
-            addonAfter: "元",
             type: 'input',
             body: {
                 style: {width: 140},
@@ -172,17 +180,23 @@ export default class NewLimitModel extends React.Component {
                                     <div style={{display: 'inline-block', margin: '10px'}}>
 
                                         <InputGroup>
-                                            <Input style={{width: 50, textAlign: 'center'}}
-                                            />
+                                            {getFieldDecorator('countLimitCountValue')(
+                                                <Input style={{width: 50, textAlign: 'center'}}
+                                                />
+                                            )}
+
                                             <Input style={{
                                                 width: 24,
                                                 borderLeft: 0,
                                                 pointerEvents: 'none',
                                                 backgroundColor: '#fff'
                                             }} placeholder="/" disabled/>
-                                            <Input
-                                                style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                            />
+                                            {getFieldDecorator('countLimitMinuteValue')(
+                                                <Input
+                                                    style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                />
+                                            )}
+
                                         </InputGroup>
                                     </div>
                                 </FormItem>

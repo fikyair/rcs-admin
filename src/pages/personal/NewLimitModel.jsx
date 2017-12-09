@@ -2,8 +2,9 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import ExtracData from '../../components/ExtractData'
+
 const InputGroup = Input.Group;
-import {getPersonalDetial,addPersionalLimit} from "../../actions/limitActions";
+import {getPersonalDetial, addPersionalLimit} from "../../actions/limitActions";
 import MapModifyCom from "../../components/MapModifyCom";
 
 
@@ -24,6 +25,16 @@ export default class NewLimitModel extends React.Component {
 
     inputLimit = [
         {
+            labelName: '单笔',
+            key: 'singleAmountLimit',
+            type: 'input',
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+
+        }, {
             labelName: '单日',
             key: 'dayAmountLimit',
             addonBefore: "金额",
@@ -86,28 +97,29 @@ export default class NewLimitModel extends React.Component {
 
         }
     ]
+
     componentWillMount() {
         let id = this.props.match.params.id
         this.props.dispatch(getPersonalDetial(id))
     }
 
     handleSubmit = () => {
-        let mainPartCode =  this.props.match.params.maincode
+        let mainPartCode = this.props.match.params.maincode
         let modelId = this.props.match.params.id
         const formData = this.formData.props.form.getFieldsValue()
 
         const {remark, mainPartValue} = this.props.form.getFieldsValue()
         let arr = []
-        arr.push({mainPartValue:mainPartValue,remark:remark})
+        arr.push({mainPartValue: mainPartValue, remark: remark})
         let list = this.state.list
         list.shift()
         let params = {
             ...formData,
-            excelVoList: list.length ?  list : arr,
+            excelVoList: list.length ? list : arr,
             mainPartCode: mainPartCode,
             modelId: modelId
         }
-        console.log('=============>',params)
+        console.log('=============>', params)
         this.props.dispatch(addPersionalLimit(params))
 
     }
@@ -198,21 +210,23 @@ export default class NewLimitModel extends React.Component {
 
                             {getFieldDecorator('mainPartValue')(
                                 <Input placeholder="请输入"
-                                       addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
+                                       addonBefore={(
+                                           <span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
                                        style={{width: '200px', margin: '10px'}}/>
                             )}
                             <FormItem
                                 label="备注"
                             >
-                                {getFieldDecorator('remark')( <TextArea></TextArea>)}
+                                {getFieldDecorator('remark')(<TextArea></TextArea>)}
 
                             </FormItem>
                             <Button style={{margin: '10px', verticalAlign: 'top'}}
                                     onClick={() => this.props.history.push('/merchantlimit')}>取消</Button>
-                            <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}} onClick={()=>this.handleSubmit()}>保存</Button>
+                            <Button htmlType="submit" style={{margin: '10px', verticalAlign: 'top'}}
+                                    onClick={() => this.handleSubmit()}>保存</Button>
                         </Row>
                         <Row>
-                        <ExtracData getData={this.getData.bind(this)}/>
+                            <ExtracData getData={this.getData.bind(this)}/>
                         </Row>
                     </Card>
                 </Form>

@@ -26,6 +26,16 @@ export default class LimitUpdate extends React.Component {
 
     inputLimit = [
         {
+            labelName: '单笔',
+            key: 'singleAmountLimit',
+            type: 'input',
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+
+        }, {
             labelName: '单日',
             key: 'dayAmountLimit',
             addonBefore: "金额",
@@ -95,7 +105,7 @@ export default class LimitUpdate extends React.Component {
 
     componentWillMount() {
         let id = this.props.match.params.id
-        this.props.dispatch(getLimitInitData({id:id}));
+        this.props.dispatch(getLimitInitData({id: id}));
     }
 
 
@@ -112,10 +122,10 @@ export default class LimitUpdate extends React.Component {
             ...value1,
             id: id,
         }
-        this.props.dispatch(editLimit(params)).then(()=>{
+        this.props.dispatch(editLimit(params)).then(() => {
 
         })
-         this.props.history.push('/limitManager',{pageNum:pageNum})
+        this.props.history.push('/limitManager', {pageNum: pageNum})
     }
 
 

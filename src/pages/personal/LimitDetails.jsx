@@ -3,13 +3,16 @@ import {Input, Button, Form, Row, Col, Card} from 'antd'
 import {Containerization, InitComs, setTitle} from '../../common/PublicComponent';
 import MapModifyCom from "../../components/MapModifyCom";
 import MapSelectComs from '../../components/MapSelectComs';
-import { getPersonalDetial,getDetailPersionalForEdit} from '../../actions/limitActions';
+import {getPersonalDetial, getDetailPersionalForEdit} from '../../actions/limitActions';
 
 const InputGroup = Input.Group;
 
 const FormItem = Form.Item;
 @setTitle('限额详情页')
-@Containerization(state=>({initdata:state.PersonalReducer.initdataEdit,entryData:state.PersonalReducer.entryDataEdit}))
+@Containerization(state => ({
+    initdata: state.PersonalReducer.initdataEdit,
+    entryData: state.PersonalReducer.entryDataEdit
+}))
 @Form.create()
 export default class LimitDetails extends React.Component {
 
@@ -227,75 +230,85 @@ export default class LimitDetails extends React.Component {
 
     }
     inputLimit = [
-    {
-      labelName: '单日',
-      key: 'dayAmountLimit',
-      addonBefore: "金额",
-      addonAfter: "元",
-      type: 'input',
-      disabled:true,
-      body: {
-        style: {width: 140},
-        addonBefore: "金额",
-        addonAfter: "元",
-      },
+        {
+            labelName: '单笔',
+            key: 'singleAmountLimit',
+            type: 'input',
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
 
-    }, {
-      labelName: '单月',
-      key: 'monthAmountLimit',
-      type: 'input',
-        disabled:true,
-      body: {
-        style: {width: 120},
-        addonBefore: "金额",
-        addonAfter: "元",
-      },
+        }, {
+            labelName: '单日',
+            key: 'dayAmountLimit',
+            addonBefore: "金额",
+            addonAfter: "元",
+            type: 'input',
+            disabled: true,
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
 
-    }, {
-      labelName: '年',
-        disabled:true,
-      key: 'yearAmountLimit',
-      body: {
-        style: {width: 120},
-        addonBefore: "金额",
-        addonAfter: "元",
-      },
-      type: 'input',
-    }, {
-      labelName: '终身',
-        disabled:true,
-      key: 'lifeAmountLimit',
-      body: {
-        style: {width: 120},
+        }, {
+            labelName: '单月',
+            key: 'monthAmountLimit',
+            type: 'input',
+            disabled: true,
+            body: {
+                style: {width: 120},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
 
-        addonBefore: "金额",
-        addonAfter: "元",
-      },
-      type: 'input',
-    }, {
-      labelName: '两笔间隔',
-        disabled:true,
-      key: 'intervalSecondsLimit',
-      addonAfter: "元",
-      body: {
-        addonAfter: "元",
-        style: {width: 120},
+        }, {
+            labelName: '年',
+            disabled: true,
+            key: 'yearAmountLimit',
+            body: {
+                style: {width: 120},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+            type: 'input',
+        }, {
+            labelName: '终身',
+            disabled: true,
+            key: 'lifeAmountLimit',
+            body: {
+                style: {width: 120},
 
-      },
-      type: 'input',
-    }, {
-      labelName: '笔/日',
-        disabled:true,
-      key: 'dayCountLimit',
-      addonAfter: "元",
-      type: 'input',
-      body: {
-        style: {width: 120},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+            type: 'input',
+        }, {
+            labelName: '两笔间隔',
+            disabled: true,
+            key: 'intervalSecondsLimit',
+            addonAfter: "元",
+            body: {
+                addonAfter: "元",
+                style: {width: 120},
 
-      },
+            },
+            type: 'input',
+        }, {
+            labelName: '笔/日',
+            disabled: true,
+            key: 'dayCountLimit',
+            addonAfter: "元",
+            type: 'input',
+            body: {
+                style: {width: 120},
 
-    }
-  ]
+            },
+
+        }
+    ]
 
     componentWillMount() {
         let id = this.props.match.params.id
@@ -308,8 +321,8 @@ export default class LimitDetails extends React.Component {
             online = this.mockData.tradeSelects.online,
             offline = this.mockData.tradeSelects.offline,
             inputLimit = this.mockData.inputLimit,
-          initdata=[],
-          entryData=[],
+            initdata = [],
+            entryData = [],
         } = this.props;
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
@@ -340,15 +353,15 @@ export default class LimitDetails extends React.Component {
                 <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
                 <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
 
-                  {
-                    initdata.map((v, k) => {
-                      return (<Card title={v.name} noHovering={true} key={k}
-                                    style={{marginBottom: 6}}
-                      >
-                          <MapModifyCom data={v.value}/>
-                      </Card>)
-                    })
-                  }
+                    {
+                        initdata.map((v, k) => {
+                            return (<Card title={v.name} noHovering={true} key={k}
+                                          style={{marginBottom: 6}}
+                            >
+                                <MapModifyCom data={v.value}/>
+                            </Card>)
+                        })
+                    }
 
                     <Card title="添加限额值" noHovering={true}
                           style={{marginBottom: 6}}
@@ -358,40 +371,40 @@ export default class LimitDetails extends React.Component {
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
                                 <FormItem>
                                 <span style={{
-                                  marginRight: '10px',
-                                  minWidth: '80px',
-                                  display: 'inline-block',
-                                  marginTop: 10,
-                                  verticalAlign: 'top',
+                                    marginRight: '10px',
+                                    minWidth: '80px',
+                                    display: 'inline-block',
+                                    marginTop: 10,
+                                    verticalAlign: 'top',
                                 }}>每笔／分钟:</span>
                                     <div style={{display: 'inline-block', margin: '10px'}}>
 
                                         <InputGroup>
-                                          {
-                                            getFieldDecorator('countLimitCountValue', {
-                                              initialValue: entryData.countLimitCountValue
-                                            })(
-                                              <Input disabled={true} style={{width: 50, textAlign: 'center'}}
-                                              />
-                                            )
-                                          }
+                                            {
+                                                getFieldDecorator('countLimitCountValue', {
+                                                    initialValue: entryData.countLimitCountValue
+                                                })(
+                                                    <Input disabled={true} style={{width: 50, textAlign: 'center'}}
+                                                    />
+                                                )
+                                            }
 
-                                            <Input  style={{
-                                              width: 24,
-                                              borderLeft: 0,
-                                              pointerEvents: 'none',
-                                              backgroundColor: '#fff'
+                                            <Input style={{
+                                                width: 24,
+                                                borderLeft: 0,
+                                                pointerEvents: 'none',
+                                                backgroundColor: '#fff'
                                             }} placeholder="/" disabled/>
-                                          {
-                                            getFieldDecorator('countLimitMinuteValue', {
-                                              initialValue: entryData.countLimitMinuteValue
-                                            })(
-                                              <Input
-                                                disabled={true}
-                                                style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                              />
-                                            )
-                                          }
+                                            {
+                                                getFieldDecorator('countLimitMinuteValue', {
+                                                    initialValue: entryData.countLimitMinuteValue
+                                                })(
+                                                    <Input
+                                                        disabled={true}
+                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                    />
+                                                )
+                                            }
 
                                         </InputGroup>
                                     </div>
@@ -402,7 +415,8 @@ export default class LimitDetails extends React.Component {
                         </Row>
 
                     </Card>
-                    <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}><Button type={"primary"}>关闭</Button>
+                    <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}><Button
+                        type={"primary"}>关闭</Button>
                     </div>
                 </Form>
             </div>

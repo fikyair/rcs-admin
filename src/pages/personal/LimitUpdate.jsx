@@ -2,7 +2,7 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
-import {getPersonalDetial, editPersional,getDetailPersionalForEdit} from '../../actions/limitActions';
+import {getPersonalDetial, editPersional, getDetailPersionalForEdit} from '../../actions/limitActions';
 
 
 const InputGroup = Input.Group;
@@ -28,6 +28,16 @@ export default class LimitUpdate extends React.Component {
 
     inputLimit = [
         {
+            labelName: '单笔',
+            key: 'singleAmountLimit',
+            type: 'input',
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+
+        }, {
             labelName: '单日',
             key: 'dayAmountLimit',
             addonBefore: "金额",

@@ -3,6 +3,7 @@ import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getLimitInitData, editLimit} from '../../actions/limitActions';
 import MapModifyCom from '../../components/MapModifyCom'
+
 const InputGroup = Input.Group;
 const FormItem = Form.Item;
 
@@ -19,6 +20,16 @@ export default class LimitDetails extends React.Component {
     }
     inputLimit = [
         {
+            labelName: '单笔',
+            key: 'singleAmountLimit',
+            type: 'input',
+            body: {
+                style: {width: 140},
+                addonBefore: "金额",
+                addonAfter: "元",
+            },
+
+        }, {
             labelName: '单日',
             key: 'dayAmountLimit',
             addonBefore: "金额",
@@ -105,7 +116,7 @@ export default class LimitDetails extends React.Component {
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
         })
-      const {modelName} = entryData;
+        const {modelName} = entryData;
         const {getFieldDecorator} = this.props.form
 
         return (
@@ -176,7 +187,9 @@ export default class LimitDetails extends React.Component {
 
                     </Card>
                     <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}>
-                        <Button onClick={()=>{this.props.history.push('/limitManager')}} type={"primary"}>关闭</Button>
+                        <Button onClick={() => {
+                            this.props.history.push('/limitManager')
+                        }} type={"primary"}>关闭</Button>
                     </div>
                 </Form>
             </div>
