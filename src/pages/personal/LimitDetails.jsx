@@ -417,7 +417,8 @@ export default class LimitDetails extends React.Component {
 
                     </Card>
                     <div style={{textAlign: 'center', marginBottom: 10, marginTop: 10}}><Button
-                        type={"primary"}>关闭</Button>
+                        type={"primary"}
+                    onClick={()=>{this.props.history.push('/merchantlimit')}}>关闭</Button>
                     </div>
                 </Form>
             </div>
