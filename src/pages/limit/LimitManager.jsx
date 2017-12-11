@@ -361,7 +361,7 @@ export default class LimitManager extends React.Component {
         const {
             selectsData,
             selectsData2,
-            modelsData,
+            modelsData=[],
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects,
@@ -373,6 +373,14 @@ export default class LimitManager extends React.Component {
             sm: 15,
             md: 22
         }
+        modelsData.records = modelsData.records && modelsData.records.map(v=> {
+            for(let p in v){
+                if(v[p]<= 0){
+                    v[p] = '无'
+                }
+            }
+            return v
+        })
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>

@@ -233,6 +233,8 @@ export default class LimitManager extends React.Component {
         this.props.dispatch(queryList(params)).then(() => {
             const {total, current, size} = this.props.homeListData
             this.setState({total: total, pageNum: current, pageSize: size})
+            const data = this.props.homeListData.records
+
         })
     }
 
@@ -315,7 +317,14 @@ export default class LimitManager extends React.Component {
         const {getFieldDecorator} = this.props.form;
         const {limitType} = selectsData;
         const data = {limitType, tranCd: consumptionTypeData, olPayType: onlineData, olPayWay: onlinePayData,}
-        debugger
+        homeListData.records = homeListData.records && homeListData.records.map(v=> {
+            for(let p in v){
+                if(v[p]<= 0){
+                    v[p] = '无'
+                }
+            }
+            return v
+        })
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
