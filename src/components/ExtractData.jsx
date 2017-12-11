@@ -1,10 +1,9 @@
 import React from 'react';
 import XLSX from 'xlsx';
-import {Input} from 'antd'
+import {Modal,Button} from 'antd'
 import './ExtractData.less'
 
 export default class ExtractData extends React.Component {
-    state= {data:''}
     make_cols = refstr => Array(XLSX.utils.decode_range(refstr).e.c + 1).fill(0).map((x, i) => ({
         name: XLSX.utils.encode_col(i),
         key: i
@@ -13,8 +12,11 @@ export default class ExtractData extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            data:'',
             data: [], /* Array of Arrays e.g. [["a","b"],[1,2]] */
-            cols: []  /* Array of column objects e.g. { name: "C", K: 2 } */
+            cols: [],  /* Array of column objects e.g. { name: "C", K: 2 } */
+            visible: false,
+            display: 'none',
         };
         this.handleFile = this.handleFile.bind(this);
     };
@@ -30,6 +32,8 @@ export default class ExtractData extends React.Component {
     }
 
     handleFile(e) {
+        console.log(11111)
+        debugger;
         const reader = new FileReader();
         reader.onload = (e) => {
             const bstr = e.target.result;
@@ -47,17 +51,59 @@ export default class ExtractData extends React.Component {
             console.log(data)
             this.setState({data: list, cols: this.make_cols(ws['!ref'])});
             this.props.getData(list)
+            this.setState({
+                visible: false,
+                display: 'inline',
+                disabled: false,
+            })
+            //$this.Button.addClass("disabled")
+
         };
         reader.readAsBinaryString(e.target.files[0]);
-
-
     };
 
+    showModal(){
+        this.setState({
+            visible: true,
+        });
+    }
+    handleOk = (e) => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+    }
+    handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+            visible: false,
+        });
+
+    }
     render() {
+        debugger
         return (
-            <a href="javascript:;" className="file">批量导入
-                <input type="file" id="extract" onChange={(e) => this.handleFile(e)}/>
-            </a>
+            <div>
+               {/* <a href="javascript:;" className="file">批量导入
+                    <input type="file" id="extract" onChange={() => this.showModal()}/>
+                </a>*/}
+                <Button className="file"  onClick={()=>this.showModal()}>批量配置商户</Button>
+                <div style={{display: this.state.display}} ><span>添加商户成功</span></div>
+                <Modal
+                title={"批量配置商户"}
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
+                footer={null}
+                >
+                    <div className={"import-file"}>
+                        <a  className="file ">引入模板</a>
+                        <a href="javascript:;" className="file">批量导入
+                            <input type="file" id="extract" onChange={(e) => this.handleFile(e)}/>
+                        </a>
+                    </div>
+                </Modal>
+            </div>
         )
     }
 }

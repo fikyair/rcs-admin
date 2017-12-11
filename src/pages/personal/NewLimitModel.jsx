@@ -20,7 +20,8 @@ const {TextArea} = Input
 export default class NewLimitModel extends React.Component {
 
     state = {
-        list: []
+        list: [],
+        flag : false,
     }
 
     inputLimit = [
@@ -126,7 +127,8 @@ export default class NewLimitModel extends React.Component {
     }
 
     getData(list) {
-        this.setState({list: list})
+        console.log('======>list',list)
+        this.setState({list: list,flag: true})
     }
 
     render() {
@@ -210,7 +212,7 @@ export default class NewLimitModel extends React.Component {
                         <Row>
 
                             {getFieldDecorator('mainPartValue')(
-                                <Input placeholder="请输入"
+                                <Input disabled={this.state.flag} placeholder="请输入"
                                        addonBefore={(
                                            <span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
                                        style={{width: '200px', margin: '10px'}}/>
@@ -218,7 +220,7 @@ export default class NewLimitModel extends React.Component {
                             <FormItem
                                 label="备注"
                             >
-                                {getFieldDecorator('remark')(<TextArea></TextArea>)}
+                                {getFieldDecorator('remark')(<TextArea disabled={this.state.flag}></TextArea>)}
 
                             </FormItem>
                             <Button style={{margin: '10px', verticalAlign: 'top'}}
