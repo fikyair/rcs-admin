@@ -237,7 +237,6 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
-        debugger
         //页面发起数据请求
         this.props.dispatch(getBussinessType());
         this.props.dispatch(getBodyProperty());
@@ -256,7 +255,6 @@ export default class LimitManager extends React.Component {
 
     menu = record => (
         <Menu>
-
             <Menu.Item>
                 <Link to={`/limitManager/+operationrecord/${record.id}`}>操作记录 </Link>
             </Menu.Item>
@@ -265,7 +263,6 @@ export default class LimitManager extends React.Component {
                     this.disableLimitRule(record)
                 }}>删除</a>
             </Menu.Item>
-
         </Menu>
     );
     timer = null
@@ -285,12 +282,9 @@ export default class LimitManager extends React.Component {
                 this.props.dispatch(setTemp({addLimitTemp: values}))
                 //TODO 提交商户主体和商户类型等数据，并跳转到添加页面
                 this.props.history.push('/limitManager/add')
-
             }
         });
-
     }
-
     componentWillUnmount() {
         clearTimeout(this.timer)
     }
