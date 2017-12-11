@@ -230,7 +230,6 @@ export default class NewLimitModel extends React.Component {
                         </Row>
                         <Row>
                             <ExtracData data={this.props.form.getFieldsValue()} getData={this.getData.bind(this)}/>
-
                         </Row>
                     </Card>
                 </Form>
