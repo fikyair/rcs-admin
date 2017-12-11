@@ -90,7 +90,6 @@ export default class ExtractData extends React.Component {
     }
 
     render() {
-        debugger
         return (
             <div>
                {/* <a href="javascript:;" className="file">批量导入

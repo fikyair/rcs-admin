@@ -68,7 +68,6 @@ export default class EditableTable extends React.Component {
             ...args,
         }
         this.props.dispatch(getOptLog({...params})).then(()=>{//异步(请求之后)显示数据
-            debugger
             const {total, current ,size}= this.props.paginationData;
             this.setState({total:total,current:current,size: size})
         });
@@ -82,7 +81,6 @@ export default class EditableTable extends React.Component {
     }
 
     changePage (page){    //=(page)=>
-        debugger
         this.handleSearch({current: page});
     }
     render() {

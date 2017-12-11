@@ -19,13 +19,16 @@ function promiseMiddleware() {
         const { data, code} =  result;
         next({...rest, data, type: 'FINISH'})
         if(code  == '200'){
-            next({...rest, data, type: SUCCESS})
+
+            return next({...rest, data, type: SUCCESS})
+
         } else {
-            next({...rest, result, type: FAILURE})
+            return next({...rest, result, type: FAILURE})
+
         }
       },
       (error) => {
-        next({...rest, error, type: FAILURE})
+        return next({...rest, error, type: FAILURE})
       }
     )
   }

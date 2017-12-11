@@ -47,7 +47,6 @@ export const FetchAPI = (url,method,data)=>{
 }
 
 export function checkStatus(response) {
-    debugger
     if ((response.status >= 200 && response.status < 300) || response.status == 400 ) {
         return response
     } else {

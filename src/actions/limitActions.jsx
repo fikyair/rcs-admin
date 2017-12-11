@@ -40,7 +40,6 @@ const ActionCreator = (type, url, method, data) => {
                     }).then(checkStatus).then(parseJSON).then(filterResponse).then((data) => {
                         resolve(data);
                     }).catch((err) => {
-                        debugger
                         reject({err});
                     });
                 })
@@ -50,7 +49,7 @@ const ActionCreator = (type, url, method, data) => {
 }
 
 export function SetCommontPageNum(data){
-    debugger
+
         return {
             type: COMMONT_PAGE_NUMBER,
             data: data

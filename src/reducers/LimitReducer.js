@@ -223,7 +223,6 @@ export default function (state = initialState, actions) {
                 editsuccess: actions.data
             }
         case COMMONT_PAGE_NUMBER:
-            debugger
             return {
                 ...state,
                 commonPageNum: actions.data
