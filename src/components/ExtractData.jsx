@@ -1,6 +1,6 @@
 import React from 'react';
 import XLSX from 'xlsx';
-import {Modal,Button} from 'antd'
+import {Modal,message,Button} from 'antd'
 import './ExtractData.less'
 
 export default class ExtractData extends React.Component {
@@ -32,8 +32,6 @@ export default class ExtractData extends React.Component {
     }
 
     handleFile(e) {
-        console.log(11111)
-        debugger;
         const reader = new FileReader();
         reader.onload = (e) => {
             const bstr = e.target.result;
@@ -67,6 +65,7 @@ export default class ExtractData extends React.Component {
             visible: true,
         });
     }
+
     handleOk = (e) => {
         console.log(e);
         this.setState({
@@ -80,6 +79,16 @@ export default class ExtractData extends React.Component {
         });
 
     }
+    check(){
+     const {mainPartValue,remark}=this.props.data;
+
+     if(mainPartValue || remark){
+         message.warning('请清空商户配置或备注输入框');
+     }else {
+         this.showModal()
+     }
+    }
+
     render() {
         debugger
         return (
@@ -87,7 +96,7 @@ export default class ExtractData extends React.Component {
                {/* <a href="javascript:;" className="file">批量导入
                     <input type="file" id="extract" onChange={() => this.showModal()}/>
                 </a>*/}
-                <Button className="file"  onClick={()=>this.showModal()}>批量配置商户</Button>
+                <Button className="file"  onClick={()=>this.check()}>批量配置商户</Button>
                 <div style={{display: this.state.display}} ><span>添加商户成功</span></div>
                 <Modal
                 title={"批量配置商户"}

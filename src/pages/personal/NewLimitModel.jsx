@@ -21,7 +21,7 @@ export default class NewLimitModel extends React.Component {
 
     state = {
         list: [],
-        flag : false,
+        flag: false,
     }
 
     inputLimit = [
@@ -127,8 +127,8 @@ export default class NewLimitModel extends React.Component {
     }
 
     getData(list) {
-        console.log('======>list',list)
-        this.setState({list: list,flag: true})
+        console.log('======>list', list)
+        this.setState({list: list, flag: true})
     }
 
     render() {
@@ -229,7 +229,7 @@ export default class NewLimitModel extends React.Component {
                                     onClick={() => this.handleSubmit()}>保存</Button>
                         </Row>
                         <Row>
-                            <ExtracData getData={this.getData.bind(this)}/>
+                            <ExtracData data={this.props.form.getFieldsValue()} getData={this.getData.bind(this)}/>
                             <a href="/stencil.xlsx" download="模版">下载模版</a>
                         </Row>
                     </Card>
