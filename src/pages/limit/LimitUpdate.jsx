@@ -13,7 +13,6 @@ const InputGroup = Input.Group;
     initdata: state.LimitReducer.initdata,
     entryData: state.LimitReducer.entryData,
     editsuccess: state.LimitReducer.editsuccess,
-    //bussinessType:state.LimitReducer.bussinessType,
 
 }))
 @Form.create()
