@@ -106,7 +106,7 @@ export default class ExtractData extends React.Component {
                 footer={null}
                 >
                     <div className={"import-file"}>
-                        <a  className="file ">引入模板</a>
+                        <a href="/stencil.xlsx" download="模版">引入模板</a>
                         <a href="javascript:;" className="file">批量导入
                             <input type="file" id="extract" onChange={(e) => this.handleFile(e)}/>
                         </a>

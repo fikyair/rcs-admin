@@ -230,7 +230,7 @@ export default class NewLimitModel extends React.Component {
                         </Row>
                         <Row>
                             <ExtracData data={this.props.form.getFieldsValue()} getData={this.getData.bind(this)}/>
-                            <a href="/stencil.xlsx" download="模版">下载模版</a>
+
                         </Row>
                     </Card>
                 </Form>
