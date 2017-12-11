@@ -30,7 +30,7 @@ if(window.addEventListener){
   window.addEventListener('message',(e)=>{
     if(e.source!=window.parent) return;
     const { data } = e;
-    if(data && typeof data == 'String'){
+    if(data && typeof data == 'string'){
       let dataObj = JSON.parse(data);
       if(dataObj && dataObj.authToken){
         setCurrentLoginUser(dataObj);

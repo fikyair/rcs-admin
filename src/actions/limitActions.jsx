@@ -22,6 +22,7 @@ import {
     API_GET_PERSIONAL_OPTLOG,
     API_RECORD_MODEL,
     API_GET_PERSIONAL_DETAILFOR_EDIT,
+  API_GET_ROLES,
     COMMONT_PAGE_NUMBER
 } from '../utils/ActionsType';
 
@@ -116,3 +117,7 @@ export const queryOnlinePayType = (data) => ActionCreator(API_GET_PERSIONAL_ONLI
 export const getOptLog = (data) => ActionCreator(API_GET_PERSIONAL_OPTLOG, `/api/rcslmodelprivateoptlog${queryData(data)}`, 'GET')();
 // 查询个性限额明细
 export const getDetailPersionalForEdit = (data) => ActionCreator(API_GET_PERSIONAL_DETAILFOR_EDIT, `/api/rcslmodelprivate/${data}`, 'GET')();
+
+
+//GET /rcslCommon/getAuthorityVerify  查看系统权限
+export const getRoles = ActionCreator(API_GET_ROLES,'/api//rcslCommon/getAuthorityVerify', 'GET')

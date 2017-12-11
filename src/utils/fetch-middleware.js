@@ -69,7 +69,7 @@ export  function parseJSON(response) {
 export const headers = {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': '*',
-        'auth-token':JSON.stringify($.cookie('auth-token')),
+        'auth-token':$.cookie('auth-token'),
         'roles':JSON.stringify(getCurrentLoginUser),
         "Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"

@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { asyncCookie,clearErrMsg } from '../actions';
+import { asyncCookie,clearErrMsg,  } from '../actions';
+import {getRoles} from '../actions/limitActions';
 import { Spin, Alert } from 'antd';
 
 
@@ -67,6 +68,7 @@ export class InitComs extends React.Component{
     super(props);
     const token  = $.cookie('token');
     this.props.dispatch(asyncCookie({token:token}));
+    this.props.dispatch(getRoles());
 
   }
 
