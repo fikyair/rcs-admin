@@ -179,7 +179,7 @@ export default class LimitManager extends React.Component {
                 key: 'action',
                 render: (text, record) => (
                     <span>
-            <Link to={`/limitManager/+update/${record.id}/${this.state.pageNum}`}>修改</Link>
+            <Link to={`/limitManager/+update/${record.id}`}>修改</Link>
               <span className="ant-divider"/>
             <a onClick={()=>{this.props.history.push(`/merchantlimit/+add/${record.id}`,{mainPartCodeGroup:record.mainPartCodeGroup})}}>个性设置</a>
                         <span className="ant-divider"/>
@@ -234,38 +234,9 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
-        console.log(11111111111)
         //页面发起数据请求
-        const {pageSize} = this.state
         this.props.dispatch(getBussinessType());
         this.props.dispatch(getBodyProperty());
-        let pageNum = this.props.history.location.state
-        debugger;
-        if (pageNum) {
-            const {pageSize} = this.state;
-            const {pageNum} = this.props.history.location.state;
-            let params = {
-                pageNum,
-                pageSize,
-            };
-            this.props.dispatch(getModels({...params})).then(() => {
-                const {total, current, size} = this.props.modelsData
-                this.setState({total: total, pageNum: current, pageSize: size})
-            })
-        } else {
-            const {pageNum, pageSize} = this.state
-            let params = {
-                pageNum,
-                pageSize,
-            };
-            this.props.dispatch(getModels({...params})).then(() => {
-                const {total, current, size} = this.props.modelsData
-                this.setState({total: total, pageNum: current, pageSize: size})
-            })
-        }
-    }
-
-    /*componentWillReceiveProps(nextProps) {
         const {pageNum, pageSize} = this.state
         let params = {
             pageNum,
@@ -275,7 +246,7 @@ export default class LimitManager extends React.Component {
             const {total, current, size} = this.props.modelsData
             this.setState({total: total, pageNum: current, pageSize: size})
         })
-    }*/
+    }
 
     menu = record => (
         <Menu>

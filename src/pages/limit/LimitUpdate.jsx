@@ -112,7 +112,6 @@ export default class LimitUpdate extends React.Component {
         //从路由带参数
         let id = this.props.match.params.id
         debugger
-        let pageNum = this.props.match.params.pageNum
         const value = this.formData.props.form.getFieldsValue()
         //value['dayCountLimit'] =  parseInt(value['dayCountLimit'])
         const value1 = this.props.form.getFieldsValue()
@@ -124,7 +123,7 @@ export default class LimitUpdate extends React.Component {
         this.props.dispatch(editLimit(params)).then(() => {
 
         })
-        this.props.history.push('/limitManager', {pageNum: pageNum})
+        this.props.history.push('/limitManager')
     }
 
 
