@@ -105,9 +105,11 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
-        let mainPartCode = this.props.location.mainPartCodeGroup
+        let mainPartCode = this.props.location.state.mainPartCodeGroup
         let modelId = this.props.match.params.id
         const formData = this.formData.props.form.getFieldsValue()
+
+        formData['dayCountLimit'] = parseInt(formData['dayCountLimit'])
 
         const {remark, mainPartValue} = this.props.form.getFieldsValue()
         let arr = []
@@ -118,7 +120,7 @@ export default class NewLimitModel extends React.Component {
             ...formData,
             excelVoList: list.length ? list : arr,
             mainPartCode: mainPartCode,
-            modelId: modelId
+            modelId: parseInt(modelId)
         }
         console.log('=============>', params)
         this.props.dispatch(addPersionalLimit(params))
