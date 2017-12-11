@@ -181,7 +181,7 @@ export default class LimitManager extends React.Component {
                     <span>
             <Link to={`/limitManager/+update/${record.id}/${this.state.pageNum}`}>修改</Link>
               <span className="ant-divider"/>
-            <Link to={`/merchantlimit/+add/${record.id}/${record.mainPartCodeGroup}`}>个性设置</Link>
+            <a onClick={()=>{this.props.history.push(`/merchantlimit/+add/${record.id}`,{mainPartCodeGroup:record.mainPartCodeGroup})}}>个性设置</a>
                         <span className="ant-divider"/>
              <Dropdown overlay={this.menu(record)}>
                 <a>

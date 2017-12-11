@@ -104,7 +104,7 @@ export default class NewLimitModel extends React.Component {
     }
 
     handleSubmit = () => {
-        let mainPartCode = this.props.match.params.maincode
+        let mainPartCode = this.props.location.mainPartCodeGroup
         let modelId = this.props.match.params.id
         const formData = this.formData.props.form.getFieldsValue()
 
