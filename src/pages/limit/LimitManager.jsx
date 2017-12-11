@@ -171,8 +171,8 @@ export default class LimitManager extends React.Component {
                 key: 'intervalSecondsLimit',
             }, {
                 title: '笔数(分钟)',
-                dataIndex: 'countLimitCountValue',
-                key: 'countLimitCountValue',
+                dataIndex: 'countEveryMin',
+                key: 'countEveryMin',
             }, {
                 title: '笔/日',
                 dataIndex: 'dayCountLimit',
@@ -368,6 +368,11 @@ export default class LimitManager extends React.Component {
             md: 22
         }
         modelsData.records = modelsData.records && modelsData.records.map(v=> {
+            if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){
+                v['countEveryMin'] = `${v['countLimitMinuteValue']}/${v['countLimitCountValue']}`
+            } else {
+                v['countEveryMin'] = '无'
+            }
             for(let p in v){
                 if(v[p]<= 0){
                     v[p] = '无'

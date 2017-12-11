@@ -166,8 +166,8 @@ export default class LimitManager extends React.Component {
                 key: 'intervalSecondsLimit',
             }, {
                 title: '笔数(分钟)',
-                dataIndex: 'countLimitMinuteValue',
-                key: 'countLimitCountValue',
+                dataIndex: 'countEveryMin',
+                key: 'countEveryMin',
             }, {
                 title: '笔/日',
                 dataIndex: 'dayCountLimit',
@@ -318,6 +318,11 @@ export default class LimitManager extends React.Component {
         const {limitType} = selectsData;
         const data = {limitType, tranCd: consumptionTypeData, olPayType: onlineData, olPayWay: onlinePayData,}
         homeListData.records = homeListData.records && homeListData.records.map(v=> {
+            if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){
+                v['countEveryMin'] = `${v['countLimitMinuteValue']}/${v['countLimitCountValue']}`
+            } else {
+                v['countEveryMin'] = '无'
+            }
             for(let p in v){
                 if(v[p]<= 0){
                     v[p] = '无'
