@@ -131,8 +131,14 @@ export default class NewLimitModel extends React.Component {
         const getValues = { ...formDataInputLimit, ...formData,...mainData, modelPropertyVoList:modelPropertyVoList}
         const val = getValues;
         console.log("表单的数据", val)
-        this.props.dispatch(addModel(val))
-        this.props.history.push('/limitManager')
+        this.props.dispatch(addModel(val)).then(data=>{
+            this.props.history.push('/limitManager')
+        },err=>{
+
+        }).catch((err)=>{
+
+        })
+
         // TODO 提交表单
     }
 

@@ -39,7 +39,8 @@ const ActionCreator = (type, url, method, data) => {
                     }).then(checkStatus).then(parseJSON).then(filterResponse).then((data) => {
                         resolve(data);
                     }).catch((err) => {
-                        reject({err: {message: '网络异常', code: '6666'}});
+                        debugger
+                        reject({err});
                     });
                 })
             }
