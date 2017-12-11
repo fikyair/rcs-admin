@@ -21,7 +21,8 @@ import {
     API_GET_PERSIONAL_HOMELIST,
     API_GET_PERSIONAL_OPTLOG,
     API_RECORD_MODEL,
-    API_GET_PERSIONAL_DETAILFOR_EDIT
+    API_GET_PERSIONAL_DETAILFOR_EDIT,
+    COMMONT_PAGE_NUMBER
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -46,6 +47,15 @@ const ActionCreator = (type, url, method, data) => {
     }
 }
 
+export function SetCommontPageNum(data){
+    debugger
+        return {
+            type: COMMONT_PAGE_NUMBER,
+            data: data
+    }
+}
+
+
 //查询所有的Models
 export const getModels = (data) => ActionCreator(API_GET_MODELS, `/api/rcslmodel${queryData(data)}`, 'GET')();
 
@@ -54,7 +64,7 @@ export const getModels = (data) => ActionCreator(API_GET_MODELS, `/api/rcslmodel
 export const addModel = (data) => ActionCreator(API_POST_MODEL, `/api/rcslmodel`, 'POST', data)();
 
 //普通限额操作记录
-export const recordData = (data) => ActionCreator(API_RECORD_MODEL,`/api/rcslmodeloptlog/list${queryData(data)}`, 'GET')();
+export const recordData = (data) => ActionCreator(API_RECORD_MODEL, `/api/rcslmodeloptlog/list${queryData(data)}`, 'GET')();
 
 //删除Models
 export const deleteModel = (data) => ActionCreator(API_DELETE_MODEL, `/api/rcslmodel/${data.id}`, 'DELETE')();
@@ -102,6 +112,6 @@ export const queryOnlineType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINE,
 // 查看在线支付类型纬度
 export const queryOnlinePayType = (data) => ActionCreator(API_GET_PERSIONAL_ONLINEPAY, `/api/rcslproperty/detail?propertyEnum=OL_PAY_WAY`, 'get')();
 //GET GET /rcslmodelprivateoptlog  个性限额操作记录
-export const getOptLog =(data) => ActionCreator(API_GET_PERSIONAL_OPTLOG,`/api/rcslmodelprivateoptlog${queryData(data)}`, 'GET')();
+export const getOptLog = (data) => ActionCreator(API_GET_PERSIONAL_OPTLOG, `/api/rcslmodelprivateoptlog${queryData(data)}`, 'GET')();
 // 查询个性限额明细
 export const getDetailPersionalForEdit = (data) => ActionCreator(API_GET_PERSIONAL_DETAILFOR_EDIT, `/api/rcslmodelprivate/${data}`, 'GET')();

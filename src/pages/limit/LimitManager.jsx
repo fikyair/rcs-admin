@@ -10,7 +10,8 @@ import {
     getBussinessType,
     getMerchtType,
     getMainPart,
-    deleteModel
+    deleteModel,
+    SetCommontPageNum
 } from '../../actions/limitActions';
 
 const FormItem = Form.Item;
@@ -22,7 +23,9 @@ const FormItem = Form.Item;
     bodyProperty: state.LimitReducer.bodyProperty,
     mainAccount: state.LimitReducer.mainAccount,
     modelsData: state.LimitReducer.modelsData,
-    formTemp: state.GlobalReducer.formTemp
+    formTemp: state.GlobalReducer.formTemp,
+    commonPageNum: state.LimitReducer.commonPageNum
+
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -234,14 +237,17 @@ export default class LimitManager extends React.Component {
     }
 
     componentWillMount() {
+        debugger
         //页面发起数据请求
         this.props.dispatch(getBussinessType());
         this.props.dispatch(getBodyProperty());
+        let commonPageNum = this.props.commonPageNum
         const {pageNum, pageSize} = this.state
         let params = {
-            pageNum,
+            pageNum: commonPageNum,
             pageSize,
         };
+
         this.props.dispatch(getModels({...params})).then(() => {
             const {total, current, size} = this.props.modelsData
             this.setState({total: total, pageNum: current, pageSize: size})
@@ -323,6 +329,7 @@ export default class LimitManager extends React.Component {
         this.props.dispatch(getModels({...params})).then(() => {
             const {total, current, size} = this.props.modelsData
             this.setState({total: total, pageNum: current, pageSize: size})
+
         })
     }
     delete = () => {
@@ -344,6 +351,7 @@ export default class LimitManager extends React.Component {
         })
     }
     changePage = (page) => {
+        this.props.dispatch(SetCommontPageNum(page))
         this.handleSearch({pageNum: page})
     }
 
