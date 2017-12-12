@@ -61,7 +61,7 @@ export default class EditableTable extends React.Component {
     handleSearch = (args) => {
         const {current,size}=this.state;
         const {id}=this.props.match.params;
-        const mainPartValue=this.props;
+        const mainPartValue=this.state;
         let params = {
             modelPrivateId: id,
             mainPartValue:mainPartValue,
@@ -70,8 +70,8 @@ export default class EditableTable extends React.Component {
             ...args,
         }
         this.props.dispatch(getOptLog({...params})).then(()=>{//异步(请求之后)显示数据
-            const {total, current ,size}= this.props.paginationData;
-            this.setState({total:total,current:current,size: size})
+            const {total, current ,size,mainPartValue}= this.props.paginationData;
+            this.setState({total:total,current:current,size: size,mainPartValue:mainPartValue})
         });
     }
 
@@ -91,7 +91,7 @@ export default class EditableTable extends React.Component {
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
-                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span><Input value={this.props.mainPartValue} disabled="true" style={{width:200}}/></span></div>} bodyStyle={{padding: '0px',}}
+                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span><Input value={dataSource.length ? dataSource[0].mainPartValue : ''} disabled={true} style={{width:200}}/></span></div>} bodyStyle={{padding: '0px',}}
 
                 >
                     <Table className="btl" dataSource={dataSource}  pagination={false} columns={columns} />
