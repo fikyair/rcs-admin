@@ -70,7 +70,6 @@ export default class EditableTable extends React.Component {
         this.props.dispatch(recordData({...params})).then(()=>{
             const {total, current,size, id} = this.props.recordType
             this.setState({total: total,pageNum:current,pageSize: size,modelId:id})
-           // const data=this.props.recordData.records
         })
     }
     changePage = (page) =>{
