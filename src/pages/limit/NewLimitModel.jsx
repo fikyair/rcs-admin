@@ -6,7 +6,7 @@ import {getSelectDdata} from '../../actions/limitActions';
 
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
-import MapSelectComs from '../../components/MapSelectComs'
+import MapModifyCom from '../../components/MapModifyCom'
 import {addModel} from "../../actions/limitActions";
 
 const FormItem = Form.Item;
@@ -173,7 +173,7 @@ export default class NewLimitModel extends React.Component {
                     >
 
                         <Row>
-                            <MapSelectComs data={this.inputLimit}
+                            <MapModifyCom data={this.inputLimit}
                                            wrappedComponentRef={(inst) => this.formDataInputLimit = inst}>
                                 <FormItem>
                                  <span style={{
@@ -207,7 +207,7 @@ export default class NewLimitModel extends React.Component {
                                     </div>
                                 </FormItem>
 
-                            </MapSelectComs>
+                            </MapModifyCom>
                         </Row>
 
                     </Card>
