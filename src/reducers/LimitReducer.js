@@ -82,7 +82,6 @@ export default function (state = initialState, actions) {
                     limitType: {
                         labelName: '限额类型',
                         optionVal: [
-                            {value: '',name: '全部'},
                             ..._.map(actions.data, (v, k) => {
                                 return {value: String(v.key), name: String(v.value)}
                             }),
@@ -103,7 +102,6 @@ export default function (state = initialState, actions) {
                         return {
                             labelName: v.name,
                             optionVal: [
-                                {value: '',name: '全部'},
                                 ..._.map(v.value, (v, k) => {
                                     return {value: String(v.code), name: String(v.name)}
                                 }),
@@ -122,7 +120,6 @@ export default function (state = initialState, actions) {
                     limitProperty: {
                         labelName: '限额属性',
                         optionVal: [
-                            {value: '',name: '全部'},
                             ..._.map(actions.data, (v, k) => {
                                 return {value: String(v.key), name: String(v.value)}
                             }),
@@ -143,7 +140,6 @@ export default function (state = initialState, actions) {
                         index: '4',
                         labelName: '商户类型',
                         optionVal: [
-                            {value: '',name: '全部'},
                             ..._.map(actions.data, (v, k) => {
                                 return {value: v.code, name: v.name}
                             }),
