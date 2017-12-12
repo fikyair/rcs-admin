@@ -104,7 +104,7 @@ export default class LimitUpdate extends React.Component {
 
     componentWillMount() {
         let id = this.props.match.params.id
-        this.props.dispatch(getLimitInitData({id: id}));
+        this.props.dispatch(getLimitIgtgfnitData({id: id}));
     }
 
 
@@ -124,8 +124,6 @@ export default class LimitUpdate extends React.Component {
         })
         this.props.history.push('/limitManager')
     }
-
-
     render() {
         const {
             match,
@@ -151,12 +149,9 @@ export default class LimitUpdate extends React.Component {
                             </Card>)
                         })
                     }
-
-
                     <Card title="添加限额值" noHovering={true}
                           style={{marginBottom: 6}}
                     >
-
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
                                 <FormItem>

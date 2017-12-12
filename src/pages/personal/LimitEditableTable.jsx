@@ -62,7 +62,7 @@ export default class EditableTable extends React.Component {
         const {current,size}=this.state;
         const {id}=this.props.match.params;
         let params = {
-            modelPrivateId: '125335780557066240',
+            modelPrivateId: id,
             current,
             size,
             ...args,
@@ -89,7 +89,7 @@ export default class EditableTable extends React.Component {
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
-                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
+                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span><Input value={this.state.mainPartValue} disabled="true" style={{width:200}}/></span></div>} bodyStyle={{padding: '0px',}}
 
                 >
                     <Table className="btl" dataSource={dataSource}  pagination={false} columns={columns} />
