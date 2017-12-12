@@ -6,6 +6,7 @@ import {
     API_DETAIL_MODEL,
     API_GET_MERCHT_TYPE,
     API_POST_MODEL,
+  API_GET_MULTI_LIST,
     API_MODIFY_MODEL,
     API_INIT_POST_MODEL,
     API_DELETE_MODEL,
@@ -30,7 +31,7 @@ const initialState = {
     initdata: [],
     entryData: {},
     editsuccess: {},
-    selectData: [],
+    selectData: {},
     operationData: [],
     paginationData: {},
     reocrdData: [],
@@ -204,9 +205,9 @@ export default function (state = initialState, actions) {
 
             return {
                 ...state,
-                selectData: _.map(actions.data, (v, k) => {
+                selectData: _.keyBy(_.map(actions.data, (v, k) => {
                     return {
-                        value: v.value.map((v, k) => {
+                        value: _.keyBy(v.value.map((v, k) => {
                             return {
                                 labelName: v.name,
                                 optionVal: v.value.map(data => {
@@ -215,11 +216,11 @@ export default function (state = initialState, actions) {
                                 key: v.code,
                                 type: 'select'
                             }
-                        }),
+                        }),'key'),
                         name: v.name,
                         code: v.code,
                     }
-                }),
+                }),'code')
 
             }
 
@@ -233,6 +234,38 @@ export default function (state = initialState, actions) {
                 ...state,
                 commonPageNum: actions.data
             }
+      case API_GET_MULTI_LIST[1]:
+        const list =_.keyBy(_.map(actions.data, (v, k) => {
+            return {
+              value: _.keyBy(v.value.map((v, k) => {
+                return {
+                  labelName: v.name,
+                  optionVal: v.value.map(data => {
+                    return {value: data.propertyDetailCode, name: data.propertyDetailName}
+                  }),
+                  key: v.code,
+                  type: 'select'
+                }
+              }),'key'),
+              name: v.name,
+              code: v.code,
+            }
+          }),'code')
+        return {
+          ...state,
+          selectData:{
+                ...state.selectData,
+                ..._.keyBy(_.map(list,(v,k)=>{
+                  return {
+                    ...v,
+                    value: {
+                      ...state.selectData[v.code].value,
+                      ...v.value,
+                    }
+                  }
+                }),'code')
+          }
+        }
       case 'FAILURE':
           return {
             ...state,

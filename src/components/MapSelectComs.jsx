@@ -4,7 +4,7 @@ import SelectComs, {Option} from './SelectComs';
 import {Form,Select, Input} from 'antd';
 import '../style/style.less'
 import Storage from '../store';
-import {  getMainPart, getMerchtType } from '../actions/limitActions';
+import {  getMainPart, getMerchtType,getMultiList } from '../actions/limitActions';
 import {  setTemp } from '../actions/index'
 
 const FormItem = Form.Item;
@@ -35,12 +35,31 @@ const FormItem = Form.Item;
         Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB?`${limitBodyB}_`:''}${limitBodyC?limitBodyC:''}`}));}
     }
 
+    if(values['P205'] && values['P205'] == 'P2051005'){
+
+      Storage.dispatch(getMultiList('propertyEnums=IS_CLOUD_PAY&propertyEnums=QR_INMOD&propertyEnums=QR_TYPE'))
+
+    } else if(values['P205'] && values['P205'] != 'P2051005') {
+      props.data['P207'] = null;
+      props.data['P209'] = null;
+      props.data['P210'] = null;
+
+    }
+    if(values['P207'] && values['P207'] == 'P2071001'){
+
+      Storage.dispatch(getMultiList('propertyEnums=CLOUD_PAY_SOURCE'))
+    } else if(values['P207'] && values['P207'] != 'P2071001'){
+      props.data['P206'] = null;
+    }
+
+
+
   }
 })
 export default class MapSelectComs extends React.Component {
 
     render() {
-        const {data,initial = false, selectedAll= false, matchIs=false } = this.props;
+        const {data ={},initial = false, selectedAll= false, matchIs=false } = this.props;
         const {getFieldDecorator} = this.props.form
         return (
             <div style={{display: 'inline-block',}} >
@@ -50,7 +69,7 @@ export default class MapSelectComs extends React.Component {
                     const v = data[key];
                     if(!v || Object.keys(v).length == 0) return null;
                     const { optionVal=[] } = v;
-                    if(optionVal.length == 0){
+                    if(optionVal.length == 0 && v.type === 'select'){
                       return null;
                     }
                     return <FormItem hasFeedback={true}   label={(<div className="label-class">{v.labelName}</div>)} style={{display: 'inline-block',margin:'10px'}}   key={k} {...this.props}>

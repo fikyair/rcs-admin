@@ -154,8 +154,8 @@ export default class NewLimitModel extends React.Component {
 
                     {
 
-                        selectData.map((v, k) => {
-
+                        Object.keys(selectData).map((k) => {
+                            const v = selectData[k];
                             return (<Card title={v.name} noHovering={true} key={k}
                                           style={{marginBottom: 6}}
                             >
@@ -175,15 +175,9 @@ export default class NewLimitModel extends React.Component {
                         <Row>
                             <MapModifyCom data={this.inputLimit}
                                            wrappedComponentRef={(inst) => this.formDataInputLimit = inst}>
-                                <FormItem>
-                                 <span style={{
-                                     marginRight: '10px',
-                                     minWidth: '80px',
-                                     display: 'inline-block',
-                                     marginTop: 10,
-                                     verticalAlign: 'top',
-                                 }}>每笔／分钟:</span>
-                                    <div style={{display: 'inline-block', margin: '10px'}}>
+                                <FormItem label={(<div className="label-class">每笔／分钟</div>)} style={{display: 'inline-block',margin:'10px'}}>
+
+
 
                                         <InputGroup>
                                             {getFieldDecorator('countLimitCountValue')(
@@ -204,7 +198,6 @@ export default class NewLimitModel extends React.Component {
                                             )}
 
                                         </InputGroup>
-                                    </div>
                                 </FormItem>
 
                             </MapModifyCom>

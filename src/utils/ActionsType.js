@@ -92,4 +92,6 @@ export const API_GET_PERSIONAL_DETAILFOR_EDIT = ['REQUEST', 'API_GET_PERSIONAL_D
 
 //GET /rcslCommon/getAuthorityVerify  查看系统权限
 
-export const  API_GET_ROLES = ['REQUEST', 'API_GET_ROLES','FAILURE'];
+export const  API_GET_ROLES = ['REQUEST', 'API_GET_ROLES_SUCESS','FAILURE'];
+
+export const API_GET_MULTI_LIST = ['REQUEST', 'API_GET_MULTI_LIST_SUCESS','FAILURE'];

@@ -23,7 +23,8 @@ import {
     API_RECORD_MODEL,
     API_GET_PERSIONAL_DETAILFOR_EDIT,
   API_GET_ROLES,
-    COMMONT_PAGE_NUMBER
+    COMMONT_PAGE_NUMBER,
+  API_GET_MULTI_LIST
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -119,4 +120,8 @@ export const getDetailPersionalForEdit = (data) => ActionCreator(API_GET_PERSION
 
 
 //GET /rcslCommon/getAuthorityVerify  查看系统权限
-export const getRoles = ActionCreator(API_GET_ROLES,'/api//rcslCommon/getAuthorityVerify', 'GET')
+export const getRoles = ActionCreator(API_GET_ROLES,'/api/rcslCommon/getAuthorityVerify', 'GET')
+
+
+//GET /rcslproperty/somedetail  查询多个维度的维度明细
+export const getMultiList =(querystr)=> ActionCreator(API_GET_MULTI_LIST,`/api/rcslproperty/somedetail?${querystr}`,'GET')();
