@@ -104,7 +104,7 @@ export default class LimitUpdate extends React.Component {
 
     componentWillMount() {
         let id = this.props.match.params.id
-        this.props.dispatch(getLimitIgtgfnitData({id: id}));
+        this.props.dispatch(getLimitInitData({id: id}));
     }
 
 
