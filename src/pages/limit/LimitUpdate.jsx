@@ -112,7 +112,6 @@ export default class LimitUpdate extends React.Component {
         //从路由带参数
         let id = this.props.match.params.id
         const value = this.formData.props.form.getFieldsValue()
-        //value['dayCountLimit'] =  parseInt(value['dayCountLimit'])
         const value1 = this.props.form.getFieldsValue()
         const params = {
             ...value,

@@ -96,7 +96,6 @@ export default class EditableTable extends React.Component {
             }
             return v
         })
-        debugger
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>

@@ -43,7 +43,7 @@ export default class EditableTable extends React.Component {
             dataIndex: 'intervalSecondsLimit',
         },{
             title: '笔数/分钟',
-            dataIndex: 'countLimitCountValue',
+            dataIndex: 'countEveryMin',
         },{
             title: '笔/日',
             dataIndex: 'dayCountLimit',
@@ -86,15 +86,29 @@ export default class EditableTable extends React.Component {
         this.handleSearch({current: page});
     }
     render() {
-        const { operationData:dataSource } = this.props;
+        let {operationData=[]} = this.props
+        operationData = operationData && operationData.map(v=> {
+            if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){
+                v['countEveryMin'] = `${v['countLimitMinuteValue']}/${v['countLimitCountValue']}`
+            } else {
+                v['countEveryMin'] = '无'
+            }
+            for(let p in v){
+                if(v[p]<= 0){
+                    v[p] = '无'
+                }
+            }
+            return v
+        })
+        debugger
         const columns = this.columns;
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
-                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span><Input value={dataSource.length ? dataSource[0].mainPartValue : ''} disabled={true} style={{width:200}}/></span></div>} bodyStyle={{padding: '0px',}}
+                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span><Input value={operationData.length ? operationData[0].mainPartValue : ''} disabled={true} style={{width:200}}/></span></div>} bodyStyle={{padding: '0px',}}
 
                 >
-                    <Table className="btl" dataSource={dataSource}  pagination={false} columns={columns} />
+                    <Table className="btl" dataSource={operationData}  pagination={false} columns={columns} />
 
                     <div style={{textAlign: 'right',margin: 29}}>
                         <Pagination pageSize={this.state.size} current={this.state.current}  total={this.state.total}

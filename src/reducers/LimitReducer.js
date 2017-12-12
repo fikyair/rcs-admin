@@ -191,7 +191,8 @@ export default function (state = initialState, actions) {
                         dayCountLimit: v.dayCountLimit,
                         optUserName: v.optUserName,
                         optTime: v.optTime,
-                        mainPartValue: v.mainPartValue
+                        mainPartValue: v.mainPartValue,
+                        countLimitMinuteValue:v.countLimitMinuteValue,
                     }
                 }),
                 paginationData: actions.data
