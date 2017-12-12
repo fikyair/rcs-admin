@@ -361,6 +361,7 @@ export default class LimitManager extends React.Component {
             modalSelects = this.mockData.modalSelects,
             formTemp
         } = this.props;
+        debugger
         console.log('m++,,',modelsData)
         const {getFieldDecorator} = this.props.form;
         const layout = {

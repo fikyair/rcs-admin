@@ -16,7 +16,7 @@ export default class InputComs extends React.Component {
                 <span style={{
                     ...labelNStyles,
                     marginRight: '10px',
-                    minWidth: '80px',
+                    minWidth: '40px',
                     display: 'inline-block'
                 }}>{labelName}:</span>
             <Input {...rest} />

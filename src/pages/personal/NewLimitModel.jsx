@@ -30,7 +30,7 @@ export default class NewLimitModel extends React.Component {
             key: 'singleAmountLimit',
             type: 'input',
             body: {
-                style: {width: 140},
+                style: {width: 120},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -42,7 +42,7 @@ export default class NewLimitModel extends React.Component {
             addonAfter: "元",
             type: 'input',
             body: {
-                style: {width: 140},
+                style: {width: 120},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
