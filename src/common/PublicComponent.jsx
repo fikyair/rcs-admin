@@ -68,7 +68,7 @@ export class InitComs extends React.Component{
     super(props);
     const token  = $.cookie('token');
     this.props.dispatch(asyncCookie({token:token}));
-    this.props.dispatch(getRoles());
+    //this.props.dispatch(getRoles());
 
   }
 
