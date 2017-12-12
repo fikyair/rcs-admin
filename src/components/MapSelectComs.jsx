@@ -49,8 +49,10 @@ export default class MapSelectComs extends React.Component {
                   Object.keys(data).map((key, k) => {
                     const v = data[key];
                     if(!v || Object.keys(v).length == 0) return null;
-                    const optionVal = v.optionVal;
-
+                    const { optionVal=[] } = v;
+                    if(optionVal.length == 0){
+                      return null;
+                    }
                     return <FormItem hasFeedback={true}   label={(<div className="label-class">{v.labelName}</div>)} style={{display: 'inline-block',margin:'10px'}}   key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
