@@ -231,6 +231,11 @@ export default function (state = initialState, actions) {
                 ...state,
                 commonPageNum: actions.data
             }
+      case 'FAILURE':
+          return {
+            ...state,
+            ...initialState,
+          }
         default:
             return state
     }
