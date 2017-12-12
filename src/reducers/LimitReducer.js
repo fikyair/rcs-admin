@@ -55,6 +55,7 @@ export default function (state = initialState, actions) {
                 recordData: _.map(actions.data.records, (v, k) => {
                     return {
                         key: k,
+                        modelName: v.modelName,
                         singleAmountLimit: v.singleAmountLimit,
                         dayAmountLimit: v.dayAmountLimit,
                         monthAmountLimit: v.monthAmountLimit,

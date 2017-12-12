@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Pagination, Card ,Button } from 'antd';
+import { Table, Pagination, Card ,Button, Input } from 'antd';
 import '../../style/style.less';
 import {Containerization} from '../../common/PublicComponent';
 import {recordData} from '../../actions/limitActions';
@@ -32,6 +32,7 @@ export default class EditableTable extends React.Component {
         total: 0,
         data: [],
         key: '1',
+        modelName: '',
     };
     constructor(props) {
         super(props);
@@ -92,13 +93,17 @@ export default class EditableTable extends React.Component {
         this.handleRecord({current:page})
     }
     render() {
-        const { recordData } = this.props;
+        const { recordData =[]}  = this.props;
         const columns = this.columns;
+        let modelName = ''
+        if(recordData.length > 0){
+            modelName = recordData[0].modelName
+        };
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
 
-                <Card noHovering= {true} title={<div>限额名称&nbsp;&nbsp;&nbsp;&nbsp;<span>123456</span></div>} bodyStyle={{padding: '0px',}}
+                <Card noHovering= {true} title={<div>限额名称&nbsp;&nbsp;&nbsp;&nbsp;<Input disabled={true} style={{width: 200}} value={modelName}/> </div>} bodyStyle={{padding: '0px',}}
 
                 >
                     <Table className="btl" dataSource={recordData}  pagination={false} columns={columns} />
