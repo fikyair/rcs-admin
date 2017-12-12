@@ -67,6 +67,7 @@ export default function (state = initialState, actions) {
                         status: v.status,
                         optUserName: v.optUserName,
                         optTime: v.optTime,
+                        countLimitMinuteValue:v.countLimitMinuteValue,
                     }
 
                 }),

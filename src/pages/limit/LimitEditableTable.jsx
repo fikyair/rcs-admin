@@ -8,23 +8,6 @@ import {recordData} from '../../actions/limitActions';
     recordData:state.LimitReducer.recordData,
     recordType:state.LimitReducer.recordType,
 }))
-// const datamock=[{
-//     key: '1',
-//     singleLimit: '12000',
-//     dayAmountLimit: '1325',
-//     monthAmountLimit: '4532',
-//     yearAmountLimit: '781501',
-//     lifeAmountLimit: '12452',
-//     twoIntervals: '450',
-//     strokeCount: '500',
-//     stroke: '12330',
-//     state: '1',
-//     operational: '王永飞',
-//     operationTime: '2017-11-29 12:30:12'
-// }];
-// function showTotal(total) {
-//     return `Total ${total} items`;
-// }
 export default class EditableTable extends React.Component {
     state = {
         pageNum : 1,
@@ -56,7 +39,7 @@ export default class EditableTable extends React.Component {
             dataIndex: 'intervalSecondsLimit',
         },{
             title: '笔数/分钟',
-            dataIndex: 'countLimitCountValue',
+            dataIndex: 'countEveryMin',
         },{
             title: '笔/日',
             dataIndex: 'dayCountLimit',
@@ -87,18 +70,34 @@ export default class EditableTable extends React.Component {
         this.props.dispatch(recordData({...params})).then(()=>{
             const {total, current,size, id} = this.props.recordType
             this.setState({total: total,pageNum:current,pageSize: size,modelId:id})
+           // const data=this.props.recordData.records
         })
     }
     changePage = (page) =>{
         this.handleRecord({current:page})
     }
     render() {
-        const { recordData =[]}  = this.props;
+        let { recordData =[]}  = this.props;
         const columns = this.columns;
         let modelName = ''
         if(recordData.length > 0){
             modelName = recordData[0].modelName
         };
+
+        recordData = recordData && recordData.map(v=> {
+            if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){
+                v['countEveryMin'] = `${v['countLimitMinuteValue']}/${v['countLimitCountValue']}`
+            } else {
+                v['countEveryMin'] = '无'
+            }
+            for(let p in v){
+                if(v[p]<= 0){
+                    v[p] = '无'
+                }
+            }
+            return v
+        })
+        debugger
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
