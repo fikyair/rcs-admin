@@ -163,22 +163,15 @@ export default class NewLimitModel extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <FormItem>
-                                <span style={{
-                                    marginRight: '10px',
-                                    minWidth: '80px',
-                                    display: 'inline-block',
-                                    marginTop: 10,
-                                    verticalAlign: 'top',
-                                }}>每笔／分钟:</span>
-                                    <div style={{display: 'inline-block', margin: '10px'}}>
+                                <FormItem label={(<div className="label-class">每笔／分钟</div>)} style={{display: 'inline-block',margin:'10px'}}>
 
                                         <InputGroup>
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
-                                                    initialValue: entryData.countLimitCountValue
+                                                    initialValue: entryData.countLimitCountValue>=0 ? entryData.countLimitCountValue:''
                                                 })(
                                                     <Input style={{width: 50, textAlign: 'center'}}
+                                                           placeholder="请输入"
                                                     />
                                                 )
                                             }
@@ -191,16 +184,17 @@ export default class NewLimitModel extends React.Component {
                                             }} placeholder="/" disabled/>
                                             {
                                                 getFieldDecorator('countLimitMinuteValue', {
-                                                    initialValue: entryData.countLimitMinuteValue
+                                                    initialValue: entryData.countLimitMinuteValue>=0?entryData.countLimitMinuteValue:""
                                                 })(
                                                     <Input
                                                         style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                        placeholder="请输入"
                                                     />
                                                 )
                                             }
 
                                         </InputGroup>
-                                    </div>
+
                                 </FormItem>
 
                             </MapModifyCom>

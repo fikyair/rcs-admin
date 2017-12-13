@@ -189,6 +189,7 @@ export default class NewLimitModel extends React.Component {
                                         <InputGroup>
                                             {getFieldDecorator('countLimitCountValue')(
                                                 <Input style={{width: 50, textAlign: 'center'}}
+                                                       placeholder="请输入"
                                                 />
                                             )}
 
@@ -201,6 +202,7 @@ export default class NewLimitModel extends React.Component {
                                             {getFieldDecorator('countLimitMinuteValue')(
                                                 <Input
                                                     style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                    placeholder="请输入"
                                                 />
                                             )}
 

@@ -83,7 +83,7 @@ export default class MapSelectComs extends React.Component {
                     return <FormItem hasFeedback={true}   label={(<div className="label-class">{v.labelName}</div>)} style={{display: 'inline-block',margin:'10px'}}   key={k} {...this.props}>
                             {
                                 getFieldDecorator(v.key, {
-                                    rules: matchIs ? [{required:true,message:'请勾选'}] : [],
+                                    rules: matchIs ? [{required:true,message:'请选择'}] : [],
                                 })(
                                     v.type === 'select' ?
                                         <Select style={{width:'120px'}} labelName={v.labelName} placeholder={selectedAll?"全部":"请选择"} {...v.body}
