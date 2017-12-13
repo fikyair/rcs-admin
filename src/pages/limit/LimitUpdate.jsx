@@ -7,6 +7,7 @@ import MapModifyCom from '../../components/MapModifyCom'
 
 const FormItem = Form.Item;
 const InputGroup = Input.Group;
+const TextArea = Input.TextArea;
 
 @setTitle('限额修改页')
 @Containerization(state => ({
@@ -110,14 +111,16 @@ export default class LimitUpdate extends React.Component {
 
     handleSubmit = () => {
         //从路由带参数
-        let id = this.props.match.params.id
-        const value = this.formData.props.form.getFieldsValue()
-        const value1 = this.props.form.getFieldsValue()
+        let id = this.props.match.params.id;
+        const value = this.formData.props.form.getFieldsValue();
+        const value1 = this.props.form.getFieldsValue();
         const params = {
             ...value,
             ...value1,
             id: id,
         }
+        console.log("---1",value)
+        console.log('--2',value1)
         this.props.dispatch(editLimit(params)).then(() => {
 
         })
@@ -132,7 +135,10 @@ export default class LimitUpdate extends React.Component {
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
         });
+        console.log('--------',entryData)
         const {modelName} = entryData;
+       // const {remark} = entryData.remark;
+       // console.log('remark',remark)
         const {getFieldDecorator} = this.props.form
 
         return (
@@ -148,7 +154,7 @@ export default class LimitUpdate extends React.Component {
                             </Card>)
                         })
                     }
-                    <Card title="添加限额值" noHovering={true}
+                    <Card title="修改限额值" noHovering={true}
                           style={{marginBottom: 6}}
                     >
                         <Row>
@@ -186,9 +192,19 @@ export default class LimitUpdate extends React.Component {
 
                                         </InputGroup>
                                 </FormItem>
-
+                                <FormItem
+                                    label={"备注"}
+                                >
+                                    {
+                                        getFieldDecorator('remark',{
+                                            initialValue: entryData.remark
+                                        })
+                                        (
+                                            <TextArea/>
+                                        )
+                                    }
+                                </FormItem>
                             </MapModifyCom>
-
                         </Row>
 
                     </Card>
