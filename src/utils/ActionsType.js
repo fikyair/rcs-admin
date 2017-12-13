@@ -95,3 +95,8 @@ export const API_GET_PERSIONAL_DETAILFOR_EDIT = ['REQUEST', 'API_GET_PERSIONAL_D
 export const  API_GET_ROLES = ['REQUEST', 'API_GET_ROLES_SUCESS','FAILURE'];
 
 export const API_GET_MULTI_LIST = ['REQUEST', 'API_GET_MULTI_LIST_SUCESS','FAILURE'];
+
+
+//GET /rcslmodel/isdelete/{modelId}  根据模型id查询个性限额模型
+
+export const API_GET_HAS_PERSONAL = ['REQUEST', 'API_GET_HAS_PERSONAL','FAILURE'];

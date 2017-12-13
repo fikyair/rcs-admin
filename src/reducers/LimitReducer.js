@@ -13,6 +13,7 @@ import {
     API_GET_PERSIONAL_OPTLOG,
     API_RECORD_MODEL,
     COMMONT_PAGE_NUMBER,
+  API_GET_HAS_PERSONAL,
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -271,6 +272,11 @@ export default function (state = initialState, actions) {
           ...state,
           selectsData:{}
         }
+      case API_GET_HAS_PERSONAL[1]:
+          return {
+            ...state,
+            hasPersonal: actions.data,
+          }
 
         default:
             return state

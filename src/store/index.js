@@ -24,12 +24,14 @@ function promiseMiddleware() {
 
         } else {
             next({...rest, data:null, type: SUCCESS});
-            return next({...rest, result, type: FAILURE})
+            next({...rest, result, type: FAILURE})
+          throw Error('接口失败')
 
         }
       },
       (error) => {
-        return next({...rest, error, type: FAILURE})
+         next({...rest, error, type: FAILURE})
+        throw Error('接口失败')
       }
     )
   }

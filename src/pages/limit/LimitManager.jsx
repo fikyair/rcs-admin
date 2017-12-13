@@ -8,8 +8,7 @@ import {
     getModels,
     getBodyProperty,
     getBussinessType,
-    getMerchtType,
-    getMainPart,
+  getHasPersonal,
     deleteModel,
     SetCommontPageNum
 } from '../../actions/limitActions';
@@ -30,6 +29,7 @@ const FormItem = Form.Item;
 @Form.create()
 export default class LimitManager extends React.Component {
     state = {
+      deleteTips:'',
         pageNum: 1,
         pageSize: 3,
         total: 0,
@@ -301,6 +301,13 @@ export default class LimitManager extends React.Component {
     }
 
     disableLimitRule(record) {
+      this.props.dispatch(getHasPersonal(record.id)).then((data)=>{
+        const {data:list} = data;
+        if(list && list.length >0){
+          this.setState({deleteTips:'模型已有个性商户配置，模型删除后个性配置也将被删除，请确认是否删除此模型?'})
+        }
+
+      })
         this.setState({removeVisible: true, removeId: record.id, modelName: record.modelName})
     }
 
@@ -358,7 +365,7 @@ export default class LimitManager extends React.Component {
 
     render() {
 
-        const {options, visible, loading, removeVisible, isMerchant} = this.state;
+        const {options, visible, loading, removeVisible, deleteTips,} = this.state;
         const {
             selectsData,
             modelsData=[],
@@ -472,9 +479,11 @@ export default class LimitManager extends React.Component {
                     ]}
                 >
 
-                    确定删除&nbsp;&nbsp;&nbsp;&nbsp;
+                  {
+                    deleteTips?deleteTips:<div>是否删除&nbsp;&nbsp;&nbsp;&nbsp;
                     <span style={{fontSize: 19}}>{this.state.modelName}</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;限额
+                    &nbsp;&nbsp;&nbsp;&nbsp;限额?</div>
+                  }
 
 
                 </Modal>

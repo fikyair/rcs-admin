@@ -24,7 +24,8 @@ import {
     API_GET_PERSIONAL_DETAILFOR_EDIT,
   API_GET_ROLES,
     COMMONT_PAGE_NUMBER,
-  API_GET_MULTI_LIST
+  API_GET_MULTI_LIST,
+  API_GET_HAS_PERSONAL,
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -125,3 +126,7 @@ export const getRoles = ActionCreator(API_GET_ROLES,'/api/rcslCommon/getAuthorit
 
 //GET /rcslproperty/somedetail  查询多个维度的维度明细
 export const getMultiList =(querystr)=> ActionCreator(API_GET_MULTI_LIST,`/api/rcslproperty/somedetail?${querystr}`,'GET')();
+
+//GET /rcslmodel/isdelete/{modelId} 根据模型id查询个性限额模型
+
+export const getHasPersonal = (id) => ActionCreator(API_GET_HAS_PERSONAL,`/api/rcslmodel/isdelete/${id}`,'GET')();
