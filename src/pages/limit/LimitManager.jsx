@@ -238,8 +238,7 @@ export default class LimitManager extends React.Component {
 
     componentWillMount() {
         //页面发起数据请求
-        this.props.dispatch(getBussinessType());
-        this.props.dispatch(getBodyProperty());
+        this.initData()
         let commonPageNum = this.props.commonPageNum
         const {pageNum, pageSize} = this.state
         let params = {
@@ -251,6 +250,12 @@ export default class LimitManager extends React.Component {
             const {total, current, size} = this.props.modelsData
             this.setState({total: total, pageNum: current, pageSize: size})
         })
+    }
+
+    initData(){
+      this.props.dispatch({type:"CLEAR_SELECT_DATA"});
+      this.props.dispatch(getBussinessType());
+      this.props.dispatch(getBodyProperty());
     }
 
     menu = record => (
@@ -267,6 +272,7 @@ export default class LimitManager extends React.Component {
     );
     timer = null
     showAddModal = () => {
+      this.initData()
         this.setState({
             visible: true,
         });
@@ -290,7 +296,8 @@ export default class LimitManager extends React.Component {
     }
 
     handleAddCancel = () => {
-        this.setState({visible: false});
+      this.initData()
+      this.setState({visible: false});
     }
 
     disableLimitRule(record) {

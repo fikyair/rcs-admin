@@ -266,6 +266,11 @@ export default function (state = initialState, actions) {
                 }),'code')
           }
         }
+      case 'CLEAR_SELECT_DATA':
+        return {
+          ...state,
+          selectsData:{}
+        }
 
         default:
             return state
