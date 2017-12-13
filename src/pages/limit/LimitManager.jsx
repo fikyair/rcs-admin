@@ -354,28 +354,12 @@ export default class LimitManager extends React.Component {
         const {options, visible, loading, removeVisible, isMerchant} = this.state;
         const {
             selectsData,
-            selectsData2,
             modelsData=[],
             columns = this.mockData.columns,
             dataSource = this.mockData.dataSource,
             modalSelects = this.mockData.modalSelects,
             formTemp
         } = this.props;
-        if(selectsData.limitType.optionVal && selectsData.limitType.optionVal[0].value){
-            selectsData.limitType.optionVal.unshift({value:'',name:'全部'})
-        }
-        if(selectsData.limitProperty.optionVal && selectsData.limitProperty.optionVal[0].value){
-            selectsData.limitProperty.optionVal.unshift({value:'',name:'全部'})
-        }
-        if(selectsData.merchType&&selectsData.merchType.optionVal && selectsData.merchType.optionVal[0].value){
-            selectsData.merchType.optionVal.unshift({value:'',name:'全部'})
-        }
-        if(selectsData.limitBodyB&&selectsData.limitBodyB.optionVal && selectsData.limitBodyB.optionVal[0].value){
-            selectsData.limitBodyB.optionVal.unshift({value:'',name:'全部'})
-        }
-        if(selectsData.limitBodyC&&selectsData.limitBodyC.optionVal && selectsData.limitBodyC.optionVal[0].value){
-            selectsData.limitBodyC.optionVal.unshift({value:'',name:'全部'})
-        }
 
         console.log('m++,,',modelsData)
         const {getFieldDecorator} = this.props.form;

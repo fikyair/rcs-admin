@@ -7,7 +7,9 @@ import {getSelectDdata} from '../../actions/limitActions';
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
 import MapModifyCom from '../../components/MapModifyCom'
+import MapSelectComs from '../../components/MapSelectComs'
 import {addModel} from "../../actions/limitActions";
+import {FetchAPI} from "../../utils/fetch-middleware";
 
 const FormItem = Form.Item;
 
@@ -115,29 +117,34 @@ export default class NewLimitModel extends React.Component {
         const { limitType, merchType, limitProperty, limitBodyC, limitBodyB} = addLimitTemp;
 
         let mainData = {limitType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}
-
-        let formDataMerchent = {};
-            Object.keys(this.formsIns).map(v=>{
-                formDataMerchent = {...formDataMerchent,...this.formsIns[v].props.form.getFieldsValue()}
-        })
-        let modelPropertyVoList =  []
-        for(let key in formDataMerchent){
-            if(formDataMerchent[key]){
-            modelPropertyVoList.push({propertyCode:key,propertyDetailCode:formDataMerchent[key]})
-            }
-        }
-        const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
         const formData = this.props.form.getFieldsValue()
-        const getValues = { ...formDataInputLimit, ...formData,...mainData, modelPropertyVoList:modelPropertyVoList}
-        const val = getValues;
-        console.log("表单的数据", val)
-        this.props.dispatch(addModel(val)).then(data=>{
-            this.props.history.push('/limitManager')
-        },err=>{
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                let formDataMerchent = {};
+                Object.keys(this.formsIns).map(v=>{
+                    formDataMerchent = {...formDataMerchent,...this.formsIns[v].props.form.getFieldsValue()}
+                })
+                let modelPropertyVoList =  []
+                for(let key in formDataMerchent){
+                    if(formDataMerchent[key]){
+                        modelPropertyVoList.push({propertyCode:key,propertyDetailCode:formDataMerchent[key]})
+                    }
+                }
+                const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
 
-        }).catch((err)=>{
+                const getValues = { ...formDataInputLimit, ...formData,...mainData, modelPropertyVoList:modelPropertyVoList}
+                const val = getValues;
+                console.log("表单的数据", val)
+                this.props.dispatch(addModel(val)).then(data=>{
+                    this.props.history.push('/limitManager')
+                },err=>{
 
-        })
+                }).catch((err)=>{
+
+                })
+            }
+        });
+
 
         // TODO 提交表单
     }
@@ -206,7 +213,9 @@ export default class NewLimitModel extends React.Component {
                     </Card>
                     <Card title="添加限额名称" noHovering={true}>
                         {
-                            getFieldDecorator('modelName')(
+                            getFieldDecorator('modelName',{
+                                rules: [{  required: true, message: '请输入限额名称!',}]
+                            })(
                                 <Input placeholder="请输入"
                                        addonBefore={(<span style={{minWidth: '70px', display: 'inline-block'}}>限额名称</span>)}
                                        style={{width: '200px', margin: '10px'}}/>
