@@ -64,10 +64,8 @@ export default class EditableTable extends React.Component {
     handleSearch = (args) => {
         const {current,size}=this.state;
         const {id}=this.props.match.params;
-        const mainPartValue=this.state;
         let params = {
             modelPrivateId: id,
-            mainPartValue:mainPartValue,
             current,
             size,
             ...args,
