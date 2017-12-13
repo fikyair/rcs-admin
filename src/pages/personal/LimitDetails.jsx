@@ -353,8 +353,8 @@ export default class LimitDetails extends React.Component {
         };
         return (
             <div>
-                <div className={"title-style"}><span>商户编号&nbsp;&nbsp;&nbsp;&nbsp;
-                    {entryData.mainPartValue}</span>
+                <div className={"title-style"}><span><b>商户编号&nbsp;&nbsp;&nbsp;&nbsp;
+                    {entryData.mainPartValue}</b></span>
                 </div>
                 <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
 
