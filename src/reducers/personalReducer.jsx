@@ -7,7 +7,8 @@ import {
     API_GET_PERSIONAL_ONLINE,
     API_GET_PERSIONAL_ONLINEPAY,
     API_GET_PERSIONAL_HOMELIST,
-    API_GET_PERSIONAL_DETAILFOR_EDIT
+    API_GET_PERSIONAL_DETAILFOR_EDIT,
+    PERSONAL_PAGE_NUMBER
 } from '../utils/ActionsType';
 
 const initialState = {
@@ -139,6 +140,11 @@ export default function (state = initialState, actions) {
 
                     }
                 }),
+            }
+        case PERSONAL_PAGE_NUMBER:
+            return {
+                ...state,
+                personalPageNum: actions.data,
             }
         default:
             return state;

@@ -8,7 +8,8 @@ import {
     queryConsumptionType,
     queryOnlineType,
     queryOnlinePayType,
-    queryList
+    queryList,
+    SetPersonalPageNum
 } from '../../actions/limitActions';
 import MapSelectComs from '../../components/MapSelectComs'
 
@@ -21,6 +22,7 @@ const FormItem = Form.Item;
     onlineData: state.PersonalReducer.onlineData,
     onlinePayData: state.PersonalReducer.onlinePayData,
     homeListData: state.PersonalReducer.homeListData,
+    personalPageNum: state.PersonalReducer.personalPageNum
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -226,8 +228,8 @@ export default class LimitManager extends React.Component {
         const {pageSize, pageNum} = this.state
 
         let params = {
-            size:pageSize,
-            current:pageNum,
+            size: pageSize,
+            current:this.props.personalPageNum,
         }
 
         this.props.dispatch(queryList(params)).then(() => {
@@ -296,6 +298,7 @@ export default class LimitManager extends React.Component {
     }
 
     changePage = (page) => {
+        this.props.dispatch(SetPersonalPageNum(page))
         this.handleSearch({current: page})
     }
     onShowSizeChange=(current, size) =>{

@@ -26,6 +26,7 @@ import {
     COMMONT_PAGE_NUMBER,
   API_GET_MULTI_LIST,
   API_GET_HAS_PERSONAL,
+    PERSONAL_PAGE_NUMBER
 } from '../utils/ActionsType';
 
 const ActionCreator = (type, url, method, data) => {
@@ -51,13 +52,18 @@ const ActionCreator = (type, url, method, data) => {
 }
 
 export function SetCommontPageNum(data){
-
         return {
             type: COMMONT_PAGE_NUMBER,
             data: data
     }
 }
 
+export function SetPersonalPageNum(data) {
+    return {
+        type: PERSONAL_PAGE_NUMBER,
+        data: data
+    }
+}
 
 //查询所有的Models
 export const getModels = (data) => ActionCreator(API_GET_MODELS, `/api/rcslmodel${queryData(data)}`, 'GET')();
