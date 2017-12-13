@@ -6,6 +6,7 @@ import {getPersonalDetial, editPersional, getDetailPersionalForEdit} from '../..
 
 
 const InputGroup = Input.Group;
+const TextArea = Input.TextArea;
 import MapModifyCom from "../../components/MapModifyCom";
 import MapSelectComs from '../../components/MapSelectComs'
 import PersonalReducer from "../../reducers/personalReducer";
@@ -185,7 +186,18 @@ export default class LimitUpdate extends React.Component {
 
                                         </InputGroup>
                                 </FormItem>
+                                <FormItem
+                                    label={"备注"}
+                                >
+                                    {
+                                        getFieldDecorator('remark',{
 
+                                        })
+                                        (
+                                            <TextArea/>
+                                        )
+                                    }
+                                </FormItem>
                             </MapModifyCom>
 
                         </Row>
