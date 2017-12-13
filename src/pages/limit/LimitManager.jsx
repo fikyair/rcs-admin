@@ -31,7 +31,7 @@ export default class LimitManager extends React.Component {
     state = {
       deleteTips:'',
         pageNum: 1,
-        pageSize: 3,
+        pageSize: 10,
         total: 0,
         options: null,
         loading: false,
@@ -401,6 +401,7 @@ export default class LimitManager extends React.Component {
               key:k,
             }
         })
+        debugger
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
