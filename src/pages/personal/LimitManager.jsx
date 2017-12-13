@@ -380,7 +380,9 @@ export default class LimitManager extends React.Component {
                         </Button>,
                     ]}
                 >
-                    确定删除{this.state.mainPartValue}限额
+                    确定删除&nbsp;&nbsp;&nbsp;&nbsp;
+                    <span style={{fontSize: 19}}>{this.state.mainPartValue}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;限额
 
                 </Modal>
             </div>
