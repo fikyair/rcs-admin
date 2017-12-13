@@ -302,7 +302,6 @@ export default class LimitManager extends React.Component {
         this.handleSearch({current: page})
     }
     onShowSizeChange=(current, size) =>{
-        debugger;
         this.handleSearch({current:current, size:size})
     }
     render() {
