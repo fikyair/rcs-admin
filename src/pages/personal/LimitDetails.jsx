@@ -311,9 +311,11 @@ export default class LimitDetails extends React.Component {
         }
     ]
 
-    componentWillMount() {
+    componentWillMount(args) {
         let id = this.props.match.params.id
-        this.props.dispatch(getDetailPersionalForEdit(id))
+        this.props.dispatch(getDetailPersionalForEdit(id)).then(()=>{
+
+        })
     }
 
     render() {
@@ -351,7 +353,9 @@ export default class LimitDetails extends React.Component {
         };
         return (
             <div>
-                <div className={"title-style"}><b>限额名称：POS商户对私结算限额</b></div>
+                <div className={"title-style"}><span>商户编号&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Input value={entryData.mainPartValue} style={{width:200}} disabled={true}/></span>
+                </div>
                 <Form className="form-body" layout="inline" onSubmit={this.handleSubmit}>
 
                     {
