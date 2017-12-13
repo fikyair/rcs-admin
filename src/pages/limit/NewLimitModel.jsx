@@ -131,6 +131,10 @@ export default class NewLimitModel extends React.Component {
                         modelPropertyVoList.push({propertyCode:key,propertyDetailCode:formDataMerchent[key]})
                     }
                 }
+                if(merchType){
+                    modelPropertyVoList.push({merchType: merchType})
+
+                }
                 const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
 
                 const getValues = { ...formDataInputLimit, ...formData,...mainData, modelPropertyVoList:modelPropertyVoList}
