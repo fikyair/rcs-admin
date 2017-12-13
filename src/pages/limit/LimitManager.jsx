@@ -238,6 +238,7 @@ export default class LimitManager extends React.Component {
 
     componentWillMount() {
         //页面发起数据请求
+        debugger
         this.props.dispatch(getBussinessType());
         this.props.dispatch(getBodyProperty());
         let commonPageNum = this.props.commonPageNum
@@ -442,7 +443,7 @@ export default class LimitManager extends React.Component {
                             ]}
                         >
                             <Form layout='inline'>
-                                <MapSelectComs formTemp={formTemp} wrappedComponentRef={(inst) => this.addFormData = inst}
+                                <MapSelectComs selectedAll={false} formTemp={formTemp} wrappedComponentRef={(inst) => this.addFormData = inst}
                                                matchIs={true} data={selectsData} ref="modalSelects"/>
                             </Form>
                         </Modal>
