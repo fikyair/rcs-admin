@@ -32,7 +32,7 @@ export default class LimitManager extends React.Component {
         merchantId: '',
         total: 0,
         pageNum: 1,
-        pageSize: 3,
+        pageSize: 10,
         mainPartValue: ''
 
     }
@@ -226,14 +226,14 @@ export default class LimitManager extends React.Component {
         const {pageSize, pageNum} = this.state
 
         let params = {
-            pageSize,
-            pageNum,
+            size:pageSize,
+            current:pageNum,
         }
 
         this.props.dispatch(queryList(params)).then(() => {
             const {total, current, size} = this.props.homeListData
             this.setState({total: total, pageNum: current, pageSize: size})
-            const data = this.props.homeListData.records
+            //const data = this.props.homeListData.records
 
         })
     }
@@ -270,13 +270,13 @@ export default class LimitManager extends React.Component {
 
     handleSearch = (args) => {
         //TODO 搜索
+        
         const formData = this.formData.props.form.getFieldsValue()
         const data = this.props.form.getFieldsValue()
         const {pageSize, pageNum} = this.state
-
         let params = {
-            pageSize,
-            pageNum,
+            size:pageSize,
+            current:pageNum,
             ...args,
             ...formData,
             ...data,
@@ -296,9 +296,11 @@ export default class LimitManager extends React.Component {
     }
 
     changePage = (page) => {
-        this.handleSearch({pageNum: page})
+        this.handleSearch({current: page})
     }
-
+    onShowSizeChange=(current, size) =>{
+        this.handleSearch({current:current, size:size})
+    }
     render() {
         const {loading, removeVisible} = this.state;
         const {
@@ -330,6 +332,7 @@ export default class LimitManager extends React.Component {
             }
             return v
         })
+        
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
@@ -364,7 +367,7 @@ export default class LimitManager extends React.Component {
                         className="btl"
                         pagination={false}/>
                     <div style={{margin: 29, textAlign: 'right'}}>
-                        <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
+                        <Pagination showSizeChanger onShowSizeChange={this.onShowSizeChange} current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
                                     onChange={this.changePage}/>
                     </div>
                 </Card>
