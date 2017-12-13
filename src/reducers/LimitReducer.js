@@ -196,7 +196,8 @@ export default function (state = initialState, actions) {
                         optTime: v.optTime,
                         mainPartValue: v.mainPartValue,
                         countLimitMinuteValue:v.countLimitMinuteValue,
-                        remark:v.remark
+                        remark:v.remark,
+                        optRemark:  v.optRemark
                     }
                 }),
                 paginationData: actions.data
