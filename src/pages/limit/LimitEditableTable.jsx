@@ -1,9 +1,10 @@
 import React from 'react';
 import { Table, Pagination, Card ,Button, Input } from 'antd';
 import '../../style/style.less';
-import {Containerization} from '../../common/PublicComponent';
+import {Containerization, setTitle} from '../../common/PublicComponent';
 import {recordData} from '../../actions/limitActions';
 
+@setTitle('限额操作记录')
 @Containerization(state=>({
     recordData:state.LimitReducer.recordData,
     recordType:state.LimitReducer.recordType,

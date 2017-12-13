@@ -6,7 +6,7 @@ const breadcrumbNameMap = {
   '/limitManager': '限额管理',
   '/limitManager/add': '添加限额',
   '/limitManager/+update/:params': '修改限额',
-  '/limitManager/+operationrecoerd/:params': '限额操作记录',
+  '/limitManager/+operationrecord/:params': '限额操作记录',
   '/limitManager/+details/:params': '限额详情',
 
 
