@@ -393,7 +393,7 @@ export default class LimitManager extends React.Component {
                     </div>
                     <Row>
 
-                        <Col {...layout} style={{marginLeft: 6}}>
+                        <Col {...layout} style={{marginLeft: 10,marginRight:10}}>
 
                             <div className="selBtn" style={{textAlign: 'right'}}>
                                 <FormItem style={{margin: "10px", float: 'left'}}
