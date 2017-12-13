@@ -130,7 +130,7 @@ export default class LimitUpdate extends React.Component {
         const {
             match,
             initdata = [],
-            entryData = {}
+            entryData = []
         } = this.props;
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
@@ -140,7 +140,15 @@ export default class LimitUpdate extends React.Component {
        // const {remark} = entryData.remark;
        // console.log('remark',remark)
         const {getFieldDecorator} = this.props.form
-
+        entryData.records = entryData.records && entryData.records.map((v,k)=> {
+            for(let p in v){
+                if(v[p]<= 0){
+                    v[p] = '无'
+                }
+            }
+            return v
+        })
+        debugger;
         return (
             <div>
                 <div className={"title-style"}><b>限额名称：{modelName}</b></div>
@@ -153,6 +161,7 @@ export default class LimitUpdate extends React.Component {
                                 <MapModifyCom data={v.value}/>
                             </Card>)
                         })
+
                     }
                     <Card title="修改限额值" noHovering={true}
                           style={{marginBottom: 6}}
@@ -208,6 +217,7 @@ export default class LimitUpdate extends React.Component {
                         </Row>
 
                     </Card>
+
                     <div>
                         <div style={{textAlign: 'center'}}>
                             <Button style={{margin: '10px'}}

@@ -121,7 +121,7 @@ export default class LimitUpdate extends React.Component {
     }
 
     render() {
-        const {
+        let {
             initdata = [],
             entryData = [],
             match
@@ -129,7 +129,10 @@ export default class LimitUpdate extends React.Component {
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
         })
+        debugger;
         const {getFieldDecorator} = this.props.form
+
+
         return (
             <div>
                 <div className={"title-style"}><b>商户编号:&nbsp;&nbsp;&nbsp;&nbsp;{entryData.mainPartValue}</b></div>
