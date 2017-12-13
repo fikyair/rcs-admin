@@ -109,7 +109,7 @@ export default function (state = initialState, actions) {
                                     return {value: String(v.code), name: String(v.name)}
                                 }),
                             ],
-                            key: v.code == 1 ? "limitBodyC" : 'limitBodyB',
+                            key: v.code == 1 ?   'limitBodyB':"limitBodyC",
                             type: 'select'
                         }
                     }), 'key')

@@ -254,8 +254,10 @@ export default class LimitManager extends React.Component {
 
     initData(){
       this.props.dispatch({type:"CLEAR_SELECT_DATA"});
-      this.props.dispatch(getBussinessType());
-      this.props.dispatch(getBodyProperty());
+      this.props.dispatch(getBussinessType()).then(()=>{
+        this.props.dispatch(getBodyProperty());
+      });
+
     }
 
     menu = record => (
@@ -401,7 +403,7 @@ export default class LimitManager extends React.Component {
               key:k,
             }
         })
-        debugger
+
         return (
             <div>
                 <Form layout='inline' className="container" onSubmit={this.handleSearch}>
