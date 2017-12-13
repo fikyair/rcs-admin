@@ -137,18 +137,7 @@ export default class LimitUpdate extends React.Component {
         });
         console.log('--------',entryData)
         const {modelName} = entryData;
-       // const {remark} = entryData.remark;
-       // console.log('remark',remark)
         const {getFieldDecorator} = this.props.form
-        // entryData.records = entryData.records && entryData.records.map((v,k)=> {
-        //     for(let p in v){
-        //         if(v[p]<= 0){
-        //             v[p] = '无'
-        //         }
-        //     }
-        //     return v
-        // })
-        // debugger;
         return (
             <div>
                 <div className={"title-style"}><b>限额名称：{modelName}</b></div>
