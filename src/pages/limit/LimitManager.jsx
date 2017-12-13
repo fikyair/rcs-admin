@@ -329,8 +329,8 @@ export default class LimitManager extends React.Component {
         let params = {
             ...getFieldsValue,
             modelName,
-            pageNum,
             pageSize,
+            pageNum,
             ...args,
         };
         //调用接口
@@ -362,7 +362,10 @@ export default class LimitManager extends React.Component {
         this.props.dispatch(SetCommontPageNum(page))
         this.handleSearch({pageNum: page})
     }
-
+    onShowSizeChange=(pageNum, pageSize) =>{
+        this.setState({pageNum:pageNum, pageSize:pageSize})
+        this.handleSearch({pageNum:pageNum, pageSize:pageSize})
+    }
     render() {
 
         const {options, visible, loading, removeVisible, deleteTips,} = this.state;
@@ -435,7 +438,7 @@ export default class LimitManager extends React.Component {
                     }
                     pagination={false}/>
                     <div style={{margin: 29, textAlign: 'right'}}>
-                        <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
+                        <Pagination showSizeChanger onShowSizeChange={this.onShowSizeChange} current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
                                     onChange={this.changePage}/>
                     </div>
 
