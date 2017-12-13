@@ -371,7 +371,7 @@ export default class LimitManager extends React.Component {
         }
         modelsData.records = modelsData.records && modelsData.records.map((v,k)=> {
             if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){
-                v['countEveryMin'] = ${v['countLimitCountValue']}`/`${v['countLimitMinuteValue']}
+                v['countEveryMin'] = `${v['countLimitCountValue']}/${v['countLimitMinuteValue']}`
             } else {
                 v['countEveryMin'] = '无'
             }

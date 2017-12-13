@@ -319,7 +319,7 @@ export default class LimitManager extends React.Component {
         const data = {limitType, tranCd: consumptionTypeData, olPayType: onlineData, olPayWay: onlinePayData,}
         homeListData.records = homeListData.records && homeListData.records.map(v=> {
             if(v['countLimitMinuteValue']>0 && v['countLimitCountValue']>0){
-                v['countEveryMin'] = ${v['countLimitCountValue']}`/`${v['countLimitMinuteValue']}
+                v['countEveryMin'] = `${v['countLimitCountValue']}/${v['countLimitMinuteValue']}`
             } else {
                 v['countEveryMin'] = '无'
             }
