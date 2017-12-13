@@ -266,11 +266,7 @@ export default function (state = initialState, actions) {
                 }),'code')
           }
         }
-      case 'FAILURE':
-          return {
-            ...state,
-            ...initialState,
-          }
+
         default:
             return state
     }

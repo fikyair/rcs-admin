@@ -79,9 +79,9 @@ export default class NewLimitModel extends React.Component {
         }, {
             labelName: '两笔间隔',
             key: 'intervalSecondsLimit',
-            addonAfter: "元",
+            addonAfter: "秒",
             body: {
-                addonAfter: "元",
+                addonAfter: "秒",
                 style: {width: 120},
 
             },

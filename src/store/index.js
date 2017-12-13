@@ -23,6 +23,7 @@ function promiseMiddleware() {
             return next({...rest, data, type: SUCCESS})
 
         } else {
+            next({...rest, data:null, type: SUCCESS});
             return next({...rest, result, type: FAILURE})
 
         }

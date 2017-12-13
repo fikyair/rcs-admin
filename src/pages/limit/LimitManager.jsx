@@ -468,7 +468,7 @@ export default class LimitManager extends React.Component {
 
                     确定删除&nbsp;&nbsp;&nbsp;&nbsp;
                     <span style={{fontSize: 19}}>{this.state.modelName}</span>
-                    &nbsp;&nbsp;&nbsp;&nbsp;限额?
+                    &nbsp;&nbsp;&nbsp;&nbsp;限额
 
 
                 </Modal>
