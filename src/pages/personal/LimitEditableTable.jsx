@@ -106,7 +106,7 @@ export default class EditableTable extends React.Component {
         return (
             <div className="limitable">
                 <Button type="primary" style={{marginBottom: 10}} onClick={()=>{this.props.history.goBack()}}>返回</Button>
-                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;<span><Input value={operationData.length ? operationData[0].mainPartValue : ''} disabled={true} style={{width:200}}/></span></div>} bodyStyle={{padding: '0px',}}
+                <Card noHovering= {true} title={<div>商户编号&nbsp;&nbsp;&nbsp;&nbsp;{operationData.length ? operationData[0].mainPartValue : ''}</div>} bodyStyle={{padding: '0px',}}
 
                 >
                     <Table className="btl" dataSource={operationData}  pagination={false} columns={columns} />
