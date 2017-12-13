@@ -101,7 +101,6 @@ export default class EditableTable extends React.Component {
             }
             return v
         })
-        debugger
         const columns = this.columns;
         return (
             <div className="limitable">
