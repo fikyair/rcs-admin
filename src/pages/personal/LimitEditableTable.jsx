@@ -16,7 +16,7 @@ function showTotal(total) {
 export default class EditableTable extends React.Component {
     state = {
         current : 1,
-        size: 3,
+        size: 10,
         total: 0,
         data: [],
         key: '1',
@@ -86,6 +86,10 @@ export default class EditableTable extends React.Component {
     changePage (page){    //=(page)=>
         this.handleSearch({current: page});
     }
+    onShowSizeChange=(current, size) =>{
+        this.setState({current:current, size:size})
+        this.handleSearch({current:current, size:size})
+    }
     render() {
         let {operationData=[]} = this.props
         operationData = operationData && operationData.map(v=> {
@@ -111,7 +115,7 @@ export default class EditableTable extends React.Component {
                     <Table className="btl" dataSource={operationData}  pagination={false} columns={columns} />
 
                     <div style={{textAlign: 'right',margin: 29}}>
-                        <Pagination pageSize={this.state.size} current={this.state.current}  total={this.state.total}
+                        <Pagination showSizeChanger onShowSizeChange={this.onShowSizeChange} pageSize={this.state.size} current={this.state.current}  total={this.state.total}
                          onChange={this.changePage.bind(this)}
                         />
                     </div>

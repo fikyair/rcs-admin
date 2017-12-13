@@ -12,7 +12,7 @@ import {recordData} from '../../actions/limitActions';
 export default class EditableTable extends React.Component {
     state = {
         pageNum : 1,
-        pageSize: 3,
+        pageSize: 10,
         total: 0,
         data: [],
         key: '1',
@@ -79,6 +79,10 @@ export default class EditableTable extends React.Component {
     changePage = (page) =>{
         this.handleRecord({current:page})
     }
+    onShowSizeChange=(current, size) =>{
+        this.setState({current:current, size:size})
+        this.handleRecord({current:current, size:size})
+    }
     render() {
         let { recordData =[]}  = this.props;
         const columns = this.columns;
@@ -112,7 +116,7 @@ export default class EditableTable extends React.Component {
                     <Table className="btl" dataSource={recordData}  pagination={false} columns={columns} />
 
                 <div style={{textAlign: 'right',margin: 29,}}>
-                    <Pagination current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
+                    <Pagination showSizeChanger onShowSizeChange={this.onShowSizeChange} current={this.state.pageNum} pageSize={this.state.pageSize} total={this.state.total}
                                 onChange={this.changePage}/>
                 </div>
                 </Card>
