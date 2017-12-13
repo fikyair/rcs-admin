@@ -108,7 +108,7 @@ export default class NewLimitModel extends React.Component {
         }
         const { limitType, merchType, limitProperty, limitBodyC, limitBodyB} = addLimitTemp;
 
-        this.props.dispatch(getSelectDdata({limitType,merchType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}))
+        this.props.dispatch(getSelectDdata({limitType,merchType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB&&limitBodyC?'_':''}${limitBodyC}`}))
     }
 
     handleSubmit = () => {

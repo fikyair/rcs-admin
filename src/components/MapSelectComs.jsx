@@ -18,6 +18,8 @@ const FormItem = Form.Item;
     if(values['limitProperty'] || values['limitType'] ){
       props.data.limitBodyB = null;
       props.data.limitBodyC = null;
+      Storage.dispatch(setTemp({limitBodyC:''}));
+      Storage.dispatch(setTemp({limitBodyB:''}));
       const { limitProperty, limitType } = {...formTemp,...values};
       if(limitProperty && limitType) Storage.dispatch(getMainPart({limitProperty,limitType}))
     }
@@ -32,7 +34,7 @@ const FormItem = Form.Item;
         )
       ){
 
-        Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB?`${limitBodyB}_`:''}${limitBodyC?limitBodyC:''}`}));}
+        Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB}${limitBodyB&&limitBodyC?'_':''}${limitBodyC?limitBodyC:''}`}));}
     }
 
     if(values['P205'] && values['P205'] == 'P2051005'){
