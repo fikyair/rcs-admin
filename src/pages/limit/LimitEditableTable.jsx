@@ -88,7 +88,7 @@ export default class EditableTable extends React.Component {
 
         recordData = recordData && recordData.map(v=> {
             if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){
-                v['countEveryMin'] = `${v['countLimitMinuteValue']}/${v['countLimitCountValue']}`
+                v['countEveryMin'] = `${v['countLimitCountValue']}/${v['countLimitMinuteValue']}`
             } else {
                 v['countEveryMin'] = '无'
             }
