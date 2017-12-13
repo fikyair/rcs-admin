@@ -118,6 +118,7 @@ export default class NewLimitModel extends React.Component {
 
         let mainData = {limitType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}
         const formData = this.props.form.getFieldsValue()
+        debugger
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let formDataMerchent = {};
@@ -214,6 +215,7 @@ export default class NewLimitModel extends React.Component {
 
                     </Card>
                     <Card title="添加限额名称" noHovering={true}>
+                        <FormItem>
                         {
                             getFieldDecorator('modelName',{
                                 rules: [{  required: true, message: '请输入限额名称!',}]
@@ -223,6 +225,7 @@ export default class NewLimitModel extends React.Component {
                                        style={{width: '200px', margin: '10px'}}/>
                             )
                         }
+                        </FormItem>
                         <Button style={{margin: '10px'}}
                                 onClick={() => this.props.history.push('/limitManager')}>取消</Button>
                         <Button htmlType="submit" style={{margin: '10px'}}
