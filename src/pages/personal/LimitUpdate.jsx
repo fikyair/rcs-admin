@@ -131,7 +131,7 @@ export default class LimitUpdate extends React.Component {
         const {getFieldDecorator} = this.props.form
         return (
             <div>
-                <div className={"title-style"}><b>商户编号:</b></div>
+                <div className={"title-style"}><b>商户编号:{entryData.mainPartValue}</b></div>
 
                 <Form className="form-body" layout="inline">
                     {
