@@ -117,6 +117,7 @@ export default class LimitUpdate extends React.Component {
             id: id
         }
         this.props.dispatch(editPersional(params))
+
         this.props.history.push('/merchantlimit')
     }
 
