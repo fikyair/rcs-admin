@@ -172,6 +172,7 @@ export default class NewLimitModel extends React.Component {
                                                 })(
                                                     <Input style={{width: 50, textAlign: 'center'}}
                                                            placeholder="请输入"
+                                                           disabled={entryData.countLimitCountValue===-1 }
                                                     />
                                                 )
                                             }
@@ -189,6 +190,7 @@ export default class NewLimitModel extends React.Component {
                                                     <Input
                                                         style={{width: 49, textAlign: 'center', borderLeft: 0}}
                                                         placeholder="请输入"
+                                                        disabled={entryData.countLimitCountValue===-1 }
                                                     />
                                                 )
                                             }

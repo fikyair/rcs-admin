@@ -25,7 +25,7 @@ export default class MapModifyCom extends React.Component {
                                     initialValue: v.initialValue != -1? v.initialValue:'',
                                     rules: v.rules ? [...v.rules] : [],
                                 })(
-                                    <Input disabled={v.disabled} {...v.body} className='input-style'
+                                    <Input disabled={v.disabled || v.initialValue==-1} {...v.body} className='input-style'
                                                placeholder="请输入"/>
                                 )
                             }

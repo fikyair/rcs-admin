@@ -129,10 +129,7 @@ export default class LimitUpdate extends React.Component {
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
         })
-        debugger;
         const {getFieldDecorator} = this.props.form
-
-
         return (
             <div>
                 <div className={"title-style"}><b>商户编号:&nbsp;&nbsp;&nbsp;&nbsp;{entryData.mainPartValue}</b></div>
@@ -166,6 +163,7 @@ export default class LimitUpdate extends React.Component {
                                                 })(
                                                     <Input style={{width: 50, textAlign: 'center'}}
                                                            placeholder="请输入"
+                                                           disabled={entryData.countLimitCountValue===-1 }
                                                     />
                                                 )
                                             }
@@ -183,6 +181,7 @@ export default class LimitUpdate extends React.Component {
                                                     <Input
                                                         style={{width: 49, textAlign: 'center', borderLeft: 0}}
                                                         placeholder="请输入"
+                                                        disabled={entryData.countLimitCountValue===-1 }
                                                     />
                                                 )
                                             }
