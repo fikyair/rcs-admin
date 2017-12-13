@@ -238,7 +238,6 @@ export default class LimitManager extends React.Component {
 
     componentWillMount() {
         //页面发起数据请求
-        debugger
         this.props.dispatch(getBussinessType());
         this.props.dispatch(getBodyProperty());
         let commonPageNum = this.props.commonPageNum

@@ -45,7 +45,7 @@ export default class EditableTable extends React.Component {
             dataIndex: 'dayCountLimit',
         },{
             title: '备注',
-            dataIndex: 'remark',
+            dataIndex: 'optRemark',
         },{
             title: '操作人',
             dataIndex: 'optUserName'
@@ -85,6 +85,8 @@ export default class EditableTable extends React.Component {
         if(recordData.length > 0){
             modelName = recordData[0].modelName
         };
+
+        console.log('recordData',recordData);
 
         recordData = recordData && recordData.map(v=> {
             if(v['countLimitMinuteValue']>=0 && v['countLimitCountValue']>=0){

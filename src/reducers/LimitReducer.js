@@ -69,7 +69,7 @@ export default function (state = initialState, actions) {
                         optUserName: v.optUserName,
                         optTime: v.optTime,
                         countLimitMinuteValue:v.countLimitMinuteValue,
-                        remark:v.remark
+                        optRemark:v.optRemark
                     }
 
                 }),
