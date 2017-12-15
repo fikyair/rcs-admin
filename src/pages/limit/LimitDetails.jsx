@@ -141,22 +141,19 @@ export default class LimitDetails extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <FormItem style={{marginLeft:30}}>
-                                <span style={{
-                                    marginRight: '0px',
-                                    minWidth: '0px',
-                                    display: 'inline-block',
-                                    marginTop: 10,
-                                    verticalAlign: 'top',
-                                }}>每笔/分钟:</span>
-                                    <div style={{display: 'inline-block', margin: '10px'}}>
+
+                                <FormItem
+                                label={(<div className="label-class">每笔/分钟</div>)}
+                                style={{display: 'inline-block',margin:'10px'}}
+                                >
+
 
                                         <InputGroup>
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
                                                     initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
                                                 })(
-                                                    <Input style={{width: 58, textAlign: 'center'}} disabled={true}
+                                                    <Input  style={{width: 58, textAlign: 'center'}} disabled={true}
                                                            placeholder="请输入"
                                                     />
                                                 )
@@ -181,7 +178,6 @@ export default class LimitDetails extends React.Component {
                                             }
 
                                         </InputGroup>
-                                    </div>
                                 </FormItem>
 
                             </MapModifyCom>
