@@ -154,9 +154,10 @@ export default class LimitDetails extends React.Component {
                                         <InputGroup>
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
-                                                    initialValue: entryData.countLimitCountValue
+                                                    initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
                                                 })(
                                                     <Input style={{width: 50, textAlign: 'center'}} disabled={true}
+                                                           placeholder="请输入"
                                                     />
                                                 )
                                             }
@@ -169,11 +170,12 @@ export default class LimitDetails extends React.Component {
                                             }} placeholder="/" disabled/>
                                             {
                                                 getFieldDecorator('countLimitMinuteValue', {
-                                                    initialValue: entryData.countLimitMinuteValue
+                                                    initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
                                                 })(
                                                     <Input
                                                         style={{width: 49, textAlign: 'center', borderLeft: 0}}
                                                         disabled={true}
+                                                        placeholder="请输入"
                                                     />
                                                 )
                                             }
