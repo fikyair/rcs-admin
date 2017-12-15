@@ -187,13 +187,14 @@ export default class NewLimitModel extends React.Component {
                         <Row>
                             <MapModifyCom data={this.inputLimit}
                                            wrappedComponentRef={(inst) => this.formDataInputLimit = inst}>
-                                <FormItem label={(<div className="label-class">每笔／分钟</div>)} style={{display: 'inline-block',margin:'10px'}}>
+                                <FormItem label={(<div className="label-class">每笔/分钟</div>)}
+                                          style={{display: 'inline-block',margin:'10px'}}>
 
 
 
                                         <InputGroup>
                                             {getFieldDecorator('countLimitCountValue')(
-                                                <Input style={{width: 50, textAlign: 'center'}}
+                                                <Input style={{width: 58, textAlign: 'center'}}
                                                        placeholder="请输入"
                                                 />
                                             )}
@@ -206,7 +207,7 @@ export default class NewLimitModel extends React.Component {
                                             }} placeholder="/" disabled/>
                                             {getFieldDecorator('countLimitMinuteValue')(
                                                 <Input
-                                                    style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                    style={{width: 58, textAlign: 'center', borderLeft: 0}}
                                                     placeholder="请输入"
                                                 />
                                             )}
