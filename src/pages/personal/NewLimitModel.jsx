@@ -108,7 +108,7 @@ export default class NewLimitModel extends React.Component {
         let mainPartCode = this.props.location.state.mainPartCodeGroup
         let modelId = this.props.match.params.id
         const formData = this.formData.props.form.getFieldsValue()
-
+        const data = this.props.form.getFieldsValue()
         formData['dayCountLimit'] = parseInt(formData['dayCountLimit'])
 
         const {remark, mainPartValue} = this.props.form.getFieldsValue()
@@ -118,6 +118,7 @@ export default class NewLimitModel extends React.Component {
         list.shift()
         let params = {
             ...formData,
+            ...data,
             excelVoList: list.length ? list : arr,
             mainPartCode: mainPartCode,
             modelId: parseInt(modelId)
