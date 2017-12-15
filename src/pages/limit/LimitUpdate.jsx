@@ -52,7 +52,7 @@ export default class LimitUpdate extends React.Component {
             key: 'monthAmountLimit',
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -61,7 +61,7 @@ export default class LimitUpdate extends React.Component {
             labelName: '年',
             key: 'yearAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -70,7 +70,7 @@ export default class LimitUpdate extends React.Component {
             labelName: '终身',
             key: 'lifeAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
                 addonBefore: "金额",
                 addonAfter: "元",
@@ -82,7 +82,7 @@ export default class LimitUpdate extends React.Component {
             addonAfter: "秒",
             body: {
                 addonAfter: "秒",
-                style: {width: 120},
+                style: {width: 140},
 
             },
             type: 'input',
@@ -92,7 +92,7 @@ export default class LimitUpdate extends React.Component {
             addonAfter: "元",
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
             },
 
@@ -165,7 +165,7 @@ export default class LimitUpdate extends React.Component {
                                                 getFieldDecorator('countLimitCountValue', {
                                                     initialValue: entryData.countLimitCountValue!=-1?entryData.countLimitCountValue:""
                                                 })(
-                                                    <Input style={{width: 50, textAlign: 'center'}}
+                                                    <Input style={{width: 58, textAlign: 'center'}}
                                                            placeholder="请输入"
                                                            disabled={entryData.countLimitCountValue===-1}
                                                     />
@@ -183,7 +183,7 @@ export default class LimitUpdate extends React.Component {
                                                     initialValue: entryData.countLimitMinuteValue !=-1? entryData.countLimitMinuteValue:''
                                                 })(
                                                     <Input
-                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                        style={{width: 58, textAlign: 'center', borderLeft: 0}}
                                                         placeholder="请输入"
                                                         disabled={entryData.countLimitCountValue===-1}
                                                     />
@@ -193,7 +193,7 @@ export default class LimitUpdate extends React.Component {
                                         </InputGroup>
                                 </FormItem>
                                 <FormItem
-                                    label={"备注"}
+                                    label={(<div className="label-class">备注</div>)} style={{display: 'inline-block',margin:'10px'}}
                                 >
                                     {
                                         getFieldDecorator('remark',{
