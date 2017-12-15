@@ -48,7 +48,7 @@ export default class LimitDetails extends React.Component {
             key: 'monthAmountLimit',
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
                 disabled: true,
@@ -58,7 +58,7 @@ export default class LimitDetails extends React.Component {
             labelName: '年',
             key: 'yearAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
                 disabled: true,
@@ -68,7 +68,7 @@ export default class LimitDetails extends React.Component {
             labelName: '终身',
             key: 'lifeAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
                 addonBefore: "金额",
                 addonAfter: "元",
@@ -81,7 +81,7 @@ export default class LimitDetails extends React.Component {
             addonAfter: "元",
             body: {
                 addonAfter: "元",
-                style: {width: 120},
+                style: {width: 140},
                 disabled: true,
 
             },
@@ -92,7 +92,7 @@ export default class LimitDetails extends React.Component {
             addonAfter: "元",
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 disabled: true,
             },
 
@@ -141,14 +141,14 @@ export default class LimitDetails extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <FormItem>
+                                <FormItem style={{marginLeft:30}}>
                                 <span style={{
-                                    marginRight: '10px',
-                                    minWidth: '80px',
+                                    marginRight: '0px',
+                                    minWidth: '0px',
                                     display: 'inline-block',
                                     marginTop: 10,
                                     verticalAlign: 'top',
-                                }}>每笔／分钟:</span>
+                                }}>每笔/分钟:</span>
                                     <div style={{display: 'inline-block', margin: '10px'}}>
 
                                         <InputGroup>
@@ -156,7 +156,7 @@ export default class LimitDetails extends React.Component {
                                                 getFieldDecorator('countLimitCountValue', {
                                                     initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
                                                 })(
-                                                    <Input style={{width: 50, textAlign: 'center'}} disabled={true}
+                                                    <Input style={{width: 58, textAlign: 'center'}} disabled={true}
                                                            placeholder="请输入"
                                                     />
                                                 )
@@ -173,7 +173,7 @@ export default class LimitDetails extends React.Component {
                                                     initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
                                                 })(
                                                     <Input
-                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                        style={{width: 58, textAlign: 'center', borderLeft: 0}}
                                                         disabled={true}
                                                         placeholder="请输入"
                                                     />
