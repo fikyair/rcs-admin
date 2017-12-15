@@ -45,11 +45,11 @@ export default class EditableTable extends React.Component {
             title: '笔数/分钟',
             dataIndex: 'countEveryMin',
         },{
-            title: '备注',
-            dataIndex: 'optRemark',
-        },{
             title: '笔/日',
             dataIndex: 'dayCountLimit',
+        },{
+            title: '备注',
+            dataIndex: 'optRemark',
         },{
             title: '操作人',
             dataIndex: 'optUserName'
