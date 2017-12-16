@@ -141,14 +141,11 @@ export default class LimitDetails extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-
+                                <InputGroup>
                                 <FormItem
                                 label={(<div className="label-class">每笔/分钟</div>)}
-                                style={{display: 'inline-block',margin:'10px'}}
+                                style={{display: 'inline-block',marginRight: 0,marginLeft: 10}}
                                 >
-
-
-                                        <InputGroup>
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
                                                     initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
@@ -158,13 +155,15 @@ export default class LimitDetails extends React.Component {
                                                     />
                                                 )
                                             }
-
+                                </FormItem>
+                                    <FormItem>
                                             <Input style={{
                                                 width: 24,
                                                 borderLeft: 0,
                                                 pointerEvents: 'none',
                                                 backgroundColor: '#fff'
                                             }} placeholder="/" disabled/>
+
                                             {
                                                 getFieldDecorator('countLimitMinuteValue', {
                                                     initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
@@ -177,9 +176,9 @@ export default class LimitDetails extends React.Component {
                                                 )
                                             }
 
-                                        </InputGroup>
-                                </FormItem>
 
+                                </FormItem>
+                                </InputGroup>
                             </MapModifyCom>
 
                         </Row>
