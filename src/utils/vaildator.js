@@ -79,7 +79,7 @@ export const validatorSpace = message => {
  * @returns {boolean}
  */
 export const validat = (modelPropertyVoList,data) => {
-    let arr = _.without(Object.values(data), '' ,undefined, null)
+    let arr = _.without(Object.values(data), '' ,undefined, null,NaN)
     if(modelPropertyVoList.length < 2){
         message.error('至少选择一个维度值',3)
         return false
@@ -97,7 +97,7 @@ export const validat = (modelPropertyVoList,data) => {
  * @returns {boolean}
  */
 export const validatSingle = (data) => {
-    let arr = _.without(Object.values(data), '' ,undefined, null)
+    let arr = _.without(Object.values(data), '' ,undefined, null,NaN)
     if(arr.length < 1){
         message.error('至少输入一种金额',3)
         return false

@@ -2,6 +2,7 @@ import React from 'react';
 import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import ExtracData from '../../components/ExtractData'
+import {validatSingle} from '../../utils/vaildator'
 
 const InputGroup = Input.Group;
 import {getPersonalDetial, addPersionalLimit} from "../../actions/limitActions";
@@ -125,9 +126,17 @@ export default class NewLimitModel extends React.Component {
             mainPartCode: mainPartCode,
             modelId: parseInt(modelId)
         }
-        console.log('=============>', params)
-        this.props.dispatch(addPersionalLimit(params))
-        this.props.history.push('/merchantlimit')
+        let data = {
+            ...formData,
+            countLimitMinuteValue: countLimitMinuteValue,
+            countLimitCountValue: countLimitCountValue
+        }
+        debugger
+        if(validatSingle(data)){
+            this.props.dispatch(addPersionalLimit(params))
+            this.props.history.push('/merchantlimit')
+        }
+
 
     }
 
