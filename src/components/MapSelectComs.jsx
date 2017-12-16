@@ -15,6 +15,7 @@ const FormItem = Form.Item;
     Storage.dispatch(setTemp({...values}))
     const {formTemp} = Storage.getState().GlobalReducer;
 
+    //限额属性及联逻辑
     if(values['limitProperty'] || values['limitType'] ){
       props.data.limitBodyB = null;
       props.data.limitBodyC = null;
@@ -23,6 +24,8 @@ const FormItem = Form.Item;
       const { limitProperty, limitType } = {...formTemp,...values};
       if(limitProperty && limitType) Storage.dispatch(getMainPart({limitProperty,limitType}))
     }
+
+    //限额主体及联逻辑
     if(values['limitProperty'] || values['limitType'] || values['limitBodyB'] || values['limitBodyC']){
       props.data.merchType = null;
       const { limitBodyB:selectsB, limitBodyC:selectsC} = props.data;
@@ -37,6 +40,7 @@ const FormItem = Form.Item;
         Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB}${limitBodyB&&limitBodyC?'_':''}${limitBodyC?limitBodyC:''}`}));}
     }
 
+    //其他消费及联逻辑
     if(values['P205'] && values['P205'] == 'P2051005'){
 
       Storage.dispatch(getMultiList('propertyEnums=IS_CLOUD_PAY&propertyEnums=QR_INMOD&propertyEnums=QR_TYPE'))
@@ -47,6 +51,8 @@ const FormItem = Form.Item;
       props.data['P210'] = null;
 
     }
+
+    //是云闪付及联逻辑
     if(values['P207'] && values['P207'] == 'P2071001'){
 
       Storage.dispatch(getMultiList('propertyEnums=CLOUD_PAY_SOURCE'))
