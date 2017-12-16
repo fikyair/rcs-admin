@@ -166,7 +166,7 @@ export default class LimitDetails extends React.Component {
 
                                             {
                                                 getFieldDecorator('countLimitMinuteValue', {
-                                                    initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
+                                                    initialValue: entryData.countLimitMinuteValue != -1? entryData.countLimitMinuteValue :''
                                                 })(
                                                     <Input
                                                         style={{width: 58, textAlign: 'center', borderLeft: 0}}
