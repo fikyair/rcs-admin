@@ -1,9 +1,9 @@
 import React from 'react';
-import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
+import {Layout, Form, Input, Button, Card, Row, Col, message} from 'antd';
 import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getSelectDdata} from '../../actions/limitActions';
-
+import _ from 'lodash'
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
 import MapModifyCom from '../../components/MapModifyCom'
@@ -135,28 +135,43 @@ export default class NewLimitModel extends React.Component {
 
                 }
                 const formDataInputLimit = this.formDataInputLimit.props.form.getFieldsValue();
-
                 const getValues = { ...formDataInputLimit, ...formData,...mainData, modelPropertyVoList:modelPropertyVoList}
                 const val = getValues;
-               // console.log("表单的数据", val)
-               //  if(formDataInputLimit != -1){
-               //      alert(222)
-               //  }if(formData != -1){
-               //      alert(3333)
-               //
-               //  }else{};
-                this.props.dispatch(addModel(val)).then(data=>{
-                    this.props.history.push('/limitManager')
-                },err=>{
+                const countLimitMinuteValue = this.props.form.getFieldValue('countLimitMinuteValue');
+                const countLimitCountValue = this.props.form.getFieldValue('countLimitCountValue')
+                let data = {
+                        ...formDataInputLimit,
+                    countLimitMinuteValue: countLimitMinuteValue,
+                    countLimitCountValue: countLimitCountValue
+                }
+                if(this.validat(modelPropertyVoList,data)){
+                    this.props.dispatch(addModel(val)).then(data=>{
+                        this.props.history.push('/limitManager')
+                    },err=>{
 
-                }).catch((err)=>{
+                    }).catch((err)=>{
 
-                })
+                    })
+                }
             }
         });
 
 
         // TODO 提交表单
+    }
+    validat = (modelPropertyVoList,data) => {
+
+        let arr = _.without(Object.values(data), '' ,undefined, null)
+        debugger
+        if(modelPropertyVoList.length < 2){
+            message.error('至少选择一个维度值',3)
+            return false
+        }else if(arr.length < 1){
+            message.error('至少输入一种金额',3)
+            return false
+        }else {
+            return true
+        }
     }
 
     render() {
