@@ -55,7 +55,7 @@ export default class LimitUpdate extends React.Component {
             key: 'monthAmountLimit',
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -64,7 +64,7 @@ export default class LimitUpdate extends React.Component {
             labelName: '年',
             key: 'yearAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -73,7 +73,7 @@ export default class LimitUpdate extends React.Component {
             labelName: '终身',
             key: 'lifeAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
                 addonBefore: "金额",
                 addonAfter: "元",
@@ -85,7 +85,7 @@ export default class LimitUpdate extends React.Component {
             addonAfter: "秒",
             body: {
                 addonAfter: "秒",
-                style: {width: 120},
+                style: {width: 140},
 
             },
             type: 'input',
@@ -95,7 +95,7 @@ export default class LimitUpdate extends React.Component {
             addonAfter: "元",
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
             },
 
@@ -154,41 +154,43 @@ export default class LimitUpdate extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <FormItem label={(<div className="label-class">每笔／分钟</div>)} style={{display: 'inline-block',margin:'10px'}}>
+                                <InputGroup style={{display: 'inline'}}>
+                                    <FormItem
+                                        label={(<div className="label-class">每笔/分钟</div>)}
+                                        style={{display: 'inline-block',marginRight: 0,marginLeft: 10, marginTop: 10}}
+                                    >
 
-
-                                        <InputGroup>
-                                            {
-                                                getFieldDecorator('countLimitCountValue', {
-                                                    initialValue: entryData.countLimitCountValue >=0? entryData.countLimitCountValue:''
-                                                })(
-                                                    <Input style={{width: 50, textAlign: 'center'}}
-                                                           placeholder="请输入"
-                                                           disabled={entryData.countLimitCountValue===-1 }
-                                                    />
-                                                )
-                                            }
-
-                                            <Input style={{
-                                                width: 24,
-                                                borderLeft: 0,
-                                                pointerEvents: 'none',
-                                                backgroundColor: '#fff'
-                                            }} placeholder="/" disabled/>
-                                            {
-                                                getFieldDecorator('countLimitMinuteValue', {
-                                                    initialValue: entryData.countLimitMinuteValue >=0? entryData.countLimitMinuteValue:""
-                                                })(
-                                                    <Input
-                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
-                                                        placeholder="请输入"
-                                                        disabled={entryData.countLimitCountValue===-1 }
-                                                    />
-                                                )
-                                            }
-
-                                        </InputGroup>
-                                </FormItem>
+                                        {
+                                            getFieldDecorator('countLimitCountValue', {
+                                                initialValue: entryData.countLimitCountValue == -1?'无': entryData.countLimitCountValue
+                                            })(
+                                                <Input disabled={true} style={{width: 58, textAlign: 'center', borderTopRightRadius: 0,borderBottomRightRadius: 0}}
+                                                />
+                                            )
+                                        }
+                                    </FormItem>
+                                    <FormItem
+                                        style={{ marginTop: 10}}
+                                    >
+                                        <Input style={{
+                                            width: 24,
+                                            borderLeft: 0,
+                                            pointerEvents: 'none',
+                                            backgroundColor: '#fff',
+                                            borderRadius: 0,
+                                        }} placeholder="/" disabled/>
+                                        {
+                                            getFieldDecorator('countLimitMinuteValue', {
+                                                initialValue: entryData.countLimitMinuteValue == -1?'无':entryData.countLimitMinuteValue
+                                            })(
+                                                <Input
+                                                    disabled={true}
+                                                    style={{width: 58, textAlign: 'center', borderLeft: 0,  borderTopLeftRadius: 0,borderBottomLeftRadius: 0}}
+                                                />
+                                            )
+                                        }
+                                    </FormItem>
+                                </InputGroup>
                                 <FormItem
                                     label={"备注"}
                                 >
