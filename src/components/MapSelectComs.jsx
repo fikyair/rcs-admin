@@ -39,14 +39,22 @@ const FormItem = Form.Item;
 
         Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB?limitBodyB:""}${limitBodyB&&limitBodyC?'_':''}${limitBodyC?limitBodyC:''}`}));}
     }
-
     //其他消费及联逻辑
     if(values['P205'] && values['P205'] == 'P2051005'){
-
-      Storage.dispatch(getMultiList('propertyEnums=IS_CLOUD_PAY&propertyEnums=QR_INMOD&propertyEnums=QR_TYPE'))
-
+      Storage.dispatch(getMultiList('propertyEnums=QR_INMOD&propertyEnums=QR_TYPE'))
+        /*
+        选择其他消费，隐藏其他 ----->代需求确认
+         */
+        // props.data["P203"] = null
+        // props.data['P204'] = null
+        // props.data['P207'] = null
+        // props.data['P215'] = null
+        // props.data['P206'] = null
     } else if(values['P205'] && values['P205'] != 'P2051005') {
-      props.data['P207'] = null;
+        /*
+       选择其他消费，隐藏其他 ----->代需求确认
+        */
+      // Storage.dispatch(getMultiList('propertyEnums=IS_CLOUD_PAY&propertyEnums=CARD_TYPE&propertyEnums=IC_CARD_FLAG&propertyEnums=NO_SIGN_SECRET'))
       props.data['P209'] = null;
       props.data['P210'] = null;
 
@@ -60,7 +68,12 @@ const FormItem = Form.Item;
       props.data['P206'] = null;
     }
 
-
+     //POS结算周期选择T+0隐藏POS秒到等级 --->代需求确认
+     //  if(values['P105']  && values['P105'] === "P1051001") {
+     //      props.data['P122'] =null
+     //  }else if(values['P105']  && values['P105'] !== "P1051001"){
+     //      Storage.dispatch(getMultiList('propertyEnums=POS_MD_LEVEL'))
+     //  }
 
   }
 })
