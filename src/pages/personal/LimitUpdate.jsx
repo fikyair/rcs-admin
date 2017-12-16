@@ -1,15 +1,12 @@
 import React from 'react';
-import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
-import SelectComs, {Option} from '../../components/SelectComs';
+import {message, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
-import {getPersonalDetial, editPersional, getDetailPersionalForEdit} from '../../actions/limitActions';
+import { editPersional, getDetailPersionalForEdit} from '../../actions/limitActions';
 
 
 const InputGroup = Input.Group;
 const TextArea = Input.TextArea;
 import MapModifyCom from "../../components/MapModifyCom";
-import MapSelectComs from '../../components/MapSelectComs'
-import PersonalReducer from "../../reducers/personalReducer";
 
 
 const FormItem = Form.Item;
@@ -118,6 +115,11 @@ export default class LimitUpdate extends React.Component {
         }
         this.props.dispatch(editPersional(params))
 
+             let arr =_.without(Object.values(value),'',undefined, null);
+            if(arr.length<1){
+                message.error('请至少填一项');
+             }
+
         this.props.history.push('/merchantlimit')
     }
 
@@ -162,7 +164,7 @@ export default class LimitUpdate extends React.Component {
 
                                         {
                                             getFieldDecorator('countLimitCountValue', {
-                                                initialValue: entryData.countLimitCountValue == -1?'无': entryData.countLimitCountValue
+                                                initialValue: entryData.countLimitCountValue == -1?'': entryData.countLimitCountValue
                                             })(
                                                 <Input disabled={true} style={{width: 58, textAlign: 'center', borderTopRightRadius: 0,borderBottomRightRadius: 0}}
                                                 />
@@ -181,7 +183,7 @@ export default class LimitUpdate extends React.Component {
                                         }} placeholder="/" disabled/>
                                         {
                                             getFieldDecorator('countLimitMinuteValue', {
-                                                initialValue: entryData.countLimitMinuteValue == -1?'无':entryData.countLimitMinuteValue
+                                                initialValue: entryData.countLimitMinuteValue == -1?'':entryData.countLimitMinuteValue
                                             })(
                                                 <Input
                                                     disabled={true}
@@ -197,7 +199,6 @@ export default class LimitUpdate extends React.Component {
                                 >
                                     {
                                         getFieldDecorator('remark',{
-
                                         })
                                         (
                                             <TextArea style={{maxWidth: 141}} autosize={ {minRows: 1, maxRows: 6}} />
