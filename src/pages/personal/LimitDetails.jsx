@@ -6,7 +6,7 @@ import MapSelectComs from '../../components/MapSelectComs';
 import {getPersonalDetial, getDetailPersionalForEdit} from '../../actions/limitActions';
 
 const InputGroup = Input.Group;
-
+const {TextArea} = Input
 const FormItem = Form.Item;
 @setTitle('限额详情页')
 @Containerization(state => ({
@@ -327,6 +327,7 @@ export default class LimitDetails extends React.Component {
             initdata = [],
             entryData = [],
         } = this.props;
+        debugger
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
         })
@@ -411,6 +412,18 @@ export default class LimitDetails extends React.Component {
                                             }
                                     </FormItem>
                                 </InputGroup>
+                                <FormItem
+                                    label={"备注"}
+                                >
+                                    {
+                                        getFieldDecorator('remark',{
+                                            initialValue: entryData.remark
+                                        })
+                                        (
+                                            <TextArea disabled={true}/>
+                                        )
+                                    }
+                                </FormItem>
                             </MapModifyCom>
 
                         </Row>
