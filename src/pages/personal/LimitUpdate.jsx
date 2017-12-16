@@ -200,7 +200,7 @@ export default class LimitUpdate extends React.Component {
 
                                         })
                                         (
-                                            <TextArea autosize={ {minRows: 1, maxRows: 6, cols: 50}} />
+                                            <TextArea style={{maxWidth: 140}} autosize={ {minRows: 1, maxRows: 6}} />
                                         )
                                     }
                                 </FormItem>
