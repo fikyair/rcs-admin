@@ -118,7 +118,6 @@ export default class NewLimitModel extends React.Component {
 
         let mainData = {limitType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}
         const formData = this.props.form.getFieldsValue()
-        debugger
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 let formDataMerchent = {};

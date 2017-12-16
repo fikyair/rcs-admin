@@ -201,14 +201,14 @@ export default class LimitUpdate extends React.Component {
                                             </FormItem>
                                         </InputGroup>
                                 <FormItem
-                                    label={(<div className="label-class">备注</div>)} style={{display: 'inline-block',margin:'10px'}}
+                                    label={(<div className="label-class">备注</div>)} style={{display: 'inline-block',margin: 5}}
                                 >
                                     {
                                         getFieldDecorator('remark',{
                                             initialValue: entryData.remark
                                         })
                                         (
-                                            <TextArea/>
+                                            <TextArea style={{width:140, height:32, maxWidth: 140, maxHeight: 100, marginTop:5}}/>
                                         )
                                     }
                                 </FormItem>
