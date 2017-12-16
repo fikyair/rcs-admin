@@ -37,7 +37,7 @@ const FormItem = Form.Item;
         )
       ){
 
-        Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB}${limitBodyB&&limitBodyC?'_':''}${limitBodyC?limitBodyC:''}`}));}
+        Storage.dispatch(getMerchtType({limitProperty,limitType,mainPartCodeGroup:`${limitBodyB?limitBodyB:""}${limitBodyB&&limitBodyC?'_':''}${limitBodyC?limitBodyC:''}`}));}
     }
 
     //其他消费及联逻辑

@@ -116,7 +116,7 @@ export default class NewLimitModel extends React.Component {
 
         const { limitType, merchType, limitProperty, limitBodyC, limitBodyB} = addLimitTemp;
 
-        let mainData = {limitType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB?'_':''}${limitBodyC}`}
+        let mainData = {limitType,limitProperty,mainPartCodeGroup:`${limitBodyB?limitBodyB:''}${limitBodyB&&limitBodyC?'_':''}${limitBodyC?limitBodyC:""}`}
         const formData = this.props.form.getFieldsValue()
         this.props.form.validateFields((err, values) => {
             if (!err) {
