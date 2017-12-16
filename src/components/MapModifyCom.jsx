@@ -24,6 +24,7 @@ export default class MapModifyCom extends React.Component {
                                 getFieldDecorator(v.key, {
                                     initialValue: v.initialValue != -1? v.initialValue:'',
                                     // rules: v.rules ? [...v.rules] : [],
+
                                     rules: [{
                                         pattern: /^(0|[1-9][0-9]*)$/, message: '请输入大于等于0的整数'
                                     }]

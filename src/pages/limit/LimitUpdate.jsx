@@ -208,7 +208,7 @@ export default class LimitUpdate extends React.Component {
                                             initialValue: entryData.remark
                                         })
                                         (
-                                            <TextArea style={{width:140, height:32, maxWidth: 140, maxHeight: 100, marginTop:5}}/>
+                                            <TextArea autosize={{minRows:1,maxRow:6}}style={{width:140, height:32}}/>
                                         )
                                     }
                                 </FormItem>
