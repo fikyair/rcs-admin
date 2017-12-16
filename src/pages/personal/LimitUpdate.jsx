@@ -193,14 +193,14 @@ export default class LimitUpdate extends React.Component {
                                 </InputGroup>
                                 <FormItem
                                     label={"备注"}
-                                    style={{marginLeft:50, marginTop: 10}}
+                                    style={{marginLeft:50, marginTop: 10, marginLeft: 75}}
                                 >
                                     {
                                         getFieldDecorator('remark',{
 
                                         })
                                         (
-                                            <TextArea style={{maxWidth: 140}} autosize={ {minRows: 1, maxRows: 6}} />
+                                            <TextArea style={{maxWidth: 141}} autosize={ {minRows: 1, maxRows: 6}} />
                                         )
                                     }
                                 </FormItem>

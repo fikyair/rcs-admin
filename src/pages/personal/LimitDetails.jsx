@@ -414,14 +414,14 @@ export default class LimitDetails extends React.Component {
                                 </InputGroup>
                                 <FormItem
                                     label={"备注"}
-                                    style={{marginLeft:50, marginTop: 10, width: 222.91}}
+                                    style={{marginLeft:50, marginTop: 10, width: 222.91, marginLeft: 75}}
                                 >
                                     {
                                         getFieldDecorator('remark',{
                                             initialValue: entryData.remark
                                         })
                                         (
-                                            <TextArea disabled={true} style={{maxWidth: 140}} autosize={ {minRows: 1, maxRows: 6}}/>
+                                            <TextArea disabled={true} style={{maxWidth: 141}} autosize={ {minRows: 1, maxRows: 6}}/>
                                         )
                                     }
                                 </FormItem>
