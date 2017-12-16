@@ -163,7 +163,7 @@ export default class LimitDetails extends React.Component {
                 addonAfter: "元",
                 type: 'input',
                 body: {
-                    style: {width: 120},
+                    style: {width: 140},
                     addonBefore: "金额",
                     addonAfter: "元",
                     disabled: true,
@@ -176,7 +176,7 @@ export default class LimitDetails extends React.Component {
 
                 type: 'input',
                 body: {
-                    style: {width: 120},
+                    style: {width: 140},
                     addonBefore: "金额",
                     addonAfter: "元",
                     disabled: true,
@@ -187,7 +187,7 @@ export default class LimitDetails extends React.Component {
                 key: 'singleYear',
                 labelValue: 'sigle',
                 body: {
-                    style: {width: 120},
+                    style: {width: 140},
                     addonBefore: "金额",
                     addonAfter: "元",
                     disabled: true,
@@ -198,7 +198,7 @@ export default class LimitDetails extends React.Component {
                 key: 'lifetime',
                 labelValue: 'sigle',
                 body: {
-                    style: {width: 120},
+                    style: {width: 140},
                     disabled: true,
                     addonBefore: "金额",
                     addonAfter: "元",
@@ -211,7 +211,7 @@ export default class LimitDetails extends React.Component {
                 body: {
                     disabled: true,
                     addonAfter: "元",
-                    style: {width: 120},
+                    style: {width: 140},
 
                 },
                 type: 'input',
@@ -221,7 +221,7 @@ export default class LimitDetails extends React.Component {
                 labelValue: 'sigle',
                 type: 'input',
                 body: {
-                    style: {width: 120},
+                    style: {width: 140},
                     disabled: true,
                 },
 
@@ -260,7 +260,7 @@ export default class LimitDetails extends React.Component {
             type: 'input',
             disabled: true,
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -270,7 +270,7 @@ export default class LimitDetails extends React.Component {
             disabled: true,
             key: 'yearAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
                 addonBefore: "金额",
                 addonAfter: "元",
             },
@@ -280,7 +280,7 @@ export default class LimitDetails extends React.Component {
             disabled: true,
             key: 'lifeAmountLimit',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
                 addonBefore: "金额",
                 addonAfter: "元",
@@ -293,7 +293,7 @@ export default class LimitDetails extends React.Component {
             addonAfter: "元",
             body: {
                 addonAfter: "元",
-                style: {width: 120},
+                style: {width: 140},
 
             },
             type: 'input',
@@ -304,7 +304,7 @@ export default class LimitDetails extends React.Component {
             addonAfter: "元",
             type: 'input',
             body: {
-                style: {width: 120},
+                style: {width: 140},
 
             },
 
@@ -374,47 +374,43 @@ export default class LimitDetails extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <FormItem>
-                                <span style={{
-                                    marginRight: '10px',
-                                    minWidth: '80px',
-                                    display: 'inline-block',
-                                    marginTop: 10,
-                                    verticalAlign: 'top',
-                                }}>每笔／分钟:</span>
-                                    <div style={{display: 'inline-block', margin: '10px'}}>
+                                <InputGroup style={{display: 'inline'}}>
+                                    <FormItem
+                                        label={(<div className="label-class">每笔/分钟</div>)}
+                                        style={{display: 'inline-block',marginRight: 0,marginLeft: 10, marginTop: 10}}
+                                    >
 
-                                        <InputGroup>
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
-                                                    initialValue: entryData.countLimitCountValue
+                                                    initialValue: entryData.countLimitCountValue == -1?'无': entryData.countLimitCountValue
                                                 })(
-                                                    <Input disabled={true} style={{width: 50, textAlign: 'center'}}
+                                                    <Input disabled={true} style={{width: 58, textAlign: 'center', borderTopRightRadius: 0,borderBottomRightRadius: 0}}
                                                     />
                                                 )
                                             }
-
+                                    </FormItem>
+                                    <FormItem
+                                        style={{ marginTop: 10}}
+                                    >
                                             <Input style={{
                                                 width: 24,
                                                 borderLeft: 0,
                                                 pointerEvents: 'none',
-                                                backgroundColor: '#fff'
+                                                backgroundColor: '#fff',
+                                                borderRadius: 0,
                                             }} placeholder="/" disabled/>
                                             {
                                                 getFieldDecorator('countLimitMinuteValue', {
-                                                    initialValue: entryData.countLimitMinuteValue
+                                                    initialValue: entryData.countLimitMinuteValue == -1?'无':entryData.countLimitMinuteValue
                                                 })(
                                                     <Input
                                                         disabled={true}
-                                                        style={{width: 49, textAlign: 'center', borderLeft: 0}}
+                                                        style={{width: 58, textAlign: 'center', borderLeft: 0,  borderTopLeftRadius: 0,borderBottomLeftRadius: 0}}
                                                     />
                                                 )
                                             }
-
-                                        </InputGroup>
-                                    </div>
-                                </FormItem>
-
+                                    </FormItem>
+                                </InputGroup>
                             </MapModifyCom>
 
                         </Row>
