@@ -187,33 +187,40 @@ export default class NewLimitModel extends React.Component {
                         <Row>
                             <MapModifyCom data={this.inputLimit}
                                            wrappedComponentRef={(inst) => this.formDataInputLimit = inst}>
-                                <FormItem label={(<div className="label-class">每笔/分钟</div>)}
-                                          style={{display: 'inline-block',margin:'10px'}}>
 
-
-
-                                        <InputGroup>
+                                        <InputGroup style={{display: 'inline'}}>
+                                            <FormItem label={(<div className="label-class">每笔/分钟</div>)}
+                                                      style={{display: 'inline-block',marginTop: 10,marginLeft: 10, marginRight: 0}}>
                                             {getFieldDecorator('countLimitCountValue')(
-                                                <Input style={{width: 58, textAlign: 'center'}}
+                                                <Input style={{width: 58, textAlign: 'center', borderTopRightRadius:0, borderBottomRightRadius:0}}
                                                        placeholder="请输入"
                                                 />
                                             )}
-
+                                            </FormItem>
+                                            <FormItem>
                                             <Input style={{
                                                 width: 24,
                                                 borderLeft: 0,
                                                 pointerEvents: 'none',
-                                                backgroundColor: '#fff'
+                                                backgroundColor: '#fff',
+                                                marginTop:10,
+                                                borderRadius:0
                                             }} placeholder="/" disabled/>
                                             {getFieldDecorator('countLimitMinuteValue')(
                                                 <Input
-                                                    style={{width: 58, textAlign: 'center', borderLeft: 0}}
+                                                    style={{
+                                                        width: 58,
+                                                        textAlign: 'center',
+                                                        borderLeft: 0,
+                                                        borderTopLeftRadius:0,
+                                                        borderBottomLeftRadius:0,
+                                                        marginTop:10
+                                                    }}
                                                     placeholder="请输入"
                                                 />
                                             )}
-
+                                            </FormItem>
                                         </InputGroup>
-                                </FormItem>
 
                             </MapModifyCom>
                         </Row>

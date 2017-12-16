@@ -141,16 +141,16 @@ export default class LimitDetails extends React.Component {
 
                         <Row>
                             <MapModifyCom data={this.inputLimit} wrappedComponentRef={(inst) => this.formData = inst}>
-                                <InputGroup>
+                                <InputGroup style={{display: 'inline'}}>
                                 <FormItem
                                 label={(<div className="label-class">每笔/分钟</div>)}
-                                style={{display: 'inline-block',marginRight: 0,marginLeft: 10}}
+                                style={{display: 'inline-block',marginTop: 10,marginLeft: 10, marginRight: 0}}
                                 >
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
                                                     initialValue: entryData.countLimitCountValue != -1? entryData.countLimitCountValue :''
                                                 })(
-                                                    <Input  style={{width: 58, textAlign: 'center'}} disabled={true}
+                                                    <Input  style={{width: 58, textAlign: 'center', borderTopRightRadius:0, borderBottomRightRadius:0}} disabled={true}
                                                            placeholder="请输入"
                                                     />
                                                 )
@@ -161,7 +161,9 @@ export default class LimitDetails extends React.Component {
                                                 width: 24,
                                                 borderLeft: 0,
                                                 pointerEvents: 'none',
-                                                backgroundColor: '#fff'
+                                                backgroundColor: '#fff',
+                                                borderRadius:0,
+                                                marginTop:10
                                             }} placeholder="/" disabled/>
 
                                             {
@@ -169,7 +171,12 @@ export default class LimitDetails extends React.Component {
                                                     initialValue: entryData.countLimitMinuteValue != -1? entryData.countLimitMinuteValue :''
                                                 })(
                                                     <Input
-                                                        style={{width: 58, textAlign: 'center', borderLeft: 0}}
+                                                        style={{
+                                                            width: 58, textAlign: 'center',
+                                                            borderLeft: 0,borderTopLeftRadius:0,
+                                                            borderBottomLeftRadius:0,
+                                                            marginTop:10
+                                                        }}
                                                         disabled={true}
                                                         placeholder="请输入"
                                                     />
