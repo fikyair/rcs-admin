@@ -3,6 +3,7 @@ import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getLimitInitData, editLimit} from '../../actions/limitActions';
 import MapModifyCom from '../../components/MapModifyCom'
+import {validatSingle} from '../../utils/vaildator'
 
 
 const FormItem = Form.Item;
@@ -119,12 +120,20 @@ export default class LimitUpdate extends React.Component {
             ...value1,
             id: id,
         }
-        console.log("---1",value)
-        console.log('--2',value1)
-        this.props.dispatch(editLimit(params)).then(() => {
+        const countLimitMinuteValue = this.props.form.getFieldValue('countLimitMinuteValue');
+        const countLimitCountValue = this.props.form.getFieldValue('countLimitCountValue')
+        let data = {
+            ...value,
+            countLimitMinuteValue: countLimitMinuteValue,
+            countLimitCountValue: countLimitCountValue
+        }
+        if(validatSingle(data)){
+            this.props.dispatch(editLimit(params)).then(() => {
 
-        })
-        this.props.history.push('/limitManager')
+            })
+            this.props.history.push('/limitManager')
+        }
+
     }
     render() {
         const {

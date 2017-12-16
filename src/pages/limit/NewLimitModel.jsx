@@ -4,6 +4,7 @@ import SelectComs, {Option} from '../../components/SelectComs';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import {getSelectDdata} from '../../actions/limitActions';
 import _ from 'lodash'
+import {validat} from '../../utils/vaildator'
 const InputGroup = Input.Group;
 import InputComs from "../../components/InputComs";
 import MapModifyCom from '../../components/MapModifyCom'
@@ -144,7 +145,7 @@ export default class NewLimitModel extends React.Component {
                     countLimitMinuteValue: countLimitMinuteValue,
                     countLimitCountValue: countLimitCountValue
                 }
-                if(this.validat(modelPropertyVoList,data)){
+                if(validat(modelPropertyVoList,data)){
                     this.props.dispatch(addModel(val)).then(data=>{
                         this.props.history.push('/limitManager')
                     },err=>{
@@ -158,20 +159,6 @@ export default class NewLimitModel extends React.Component {
 
 
         // TODO 提交表单
-    }
-    validat = (modelPropertyVoList,data) => {
-
-        let arr = _.without(Object.values(data), '' ,undefined, null)
-        debugger
-        if(modelPropertyVoList.length < 2){
-            message.error('至少选择一个维度值',3)
-            return false
-        }else if(arr.length < 1){
-            message.error('至少输入一种金额',3)
-            return false
-        }else {
-            return true
-        }
     }
 
     render() {

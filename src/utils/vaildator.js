@@ -1,5 +1,5 @@
 // 公用校验方法。
-
+import {message} from 'antd'
 /**
  * 校验字符串长度
  * @param  {String}   value    字符串
@@ -72,3 +72,36 @@ export const validatorSpace = message => {
         message
     };
 };
+/**
+ *
+ * @param modelPropertyVoList
+ * @param data
+ * @returns {boolean}
+ */
+export const validat = (modelPropertyVoList,data) => {
+    let arr = _.without(Object.values(data), '' ,undefined, null)
+    if(modelPropertyVoList.length < 2){
+        message.error('至少选择一个维度值',3)
+        return false
+    }else if(arr.length < 1){
+        message.error('至少输入一种金额',3)
+        return false
+    }else {
+        return true
+    }
+}
+
+/**
+ *只验证输入金额
+ * @param data
+ * @returns {boolean}
+ */
+export const validatSingle = (data) => {
+    let arr = _.without(Object.values(data), '' ,undefined, null)
+    if(arr.length < 1){
+        message.error('至少输入一种金额',3)
+        return false
+    }else {
+        return true
+    }
+}
