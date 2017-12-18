@@ -96,7 +96,7 @@ export default class ExtractData extends React.Component {
                     <input type="file" id="extract" onChange={() => this.showModal()}/>
                 </a>*/}
                 <Button className="file"  onClick={()=>this.check()}>批量配置商户</Button>
-                <div style={{display: this.state.display}} ><span>添加商户成功</span></div>
+                <div style={this.props.flag?{display: 'inline'}: {display: 'none'}} ><span>添加商户成功</span></div>
                 <Modal
                 title={"批量配置商户"}
                 visible={this.state.visible}

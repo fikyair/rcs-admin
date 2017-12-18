@@ -1,11 +1,11 @@
 import React from 'react';
-import {Layout, Form, Input, Button, Card, Row, Col} from 'antd';
+import {Layout, Form, Input, Button, Card, Row, Col, message} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import ExtracData from '../../components/ExtractData'
-import {validatSingle} from '../../utils/vaildator'
+import {validat, validatSingle} from '../../utils/vaildator'
 
 const InputGroup = Input.Group;
-import {getPersonalDetial, addPersionalLimit} from "../../actions/limitActions";
+import {getPersonalDetial, addPersionalLimit, addModel} from "../../actions/limitActions";
 import MapModifyCom from "../../components/MapModifyCom";
 
 
@@ -131,16 +131,37 @@ export default class NewLimitModel extends React.Component {
             countLimitMinuteValue: countLimitMinuteValue,
             countLimitCountValue: countLimitCountValue
         }
-        if(validatSingle(data)){
-            this.props.dispatch(addPersionalLimit(params))
-            this.props.history.push('/merchantlimit')
+        console.log('======>',params)
+        //
+        if(!this.state.flag) {
+            // 验证备注和商编必填
+            this.props.form.validateFields((err, values) => {
+                if (!err) {
+                    if(validatSingle(data)){
+                        this.props.dispatch(addPersionalLimit(params))
+                        this.props.history.push('/merchantlimit')
+                    }
+                }
+            });
+        }else {
+            // 批量导入验证
+            if(validatSingle(data)){
+                this.props.dispatch(addPersionalLimit(params))
+                this.props.history.push('/merchantlimit')
+            }
         }
 
 
     }
 
     getData(list) {
-        this.setState({list: list, flag: true})
+        console.log('=====>',list)
+        if(list.length <= 1 ){
+            message.error('不能导入空数据')
+        }else {
+
+            this.setState({list: list, flag: true})
+        }
     }
 
     render() {
@@ -218,17 +239,28 @@ export default class NewLimitModel extends React.Component {
                           noHovering={true}
                     >
                         <Row>
+                            <FormItem>
+                            {getFieldDecorator('mainPartValue',{
+                                rules: [{
+                                  required: true, message: '请输入商编'
+                                }]
+                            })(
 
-                            {getFieldDecorator('mainPartValue')(
                                 <Input disabled={this.state.flag} placeholder="请输入"
                                        addonBefore={(
                                            <span style={{minWidth: '70px', display: 'inline-block'}}>配置商户</span>)}
                                        style={{width: '200px', margin: '10px'}}/>
                             )}
+                            </FormItem>
+
                             <FormItem
                                 label="备注"
                             >
-                                {getFieldDecorator('remark')(<TextArea disabled={this.state.flag}></TextArea>)}
+                                {getFieldDecorator('remark',{
+                                    rules: [{
+                                        required: true, message: '请输入备注'
+                                    }]
+                                })(<TextArea disabled={this.state.flag}></TextArea>)}
 
                             </FormItem>
                             <Button style={{margin: '10px', verticalAlign: 'top'}}
@@ -237,7 +269,7 @@ export default class NewLimitModel extends React.Component {
                                     onClick={() => this.handleSubmit()}>保存</Button>
                         </Row>
                         <Row>
-                            <ExtracData data={this.props.form.getFieldsValue()} getData={this.getData.bind(this)}/>
+                            <ExtracData flag={this.state.flag} data={this.props.form.getFieldsValue()} getData={this.getData.bind(this)}/>
                         </Row>
                     </Card>
                 </Form>
