@@ -346,10 +346,10 @@ export default class LimitManager extends React.Component {
 
                     </div>
                     <Row>
-                        <Col {...layout} style={{marginLeft: 6}}>
+                        <Col {...layout} >
                             <div className="selBtn" style={{textAlign: 'right'}}>
                                 <FormItem style={{margin: "10px", float: 'left'}}
-                                          label={(<div className="label-class">商户编号</div>)}>
+                                          label={(<div className="label-class" >商户编号</div>)}>
                                     {
                                         getFieldDecorator('mainPartValue', {})(
                                             <Input placeholder="请输入"/>
