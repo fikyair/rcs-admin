@@ -2,6 +2,7 @@ import React from 'react';
 import {message, Form, Input, Button, Card, Row, Col} from 'antd';
 import {setTitle, Containerization} from '../../common/PublicComponent';
 import { editPersional, getDetailPersionalForEdit} from '../../actions/limitActions';
+import {validatSingle} from '../../utils/vaildator'
 
 
 const InputGroup = Input.Group;
@@ -113,14 +114,23 @@ export default class LimitUpdate extends React.Component {
             ...value1,
             id: id
         }
-        this.props.dispatch(editPersional(params))
+        const countLimitMinuteValue = this.props.form.getFieldValue('countLimitMinuteValue');
+        const countLimitCountValue = this.props.form.getFieldValue('countLimitCountValue')
+        let data = {
+            ...value,
+            countLimitMinuteValue: countLimitMinuteValue,
+            countLimitCountValue: countLimitCountValue
+        }
+        if(validatSingle(data)){
+            this.props.dispatch(editPersional(params))
+            this.props.history.push('/merchantlimit')
+        }
 
-             let arr =_.without(Object.values(value),'',undefined, null);
-            if(arr.length<1){
-                message.error('请至少填一项');
-             }
+            //  let arr =_.without(Object.values(value),'',undefined, null);
+            // if(arr.length<1){
+            //     message.error('请至少填一项');
+            //  }
 
-        this.props.history.push('/merchantlimit')
     }
 
     render() {

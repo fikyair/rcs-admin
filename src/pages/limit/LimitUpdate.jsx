@@ -144,7 +144,6 @@ export default class LimitUpdate extends React.Component {
         this.inputLimit.map(data => {
             data.initialValue = entryData[data.key]
         });
-        console.log('--------',entryData)
         const {modelName} = entryData;
         const {getFieldDecorator} = this.props.form
         return (

@@ -131,7 +131,6 @@ export default class NewLimitModel extends React.Component {
             countLimitMinuteValue: countLimitMinuteValue,
             countLimitCountValue: countLimitCountValue
         }
-        debugger
         if(validatSingle(data)){
             this.props.dispatch(addPersionalLimit(params))
             this.props.history.push('/merchantlimit')
@@ -141,7 +140,6 @@ export default class NewLimitModel extends React.Component {
     }
 
     getData(list) {
-        console.log('======>list', list)
         this.setState({list: list, flag: true})
     }
 
