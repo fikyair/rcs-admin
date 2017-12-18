@@ -383,9 +383,9 @@ export default class LimitDetails extends React.Component {
 
                                             {
                                                 getFieldDecorator('countLimitCountValue', {
-                                                    initialValue: entryData.countLimitCountValue == -1?'无': entryData.countLimitCountValue
+                                                    initialValue: entryData.countLimitCountValue == -1?'': entryData.countLimitCountValue
                                                 })(
-                                                    <Input disabled={true} style={{width: 58, textAlign: 'center', borderTopRightRadius: 0,borderBottomRightRadius: 0}}
+                                                    <Input placeholder="请输入" disabled={true}  style={{width: 58, textAlign: 'center', borderTopRightRadius: 0,borderBottomRightRadius: 0}}
                                                     />
                                                 )
                                             }
@@ -402,10 +402,10 @@ export default class LimitDetails extends React.Component {
                                             }} placeholder="/" disabled/>
                                             {
                                                 getFieldDecorator('countLimitMinuteValue', {
-                                                    initialValue: entryData.countLimitMinuteValue == -1?'无':entryData.countLimitMinuteValue
+                                                    initialValue: entryData.countLimitMinuteValue == -1?'':entryData.countLimitMinuteValue
                                                 })(
                                                     <Input
-                                                        disabled={true}
+                                                        disabled={true} placeholder="请输入"
                                                         style={{width: 58, textAlign: 'center', borderLeft: 0,  borderTopLeftRadius: 0,borderBottomLeftRadius: 0}}
                                                     />
                                                 )
