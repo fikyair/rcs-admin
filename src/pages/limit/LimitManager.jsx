@@ -24,7 +24,6 @@ const FormItem = Form.Item;
     modelsData: state.LimitReducer.modelsData,
     formTemp: state.GlobalReducer.formTemp,
     commonPageNum: state.LimitReducer.commonPageNum
-
 }))
 @Form.create()
 export default class LimitManager extends React.Component {
@@ -331,13 +330,13 @@ export default class LimitManager extends React.Component {
         let params = {
             ...getFieldsValue,
             modelName,
-            pageSize,
+            pageSize ,
             pageNum,
             ...args,
         };
         //调用接口
         this.props.dispatch(getModels({...params})).then(() => {
-            const {total, current, size} = this.props.modelsData
+            const {total, current = 0, size = 10} = this.props.modelsData
             this.setState({total: total, pageNum: current, pageSize: size})
 
         })
@@ -363,8 +362,11 @@ export default class LimitManager extends React.Component {
     changePage = (page) => {
         this.props.dispatch(SetCommontPageNum(page))
         this.handleSearch({pageNum: page})
+        console.log("ｐａｇｅＮａｍｅ",page);
     }
     onShowSizeChange=(pageNum, pageSize) =>{
+        debugger
+        console.log("pageNum",pageNum,pageSize)
         this.setState({pageNum:pageNum, pageSize:pageSize})
         this.handleSearch({pageNum:pageNum, pageSize:pageSize})
     }

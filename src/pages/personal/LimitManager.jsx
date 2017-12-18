@@ -272,7 +272,7 @@ export default class LimitManager extends React.Component {
 
     handleSearch = (args) => {
         //TODO 搜索
-        
+
         const formData = this.formData.props.form.getFieldsValue()
         const data = this.props.form.getFieldsValue()
         const {pageSize, pageNum} = this.state
