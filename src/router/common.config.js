@@ -17,14 +17,15 @@ const BundleCom = (props, loader) => {
 
 export const commontLimtRouter = [
    {
-        path: '/limitManager',
+        path: '/',
         exact: true,
-        component: (props) => BundleCom(props, LimitManager),
+        component: (props) => BundleCom(props,Index),
     },{
         path: '/index',
         exact: true,
         component: (props) => BundleCom(props,Index),
-    },{
+    },
+    {
         path:'/rent',
         exact: true,
         component: (props) => BundleCom(props,Rent),
