@@ -1,4 +1,4 @@
-import { Menu,Carousel } from 'antd';
+import { Menu,Button } from 'antd';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import '../style/navigation.less';
@@ -47,6 +47,11 @@ export  default class Navigation extends React.Component {
                         </div>
                         <div className="phonenum">
                             400-818-5656
+                        </div>
+                    </div>
+                    <div className="fr serphone">
+                        <div className="user">
+                            <Link to="/login"/>登录
                         </div>
                     </div>
                 </Menu>

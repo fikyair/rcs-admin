@@ -145,7 +145,7 @@ export default {
             chunks: [ 'main','vendor',],
             filename: 'index.html',
             template: './static/index.html',
-            title: '随行付风控限额系统',
+            title: '爱家房屋',
             inject: true,
             minify: {
                 removeComments: true,
