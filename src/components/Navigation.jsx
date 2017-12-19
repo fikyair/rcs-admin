@@ -38,22 +38,21 @@ export  default class Navigation extends React.Component {
                             <li><a href="javascript:void(0)" rel="wh">武汉市</a></li>
                         </ul>
                     </div>
-                    <div   id="home-menu">
+                    <div className="fl "  id="home-menu">
                         <Menu
                             onClick={this.handleClick}
                             selectedKeys={[this.state.current]}
                             mode="horizontal"
-                            className="fl nav_channel"
-                            style={{fontSize:16}}
+                            className='nav_channel'
                         >
                             <Menu.Item key="index">
-                                <Link to="/index" >首页</Link>
+                                <Link to="/index" />首页
                             </Menu.Item>
                             <Menu.Item key="rent">
-                                <Link to="/rent" >我要找房</Link>
+                                <Link to="/rent" />我要找房
                             </Menu.Item>
                             <Menu.Item key="about">
-                                <Link to="/about" >关于爱家</Link>
+                                <Link to="/about" />关于爱家
                             </Menu.Item>
                         </Menu>
                     </div>
