@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel, Row,Input, Button, Col, Card,Select} from 'antd';
+import {Carousel, Row, Input, Button, Col, Card, Select} from 'antd';
 import '../style/style.less';
 import nav1 from '../img/nav1.gif';
 import nav2 from '../img/nav2.jpg';
@@ -8,12 +8,13 @@ import nav4 from '../img/nav4.jpg';
 import plat1 from '../img/plat1.jpg';
 import plat2 from '../img/plat2.jpg';
 import plat3 from '../img/plat3.jpg';
+
 const Option = Select.Option;
 const {Meta} = Card;
 
-export default class Index extends React.Component{
+export default class Index extends React.Component {
 
-     handleChange(value) {
+    handleChange(value) {
         console.log(`selected ${value}`);
     }
 
@@ -28,11 +29,13 @@ export default class Index extends React.Component{
                 </Carousel>
 
                 <div className="g-center">
-                    <Select defaultValue="销售" style={{ width: 95, marginRight: 50,marginTop:50 }} onChange={this.handleChange}>
+                    <Select defaultValue="销售" style={{width: 95, marginRight: 50, marginTop: 50}}
+                            onChange={this.handleChange}>
                         <Option value="price">销售</Option>
                         <Option value="area">租赁</Option>
                     </Select>
-                    <Select defaultValue="地域" style={{ width: 95, marginRight: 50,marginTop:50 }} onChange={this.handleChange}>
+                    <Select defaultValue="地域" style={{width: 95, marginRight: 50, marginTop: 50}}
+                            onChange={this.handleChange}>
                         <Option value="price">价格</Option>
                         <Option value="area">地域</Option>
                     </Select>
@@ -79,25 +82,25 @@ export default class Index extends React.Component{
                                     <p>3940元/月</p>
                                 </div>
                             </Card>
-                         </Col>
-                            <Col span={8}>
+                        </Col>
+                        <Col span={8}>
 
-                                <Card style={{width: 380}} bodyStyle={{padding: 0}}>
-                                    <div className="custom-image">
-                                        <img alt="example" width="100%" src={plat3}/>
-                                    </div>
-                                    <div className="custom-card">
-                                        <h3>双井 广渠路48号院 主卧 朝南 B室</h3>
-                                        <p> 地铁 10号线 / 约14平米</p>
-                                        <p>3300元/月</p>
-                                    </div>
-                                </Card>
-                            </Col>
+                            <Card style={{width: 380}} bodyStyle={{padding: 0}}>
+                                <div className="custom-image">
+                                    <img alt="example" width="100%" src={plat3}/>
+                                </div>
+                                <div className="custom-card">
+                                    <h3>双井 广渠路48号院 主卧 朝南 B室</h3>
+                                    <p> 地铁 10号线 / 约14平米</p>
+                                    <p>3300元/月</p>
+                                </div>
+                            </Card>
+                        </Col>
                     </Row>
                 </div>
             </div>
-    );
+        );
 
     }
 
-    }
+}
