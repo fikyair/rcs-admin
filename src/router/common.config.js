@@ -1,6 +1,5 @@
 import React from 'react';
 import Bundle from './DynamicRoute';
-import LimitManager from 'bundle-loader?lazy!../pages/limit/LimitManager';
 import Index from 'bundle-loader?lazy!../pages/Index';
 import Rent from 'bundle-loader?lazy!../pages/Rent';
 import About from 'bundle-loader?lazy!../pages/About';

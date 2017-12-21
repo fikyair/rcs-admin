@@ -7,18 +7,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta name="format-detection" content="telephone=no">
   <title><%= htmlWebpackPlugin.options.title %></title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div id="content">
 </div>
 
-
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 <script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script>
 <script src="https://cdn.bootcss.com/lodash.js/4.17.4/lodash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.js"></script>
 
+<script>
+
+    $("#uldrop li a").click(function () {
+        alert("ss");
+       alert($(this).text());
+    });
+
+</script>
 </body>
 </html>

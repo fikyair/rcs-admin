@@ -1,11 +1,14 @@
-import { Menu,Button } from 'antd';
+import {Menu, Button, Select} from 'antd';
 import React from 'react';
-import {Link,withRouter} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 import '../style/navigation.less';
 import logo from '../img/logo.png';
+import ads from '../img/ads.png';
+import spri from '../img/spri.png';
+
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
-
+const {Option, OptGroup} = Select;
 
 class Navigation extends React.Component {
     state = {
@@ -17,28 +20,48 @@ class Navigation extends React.Component {
             current: e.key,
         });
     }
+
     render() {
         return (
+            <div>
+
+
                 <Menu
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
                     mode="horizontal"
                     className='nav_channel danke_header'
                 >
-                    <div >
+                    <div>
                         <div className="fr logo" onClick={() => this.props.history.push('/')}>
-                            <img src={logo} alt="logo"  width="130" height="28"/>
+                            <img src={logo} alt="logo" width="130" height="28"/>
                         </div>
                     </div>
-                        {/*<div className="fl grline"></div>*/}
-                    <Menu.Item key="index" style={{marginLeft: 300}}>
-                        <Link to="/index" />首页
+                    <div className="fl dkcity">
+                            <span id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style={{justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+
+                               <img src={ads} style={{marginRight: 11}}/>
+                               深圳
+                              <img src={spri} style={{}}/>
+                            </span>
+                        <ul id = "uldrop" className="dropdown-menu">
+                            <li><a style={{textDecoration: 'none'}}  rel="bj">北京市</a></li>
+                            <li><a style={{textDecoration: 'none'}}  rel="sz">深圳市</a></li>
+                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sh">上海市</a></li>
+                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="hz">杭州市</a></li>
+                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="tj">天津市</a></li>
+                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="wh">武汉市</a></li>
+                        </ul>
+                    </div>
+                    {/*<div className="fl grline"></div>*/}
+                    <Menu.Item key="index" style={{marginLeft: '15%'}}>
+                        <Link to="/index"/>首页
                     </Menu.Item>
                     <Menu.Item key="rent">
-                        <Link to="/rent" />我要找房
+                        <Link to="/rent"/>我要找房
                     </Menu.Item>
-                    <Menu.Item key="about" style={{marginRight: 220}}>
-                        <Link to="/about" />关于爱家
+                    <Menu.Item key="about" style={{marginRight: '15%'}}>
+                        <Link to="/about"/>关于爱家
                     </Menu.Item>
                     <div className=" serphone">
                         <div className="phonetime">
@@ -52,7 +75,9 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                 </Menu>
+            </div>
         );
     }
 }
-export  default  Navigation = withRouter(Navigation)
+
+export default Navigation = withRouter(Navigation)

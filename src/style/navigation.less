@@ -26,7 +26,7 @@
   float: left
 }
 .logo{
-  padding-top: 11px;
+  padding-top: 0;
   display: block;
 }
 .grline{
@@ -36,8 +36,9 @@
 }
 .dkcity{
   width: 104px;
-  margin-top: 14px;
+  margin-top: 0px;
   position: relative;
+  margin-left: 4%;
 }
 .nav_channel{
   line-height: 55px;
@@ -87,46 +88,8 @@ a:active, a:hover, a:link, a:visited{
   color: #fff;
   font-weight: 700;
 }
-.dkcity span {
-  display: block;
-  cursor: pointer;
-  height: 26px;
-  border: 1px solid #4bb4bb;
-  border-radius: 14px;
-  line-height: 26px;
-  color: #4bb4bb;
-  text-indent: 8px;
-  font-size: 14px;
-  background: #fff url(/public/spri.png) no-repeat 78px center;
-}
-.dkcity .dropdown-menu {
-  position: absolute;
-  min-width: 102px;
-}
 .dkcity ul {
   display: none;
-}
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  font-size: 14px;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  -webkit-background-clip: padding-box;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0,0,0,.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-  box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 abbr, acronym, address, applet, blockquote, body, caption, cite, code, col, colgroup, dd, del, dfn, div, dl, dt, em, fieldset, form, h1, h2, h3, h4, h5, h6, html, iframe, img, ins, label, legend, li, object, ol, p, span, strike, strong, summary, table, tbody, td, tfoot, th, thead, tr, ul {
   margin: 0;
@@ -200,4 +163,56 @@ a:-webkit-any-link {
   position: absolute;
   top: 5px;
   right: 100px;
+}
+.dkcity span {
+  display: block;
+  cursor: pointer;
+  height: 26px;
+  border: 1px solid #4bb4bb;
+  border-radius: 14px;
+  line-height: 26px;
+  color: #4bb4bb;
+  text-indent: 8px;
+  font-size: 14px;
+  background: #fff url(../img/public/spri.png) no-repeat 78px center;
+}
+
+.dkcity ul {
+  display: none;
+}
+dd, dl, dt, li, ol, ul {
+  display: block;
+  list-style: none;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+.dkcity .dropdown-menu {
+  position: absolute;
+  min-width: 102px;
+}
+.open>.dropdown-menu {
+  display: block;
+}
+.dkcity ul {
+  display: none;
 }

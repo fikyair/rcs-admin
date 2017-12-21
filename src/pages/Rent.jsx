@@ -1,15 +1,18 @@
 import React from 'react';
+import {Card} from 'antd';
 
 export default class Index extends React.Component{
 
 
     render(){
         return(
-            <div>
-                我要租房
+            <div className='g-center'>
+               <Card style={{width: '80%',height: 300}} >
+
+
+
+               </Card>
             </div>
         )
-
     }
-
 }

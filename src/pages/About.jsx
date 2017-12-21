@@ -7,7 +7,7 @@ export default class Index extends React.Component{
         return(
             <div>
 
-                关于爱家
+               <button>sdsd</button>
 
             </div>
         )

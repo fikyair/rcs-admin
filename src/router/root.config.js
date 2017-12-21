@@ -1,5 +1,5 @@
 import React from 'react'
-import LimitManager from "bundle-loader?lazy!../pages/limit/LimitManager";
+import Index from "bundle-loader?lazy!../pages/Index";
 import Login from "bundle-loader?lazy!../pages/login/Login";
 import Bundle from './DynamicRoute';
 import NoMatch from "../pages/error/NoMatch";
@@ -17,7 +17,7 @@ export const root = [
     {
         path: '/',
         exact: true,
-        component: (props) => BundleCom(props, LimitManager),
+        component: (props) => BundleCom(props, Index),
         breadcrumbName: '首页',
     }, {
         path: '/login',
