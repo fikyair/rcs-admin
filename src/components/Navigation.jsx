@@ -25,8 +25,7 @@ class Navigation extends React.Component {
         let $Uarry = $("#uldrop a");
         $Uarry.click(function(){
             let r = $(this).text();
-            let k=$("#dropdownMenu1").text(r);
-            console.log('sss',k);
+            $("#dropdownMenu1").text(r);
         });
     }
 
