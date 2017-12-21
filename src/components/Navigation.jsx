@@ -5,6 +5,7 @@ import '../style/navigation.less';
 import logo from '../img/logo.png';
 import ads from '../img/ads.png';
 import spri from '../img/spri.png';
+import $ from 'jquery';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -20,12 +21,19 @@ class Navigation extends React.Component {
             current: e.key,
         });
     }
+    ulClick(){
+        let $Uarry = $("#uldrop a");
+        $Uarry.click(function(){
+            let r = $(this).text();
+            let k=$("#dropdownMenu1").text(r);
+            console.log('sss',k);
+        });
+    }
 
     render() {
         return (
+
             <div>
-
-
                 <Menu
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
@@ -38,15 +46,14 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                     <div className="fl dkcity">
-                            <span id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" style={{justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-
-                               <img src={ads} style={{marginRight: 11}}/>
-                               深圳
-                              <img src={spri} style={{}}/>
+                            <span  data-toggle="dropdown" onClick={() => {this.ulClick()}} aria-expanded="true" style={{justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                               <img src={ads} />
+                                <div id="dropdownMenu1"　>北京市</div>
+                               <img src={spri} style={{marginLeft: 7}}/>
                             </span>
-                        <ul id = "uldrop" className="dropdown-menu">
-                            <li><a style={{textDecoration: 'none'}}  rel="bj">北京市</a></li>
-                            <li><a style={{textDecoration: 'none'}}  rel="sz">深圳市</a></li>
+                        <ul id = "uldrop" className="dropdown-menu" >
+                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="bj">北京市</a></li>
+                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sz">深圳市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sh">上海市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="hz">杭州市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="tj">天津市</a></li>
