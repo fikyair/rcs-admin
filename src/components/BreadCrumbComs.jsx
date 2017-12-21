@@ -3,18 +3,12 @@ import React from 'react';
 import { withRouter, Link } from 'react-router-dom';
 
 const breadcrumbNameMap = {
+  '/rent': '我要租房',
   '/limitManager': '限额管理',
   '/limitManager/add': '添加限额',
   '/limitManager/+update/:params': '修改限额',
   '/limitManager/+operationrecord/:params': '限额操作记录',
   '/limitManager/+details/:params': '限额详情',
-
-
-  '/merchantlimit': '个性限额管理',
-  '/merchantlimit/+add/:params': '个性限额设置',
-  '/merchantlimit/+update/:params': '修改个性限额',
-  '/merchantlimit/+operationrecoerd/:params': '个性限额操作记录',
-  '/merchantlimit/+details/:params': '个性限额详情',
 };
 
 @withRouter
@@ -72,16 +66,15 @@ export default class BreadCrumbComs extends React.Component{
     if(extraBreadcrumbItems.length >0){
       this.setState({breadcrumbItems:extraBreadcrumbItems,docTitle:extraBreadcrumbItems[extraBreadcrumbItems.length-1].props.name})
     }
-
   }
 
   render(){
     const { breadcrumbItems, docTitle } = this.state;
     return (
-      <Card noHovering={true} style={{marginBottom: '10px'}} bodyStyle={{padding:'10px',marginBottom:'10px'}}><Breadcrumb >
-      { breadcrumbItems }
-    </Breadcrumb>
-        <h2>{docTitle}</h2>
-      </Card>)
+      <div style={{marginBottom: '10px'}} bodyStyle={{padding:'10px',marginBottom:'10px'}}>
+        <Breadcrumb >
+           { breadcrumbItems }
+        </Breadcrumb>
+      </div>)
   }
 }
