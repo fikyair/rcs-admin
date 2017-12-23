@@ -18,7 +18,50 @@ export default class Index extends React.Component {
         console.log(`selected ${value}`);
     }
 
+    mockData = {
+        houseData: [{
+            img: 'http://public.wutongwan.org/public-20171219-FgaTYh9h4OXiFf7JT12aAeomUM3O?imageView2/1/w/380/h/285',
+            address: '大望路 东区国际公寓 主卧 朝西南 A室',
+            ground: '地铁 1号线,八通线',
+            platDetails: {
+                area: '约54㎡',
+                floor: '18楼',
+                habitable: '１室１卫',
+                orientation: '朝南',
+                type: '整租',
+            },
+            price: '3940',
+
+        }, {
+            img: 'http://public.wutongwan.org/public-20170122-Fty1bFXa4ZGNtxk2kF66wOHk0VMq?imageView2/1/w/380/h/285',
+            address: '金台路 公园5号 主卧 朝东南 A室',
+            ground: '地铁 6号线,14号线,八通线',
+            platDetails: {
+                area: '约54㎡',
+                floor: '18楼',
+                habitable: '１室１卫',
+                orientation: '朝南',
+                type: '整租',
+            },
+            price: '4730',
+        },{
+            img: 'http://public.wutongwan.org/public-20171219-Fq30Y-oNU2Hw2iN6GXUk_IzXK3M4?imageView2/1/w/380/h/285',
+            address: '双井 广渠路48号院 主卧 朝南 B室',
+            ground: '地铁 10号线,八通线',
+            platDetails: {
+                area: '约14㎡',
+                floor: '18楼',
+                habitable: '１室１卫',
+                orientation: '朝南',
+                type: '整租',
+            },
+            price: '3330',
+        }]
+    }
+
     render() {
+        const houseData = this.mockData.houseData;
+
         return (
             <div>
                 <Carousel autoplay>
@@ -27,7 +70,6 @@ export default class Index extends React.Component {
                     <div><img src={nav3} width={'100%'} height={332}/></div>
                     <div><img src={nav4} width={'100%'} height={332}/></div>
                 </Carousel>
-
                 <div className="g-center">
                     <Select defaultValue="销售" style={{width: 95, marginRight: 50, marginTop: 50}}
                             onChange={this.handleChange}>
@@ -58,44 +100,29 @@ export default class Index extends React.Component {
                 </div>
                 <div style={{marginLeft: 40}}>
                     <Row>
-                        <Col span={8}>
-                            <Card style={{width: 380}} bodyStyle={{padding: 0}}>
-                                <div className="custom-image">
-                                    <img alt="example" width="100%" src={plat1}/>
-                                </div>
-                                <div className="custom-card">
-                                    <h3>大望路 东区国际公寓 主卧 朝北 C室</h3>
-                                    <p>地铁 1号线,八通线 / 约20平米 / 独立阳台</p>
-                                    <p>3070元/月</p>
-                                </div>
-                            </Card>
+                        <Col span={8} style={{float: 'left'}}>
+                            {
+                                houseData.map((data, k) => {
+                                    return (
+                                        <Card style={{width: 380}} bodyStyle={{padding: 0}}>
+                                            <img alt="example" width="100%" src={data.img}/>
+                                            <div className="room_ti">
+                                                <a href="#">{data.address}</a>
+                                            </div>
+                                            <div className="roo_ads">
+                                                <div className="roo_ads fl">
+                                                    {data.ground} / {data.platDetails.area} / 独卫
+                                                </div>
+                                                <div className="room_money fr">
+                                                    {data.price}<span>元/月</span>
+                                                </div>
+                                            </div>
+                                        </Card>
+                                    )
+                                })
+                            }
                         </Col>
-                        <Col span={8}>
 
-                            <Card style={{width: 380}} bodyStyle={{padding: 0}}>
-                                <div className="custom-image">
-                                    <img alt="example" width="100%" src={plat2}/>
-                                </div>
-                                <div className="custom-card">
-                                    <h3>大望路 东区国际公寓 主卧 朝西南 A室</h3>
-                                    <p>地铁 1号线,八通线 / 约22平米 / 独卫</p>
-                                    <p>3940元/月</p>
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col span={8}>
-
-                            <Card style={{width: 380}} bodyStyle={{padding: 0}}>
-                                <div className="custom-image">
-                                    <img alt="example" width="100%" src={plat3}/>
-                                </div>
-                                <div className="custom-card">
-                                    <h3>双井 广渠路48号院 主卧 朝南 B室</h3>
-                                    <p> 地铁 10号线 / 约14平米</p>
-                                    <p>3300元/月</p>
-                                </div>
-                            </Card>
-                        </Col>
                     </Row>
                 </div>
             </div>
@@ -103,4 +130,123 @@ export default class Index extends React.Component {
 
     }
 
+}
+
+
+{/*<div className="mainbox clear blocklook">*/
+}
+{/*<div id="oneTabContent">*/
+}
+{/*<div className="room_pro " id="rooms_特惠房源">*/
+}
+{/*<div className="room_pro_box">*/
+}
+{/*<a href="#">*/
+}
+{/*<img alt="example" width="100%" src={plat1}/>*/
+}
+{/*</a>*/
+}
+{/*<div className="room_ti">*/
+}
+{/*<a href="#">大望路 东区国际公寓 主卧 朝西南 A室</a>*/
+}
+{/*</div>*/
+}
+{/*<div className="roo_ads">*/
+}
+{/*<div className="roo_ads fl">*/
+}
+{/*地铁 1号线,八通线 / 约22平米 / 独卫*/
+}
+{/*</div>*/
+}
+{/*<div className="room_money fr">*/
+}
+{/*3940<span>元/月</span>*/
+}
+{/*</div>*/
+}
+{/*</div>*/
+}
+{/*</div>*/
+}
+{/*/!*<div className="room_pro_box">*!/*/
+}
+{/*/!*<a href="#">*!/*/
+}
+{/*/!*<img*!/*/
+}
+{/*/!*src="http://public.wutongwan.org/public-20170122-Fty1bFXa4ZGNtxk2kF66wOHk0VMq?imageView2/1/w/380/h/285"*!/*/
+}
+{/*/!*alt="金台路 公园5号 主卧 朝东南 A室图片" title="金台路 公园5号 主卧 朝东南 A室" width="380"/>*!/*/
+}
+{/*/!*</a>*!/*/
+}
+{/*/!*<div className="room_ti">*!/*/
+}
+{/*/!*<a href="#">金台路 公园5号 主卧 朝东南 A室</a>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*<div className="roo_ads">*!/*/
+}
+{/*/!*<div className="roo_ads fl">*!/*/
+}
+{/*/!*地铁 6号线,14号线 / 约22平米 / 独卫*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*<div className="room_money fr">*!/*/
+}
+{/*/!*4730<span>元/月</span>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*<div className="room_pro_box">*!/*/
+}
+{/*/!*<a href="#">*!/*/
+}
+{/*/!*<img*!/*/
+}
+{/*/!*src="http://public.wutongwan.org/public-20171219-Fq30Y-oNU2Hw2iN6GXUk_IzXK3M4?imageView2/1/w/380/h/285"*!/*/
+}
+{/*/!*alt="双井 广渠路48号院 主卧 朝南 B室图片" title="双井 广渠路48号院 主卧 朝南 B室" width="380"/>*!/*/
+}
+{/*/!*</a>*!/*/
+}
+{/*/!*<div className="room_ti">*!/*/
+}
+{/*/!*<a href="#">双井 广渠路48号院 主卧 朝南 B室</a>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*<div className="roo_ads">*!/*/
+}
+{/*/!*<div className="roo_ads fl">*!/*/
+}
+{/*/!*地铁 10号线 / 约14平米*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*<div className="room_money fr">*!/*/
+}
+{/*/!*3300<span>元/月</span>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+{/*/!*</div>*!/*/
+}
+
+{/*</div>*/
+}
+{/*</div>*/
+}
+{/*</div>*/
 }
