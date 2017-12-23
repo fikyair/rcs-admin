@@ -58,34 +58,56 @@ export default class Index extends React.Component {
         ],
         platData: [
             {
-                value: 'platImage',
                 url: 'http://public.wutongwan.org/public-20171214-Fqv1N_pbx3GsIkaY1IZDRMkvvdi4?imageView2/1/w/380/h/285',
+                address: '物资学院路 悦澜水岸家园 主卧 朝南 A室',
+                ground: '地铁６号线',
+                platDetails: {
+                    area: '约54㎡',
+                    floor: '18楼',
+                    habitable: '１室１卫',
+                    orientation: '朝南',
+                    type: '整租',
+                },
+                spDetails: {
+                    toilet: '独立卫生间',
+                    shower: '独立淋浴',
+                    heating: '集中供暖',
+                },
+                price: '3660',
             }, {
-                name: '物资学院路 悦澜水岸家园 主卧 朝南 A室', value: 'address',
+                url: 'http://public.wutongwan.org/public-20171211-Fkp3yxzx8iE29vZluvXCFAOaiVEz?imageView2/1/w/380/h/285',
+                address: '马家堡 亚林西1区 主卧 朝南 B室',
+                ground: '地铁4号线',
+                platDetails: {
+                    area: '约12㎡',
+                    floor: '23楼',
+                    habitable: '2室１卫',
+                    orientation: '朝南',
+                    type: '合',
+                },
+                spDetails: {
+                    toilet: '独立卫生间',
+                    shower: '独立阳台',
+                    heating: '集中供暖',
+                },
+                price: '3040',
             }, {
-                name: '地铁 6号线', value: 'underground',
-            }, {
-                platDetails: [{
-                    name: '约54㎡', value: 'area', area: '约54㎡'
-                }, {
-                    name: '18楼', value: 'floor',
-                }, {
-                    name: '１室１卫', value: 'habitable',
-                }, {
-                    name: '朝南', value: 'orientation',
-                }, {
-                    name: '整租', value: 'type',
-                }]
-            }, {
-                spDetails: [{
-                    name: '独立卫生间', value: 'toilet',
-                }, {
-                    name: '独立淋浴', value: 'shower',
-                }, {
-                    name: '供暖', value: 'heating'
-                }]
-            }, {}, {
-                name: '3660', value: 'price',
+                url: 'http://public.wutongwan.org/public-20171213-FhbbTF18lB-Me0GrRPwjVFUbfSAs?imageView2/1/w/380/h/285',
+                address: '四惠 都会华庭 主卧 朝南 B室',
+                ground: '地铁 1号线,八通线',
+                platDetails: {
+                    area: '约18㎡ ',
+                    floor: '6楼',
+                    habitable: '3室1卫',
+                    orientation: '朝南',
+                    type: '合',
+                },
+                spDetails: {
+                    toilet: '独立卫生间',
+                    shower: '独立阳台',
+                    heating: '自采暖',
+                },
+                price: '2590',
             }
         ]
     }
@@ -111,7 +133,7 @@ export default class Index extends React.Component {
         const street = this.mockData.streetData;
         const price = this.mockData.priceData;
         const platData = this.mockData.platData;
-        debugger
+
         return (
             <div>
                 <Card className="wrapper" style={{marginTop: 50}} noHovering={true}>
@@ -124,6 +146,7 @@ export default class Index extends React.Component {
                                        className={this.state.checkedFlag ? 'onlist' : ''}>不限</a>
                                     {
                                         city.map((data, k) => {
+                                            console.log(data)
                                             return (
                                                 <a key={k} onClick={(e) => this.cityClick(k)}
                                                    className={this.state.currentActive == k ? 'onlist' : ''}>{data.name}</a>
@@ -136,7 +159,6 @@ export default class Index extends React.Component {
                                      style={this.state.display ? {display: 'block'} : {display: 'none'}}>
                                     {
                                         street.map((data, k) => {
-                                            console.log("sss", data);
                                             return (
                                                 <a key={k} href="#" className="">{data.name}</a>
                                             )
@@ -193,36 +215,38 @@ export default class Index extends React.Component {
                     <div className="r_ls_box">
                         {
                             platData.map((data, k) => {
+                                console.log(data.platDetails.area)
                                 return (
                                     <div className="r_lbx">
                                         <a href="#" className="rimg" target="_blank"><img
-                                            src="http://public.wutongwan.org/public-20171214-Fqv1N_pbx3GsIkaY1IZDRMkvvdi4?imageView2/1/w/380/h/285"
+                                            src={data.url}
                                             width="300" height="240" title="远洋悦山水" alt="远洋悦山水图片"/>
 
                                         </a>
                                         <div className="r_lbx_cen">
                                             <div className="r_lbx_cena">
-                                                <a href="#" target="_blank"></a>
+                                                <a href="#" target="_blank">{data.address}</a>
                                                 <div className="r_lbx_cena">
-                                                    地铁 6号线
+                                                    {data.ground}
                                                 </div>
                                             </div>
                                             <div className="r_lbx_cenb">
 
-                                                约54㎡  | 18楼
-                                                | 1室1卫 | 朝南
+                                                {data.platDetails.area} | {data.platDetails.floor}
+                                                | {data.platDetails.habitable} | {data.platDetails.orientation}
                                                 <em>整</em>
                                             </div>
                                             <div className="r_lbx_cenc">
 
-                                                <span>独立卫生间</span>
-                                                <span>独立淋浴</span>
-                                                <span>集中供暖</span>
+                                                <span>{data.spDetails.toilet}</span>
+                                                <span>{data.spDetails.shower}</span>
+                                                <span>{data.spDetails.heating}</span>
                                             </div>
                                         </div>
                                         <div className="r_lbx_money">
                                             <div className="r_lbx_moneya" style={{textAlign: 'center', paddingTop: 30}}>
-                                                <span className="ty_b" style={{fontSize: 40}}>3660</span>&nbsp;元/月
+                                                <span className="ty_b" style={{fontSize: 40}}>{data.price}</span>&nbsp;
+                                                元/月
                                             </div>
                                             <a className="lk_more" href="#" target="_blank">
                                                 查看房间详情
