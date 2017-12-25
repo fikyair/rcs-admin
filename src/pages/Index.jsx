@@ -95,13 +95,13 @@ export default class Index extends React.Component {
                         <Button style={{margin: 7}}>特大空间</Button>
                     </div>
                 </div>
-                <div style={{marginLeft: 50}}>
+                <div style={{maxWidth: 1190, margin: '0 auto'}}>
                     <Row>
                             {
                                 houseData.map((data, k) => {
                                     return (
                                         <Col span={8}>
-                                        <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}}>
+                                        <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}} noHovering={true}>
                                             <img alt="example" width="100%" src={data.img}/>
                                             <div className="room_ti">
                                                 <a href="#">{data.address}</a>
