@@ -84,7 +84,7 @@ export default class Index extends React.Component {
                         <button type="submit" className="search_btn">搜索</button>
                     </div>
                 </div>
-                <div className="col_row">
+                <div className="col_row line">
                     <h1 className="title_sec gred3">
                         爱家精选房源
                     </h1>
