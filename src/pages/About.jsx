@@ -18,7 +18,7 @@ export default class Index extends React.Component{
                                     <a href="#">关于爱家</a>
                                 </li>
                                 <li className="">
-                                    <a href="#">联系爱家</a>
+                                    <a href="/rent">联系爱家</a>
                                 </li>
                                 <li className="">
                                     <a href="#">加入爱家</a>
@@ -29,7 +29,7 @@ export default class Index extends React.Component{
                     <div className="fr roomcenter">
                         <div className="hp_title">
                             <div className="hp_t_h">
-                                <h1>关于蛋壳</h1>
+                                <h1>关于爱家</h1>
                             </div>
                             <span className="hp_t_line"></span>
                         </div>
