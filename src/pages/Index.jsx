@@ -5,12 +5,9 @@ import nav1 from '../img/nav1.gif';
 import nav2 from '../img/nav2.jpg';
 import nav3 from '../img/nav3.jpg';
 import nav4 from '../img/nav4.jpg';
-import plat1 from '../img/plat1.jpg';
-import plat2 from '../img/plat2.jpg';
-import plat3 from '../img/plat3.jpg';
+import logo from '../img/logo.png';
+import '../style/footer.less';
 
-const Option = Select.Option;
-const {Meta} = Card;
 
 export default class Index extends React.Component {
 
@@ -98,13 +95,13 @@ export default class Index extends React.Component {
                         <Button style={{margin: 7}}>特大空间</Button>
                     </div>
                 </div>
-                <div style={{marginLeft: 40}}>
+                <div style={{marginLeft: 50}}>
                     <Row>
-                        <Col span={8} style={{float: 'left'}}>
                             {
                                 houseData.map((data, k) => {
                                     return (
-                                        <Card style={{width: 380}} bodyStyle={{padding: 0}}>
+                                        <Col span={8}>
+                                        <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}}>
                                             <img alt="example" width="100%" src={data.img}/>
                                             <div className="room_ti">
                                                 <a href="#">{data.address}</a>
@@ -118,12 +115,30 @@ export default class Index extends React.Component {
                                                 </div>
                                             </div>
                                         </Card>
+                                        </Col>
                                     )
                                 })
                             }
-                        </Col>
-
                     </Row>
+                </div>
+                <div className="lk_more">
+                    <a href="#">更多房源</a>
+                </div>
+                <div className="footer-new">
+                    <div className="wrapper">
+                        <div className="clear"></div>
+                        <div className="foot-logo">
+                            <div className="foot-logo-box">
+                                <a href="//www.dankegongyu.com/" className="logo">
+                                    <img src = {logo} alt="愛家房屋官网图片" title="愛家房屋官网" width="140" height="28"/>
+                                </a>
+                                <span>© 2017 愛家房屋 京ICP备15009197号-1<br/>地址：北京市东城区朝阳门内大街8号朝阳首府2层212 </span>
+                            </div>
+                            <div className="web-belive">
+                                <a href="//www.baidu.com/s?wd=%E7%B4%AB%E6%A2%A7%E6%A1%90%28%E5%8C%97%E4%BA%AC%29%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8@v" target="_blank"><img src="//s3.wutongwan.org/img/public/zxrz2016.jpeg"/></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
