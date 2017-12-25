@@ -3,7 +3,7 @@ import Bundle from './DynamicRoute';
 import Index from 'bundle-loader?lazy!../pages/Index';
 import Rent from 'bundle-loader?lazy!../pages/Rent';
 import About from 'bundle-loader?lazy!../pages/About';
-
+import Login from 'bundle-loader?lazy!../pages/login/Login';
 
 
 const BundleCom = (props, loader) => {
@@ -32,6 +32,10 @@ export const commontLimtRouter = [
         path: '/about',
         exact: true,
         component: (props) => BundleCom(props,About),
-    },
+    },{
+        path: '/login',
+        exact: true,
+        component: (props) => BundleCom(props,Login),
+    }
 ]
 

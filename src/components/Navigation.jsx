@@ -69,16 +69,14 @@ class Navigation extends React.Component {
                     <Menu.Item key="about" style={{marginRight: '15%'}}>
                         <Link to="/about"/>关于爱家
                     </Menu.Item>
-                    <div className=" serphone">
+                    <div className="serphone">
                         <div className="phonetime">
                             客服热线：09:00 ~ 21:00
                         </div>
                         <div className="phonenum">
                             400-818-5656
                         </div>
-                        <div className="fr user">
-                            <Link to="/login"/>登录
-                        </div>
+                            <Link to="/login"><span className="fr user">登录</span></Link>
                     </div>
                 </Menu>
             </div>

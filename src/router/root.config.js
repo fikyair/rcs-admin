@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Index from "bundle-loader?lazy!../pages/Index";
 import Login from "bundle-loader?lazy!../pages/login/Login";
 import Bundle from './DynamicRoute';
@@ -20,15 +20,17 @@ export const root = [
         component: (props) => BundleCom(props, Index),
         breadcrumbName: '首页',
     }, {
-        path: '/login',
-        exact: true,
-        breadcrumbName: '登陆',
-        component: (props) => BundleCom(props, Login),
-    }, {
-        path: '/login/:id',
-        breadcrumbName: '登陆',
-        exact: true,
-        component: (props) => BundleCom(props, Login),
-    },{
         component: NoMatch,
-    }]
+    }
+]
+// {
+//     path: '/login',
+//         exact: true,
+//     breadcrumbName: '登陆',
+//     component: (props) => BundleCom(props, Login),
+// }, {
+//     path: '/login/:id',
+//         breadcrumbName: '登陆',
+//         exact: true,
+//         component: (props) => BundleCom(props, Login),
+// }
