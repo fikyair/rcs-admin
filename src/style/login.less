@@ -150,7 +150,6 @@ body, button, input, select, textarea, pre {
   width: 120px;
   position: relative;
   line-height: 16px;
-  padding-left: 20px;
 }
 .fl {
    float: left;
@@ -188,9 +187,6 @@ input[type="checkbox"], input[type="radio"] {
   margin: 0px auto;
   text-align: left;
 }
-.clearfix {
-  display: block;
-}
 .linksFooter {
   border-top: solid 1px #eee;
   border-bottom: solid 1px #eee;
@@ -219,4 +215,18 @@ input[type="checkbox"], input[type="radio"] {
   height: 20px;
   margin: 0 auto;
   width: 280px;
+}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+  margin: 0;
+  padding: 0;
+}
+.checkbox label{
+  margin-bottom: 0;
+  font-weight: 400;
+}
+.checkbox, .radio{
+  position: relative;
+  display: block;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
