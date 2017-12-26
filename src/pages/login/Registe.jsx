@@ -4,73 +4,49 @@ import '../../style/footer.less';
 import logo from '../../img/logo.png';
 
 
-
 export default class Register extends React.Component {
 
     render() {
         return (
-            <div>
+                <div>
                 <div className="m-content">
                     <div className="m-content_mid">
-                        <div className="modal-content logins" id="logins" style={{display: 'block'}}>
-                            <div className="separator m_icon"></div>
+                        <div className="modal" id="modal" style={{display: 'block'}}>
+                            <div className="modal-content signup" id="signup" style={{display: 'block'}} >
+                                <div className="separator m_icon"></div>
+                                <form action="/api/index.php?r=user/register" method="post" id="m-j-sign_Form">
 
-                            <div className="control-group">
-                                <span className="m_icon user"></span>
-                                <input type="text" name="user_name" id="user_name" placeholder="请输入用户名或手机号或邮箱"
-                                       className="inp_txt" tabIndex="1"/>
-                                <p htmlFor="user_name" className="invalid" style={{display: 'nonfe'}}></p>
+                                    <div className="control-group">
+                                        <span className="m_icon tel_icon"></span>
+                                        <input type="text" name="phone" id="sign_name" placeholder="建议使用常用手机号或邮箱" className="inp_txt"/>
+                                            <p htmlFor="sign_name" className="invalid" style={{display: 'none'}}>请输入符合格式的手机号或邮箱</p>
+                                    </div>
+                                    <div className="control-group">
+                                        <span className="m_icon pas"></span>
+                                        <input type="password" name="password" id="sign_pas" placeholder="请输入6-16位密码" className="inp_txt"/>
+                                            <p htmlFor="sign_pas" className="invalid" style={{display: 'none'}}>请输入6-16位密码</p>
+
+                                    </div>
+
+                                    <div className="control-group">
+                                        <span className="m_icon pas"></span>
+                                        <input type="password" name="password1" id="sign_pas_two" placeholder="请确认密码" className="inp_txt"/>
+                                            <p htmlFor="sign_pas_two" className="invalid" style={{display: 'none'}}>请确认密码一致且符合格式</p>
+
+                                    </div>
+                                    <div className="control-group clearfix">
+                                        <input type="button" value="注 册" className="org_btn" id="signup_button"/>
+                                    </div>
+
+
+                                    <div className="control-group clearfix tc bottom">
+                                        已有账号？现在就 <a href="/login" id="toLogin" className="org">登录</a>
+                                    </div>
+                                </form>
                             </div>
-                            <div className="control-group">
-                                <span className="m_icon pas"></span>
-                                <input type="password" name="user_pas" id="user_pas" placeholder="请输入6-16位密码"
-                                       className="inp_txt" tabIndex="2"/>
-                                <p htmlFor="user_pas" className="invalid" style={{display: 'none'}}></p>
-                            </div>
-
-                            <div className="control-group " id="captcha_tr" style={{display: 'none'}}>
-                                <input type="hidden" id="is_captcha" value="0"/>
-
-
-                                <div className="clearfix">
-                                    <input type="text" name="verification" id="verification" placeholder="请输入验证码"
-                                           className="inp_txt inp_yzm" tabIndex="3"/>
-                                    <img src="" width="114" height="45" className="cur_pointer captcha_img"
-                                         id="J-m-img"/>
-                                    <span className="m_icon refurbish"></span>
-                                </div>
-
-                                <p htmlFor="verification" className="invalid" style={{display: 'none'}}></p>
-                            </div>
-
-                            <div className="control-group clearfix">
-                                <p className="fl checkbox" id="within">
-                                    <label htmlFor="within_a_week">
-                                        <span className="m_icon" id="J-m-isSeven" data-isseven="0"></span>
-                                        <input type="checkbox" id="within_a_week"/>一周内免登录
-                                    </label>
-                                </p>
-                                <a href="#" className="fr org">忘记密码？</a>
-                            </div>
-                            <div className="control-group clearfix">
-                                <input type="button" value="登 录" className="org_btn" id="login_button"/>
-
-                            </div>
-
-                            <div className="control-group clearfix">
-
-                            </div>
-
-                            <div className="control-group clearfix tc bottom">
-                                没有账号？现在就 <a href="#" className="org"
-                                            id="toSignup">注册</a>
-                            </div>
-
-
                         </div>
                     </div>
                 </div>
-
                 <div className="footer-new">
                     <div className="wrapper">
                         <div className="clear"></div>

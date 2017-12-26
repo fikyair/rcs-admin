@@ -19,7 +19,7 @@ export default class Login extends React.Component {
                                 <span className="m_icon user"></span>
                                 <input type="text" name="user_name" id="user_name" placeholder="请输入用户名或手机号或邮箱"
                                        className="inp_txt" tabIndex="1"/>
-                                <p htmlFor="user_name" className="invalid" style={{display: 'nonfe'}}></p>
+                                <p htmlFor="user_name" className="invalid" style={{display: 'none'}}></p>
                             </div>
                             <div className="control-group">
                                 <span className="m_icon pas"></span>
