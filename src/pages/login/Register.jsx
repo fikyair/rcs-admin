@@ -62,7 +62,7 @@ export default class Login extends React.Component {
                             </div>
 
                             <div className="control-group clearfix tc bottom">
-                                没有账号？现在就 <a href="/register" className="org"
+                                没有账号？现在就 <a href="#" className="org"
                                             id="toSignup">注册</a>
                             </div>
 
