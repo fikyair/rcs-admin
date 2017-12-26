@@ -5,7 +5,7 @@ import logo from '../../img/logo.png';
 
 
 
-export default class Login extends React.Component {
+export default class Register extends React.Component {
 
     render() {
         return (
