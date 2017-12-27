@@ -6,6 +6,23 @@ import logo from '../../img/logo.png';
 
 export default class Register extends React.Component {
 
+    state={
+        className: false,
+        userName: 'none',
+        info: '',
+    }
+
+    phoneCheck(e){
+        let val = e.target.value;
+        if(/^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(val)){
+            setTimeout(function(){
+                this.setState({"info":""});
+            }.bind(this),1000);
+        }else{
+            this.setState({"info":"请输入符合格式的手机号或邮箱"});
+        }
+        this.setState({"val": val , userName: 'block',});
+    }
     render() {
         return (
                 <div>
@@ -18,8 +35,8 @@ export default class Register extends React.Component {
 
                                     <div className="control-group">
                                         <span className="m_icon tel_icon"></span>
-                                        <input type="text" name="phone" id="sign_name" placeholder="建议使用常用手机号或邮箱" className="inp_txt"/>
-                                            <p htmlFor="sign_name" className="invalid" style={{display: 'none'}}>请输入符合格式的手机号或邮箱</p>
+                                        <input type="text" name="phone" onChange={(e)=>this.phoneCheck(e)} id="sign_name" placeholder="建议使用常用手机号" className="inp_txt"/>
+                                            <p htmlFor="sign_name" className="invalid"  style={{display: this.state.userName}}>{this.state.info}</p>
                                     </div>
                                     <div className="control-group">
                                         <span className="m_icon pas"></span>
