@@ -6,12 +6,26 @@ import logo from '../../img/logo.png';
 
 
 export default class Login extends React.Component {
+
     state={
         className: false,
+        userName: 'none',
+        info: '',
     }
 
     spanClick(){
         this.setState({className: !this.state.className})
+    }
+    phoneCheck(e){
+        let val = e.target.value;
+        if(/^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$/.test(val)){
+            setTimeout(function(){
+                this.setState({"info":""});
+            }.bind(this),1000);
+        }else{
+            this.setState({"info":"请输入正确的手机号!"});
+        }
+        this.setState({"val":val , userName: 'block',});
     }
 
     render() {
@@ -24,9 +38,9 @@ export default class Login extends React.Component {
 
                             <div className="control-group">
                                 <span className="m_icon user"></span>
-                                <input type="text" name="user_name" id="user_name" placeholder="请输入用户名或手机号或邮箱"
+                                <input type="text" name="user_name" onChange={(e)=>this.phoneCheck(e)} id="user_name" placeholder="请输入用户名或手机号或邮箱"
                                        className="inp_txt" tabIndex="1"/>
-                                <p htmlFor="user_name" className="invalid" style={{display: 'none'}}></p>
+                                <p htmlFor="user_name" className="invalid" style={{display: this.state.userName}}>{this.state.info}</p>
                             </div>
                             <div className="control-group">
                                 <span className="m_icon pas"></span>
