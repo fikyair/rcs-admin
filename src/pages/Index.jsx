@@ -18,7 +18,7 @@ export default class Index extends React.Component {
     mockData = {
         houseData: [{
             img: 'http://public.wutongwan.org/public-20171219-FgaTYh9h4OXiFf7JT12aAeomUM3O?imageView2/1/w/380/h/285',
-            address: '大望路 东区国际公寓 主卧 朝西南 A室',
+            "address" : '大望路 东区国际公寓 主卧 朝西南 A室',
             ground: '地铁 1号线,八通线',
             platDetails: {
                 area: '约54㎡',
@@ -135,7 +135,7 @@ export default class Index extends React.Component {
                                 <span>© 2017 愛家房屋 京ICP备15009197号-1<br/>地址：北京市东城区朝阳门内大街8号朝阳首府2层212 </span>
                             </div>
                             <div className="web-belive">
-                                <a href="//www.baidu.com/s?wd=%E7%B4%AB%E6%A2%A7%E6%A1%90%28%E5%8C%97%E4%BA%AC%29%E8%B5%84%E4%BA%A7%E7%AE%A1%E7%90%86%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8@v" target="_blank"><img src="//s3.wutongwan.org/img/public/zxrz2016.jpeg"/></a>
+                                <a href="#" target="_blank"><img src="//s3.wutongwan.org/img/public/zxrz2016.jpeg"/></a>
                             </div>
                         </div>
                     </div>
@@ -145,123 +145,4 @@ export default class Index extends React.Component {
 
     }
 
-}
-
-
-{/*<div className="mainbox clear blocklook">*/
-}
-{/*<div id="oneTabContent">*/
-}
-{/*<div className="room_pro " id="rooms_特惠房源">*/
-}
-{/*<div className="room_pro_box">*/
-}
-{/*<a href="#">*/
-}
-{/*<img alt="example" width="100%" src={plat1}/>*/
-}
-{/*</a>*/
-}
-{/*<div className="room_ti">*/
-}
-{/*<a href="#">大望路 东区国际公寓 主卧 朝西南 A室</a>*/
-}
-{/*</div>*/
-}
-{/*<div className="roo_ads">*/
-}
-{/*<div className="roo_ads fl">*/
-}
-{/*地铁 1号线,八通线 / 约22平米 / 独卫*/
-}
-{/*</div>*/
-}
-{/*<div className="room_money fr">*/
-}
-{/*3940<span>元/月</span>*/
-}
-{/*</div>*/
-}
-{/*</div>*/
-}
-{/*</div>*/
-}
-{/*/!*<div className="room_pro_box">*!/*/
-}
-{/*/!*<a href="#">*!/*/
-}
-{/*/!*<img*!/*/
-}
-{/*/!*src="http://public.wutongwan.org/public-20170122-Fty1bFXa4ZGNtxk2kF66wOHk0VMq?imageView2/1/w/380/h/285"*!/*/
-}
-{/*/!*alt="金台路 公园5号 主卧 朝东南 A室图片" title="金台路 公园5号 主卧 朝东南 A室" width="380"/>*!/*/
-}
-{/*/!*</a>*!/*/
-}
-{/*/!*<div className="room_ti">*!/*/
-}
-{/*/!*<a href="#">金台路 公园5号 主卧 朝东南 A室</a>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*<div className="roo_ads">*!/*/
-}
-{/*/!*<div className="roo_ads fl">*!/*/
-}
-{/*/!*地铁 6号线,14号线 / 约22平米 / 独卫*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*<div className="room_money fr">*!/*/
-}
-{/*/!*4730<span>元/月</span>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*<div className="room_pro_box">*!/*/
-}
-{/*/!*<a href="#">*!/*/
-}
-{/*/!*<img*!/*/
-}
-{/*/!*src="http://public.wutongwan.org/public-20171219-Fq30Y-oNU2Hw2iN6GXUk_IzXK3M4?imageView2/1/w/380/h/285"*!/*/
-}
-{/*/!*alt="双井 广渠路48号院 主卧 朝南 B室图片" title="双井 广渠路48号院 主卧 朝南 B室" width="380"/>*!/*/
-}
-{/*/!*</a>*!/*/
-}
-{/*/!*<div className="room_ti">*!/*/
-}
-{/*/!*<a href="#">双井 广渠路48号院 主卧 朝南 B室</a>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*<div className="roo_ads">*!/*/
-}
-{/*/!*<div className="roo_ads fl">*!/*/
-}
-{/*/!*地铁 10号线 / 约14平米*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*<div className="room_money fr">*!/*/
-}
-{/*/!*3300<span>元/月</span>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-{/*/!*</div>*!/*/
-}
-
-{/*</div>*/
-}
-{/*</div>*/
-}
-{/*</div>*/
 }

@@ -6,6 +6,13 @@ import logo from '../../img/logo.png';
 
 
 export default class Login extends React.Component {
+    state={
+        className: false,
+    }
+
+    spanClick(){
+        this.setState({className: !this.state.className})
+    }
 
     render() {
         return (
@@ -46,7 +53,7 @@ export default class Login extends React.Component {
                             <div className="control-group clearfix">
                                 <p className="fl checkbox" id="within">
                                     <label htmlFor="within_a_week">
-                                        <span className="m_icon" id="J-m-isSeven" data-isseven="0"></span>
+                                        <span className={this.state.className?'m_icon m_icon_active':'m_icon'} onClick={() => {this.spanClick()}} id="J-m-isSeven" data-isseven="0"></span>
                                         <input type="checkbox" id="within_a_week"/>一周内免登录
                                     </label>
                                 </p>
