@@ -92,5 +92,6 @@
     "webpack": "^3.3.0",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-server": "^2.4.5"
+
   }
 }
