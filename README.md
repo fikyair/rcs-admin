@@ -8,7 +8,6 @@
 ```
 npm run dev
 ```
-
 #### 开发构建
 通过jenkins进行远程构建然后将build和nginx-conf发送到rcs-admin的容器内，
 jenkins使用nginx镜像重新发布服务
