@@ -2,7 +2,7 @@ import React from 'react';
 import '../style/about.less';
 import {Card} from 'antd';
 import logo from '../img/logo.png';
-import {AboutAiJia, ConcatAiJia} from '../components/AboutItems';
+import {AboutAiJia, ConcatAiJia, JoinAiJia} from '../components/AboutItems';
 import { Link } from 'react-router-dom';
 
 export default class Index extends React.Component {
@@ -28,6 +28,10 @@ export default class Index extends React.Component {
                 <ConcatAiJia/>
             )
 
+        }else {
+            return(
+                <JoinAiJia/>
+            )
         }
 
     }
@@ -38,7 +42,7 @@ export default class Index extends React.Component {
         }else if( flag === 'concat'){
             this.setState({about: false, concat: true, changeA: false, changeB: !this.state.changeB, changeC: false})
         }else {
-            this.state({about: false, concat: false, changeA: false, changeB: false ,changeC: !this.state.changeC})
+            this.setState({about: false, concat: false, changeA: false, changeB: false ,changeC: !this.state.changeC})
         }
 
     }

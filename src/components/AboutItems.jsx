@@ -54,3 +54,38 @@ export const ConcatAiJia = () => (
             </div>
         </div>
 )
+export  const JoinAiJia = () => (
+
+    <div className="fr roomcenter">
+        <div className="hp_title">
+            <div className="hp_t_h">
+                <h1>加入爱家</h1>
+            </div>
+            <span className="hp_t_line"></span>
+        </div>
+
+        <div className="joinbox">
+            <div className="jointext">
+                应聘信息投递邮箱：<a href="mailto:hr@aijiafangwu.com">hr@dankegongyu.com</a><br/>
+                投递邮件主题注明 ：投递岗位+姓名(校园毕业生、实习生：投递岗位+姓名+学校+学历+专业)。<br/>
+                <b>本招聘长期有效！</b>
+            </div>
+            <div className="boxlist on">
+                <div className="listtitle">
+                    <span>Java 高级工程师</span>
+                </div>
+                <div className="jobtext">
+                    <span>工作地址</span>
+                    <p>北京朝阳门联合大厦601</p>
+                    <span>岗位职责</span>
+                    <p>1.参与公司业务系统开发；<br/>2.参与底层服务架构开发；</p>
+                    <span>任职要求</span>
+                    <p>1.本科及以上学历，计算机或相关专业，5年以上互联网行业java开发经验，熟悉RPC原理，至少有一种RPC框架的使用经验；<br>2.精通J2EE架构，Java基础扎实，理解io、多线程、集合等基础框架，对JVM原理有一定的了解；<br>3.熟悉主流开源框架，如Spring、SpringMVC、MyBatis、Activity、SpringBoot等；熟悉Spring原理；<br>4.熟练使用MYSQL数据库，对SQL优化有经验；熟悉至少一种非关系型数据库和缓存工具；<br>5.熟悉Servlet容器（Tomcat、Jetty、Resin等）原理和使用；<br>6.熟悉RESTful API 规范，了解 Open API 标准；<br>7.熟悉持续集成和自动化测试工具，如Hudson、Jenkins；<br>8.有ERP项目开发经验的优先；</p>
+                    <span>简历投递邮箱</span>
+                    <p><a href="mailto:lixiang1@dankegongyu.com">lixiang1@dankegongyu.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+)
