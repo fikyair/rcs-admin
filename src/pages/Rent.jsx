@@ -204,7 +204,7 @@ export default class Index extends React.Component {
                         </dl>
                     </div>
                 </Card>
-                <Card className="roomlist wrapper" noHovering={true}>
+                <Card className="roomlist wrapper" style={{marginTop: 20}} noHovering={true}>
                     <div className="r_ls">
 
                         <a href="#" className="ck_on">默认</a>
@@ -251,7 +251,7 @@ export default class Index extends React.Component {
                                                 <span className="ty_b" style={{fontSize: 40}}>{data.price}</span>&nbsp;
                                                 元/月
                                             </div>
-                                            <a className="lk_more" href="#" target="_blank">
+                                            <a className="lk_more_rent" href="#" target="_blank">
                                                 查看房间详情
                                             </a>
                                         </div>
