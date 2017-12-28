@@ -10,8 +10,12 @@ export default class Index extends React.Component {
     state = {
         about: true,
         concat: false,
-        flag: 'about'
-    }
+        join: false,
+        flag: 'about',
+        changeA: true,
+        changeB: false,
+        changeC: false,
+     }
 
 
     left = () => {
@@ -30,9 +34,11 @@ export default class Index extends React.Component {
 
     itemClick = (flag) => {
         if(flag === 'about'){
-            this.setState({about: true, concat: false})
-        }else if( flag==='concat'){
-            this.setState({about: false, concat: true})
+            this.setState({about: true, concat: false, changeB: false, changeA: !this.state.changeA, changeC: false})
+        }else if( flag === 'concat'){
+            this.setState({about: false, concat: true, changeA: false, changeB: !this.state.changeB, changeC: false})
+        }else {
+            this.state({about: false, concat: false, changeA: false, changeB: false ,changeC: !this.state.changeC})
         }
 
     }
@@ -44,13 +50,13 @@ export default class Index extends React.Component {
                     <Card className="fl roomintro" noHovering={true}>
                         <div className="hp_usbox">
                             <ul>
-                                <li className="active" onClick={()=>{this.itemClick('about')}}>
+                                <li className={this.state.changeA?'active': ''} onClick={()=>{this.itemClick('about')}}>
                                     <Link to='#' >关于爱家</Link>
                                 </li>
-                                <li className="" onClick={()=>{this.itemClick('concat')}}>
+                                <li className={this.state.changeB?'active': ''} onClick={()=>{this.itemClick('concat')}}>
                                     <Link to="#">联系爱家</Link>
                                 </li>
-                                <li className="">
+                                <li className={this.state.changeC?'active': ''} onClick={()=>{this.itemClick('join')}}>
                                     <Link to="#">加入爱家</Link>
                                 </li>
                             </ul>
