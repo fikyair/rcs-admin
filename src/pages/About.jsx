@@ -5,7 +5,7 @@ import logo from '../img/logo.png';
 import {AboutAiJia, ConcatAiJia, JoinAiJia} from '../components/AboutItems';
 import { Link } from 'react-router-dom';
 
-export default class Index extends React.Component {
+export default class About extends React.Component {
 
     state = {
         about: true,

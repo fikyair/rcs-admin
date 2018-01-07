@@ -3,6 +3,7 @@ import {Card} from 'antd';
 import '../style/rent.less';
 import logo from '../img/logo.png';
 import '../style/footer.less';
+import { Link } from 'react-router-dom';
 
 
 export default class Index extends React.Component {
@@ -12,8 +13,11 @@ export default class Index extends React.Component {
         checkedFlag: true,
         currentActive: null,
         currentActive1: null,
+        currentActive2: null,
+        currentActive3: null,
         priceCheckedFlag: true,
-
+        typeCheckedFlag: true,
+        habitableCheckedFlag: true,
 
     }
 
@@ -57,6 +61,24 @@ export default class Index extends React.Component {
                 name: '3000~3500元', value: '3'
             }, {
                 name: ' 3500元以上', value: '4'
+            }
+        ],
+        habitableData: [
+            {
+                name: '一居室', value: '1'
+            },{
+                name: '两户合租', value: '2'
+            },{
+                name: '三户合租', value: '3'
+            },{
+                name: '四户及以上', value: '4'
+            }
+        ],
+        typeData: [
+            {
+                name: '整租', value: '1'
+            } ,{
+                name: '合租', value: '2'
             }
         ],
         platData: [
@@ -131,12 +153,25 @@ export default class Index extends React.Component {
         this.setState({priceCheckedFlag: !this.state.priceCheckedFlag, currentActive1: null})
     }
 
+    habitableClick(j) {
+        this.setState({currentActive2: j, habitableCheckedFlag: false});
+    }
+    aHabitableClick() {
+        this.setState({habitableCheckedFlag: !this.state.habitableCheckedFlag, currentActive2: null})
+    }
+    typeClick(j) {
+        this.setState({currentActive3: j, typeCheckedFlag: false});
+    }
+    aTypeClick() {
+        this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null})
+    }
     render() {
         const city = this.mockData.cityData;
         const street = this.mockData.streetData;
         const price = this.mockData.priceData;
         const platData = this.mockData.platData;
-
+        const habitable = this.mockData.habitableData;
+        const type = this.mockData.typeData;
         return (
             <div>
                 <Card className="wrapper" style={{marginTop: 50}} noHovering={true}>
@@ -172,6 +207,25 @@ export default class Index extends React.Component {
                         </dl>
 
                         <dl className="dl_lst">
+                            <dt>居室：</dt>
+                            <dd>
+                                <div className="option_list">
+                                    <a onClick={() => {
+                                        this.aHabitableClick()
+                                    }} className={this.state.habitableCheckedFlag ? 'onlist' : ''}>不限</a>
+                                    {
+                                        habitable.map((data, j) => {
+                                            return (
+                                                <a key={j} onClick={(e) => this.habitableClick(j)}
+                                                   className={this.state.currentActive2 == j ? 'onlist' : ''}>{data.name}</a>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </dd>
+                        </dl>
+
+                        <dl className="dl_lst">
                             <dt>租金：</dt>
                             <dd>
                                 <div className="option_list">
@@ -189,19 +243,26 @@ export default class Index extends React.Component {
                                 </div>
                             </dd>
                         </dl>
-
-                        <dl className="dl_lst last" style={{display: 'none'}}>
-                            <dt>居室：</dt>
+                        <dl className="dl_lst">
+                            <dt>类型：</dt>
                             <dd>
                                 <div className="option_list">
-                                    <a href="#" className="onlist">不限</a>
-                                    <a href="#" className="">一居室</a>
-                                    <a href="#" className="">两户合租</a>
-                                    <a href="#" className="">三户合租</a>
-                                    <a href="#" className="">四户及以上合租</a>
+                                    <a onClick={() => {
+                                        this.aTypeClick()
+                                    }} className={this.state.typeCheckedFlag ? 'onlist' : ''}>不限</a>
+                                    {
+                                        type.map((data, j) => {
+                                            return (
+                                                <a key={j} onClick={(e) => this.typeClick(j)}
+                                                   className={this.state.currentActive3 == j ? 'onlist' : ''}>{data.name}</a>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </dd>
                         </dl>
+
+
                     </div>
                 </Card>
                 <Card className="roomlist wrapper" style={{marginTop: 20}} noHovering={true}>
@@ -221,14 +282,14 @@ export default class Index extends React.Component {
                                 console.log(data.platDetails.area)
                                 return (
                                     <div className="r_lbx">
-                                        <a href="#" className="rimg" target="_blank"><img
+                                        <Link to="/platDetails" className="rimg" target="_blank"><img
                                             src={data.url}
                                             width="300" height="240" title="远洋悦山水" alt="远洋悦山水图片"/>
 
-                                        </a>
+                                        </Link>
                                         <div className="r_lbx_cen">
                                             <div className="r_lbx_cena">
-                                                <a href="#" target="_blank">{data.address}</a>
+                                                <Link to="/platDetails" target="_blank">{data.address}</Link>
                                                 <div className="r_lbx_cena">
                                                     {data.ground}
                                                 </div>
@@ -251,9 +312,9 @@ export default class Index extends React.Component {
                                                 <span className="ty_b" style={{fontSize: 40}}>{data.price}</span>&nbsp;
                                                 元/月
                                             </div>
-                                            <a className="lk_more_rent" href="#" target="_blank">
+                                            <Link className="lk_more_rent" to="/platDetails" target="_blank">
                                                 查看房间详情
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                 )
