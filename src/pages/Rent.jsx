@@ -85,7 +85,7 @@ export default class Index extends React.Component {
             {
                 url: 'http://public.wutongwan.org/public-20171214-Fqv1N_pbx3GsIkaY1IZDRMkvvdi4?imageView2/1/w/380/h/285',
                 address: '物资学院路 悦澜水岸家园 主卧 朝南 A室',
-                ground: '地铁６号线',
+                ground: '五星',
                 platDetails: {
                     area: '约54㎡',
                     floor: '18楼',
@@ -102,7 +102,7 @@ export default class Index extends React.Component {
             }, {
                 url: 'http://public.wutongwan.org/public-20171211-Fkp3yxzx8iE29vZluvXCFAOaiVEz?imageView2/1/w/380/h/285',
                 address: '马家堡 亚林西1区 主卧 朝南 B室',
-                ground: '地铁4号线',
+                ground: '四星',
                 platDetails: {
                     area: '约12㎡',
                     floor: '23楼',
@@ -119,7 +119,7 @@ export default class Index extends React.Component {
             }, {
                 url: 'http://public.wutongwan.org/public-20171213-FhbbTF18lB-Me0GrRPwjVFUbfSAs?imageView2/1/w/380/h/285',
                 address: '四惠 都会华庭 主卧 朝南 B室',
-                ground: '地铁 1号线,八通线',
+                ground: '五星',
                 platDetails: {
                     area: '约18㎡ ',
                     floor: '6楼',
