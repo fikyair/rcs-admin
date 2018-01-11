@@ -138,3 +138,4 @@ export const global = {
     keys.forEach(key => this.removeItem(key));
   },
 };
+
