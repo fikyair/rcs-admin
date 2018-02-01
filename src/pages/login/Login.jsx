@@ -3,6 +3,8 @@ import '../../style/login.less';
 import '../../style/footer.less';
 import logo from '../../img/logo.png';
 import { Link } from 'react-router-dom';
+import pay from '../../img/pay.jpg';
+import weixin from '../../img/wexin.jpg';
 
 export default class Login extends React.Component {
 
@@ -91,7 +93,54 @@ export default class Login extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="footer">
+                    <div className="wibsite-center">
+                        <div className="footer-chain">爱家公寓连锁</div>
+                        <div className="chain-box">
+                            <label><a href="#">北京爱家公寓</a></label>
+                            <label><a href="#">深圳爱家公寓</a></label>
+                            <label><a href="#">上海爱家公寓</a></label>
+                            <label><a href="#">杭州爱家公寓</a></label>
+                            <label><a href="#">天津爱家公寓</a></label>
+                            <label><a href="#">武汉爱家公寓</a></label>
 
+                        </div>
+                    </div>
+                    <div className="website-help">
+                        <div className="wibsite-center">
+                            <div className="website-f-list">
+                                <span>用户帮助</span>
+                                <p><a href="#" target="_blank">入住指南</a></p>
+                                <p><a href="#" target="_blank">生活常识</a></p>
+                            </div>
+                            <div className="website-f-list">
+                                <span>商务合作</span>
+                                <p><a href="#" target="_blank">商务合作</a></p>
+                            </div>
+                            <div className="website-f-list">
+                                <span>公司信息</span>
+                                <p><a href="#" target="_blank">关于爱家</a></p>
+                                <p><a href="#" target="_blank">联系爱家</a></p>
+                                <p><a href="#" target="_blank">加入爱家</a></p>
+                            </div>
+                            <div className="website-f-list">
+                                <span>客服热线</span>
+                                <p>400-818-5656</p>
+                                <p>工作日 09:00-21:00</p>
+                            </div>
+                            <div className="website-f-right">
+                                <div className="website-f-pic">
+                                    <img src={pay} alt="下载爱家公寓APP"/>
+                                    <p>加我支友</p>
+                                </div>
+                                <div className="website-f-pic">
+                                    <img src={weixin} alt="关注爱家公寓官方微信"/>
+                                    <p>好房随意挑，微信更方便</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="footer-new">
                     <div className="wrapper">
                         <div className="clear"></div>
