@@ -6,6 +6,7 @@ import About from 'bundle-loader?lazy!../pages/About';
 import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Registe from 'bundle-loader?lazy!../pages/login/Registe';
 import PlatDetails from 'bundle-loader?lazy!../pages/platDetails';
+import Personal from 'bundle-loader?lazy!../pages/Personal';
 
 const BundleCom = (props, loader) => {
     return (
@@ -45,6 +46,10 @@ export const commontLimtRouter = [
         path: '/platDetails',
         exact: true,
         component: (props) => BundleCom(props,PlatDetails),
+    },{
+        path: '/personal',
+        exact: true,
+        component: (props) => BundleCom(props, Personal),
     }
 ]
 

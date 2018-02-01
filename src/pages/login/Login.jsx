@@ -2,8 +2,7 @@ import React from 'react';
 import '../../style/login.less';
 import '../../style/footer.less';
 import logo from '../../img/logo.png';
-
-
+import { Link } from 'react-router-dom';
 
 export default class Login extends React.Component {
 
@@ -74,7 +73,8 @@ export default class Login extends React.Component {
                                 <a href="#" className="fr org">忘记密码？</a>
                             </div>
                             <div className="control-group clearfix">
-                                <input type="button" value="登 录" className="org_btn" id="login_button"/>
+
+                                <Link to = "/personal"> <input type="button" value="登 录" className="org_btn" id="login_button"/> </Link>
 
                             </div>
 
