@@ -66,7 +66,7 @@ export  const JoinAiJia = () => (
 
         <div className="joinbox">
             <div className="jointext">
-                应聘信息投递邮箱：<a href="mailto:hr@aijiagongyu.com">hr@dankegongyu.com</a><br/>
+                应聘信息投递邮箱：<a href="mailto:hr@aijiagongyu.com">hr@aijiagongyu.com</a><br/>
                 投递邮件主题注明 ：投递岗位+姓名(校园毕业生、实习生：投递岗位+姓名+学校+学历+专业)。<br/>
                 <b>本招聘长期有效！</b>
             </div>
