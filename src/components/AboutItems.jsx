@@ -47,10 +47,10 @@ export const ConcatAiJia = () => (
                 <p><label Htmlfor="">地 址：</label>北京市东城区朝阳门内大街8号朝阳首府2楼212室</p>
                 <p><label Htmlfor="">邮 编：</label>100010</p>
                 <p><label Htmlfor="">电 话：</label><a href="tel:400-018-8090" className="telphoneview">400-018-8090</a><a href="tel:400-018-8090" className="telphonepcview">400-818-5656</a></p>
-                <p><label Htmlfor="">邮 箱：</label><a href="mailto:bd@aijiafangwu.com">bd@dankegongyu.com</a>&nbsp;&nbsp;(商务合作专用)</p>
+                <p><label Htmlfor="">邮 箱：</label><a href="mailto:bd@aijiagongyu.com">bd@aijiagongyu.com</a>&nbsp;&nbsp;(商务合作专用)</p>
             </div>
             <div className="hp_baidumap">
-                <img src="//s2.wutongwan.org/build/img/help/baidumap-a482e83e90.jpg" title="联系蛋壳" alt="联系蛋壳图片" width="820" height="388"/>
+                <img src="//s2.wutongwan.org/build/img/help/baidumap-a482e83e90.jpg" title="联系蛋壳" alt="联系爱家图片" width="820" height="388"/>
             </div>
         </div>
 )
@@ -66,7 +66,7 @@ export  const JoinAiJia = () => (
 
         <div className="joinbox">
             <div className="jointext">
-                应聘信息投递邮箱：<a href="mailto:hr@aijiafangwu.com">hr@dankegongyu.com</a><br/>
+                应聘信息投递邮箱：<a href="mailto:hr@aijiagongyu.com">hr@dankegongyu.com</a><br/>
                 投递邮件主题注明 ：投递岗位+姓名(校园毕业生、实习生：投递岗位+姓名+学校+学历+专业)。<br/>
                 <b>本招聘长期有效！</b>
             </div>
@@ -89,7 +89,7 @@ export  const JoinAiJia = () => (
                         7.熟悉持续集成和自动化测试工具，如Hudson、Jenkins；<br/>
                         8.有ERP项目开发经验的优先；</p>
                     <span>简历投递邮箱</span>
-                    <p><a href="mailto:lixiang1@dankegongyu.com">lixiang1@dankegongyu.com</a></p>
+                    <p><a href="mailto:lixiang1@aijiagongyu.com">lixiang1@aijiagongyu.com</a></p>
                 </div>
             </div>
         </div>

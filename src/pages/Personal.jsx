@@ -27,7 +27,7 @@ export default class Personal extends React.Component {
                         <ul>
                             <li className="myStore"><b></b><a href="#">我的收藏</a></li>
                             <li className="myLook"><b></b><a href="#">发布房屋</a></li>
-                            <li className="myContract"><b></b><a href="#">管理管理</a></li>
+                            <li className="myContract"><b></b><a href="#">我的订单</a></li>
                             <li className="myChange"><b></b><a href="#">我的留言</a></li>
                         </ul>
                     </div>
@@ -41,7 +41,7 @@ export default class Personal extends React.Component {
                                 <p className="p1">下午好，
                                     <span>
                                     <a href="http://passport.ziroom.com/index.php?r=user/index">
-                                        自如客
+                                        爱家客
                                     </a>
                                 </span>
                                 </p>
