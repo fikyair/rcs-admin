@@ -92,3 +92,8 @@ export const API_GET_MULTI_LIST = ['REQUEST', 'API_GET_MULTI_LIST_SUCESS','FAILU
 //GET /rcslmodel/isdelete/{modelId}  根据模型id查询个性限额模型
 
 export const API_GET_HAS_PERSONAL = ['REQUEST', 'API_GET_HAS_PERSONAL','FAILURE'];
+
+
+//GEt 根据id查询城市
+
+export const API_GET_PROVINCE = ['REQUEST', 'API_GET_PROVINCE','FAILURE'];

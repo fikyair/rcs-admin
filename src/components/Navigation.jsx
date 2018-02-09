@@ -1,16 +1,22 @@
-import {Menu, Button, Select} from 'antd';
 import React from 'react';
+import {Containerization} from '../common/PublicComponent';
+import {Menu, Button, Select} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
 import '../style/navigation.less';
 import logo from '../img/logo.png';
 import ads from '../img/ads.png';
 import spri from '../img/spri.png';
 import $ from 'jquery';
+import {
+    get_province_all,
+} from '../../src/actions/platfrontAction';
 
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const {Option, OptGroup} = Select;
-
+@Containerization(state => ({
+    provinceData: state.PlatReducer.provinceData,
+}))
 class Navigation extends React.Component {
     state = {
         current: 'mail',
@@ -21,11 +27,19 @@ class Navigation extends React.Component {
             current: e.key,
         });
     }
-    ulClick(){
+
+    ulClick() {
         let $Uarry = $("#uldrop a");
-        $Uarry.click(function(){
+        $Uarry.click(function () {
             let r = $(this).text();
             $("#dropdownMenu1").text(r);
+        });
+    }
+
+    componentWillMount() {
+        this.props.dispatch(get_province_all()).then(() => {
+            console.log(">>>")
+            console.log("=====",this.props.provinceData);
         });
     }
 
@@ -45,12 +59,15 @@ class Navigation extends React.Component {
                         </div>
                     </div>
                     <div className="fl dkcity">
-                            <span  data-toggle="dropdown" onClick={() => {this.ulClick()}} aria-expanded="true" style={{justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-                               <img src={ads} />
-                                <div id="dropdownMenu1"　>北京市</div>
+                            <span data-toggle="dropdown" onClick={() => {
+                                this.ulClick()
+                            }} aria-expanded="true"
+                                  style={{justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                               <img src={ads}/>
+                                <div id="dropdownMenu1">北京市</div>
                                <img src={spri} style={{marginLeft: 7}}/>
                             </span>
-                        <ul id = "uldrop" className="dropdown-menu" >
+                        <ul id="uldrop" className="dropdown-menu">
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="bj">北京市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sz">深圳市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sh">上海市</a></li>
@@ -76,7 +93,7 @@ class Navigation extends React.Component {
                         <div className="phonenum">
                             400-818-5656
                         </div>
-                            <Link to="/login"><span className="fr user">登录</span></Link>
+                        <Link to="/login"><span className="fr user">登录</span></Link>
                     </div>
                 </Menu>
             </div>
