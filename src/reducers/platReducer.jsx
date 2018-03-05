@@ -4,18 +4,18 @@ import {
 
 
 const initialState = {
-    provinceData: [],
+    NavProvinceData: {},
 }
 
-export default function (state = initialState, action) {
-    switch (action.type){
+export default function (state = initialState, actions) {
+    switch (actions.type){
         case API_GET_PROVINCE[1]:
             return {
                 ...state,
-                provinceData: action.data
+                NavProvinceData: actions.data
             }
         default:
-            return state
+            return state;
     }
 
 }

@@ -15,7 +15,7 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const {Option, OptGroup} = Select;
 @Containerization(state => ({
-    provinceData: state.PlatReducer.provinceData,
+    provinceData: state.PlatReducer.NavProvinceData,
 }))
 class Navigation extends React.Component {
     state = {
@@ -25,6 +25,14 @@ class Navigation extends React.Component {
         console.log('click ', e);
         this.setState({
             current: e.key,
+        });
+    }
+    handleClickPosition(){
+        debugger
+        this.props.dispatch(get_province_all()).then(() => {
+            debugger;
+            console.log(">>>位置信息：")
+            console.log("=====",this.props.provinceData);
         });
     }
 
@@ -37,10 +45,7 @@ class Navigation extends React.Component {
     }
 
     componentWillMount() {
-        this.props.dispatch(get_province_all()).then(() => {
-            console.log(">>>")
-            console.log("=====",this.props.provinceData);
-        });
+
     }
 
     render() {
@@ -68,7 +73,7 @@ class Navigation extends React.Component {
                                <img src={spri} style={{marginLeft: 7}}/>
                             </span>
                         <ul id="uldrop" className="dropdown-menu">
-                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="bj">北京市</a></li>
+                            <li><a style={{textDecoration: 'none'}} onClick={() => {this.handleClickPosition()}} rel="bj">北京市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sz">深圳市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sh">上海市</a></li>
                             <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="hz">杭州市</a></li>

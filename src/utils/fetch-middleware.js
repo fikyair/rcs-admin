@@ -1,6 +1,29 @@
 import store from '../store';
 import {getCurrentLoginUser} from '../common/permission';
 
+export const ActionCreator = (type, url, method, data,key) => {
+
+    return () => {
+        return {
+            types: [...type],
+            payload: key,
+            promise: () => {
+                return new Promise((resolve, reject) => {
+                    fetch(url, {
+                        method: method,
+                        headers:{...headers,'auth-token': $.cookie('auth-token')},
+                        body: data?JSON.stringify(data):null,
+                    }).then(checkStatus).then(parseJSON).then(filterResponse).then((data) => {
+                        resolve(data);
+                    }).catch((err) => {
+                        reject({err});
+                    });
+                })
+            }
+        }
+    }
+}
+
 export const FetchAPI = (url,method,data)=>{
   store.dispatch({ type: 'REQUEST'});
     return new Promise((resolve, reject) => {

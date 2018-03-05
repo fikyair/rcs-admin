@@ -16,9 +16,9 @@ function promiseMiddleware() {
 
     return promise().then(
       (result) => {
-        const { data, code} =  result;
+        const { data, state} =  result;
         next({...rest, data, type: 'FINISH'})
-        if(code  == '200'){
+        if(state  == '200'){
 
             return next({...rest, data, type: SUCCESS})
 
