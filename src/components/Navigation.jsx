@@ -28,11 +28,9 @@ class Navigation extends React.Component {
         });
     }
     handleClickPosition(){
-        debugger
         this.props.dispatch(get_province_all()).then(() => {
-            debugger;
-            console.log(">>>位置信息：")
-            console.log("=====",this.props.provinceData);
+            debugger
+            console.log(">>>位置信息",this.props.provinceData);
         });
     }
 

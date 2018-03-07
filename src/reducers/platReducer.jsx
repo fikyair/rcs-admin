@@ -5,8 +5,6 @@ import {
 
 const initialState = {
     NavProvinceData: [],
-    cities: [],
-
 }
 
 export default function (state = initialState, actions) {
@@ -19,7 +17,14 @@ export default function (state = initialState, actions) {
                     return{
                         pName: v.pName,
                         cities: v.cities.map((i) =>{
-                            return i.cName
+                            return {
+                                cName: i.cName,
+                                streets: i.streets.map((j) =>{
+                                     return {
+                                         sName: j.sName
+                                     }
+                                })
+                            }
                         })
                     }
                 })
