@@ -5,6 +5,8 @@ import {
 
 const initialState = {
     NavProvinceData: [],
+    cities: [],
+
 }
 
 export default function (state = initialState, actions) {
@@ -13,7 +15,14 @@ export default function (state = initialState, actions) {
             debugger
             return {
                 ...state,
-                NavProvinceData: actions.data
+                NavProvinceData: _.map(actions.data, (v) =>{
+                    return{
+                        pName: v.pName,
+                        cities: v.cities.map((i) =>{
+                            return i.cName
+                        })
+                    }
+                })
             }
         default:
             return state;
