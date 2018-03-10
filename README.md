@@ -2,7 +2,7 @@
 
 爱家公寓前端项目
 
-后台管理请见[flat](https://github.com/fikyair/flat)
+后台管理请见  [flat](https://github.com/fikyair/flat)
 
 
 #### 开发启动
