@@ -27,14 +27,9 @@ class Navigation extends React.Component {
             current: e.key,
         });
     }
-    handleClickPosition(){
-        this.props.dispatch(get_province_all()).then(() => {
-            debugger
-            console.log(">>>位置信息",this.props.provinceData);
-        });
-    }
 
     ulClick() {
+
         let $Uarry = $("#uldrop a");
         $Uarry.click(function () {
             let r = $(this).text();
@@ -43,10 +38,14 @@ class Navigation extends React.Component {
     }
 
     componentWillMount() {
-
+        this.props.dispatch(get_province_all()).then(() => {
+            console.log(">>>位置信息",this.props.provinceData);
+        });
     }
 
     render() {
+        const positionData = this.props.provinceData;
+
         return (
 
             <div>
@@ -71,12 +70,16 @@ class Navigation extends React.Component {
                                <img src={spri} style={{marginLeft: 7}}/>
                             </span>
                         <ul id="uldrop" className="dropdown-menu">
-                            <li><a style={{textDecoration: 'none'}} onClick={() => {this.handleClickPosition()}} rel="bj">北京市</a></li>
-                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sz">深圳市</a></li>
-                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="sh">上海市</a></li>
-                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="hz">杭州市</a></li>
-                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="tj">天津市</a></li>
-                            <li><a style={{textDecoration: 'none'}} href="javascript:void(0)" rel="wh">武汉市</a></li>
+                            {
+                                positionData.map((data,k)=>{
+                                    return(
+
+                                        <li><a k = {k} style={{textDecoration: 'none'}}
+                                               rel="bj">{data.pName}</a></li>
+                                    )
+                                })
+                            }
+
                         </ul>
                     </div>
                     {/*<div className="fl grline"></div>*/}
