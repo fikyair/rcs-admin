@@ -6,8 +6,12 @@ import { Link } from 'react-router-dom';
 import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
+import {Containerization} from '../common/PublicComponent';
 
 
+@Containerization(state => ({
+    provinceData: state.PlatReducer.NavProvinceData,
+}))
 export default class Index extends React.Component {
 
     state = {
@@ -20,7 +24,7 @@ export default class Index extends React.Component {
         priceCheckedFlag: true,
         typeCheckedFlag: true,
         habitableCheckedFlag: true,
-
+        province: this.props.provinceData
     }
 
     mockData = {
@@ -174,6 +178,7 @@ export default class Index extends React.Component {
         const platData = this.mockData.platData;
         const habitable = this.mockData.habitableData;
         const type = this.mockData.typeData;
+        console.log(".....",this.props.provinceData)
         return (
             <div>
                 <Card className="wrapper" style={{marginTop: 50}} noHovering={true}>

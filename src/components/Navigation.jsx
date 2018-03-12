@@ -29,18 +29,19 @@ class Navigation extends React.Component {
     }
 
     ulClick() {
-
-        let $Uarry = $("#uldrop a");
-        $Uarry.click(function () {
-            let r = $(this).text();
-            $("#dropdownMenu1").text(r);
+        this.props.dispatch(get_province_all()).then(() => {
+            console.log(">>>位置信息",this.props.provinceData);
+            let $Uarry = $("#uldrop a");
+            $Uarry.click(function () {
+                let r = $(this).text();
+                $("#dropdownMenu1").text(r);
+            });
         });
+
     }
 
     componentWillMount() {
-        this.props.dispatch(get_province_all()).then(() => {
-            console.log(">>>位置信息",this.props.provinceData);
-        });
+
     }
 
     render() {
