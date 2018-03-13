@@ -9,6 +9,7 @@ import spri from '../img/spri.png';
 import $ from 'jquery';
 import {
     get_province_all,
+    get_province_by_pname,
 } from '../../src/actions/platfrontAction';
 
 const SubMenu = Menu.SubMenu;
@@ -16,6 +17,7 @@ const MenuItemGroup = Menu.ItemGroup;
 const {Option, OptGroup} = Select;
 @Containerization(state => ({
     provinceData: state.PlatReducer.NavProvinceData,
+    provinceDataByName: state.PlatReducer.NavProvinceDataByPName,
 }))
 class Navigation extends React.Component {
     state = {
@@ -40,11 +42,18 @@ class Navigation extends React.Component {
 
     }
     handleLinkClick() {
-
+       // const { pName } = this.props.match.params;
+        const pName = $("#dropdownMenu1").text();
+      //  console.log("当前位置：====》",$("#dropdownMenu1").text())
+        this.props.dispatch(get_province_by_pname(pName)).then(() => {
+                //console.log("按pName：===》",this.props.provinceDataByName)
+        })
     }
 
     componentWillMount() {
+        this.props.dispatch(get_province_by_pname('北京市')).then(() => {
 
+        })
     }
 
     render() {
@@ -77,13 +86,13 @@ class Navigation extends React.Component {
                             {
                                 positionData.map((data,k)=>{
                                     return(
-
-                                        <li><Link to={`/index/+index/${data.pName}`}
+                                       //  /index/+index/${data.pName}
+                                        <li><a
                                                   k = {k}
                                                   style={{textDecoration: 'none'}}
                                                   rel="bj"
                                                   onClick = {()=>{this.handleLinkClick()}}
-                                                  >{data.pName}</Link></li>
+                                                  >{data.pName}</a></li>
                                     )
                                 })
                             }

@@ -97,3 +97,7 @@ export const API_GET_HAS_PERSONAL = ['REQUEST', 'API_GET_HAS_PERSONAL','FAILURE'
 //GEt Nav位置信息查询所有城市
 
 export const API_GET_PROVINCE = ['REQUEST', 'API_GET_PROVINCE','FAILURE'];
+
+//GET Nav根据pName查询位置信息
+
+export const API_GET_PROVINCE_BY_PNAME = ['REQUEST', 'API_GET_PROVINCE_BY_PNAME', 'FAILURE']

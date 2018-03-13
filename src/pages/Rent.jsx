@@ -11,6 +11,7 @@ import {Containerization} from '../common/PublicComponent';
 
 @Containerization(state => ({
     provinceData: state.PlatReducer.NavProvinceData,
+    provinceDataByName: state.PlatReducer.NavProvinceDataByPName,
 }))
 export default class Index extends React.Component {
 
@@ -172,13 +173,13 @@ export default class Index extends React.Component {
         this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null})
     }
     render() {
-        const city = this.mockData.cityData;
+        const city = this.props.provinceDataByName;
         const street = this.mockData.streetData;
         const price = this.mockData.priceData;
         const platData = this.mockData.platData;
         const habitable = this.mockData.habitableData;
         const type = this.mockData.typeData;
-        console.log(".....",this.props.provinceData)
+        console.log("读取位置信息====>",this.props.provinceDataByName)
         return (
             <div>
                 <Card className="wrapper" style={{marginTop: 50}} noHovering={true}>
@@ -188,15 +189,14 @@ export default class Index extends React.Component {
                             <dd>
                                 <div className="option_list">
                                     <a onClick={() => this.aLimitClick()}
-                                       className={this.state.checkedFlag ? 'onlist' : ''}>不限</a>
+                                     className={this.state.checkedFlag ? 'onlist' : ''}>不限</a>
                                     {
-                                        city.map((data, k) => {
-                                            console.log(data)
-                                            return (
-                                                <a key={k} onClick={(e) => this.cityClick(k)}
-                                                   className={this.state.currentActive == k ? 'onlist' : ''}>{data.name}</a>
+                                        city.map((i)=>{
+                                            return i.cities.map((j, k) => {
+                                                return  <a key={k} onClick={(e) => this.cityClick(k)}
+                                                           className={this.state.currentActive == k ? 'onlist' : ''}>{j.cName}</a>
 
-                                            )
+                                            })
                                         })
                                     }
                                 </div>
