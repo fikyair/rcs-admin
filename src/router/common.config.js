@@ -25,6 +25,10 @@ export const commontLimtRouter = [
         path: '/index',
         exact: true,
         component: (props) => BundleCom(props,Index),
+    },{
+        path: '/index/+index/:pName',
+        exact: true,
+        component: (props) => BundleCom(props,Index),
     },
     {
         path:'/rent',

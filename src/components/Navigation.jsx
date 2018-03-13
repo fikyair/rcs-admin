@@ -31,12 +31,15 @@ class Navigation extends React.Component {
     ulClick() {
         this.props.dispatch(get_province_all()).then(() => {
             console.log(">>>位置信息",this.props.provinceData);
-            let $Uarry = $("#uldrop a");
+            let $Uarry = $("#uldrop li");
             $Uarry.click(function () {
                 let r = $(this).text();
                 $("#dropdownMenu1").text(r);
             });
         });
+
+    }
+    handleLinkClick() {
 
     }
 
@@ -75,8 +78,12 @@ class Navigation extends React.Component {
                                 positionData.map((data,k)=>{
                                     return(
 
-                                        <li><a k = {k} style={{textDecoration: 'none'}}
-                                               rel="bj">{data.pName}</a></li>
+                                        <li><Link to={`/index/+index/${data.pName}`}
+                                                  k = {k}
+                                                  style={{textDecoration: 'none'}}
+                                                  rel="bj"
+                                                  onClick = {()=>{this.handleLinkClick()}}
+                                                  >{data.pName}</Link></li>
                                     )
                                 })
                             }
