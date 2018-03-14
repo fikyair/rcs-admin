@@ -19,6 +19,7 @@ import {
 }))
 export default class Index extends React.Component {
 
+
     state = {
         display: false,
         checkedFlag: true,
@@ -194,7 +195,7 @@ export default class Index extends React.Component {
 
     render() {
         const city = this.props.provinceDataByName;
-        const street = this.mockData.streetData;
+        const street = this.props.cityDataByCName;
         const price = this.mockData.priceData;
         const platData = this.mockData.platData;
         const habitable = this.mockData.habitableData;
@@ -223,12 +224,12 @@ export default class Index extends React.Component {
                                 <div id = "subList" className="sub_option_list"
                                      style={this.state.display ? {display: 'block'} : {display: 'none'}}>
                                     {
-                                        street.map((data, k) => {
-                                            return (
-                                                <a key={k} href="#"
-                                                   onClick = {() => {this.handleClickA()}}
-                                                   className="">{data.name}</a>
-                                            )
+                                        street.map((v) => {
+                                            return v.streets.map((j, k) => {
+                                                return <a key={k} href="#"
+                                                          onClick = {() => {this.handleClickA()}}
+                                                          className="">{j.sName}</a>
+                                            })
                                         })
                                     }
                                 </div>
