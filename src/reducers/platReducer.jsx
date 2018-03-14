@@ -1,12 +1,14 @@
 import {
     API_GET_PROVINCE,
     API_GET_PROVINCE_BY_PNAME,
+    API_GET_CITY_BY_CNAME,
 } from '../utils/ActionsType';
 
 
 const initialState = {
     NavProvinceData: [],
     NavProvinceDataByPName: [],
+    NavCityDataByCName: [],
 }
 
 export default function (state = initialState, actions) {
@@ -46,6 +48,21 @@ export default function (state = initialState, actions) {
                                         sName: j.sName
                                     }
                                 })
+                            }
+                        })
+                    }
+                })
+            }
+        case API_GET_CITY_BY_CNAME[1]:
+            debugger
+            return {
+                ...state,
+                NavCityDataByCName: _.map(actions.data, (v) => {
+                    return {
+                        cName: v.cName,
+                        streets: v.streets.map((i) => {
+                            return {
+                                sName: i.sName
                             }
                         })
                     }

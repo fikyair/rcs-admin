@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
+import $ from 'jquery';
 import {Containerization} from '../common/PublicComponent';
-
+import {
+    get_city_by_cname,
+}from '../../src/actions/platfrontAction';
 
 @Containerization(state => ({
     provinceData: state.PlatReducer.NavProvinceData,
     provinceDataByName: state.PlatReducer.NavProvinceDataByPName,
+    cityDataByCName: state.PlatReducer.NavCityDataByCName,
 }))
 export default class Index extends React.Component {
 
@@ -144,8 +148,14 @@ export default class Index extends React.Component {
         ]
     }
 
-    cityClick(k) {
+    cityClick(e, k) {
         this.setState({display: true, currentActive: k, checkedFlag: false});
+        let cName = e.target.innerText;
+        this.props.dispatch(get_city_by_cname(cName)).then(()=>{
+            console.log("==hggh=>",this.props.cityDataByCName);
+        })
+
+        console.log("===>", e.target.innerText)
     }
 
     aLimitClick() {
@@ -172,6 +182,16 @@ export default class Index extends React.Component {
     aTypeClick() {
         this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null})
     }
+
+    handleClickA () {
+        let $divU = $("#sublist a");
+       /* $divU.click(function () {
+            let r = $(text).text();
+            console.log("====>", )
+        })*/
+        console.log("====>", $divU);
+    }
+
     render() {
         const city = this.props.provinceDataByName;
         const street = this.mockData.streetData;
@@ -187,25 +207,27 @@ export default class Index extends React.Component {
                         <dl className="dl_lst">
                             <dt>区域：</dt>
                             <dd>
-                                <div className="option_list">
+                                <div id = "optionList" className="option_list">
                                     <a onClick={() => this.aLimitClick()}
                                      className={this.state.checkedFlag ? 'onlist' : ''}>不限</a>
                                     {
                                         city.map((i)=>{
                                             return i.cities.map((j, k) => {
-                                                return  <a key={k} onClick={(e) => this.cityClick(k)}
+                                                return  <a id = "alist" key={k} onClick={(e) => this.cityClick(e,k)}
                                                            className={this.state.currentActive == k ? 'onlist' : ''}>{j.cName}</a>
 
                                             })
                                         })
                                     }
                                 </div>
-                                <div className="sub_option_list"
+                                <div id = "subList" className="sub_option_list"
                                      style={this.state.display ? {display: 'block'} : {display: 'none'}}>
                                     {
                                         street.map((data, k) => {
                                             return (
-                                                <a key={k} href="#" className="">{data.name}</a>
+                                                <a key={k} href="#"
+                                                   onClick = {() => {this.handleClickA()}}
+                                                   className="">{data.name}</a>
                                             )
                                         })
                                     }
