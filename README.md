@@ -6,7 +6,7 @@
 
 #### 接口列表(Updating)
 
-\* 客户端与admin共用接口
+\* client与admin共用接口
 
 ##### CLIENT：
 
