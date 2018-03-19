@@ -7,7 +7,7 @@
 #### 接口列表
 
 
-* 客户端与后台管理共用接口
+\* 客户端与后台管理共用接口
 
 ##### CLIENT：
 
@@ -27,7 +27,6 @@
 
 | Definition | function      | args             | type       |
 | -----------|:-------------:|:----------------:|:----------:|
-| ADMIN      |               |                  |            |
 | User       | CRUD          | name,pwd         | post       |
 | FlatSource | CRUD          | pos,area...      | post       |
 | Position   | CRUD          | pName cName sName| post       |
