@@ -4,10 +4,9 @@
 
 后台管理请见  [flat](https://github.com/fikyair/flat)
 
-#### 接口列表
+#### 接口列表(Updating)
 
-
-\* 客户端与后台管理共用接口
+\* 客户端与admin共用接口
 
 ##### CLIENT：
 
@@ -19,18 +18,18 @@
 |  FlatSource| query         | price flatType...| get        |
 |  Index     | query         | any...           | get        |
 |  News      | query         | all              | get        |
-|* Message   | add query     | flatId,msg       | post       |
-|* Publish   | add           | pos,area...      | post       |
-|* Collect   | add           | pos,area...      | post       |
+|* Message   | add query     | flatId msg       | post       |
+|* Publish   | add           | pos area...      | post       |
+|* Collect   | add           | pos area...      | post       |
 
 ##### ADMIN:
 
 | Definition | function      | args             | type       |
 | -----------|:-------------:|:----------------:|:----------:|
-| User       | CRUD          | name,pwd         | post       |
-| FlatSource | CRUD          | pos,area...      | post       |
+| User       | CRUD          | name pwd         | post       |
+| FlatSource | CRUD          | pos area...      | post       |
 | Position   | CRUD          | pName cName sName| post       |
-|* Message   | CRUD          | flatId,msg       | post       |
+|* Message   | CRUD          | flatId msg       | post       |
 | News       | CRUD          | all              | post       |
 
 
