@@ -69,7 +69,7 @@ class Navigation extends React.Component {
                     className='nav_channel danke_header'
                 >
                     <div>
-                        <div className="fr logo" onClick={() => this.props.history.push('/')}>
+                        <div className="fr logo" onClick={() => this.props.history.push('/index')}>
                             <img src={logo} alt="logo" width="130" height="28"/>
                         </div>
                     </div>
