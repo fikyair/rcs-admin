@@ -3,6 +3,7 @@ import {
     API_GET_PROVINCE_BY_PNAME,
     API_GET_CITY_BY_CNAME,
     API_GET_FLAT_BY_SID,
+    API_GET_FLAT_ALL,
 } from '../utils/ActionsType';
 
 
@@ -11,6 +12,7 @@ const initialState = {
     NavProvinceDataByPName: [],
     NavCityDataByCName: [],
     flatDataByAny: [],
+    flatAllData: [],
 }
 
 export default function (state = initialState, actions) {
@@ -76,6 +78,11 @@ export default function (state = initialState, actions) {
             return {
                 ...state,
                 flatDataByAny: actions.data
+            }
+        case API_GET_FLAT_ALL[1]:
+            return {
+                ...state,
+                flatAllData: actions.data
             }
         default:
             return state;

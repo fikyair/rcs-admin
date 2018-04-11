@@ -109,3 +109,7 @@ export const API_GET_CITY_BY_CNAME = ['REQUEST', 'API_GET_CITY_BY_CNAME', 'FAILU
 //GET 按sid查询房屋信息
 
 export const API_GET_FLAT_BY_SID = ['REQUEST', 'API_GET_FLAT_BY_SID', 'FAILURE'];
+
+//GET 查询所有信息
+
+export const API_GET_FLAT_ALL = ['REQUEST', 'API_GET_FLAT_ALL', 'FAILURE']

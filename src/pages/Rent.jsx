@@ -11,6 +11,7 @@ import {Containerization} from '../common/PublicComponent';
 import {
     get_city_by_cname,
     get_flat_by_sId,
+    get_flat_all,
 }from '../../src/actions/platfrontAction';
 import {FetchAPI} from "../utils/fetch-middleware";
 
@@ -19,6 +20,7 @@ import {FetchAPI} from "../utils/fetch-middleware";
     provinceDataByName: state.PlatReducer.NavProvinceDataByPName,
     cityDataByCName: state.PlatReducer.NavCityDataByCName,
     flatData: state.PlatReducer.flatDataByAny,
+    flatAllDataInit: state.PlatReducer.flatAllData,
 }))
 export default class Index extends React.Component {
 
@@ -156,6 +158,14 @@ export default class Index extends React.Component {
         ]
     }
 
+    componentWillMount (){
+        this.props.dispatch(get_flat_all()).then(() => {
+            //console.log("==初始化=>",this.props.flatAllDataInit);
+            this.setState({
+                flatData: this.props.flatAllDataInit,
+            })
+        })
+    }
     cityClick(e, k) {
         this.setState({display: true, currentActive: k, checkedFlag: false});
         let cName = e.target.innerText;
@@ -348,7 +358,7 @@ export default class Index extends React.Component {
                                             <div className="r_lbx_cena">
                                                 <Link to="/platDetails" target="_blank">{data.fStreet} <span> { data.fName }</span></Link>
                                                 <div className="r_lbx_cena">
-                                                    地铁
+                                                    地铁三号线
                                                 </div>
                                             </div>
                                             <div className="r_lbx_cenb">
