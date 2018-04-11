@@ -2,6 +2,7 @@ import {
     API_GET_PROVINCE,
     API_GET_PROVINCE_BY_PNAME,
     API_GET_CITY_BY_CNAME,
+    API_GET_FLAT_BY_SID,
 } from '../utils/ActionsType';
 
 
@@ -9,6 +10,7 @@ const initialState = {
     NavProvinceData: [],
     NavProvinceDataByPName: [],
     NavCityDataByCName: [],
+    flatDataByAny: [],
 }
 
 export default function (state = initialState, actions) {
@@ -60,13 +62,20 @@ export default function (state = initialState, actions) {
                 NavCityDataByCName: _.map(actions.data, (v) => {
                     return {
                         cName: v.cName,
+                        cId: v.cId,
                         streets: v.streets.map((i) => {
                             return {
-                                sName: i.sName
+                                sName: i.sName,
+                                sId: i.sId,
                             }
                         })
                     }
                 })
+            }
+        case API_GET_FLAT_BY_SID[1]:
+            return {
+                ...state,
+                flatDataByAny: actions.data
             }
         default:
             return state;

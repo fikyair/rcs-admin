@@ -105,3 +105,7 @@ export const API_GET_PROVINCE_BY_PNAME = ['REQUEST', 'API_GET_PROVINCE_BY_PNAME'
 //GET Nav根据cName查询所有街道信息
 
 export const API_GET_CITY_BY_CNAME = ['REQUEST', 'API_GET_CITY_BY_CNAME', 'FAILURE'];
+
+//GET 按sid查询房屋信息
+
+export const API_GET_FLAT_BY_SID = ['REQUEST', 'API_GET_FLAT_BY_SID', 'FAILURE'];

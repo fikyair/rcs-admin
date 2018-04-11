@@ -10,12 +10,15 @@ import $ from 'jquery';
 import {Containerization} from '../common/PublicComponent';
 import {
     get_city_by_cname,
+    get_flat_by_sId,
 }from '../../src/actions/platfrontAction';
+import {FetchAPI} from "../utils/fetch-middleware";
 
 @Containerization(state => ({
     provinceData: state.PlatReducer.NavProvinceData,
     provinceDataByName: state.PlatReducer.NavProvinceDataByPName,
     cityDataByCName: state.PlatReducer.NavCityDataByCName,
+    flatData: state.PlatReducer.flatDataByAny,
 }))
 export default class Index extends React.Component {
 
@@ -30,7 +33,11 @@ export default class Index extends React.Component {
         priceCheckedFlag: true,
         typeCheckedFlag: true,
         habitableCheckedFlag: true,
-        province: this.props.provinceData
+        province: this.props.provinceData,
+        streetsData: [],
+        flatData: [],
+        querData: {},
+
     }
 
     mockData = {
@@ -153,9 +160,15 @@ export default class Index extends React.Component {
         this.setState({display: true, currentActive: k, checkedFlag: false});
         let cName = e.target.innerText;
         this.props.dispatch(get_city_by_cname(cName)).then(()=>{
-            console.log("==hggh=>",this.props.cityDataByCName);
+            console.log("==点击城市之后=>",this.props.cityDataByCName);
+            let streetsData = [];
+            this.props.cityDataByCName[0].streets.map((item) => {
+                streetsData = streetsData.concat(item);
+            })
+            this.setState({
+                streetsData: streetsData,
+            })
         })
-
         console.log("===>", e.target.innerText)
     }
 
@@ -184,20 +197,35 @@ export default class Index extends React.Component {
         this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null})
     }
 
-    handleClickA () {
-        let $divU = $("#sublist a");
-       /* $divU.click(function () {
-            let r = $(text).text();
-            console.log("====>", )
-        })*/
-        console.log("====>", $divU);
+    handleClickA (e, key) {
+
+        const sId = key;
+        // FetchAPI(`/flat/queryBysId/${sId}`,'GET').then((result) => {
+        //     console.log("房源信息：",result)
+        //     debugger
+        //     let { data = [] } = result;
+        //     this.setState({
+        //         querData: { sId : sId},
+        //         flatData:  data,
+        //     })
+        // })
+        this.props.dispatch(get_flat_by_sId(sId)).then(() => {
+            console.log("房屋信息",this.props.flatData);
+                let { flatData = [] } = this.props;
+                this.setState({
+                    querData: { sId : sId},
+                    flatData:  flatData,
+                })
+
+        })
     }
 
     render() {
         const city = this.props.provinceDataByName;
         const street = this.props.cityDataByCName;
         const price = this.mockData.priceData;
-        const platData = this.mockData.platData;
+        const flatData = this.state.flatData;
+        console.log("flatData",flatData)
         const habitable = this.mockData.habitableData;
         const type = this.mockData.typeData;
         console.log("读取位置信息====>",this.props.provinceDataByName)
@@ -226,8 +254,8 @@ export default class Index extends React.Component {
                                     {
                                         street.map((v) => {
                                             return v.streets.map((j, k) => {
-                                                return <a key={k} href="#"
-                                                          onClick = {() => {this.handleClickA()}}
+                                                return <a key={j.sId}
+                                                          onClick = {(e) => this.handleClickA(e, j.sId)}
                                                           className="">{j.sName}</a>
                                             })
                                         })
@@ -308,38 +336,37 @@ export default class Index extends React.Component {
                     </div>
                     <div className="r_ls_box">
                         {
-                            platData.map((data, k) => {
-                                console.log(data.platDetails.area)
+                            flatData.map((data, k) => {
+                               // console.log(data.platDetails.area)
                                 return (
                                     <div className="r_lbx">
                                         <Link to="/platDetails" className="rimg" target="_blank"><img
-                                            src={data.url}
-                                            width="300" height="240" title="远洋悦山水" alt="远洋悦山水图片"/>
-
+                                            src={data.fPic}
+                                            width="300" height="240" title={data.fName} alt={data.fName}/>
                                         </Link>
                                         <div className="r_lbx_cen">
                                             <div className="r_lbx_cena">
-                                                <Link to="/platDetails" target="_blank">{data.address}</Link>
+                                                <Link to="/platDetails" target="_blank">{data.fStreet} <span> { data.fName }</span></Link>
                                                 <div className="r_lbx_cena">
-                                                    {data.ground}
+                                                    地铁
                                                 </div>
                                             </div>
                                             <div className="r_lbx_cenb">
 
-                                                {data.platDetails.area} | {data.platDetails.floor}
-                                                | {data.platDetails.habitable} | {data.platDetails.orientation}
-                                                <em>整</em>
+                                                {data.fArea}m² | {data.fFloor}楼
+                                                | {data.fHabitable} | {data.fOrientation}
+                                                &nbsp;&nbsp;<em>{data.fType}</em>
                                             </div>
                                             <div className="r_lbx_cenc">
 
-                                                <span>{data.spDetails.toilet}</span>
-                                                <span>{data.spDetails.shower}</span>
-                                                <span>{data.spDetails.heating}</span>
+                                                <span>{data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'}</span>
+                                                <span>{data.fHeating==1?'集中供暖':'无集中供暖'}</span>
                                             </div>
                                         </div>
                                         <div className="r_lbx_money">
                                             <div className="r_lbx_moneya" style={{textAlign: 'center', paddingTop: 30}}>
-                                                <span className="ty_b" style={{fontSize: 40}}>{data.price}</span>&nbsp;
+                                                <span className="ty_b"
+                                                      style={{fontSize: 40}}>{data.fPrice}</span>&nbsp;
                                                 元/月
                                             </div>
                                             <Link className="lk_more_rent" to="/platDetails" target="_blank">
