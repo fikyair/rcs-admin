@@ -32,13 +32,15 @@ export default class Index extends React.Component {
         currentActive1: null,
         currentActive2: null,
         currentActive3: null,
+        currentActive4: null,
         priceCheckedFlag: true,
         typeCheckedFlag: true,
         habitableCheckedFlag: true,
+        streetCheckedFlag: true,
         province: this.props.provinceData,
         streetsData: [],
         flatData: [],
-        querData: {},
+        queryDataCom: {},
 
     }
 
@@ -159,8 +161,8 @@ export default class Index extends React.Component {
     }
 
     componentWillMount (){
+        //查询所有的房源信息
         this.props.dispatch(get_flat_all()).then(() => {
-            //console.log("==初始化=>",this.props.flatAllDataInit);
             this.setState({
                 flatData: this.props.flatAllDataInit,
             })
@@ -169,8 +171,8 @@ export default class Index extends React.Component {
     cityClick(e, k) {
         this.setState({display: true, currentActive: k, checkedFlag: false});
         let cName = e.target.innerText;
+        //按cityName查询当前城市的所有街道信息
         this.props.dispatch(get_city_by_cname(cName)).then(()=>{
-            console.log("==点击城市之后=>",this.props.cityDataByCName);
             let streetsData = [];
             this.props.cityDataByCName[0].streets.map((item) => {
                 streetsData = streetsData.concat(item);
@@ -179,7 +181,6 @@ export default class Index extends React.Component {
                 streetsData: streetsData,
             })
         })
-        console.log("===>", e.target.innerText)
     }
 
     aLimitClick() {
@@ -194,8 +195,15 @@ export default class Index extends React.Component {
         this.setState({priceCheckedFlag: !this.state.priceCheckedFlag, currentActive1: null})
     }
 
-    habitableClick(j) {
-        this.setState({currentActive2: j, habitableCheckedFlag: false});
+    habitableClick(e, j) {
+        this.setState({currentActive2: j-1, habitableCheckedFlag: false});
+        const hData = {fHabitable: e.target.innerText}
+        let HQueryData = {...this.state.queryDataCom, ...hData };
+        this.setState({
+            queryDataCom: HQueryData
+        }, () => {
+            console.log("按‘地域+居室’查询的入参：",this.state.queryDataCom);
+        })
     }
     aHabitableClick() {
         this.setState({habitableCheckedFlag: !this.state.habitableCheckedFlag, currentActive2: null})
@@ -207,26 +215,23 @@ export default class Index extends React.Component {
         this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null})
     }
 
-    handleClickA (e, key) {
+    handleClickA (e, key, k) {
 
+        this.setState({
+            currentActive4: k,
+        })
+        //按sId查询所有的房源信息
         const sId = key;
-        // FetchAPI(`/flat/queryBysId/${sId}`,'GET').then((result) => {
-        //     console.log("房源信息：",result)
-        //     debugger
-        //     let { data = [] } = result;
-        //     this.setState({
-        //         querData: { sId : sId},
-        //         flatData:  data,
-        //     })
-        // })
         this.props.dispatch(get_flat_by_sId(sId)).then(() => {
             console.log("房屋信息",this.props.flatData);
                 let { flatData = [] } = this.props;
+                const streetQueryData = { sId : sId }
                 this.setState({
-                    querData: { sId : sId},
+                    queryDataCom: { ...this.state.queryDataCom, ...streetQueryData},
                     flatData:  flatData,
+                }, () => {
+                    console.log("按‘地域’查询的入参：",this.state.queryDataCom);
                 })
-
         })
     }
 
@@ -235,10 +240,10 @@ export default class Index extends React.Component {
         const street = this.props.cityDataByCName;
         const price = this.mockData.priceData;
         const flatData = this.state.flatData;
-        console.log("flatData",flatData)
+       // console.log("flatData",flatData)
         const habitable = this.mockData.habitableData;
         const type = this.mockData.typeData;
-        console.log("读取位置信息====>",this.props.provinceDataByName)
+       // console.log("读取位置信息====>",this.props.provinceDataByName)
         return (
             <div>
                 <Card className="wrapper" style={{marginTop: 50}} noHovering={true}>
@@ -264,9 +269,9 @@ export default class Index extends React.Component {
                                     {
                                         street.map((v) => {
                                             return v.streets.map((j, k) => {
-                                                return <a key={j.sId}
-                                                          onClick = {(e) => this.handleClickA(e, j.sId)}
-                                                          className="">{j.sName}</a>
+                                                return <a key={k}
+                                                          onClick = {(e) => this.handleClickA(e, j.sId, k)}
+                                                          className={this.state.currentActive4 == k ? 'sublist': ''}>{j.sName}</a>
                                             })
                                         })
                                     }
@@ -284,7 +289,7 @@ export default class Index extends React.Component {
                                     {
                                         habitable.map((data, j) => {
                                             return (
-                                                <a key={j} onClick={(e) => this.habitableClick(j)}
+                                                <a key={j} onClick={(e) => this.habitableClick(e, j+1)}
                                                    className={this.state.currentActive2 == j ? 'onlist' : ''}>{data.name}</a>
                                             )
                                         })
@@ -347,11 +352,12 @@ export default class Index extends React.Component {
                     <div className="r_ls_box">
                         {
                             flatData.map((data, k) => {
-                               // console.log(data.platDetails.area)
+                                //取第一张房屋图片展示
+                                const fUrl = data.fPic.split(' ');
                                 return (
                                     <div className="r_lbx">
                                         <Link to="/platDetails" className="rimg" target="_blank"><img
-                                            src={data.fPic}
+                                            src={fUrl[0]}
                                             width="300" height="240" title={data.fName} alt={data.fName}/>
                                         </Link>
                                         <div className="r_lbx_cen">
