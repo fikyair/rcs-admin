@@ -39,6 +39,7 @@ export default class Index extends React.Component {
         streetCheckedFlag: true,
         province: this.props.provinceData,
         streetsData: [],
+        currentCityData: '',
         flatData: [],
         queryDataCom: {},
 
@@ -77,13 +78,17 @@ export default class Index extends React.Component {
         ],
         priceData: [
             {
-                name: '2000元以下', value: '1'
+                name: '0~2000元', value: '1'
             }, {
-                name: '2000~2500元', value: '2'
+                name: '2000~3500元', value: '2'
             }, {
-                name: '3000~3500元', value: '3'
+                name: '3500~5000元', value: '3'
             }, {
-                name: ' 3500元以上', value: '4'
+                name: '5000~6500元', value: '4'
+            },{
+                name: '6500~8000元', value: '5'
+            },{
+                name: '8000~10000元', value: '6'
             }
         ],
         habitableData: [
@@ -177,8 +182,10 @@ export default class Index extends React.Component {
             this.props.cityDataByCName[0].streets.map((item) => {
                 streetsData = streetsData.concat(item);
             })
+            const { cId } = this.props.cityDataByCName[0];
             this.setState({
                 streetsData: streetsData,
+                currentCityData: cId,
             })
         })
     }
@@ -187,14 +194,25 @@ export default class Index extends React.Component {
         this.setState({checkedFlag: !this.state.checkedFlag, currentActive: null, display: false});
     }
 
-    priceClick(j) {
-        this.setState({currentActive1: j, priceCheckedFlag: false});
+    //租金点击事件处理
+    priceClick(e, j) {
+        this.setState({currentActive1: j-1, priceCheckedFlag: false});
+        const temp = e.target.innerText.substr(0,e.target.innerText.length-1).split("~");
+        const pData = {minPrice: temp[0], maxPrice: temp[1] };
+        console.log("pData",pData)
+        let PQueryData = {...this.state.queryDataCom, ...pData };
+        this.setState({
+            queryDataCom: PQueryData,
+        }, () => {
+            console.log("按‘地域+居室+租金’查询的入参：",this.state.queryDataCom);
+        })
     }
 
     aPriceClick() {
         this.setState({priceCheckedFlag: !this.state.priceCheckedFlag, currentActive1: null})
     }
 
+    //居室点击事件处理
     habitableClick(e, j) {
         this.setState({currentActive2: j-1, habitableCheckedFlag: false});
         const hData = {fHabitable: e.target.innerText}
@@ -225,9 +243,10 @@ export default class Index extends React.Component {
         this.props.dispatch(get_flat_by_sId(sId)).then(() => {
             console.log("房屋信息",this.props.flatData);
                 let { flatData = [] } = this.props;
-                const streetQueryData = { sId : sId }
+                const streetQueryData = { sId : sId };
+                const cityQueryData = { cId :  this.state.currentCityData };
                 this.setState({
-                    queryDataCom: { ...this.state.queryDataCom, ...streetQueryData},
+                    queryDataCom: { ...this.state.queryDataCom, ...streetQueryData, ...cityQueryData},
                     flatData:  flatData,
                 }, () => {
                     console.log("按‘地域’查询的入参：",this.state.queryDataCom);
@@ -308,7 +327,7 @@ export default class Index extends React.Component {
                                     {
                                         price.map((data, j) => {
                                             return (
-                                                <a key={j} onClick={(e) => this.priceClick(j)}
+                                                <a key={j} onClick={(e) => this.priceClick(e, j+1)}
                                                    className={this.state.currentActive1 == j ? 'onlist' : ''}>{data.name}</a>
                                             )
                                         })
