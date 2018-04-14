@@ -4,6 +4,7 @@ import {
     API_GET_CITY_BY_CNAME,
     API_GET_FLAT_BY_SID,
     API_GET_FLAT_ALL,
+    API_GET_COMBINE_FLAT,
 } from '../utils/ActionsType';
 
 
@@ -13,6 +14,7 @@ const initialState = {
     NavCityDataByCName: [],
     flatDataByAny: [],
     flatAllData: [],
+    dymFlatData:[],
 }
 
 export default function (state = initialState, actions) {
@@ -83,6 +85,11 @@ export default function (state = initialState, actions) {
             return {
                 ...state,
                 flatAllData: actions.data
+            }
+        case API_GET_COMBINE_FLAT[1]:
+            return {
+                ...state,
+                dymFlatData: actions.data
             }
         default:
             return state;

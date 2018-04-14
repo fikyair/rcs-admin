@@ -112,4 +112,7 @@ export const API_GET_FLAT_BY_SID = ['REQUEST', 'API_GET_FLAT_BY_SID', 'FAILURE']
 
 //GET 查询所有信息
 
-export const API_GET_FLAT_ALL = ['REQUEST', 'API_GET_FLAT_ALL', 'FAILURE']
+export const API_GET_FLAT_ALL = ['REQUEST', 'API_GET_FLAT_ALL', 'FAILURE'];
+
+//GET 动态查询房源信息
+export const API_GET_COMBINE_FLAT = ['REQUEST', 'API_GET_COMBINE_FLAT', 'FAILURE'];

@@ -12,6 +12,7 @@ import {
     get_city_by_cname,
     get_flat_by_sId,
     get_flat_all,
+    get_combine_flat,
 }from '../../src/actions/platfrontAction';
 import {FetchAPI} from "../utils/fetch-middleware";
 
@@ -21,6 +22,7 @@ import {FetchAPI} from "../utils/fetch-middleware";
     cityDataByCName: state.PlatReducer.NavCityDataByCName,
     flatData: state.PlatReducer.flatDataByAny,
     flatAllDataInit: state.PlatReducer.flatAllData,
+    combineFlatData: state.PlatReducer.dymFlatData,
 }))
 export default class Index extends React.Component {
 
@@ -173,6 +175,16 @@ export default class Index extends React.Component {
             })
         })
     }
+
+    //动态查询房源信息
+
+    combineSelect () {
+        const data = this.state.queryDataCom;
+        this.props.dispatch(get_combine_flat(data)).then(()=>{
+            console.log("sssss====>",this.props.combineFlatData);
+        })
+    }
+
     cityClick(e, k) {
         this.setState({display: true, currentActive: k, checkedFlag: false});
         let cName = e.target.innerText;
@@ -190,8 +202,15 @@ export default class Index extends React.Component {
         })
     }
 
+    //区域‘不限’按钮
     aLimitClick() {
         this.setState({checkedFlag: !this.state.checkedFlag, currentActive: null, display: false});
+        const withLimitPosition = { ...this.state.queryDataCom, sId: '', cId: ''}
+        this.setState({
+            queryDataCom: withLimitPosition
+        },() => {
+            console.log("去掉区域入参", this.state.queryDataCom);
+        })
     }
 
     //租金点击事件处理
@@ -204,12 +223,20 @@ export default class Index extends React.Component {
         this.setState({
             queryDataCom: PQueryData,
         }, () => {
-            console.log("按‘地域+居室+租金’查询的入参：",this.state.queryDataCom);
+            console.log("加入租金入参：",this.state.queryDataCom);
         })
+        this.combineSelect();
     }
 
+    //租金‘不限’按钮
     aPriceClick() {
         this.setState({priceCheckedFlag: !this.state.priceCheckedFlag, currentActive1: null})
+        const withLimitPrice = { ...this.state.queryDataCom, minPrice: '', maxPrice: '' }
+        this.setState({
+            queryDataCom: withLimitPrice
+        },() => {
+            console.log("去掉租金入参：", this.state.queryDataCom);
+        })
     }
 
     //居室点击事件处理
@@ -220,19 +247,48 @@ export default class Index extends React.Component {
         this.setState({
             queryDataCom: HQueryData
         }, () => {
-            console.log("按‘地域+居室’查询的入参：",this.state.queryDataCom);
+            console.log("加入居室入参：",this.state.queryDataCom);
         })
-    }
-    aHabitableClick() {
-        this.setState({habitableCheckedFlag: !this.state.habitableCheckedFlag, currentActive2: null})
-    }
-    typeClick(j) {
-        this.setState({currentActive3: j, typeCheckedFlag: false});
-    }
-    aTypeClick() {
-        this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null})
+        this.combineSelect();
     }
 
+    //居室‘不限’按钮
+    aHabitableClick() {
+        this.setState({habitableCheckedFlag: !this.state.habitableCheckedFlag, currentActive2: null})
+        const withLimitHabitable = { ...this.state.queryDataCom, fHabitable: ''};
+        this.setState({
+            queryDataCom: withLimitHabitable
+        }, () => {
+            console.log("去掉居室入参：",this.state.queryDataCom);
+        })
+    }
+
+    //类型点击查询处理
+    typeClick(e, j) {
+        this.setState({currentActive3: j-1, typeCheckedFlag: false});
+        const tData = { fType: e.target.innerText}
+        let TQueryData = { ...this.state.queryDataCom, ...tData };
+        this.setState({
+            queryDataCom: TQueryData
+        },() => {
+            console.log("加入房屋类型入参：",this.state.queryDataCom);
+        })
+
+        this.combineSelect();
+    }
+
+    //类型‘不限’按钮
+    aTypeClick() {
+        this.setState({typeCheckedFlag: !this.state.typeCheckedFlag, currentActive3: null});
+        const withLimitType = { ...this.state.queryDataCom, fType: ''};
+        this.setState({
+            queryDataCom: withLimitType
+        }, () => {
+            console.log("去掉类型入参：",this.state.queryDataCom);
+        })
+    }
+
+    //街道点击查询处理
     handleClickA (e, key, k) {
 
         this.setState({
@@ -247,11 +303,13 @@ export default class Index extends React.Component {
                 const cityQueryData = { cId :  this.state.currentCityData };
                 this.setState({
                     queryDataCom: { ...this.state.queryDataCom, ...streetQueryData, ...cityQueryData},
-                    flatData:  flatData,
+                    //flatData:  flatData,
                 }, () => {
                     console.log("按‘地域’查询的入参：",this.state.queryDataCom);
                 })
         })
+
+        this.combineSelect();
     }
 
     render() {
@@ -345,7 +403,7 @@ export default class Index extends React.Component {
                                     {
                                         type.map((data, j) => {
                                             return (
-                                                <a key={j} onClick={(e) => this.typeClick(j)}
+                                                <a key={j} onClick={(e) => this.typeClick(e, j+1)}
                                                    className={this.state.currentActive3 == j ? 'onlist' : ''}>{data.name}</a>
                                             )
                                         })
@@ -373,6 +431,7 @@ export default class Index extends React.Component {
                             flatData.map((data, k) => {
                                 //取第一张房屋图片展示
                                 const fUrl = data.fPic.split(' ');
+                                const fType = data.fType.substr(0, data.fType.length-1);
                                 return (
                                     <div className="r_lbx">
                                         <Link to="/platDetails" className="rimg" target="_blank"><img
@@ -390,7 +449,7 @@ export default class Index extends React.Component {
 
                                                 {data.fArea}m² | {data.fFloor}楼
                                                 | {data.fHabitable} | {data.fOrientation}
-                                                &nbsp;&nbsp;<em>{data.fType}</em>
+                                                &nbsp;&nbsp;<em>{fType}</em>
                                             </div>
                                             <div className="r_lbx_cenc">
 
