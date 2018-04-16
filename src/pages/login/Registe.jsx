@@ -57,7 +57,9 @@ export default class Register extends React.Component {
                                     <div>
                                         <FormItem>
                                             { getFieldDecorator('uNickname',{
-
+                                                rules: [{
+                                                    required: true, message: '昵称必须填写☺'
+                                                }]
                                             })(
                                                 <div className="control-group">
                                                     <span className="m_icon pas"></span>
@@ -73,7 +75,7 @@ export default class Register extends React.Component {
                                             { getFieldDecorator('uPhone', {
                                                 initialValue: '',
                                                 rules: [{
-                                                    //required: true, message: '用户名必须填写☺'
+                                                    required: true, message: '手机号必须填写☺'
                                                 }]
                                             })(
                                                 <div className="control-group" >
@@ -91,7 +93,7 @@ export default class Register extends React.Component {
                                             { getFieldDecorator('uPwd', {
                                                 initialValue:'',
                                                 rules: [{
-
+                                                    required: true, message: '密码必须填写☺'
                                                 }]
                                             })(
                                                 <div className="control-group">
@@ -105,7 +107,9 @@ export default class Register extends React.Component {
                                         </FormItem>
                                     </div>
                                     <div className="control-group clearfix">
-                                        <Button htmlType="submit" value="注 册" onClick = { () => { this.handleRegister()} } className="org_btn" id="signup_button"/>
+                                        <Button htmlType="submit"  onClick = { () => { this.handleRegister()} } className="org_btn" id="signup_button">
+                                            注册
+                                        </Button>
                                     </div>
 
 
