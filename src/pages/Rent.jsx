@@ -184,6 +184,13 @@ export default class Index extends React.Component {
         const data = this.state.queryDataCom;
         Axios.post(`/flat/combineselect`,data).then((result) => {
             console.log("现在的信息", result.data);
+            const { data = [] } = result.data;
+            //把查询到的房源信息绑定到也页面上
+            this.setState({
+                flatData: data,
+            },() => {
+                console.log("======>",this.state.flatData);
+            })
         })
     }
 
