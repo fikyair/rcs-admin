@@ -7,6 +7,7 @@ import {
     API_GET_FLAT_BY_SID,
     API_GET_FLAT_ALL,
     API_GET_COMBINE_FLAT,
+    API_GET_USER_REGISTER,
 } from '../utils/ActionsType';
 
 export const get_province_all = (data) => ActionCreator(API_GET_PROVINCE, `/api/queryProvince/query`, 'GET')();
@@ -28,3 +29,6 @@ export const get_flat_all = () => ActionCreator(API_GET_FLAT_ALL, `/api/flat/que
 //动态查询房源信息
 
 export const get_combine_flat = (data) => ActionCreator(API_GET_COMBINE_FLAT, `/api/flat/combineselect`, 'POST', data)();
+
+//前端注册接口
+export const get_user_register = (data) => ActionCreator(API_GET_USER_REGISTER, `/api/user/addUser`, 'POST', data)();

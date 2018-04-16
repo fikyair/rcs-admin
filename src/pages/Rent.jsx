@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
+import {Axios} from "../utils/Axios";
+
 import $ from 'jquery';
 import {Containerization} from '../common/PublicComponent';
 import {
@@ -41,7 +43,7 @@ export default class Index extends React.Component {
         streetCheckedFlag: true,
         province: this.props.provinceData,
         streetsData: [],
-        currentCityData: '',
+        currentProvinceData: '',
         flatData: [],
         queryDataCom: {},
 
@@ -97,11 +99,11 @@ export default class Index extends React.Component {
             {
                 name: '一居室', value: '1'
             },{
-                name: '两户合租', value: '2'
+                name: '二居室', value: '2'
             },{
-                name: '三户合租', value: '3'
+                name: '三居室', value: '3'
             },{
-                name: '四户及以上', value: '4'
+                name: '四居室', value: '4'
             }
         ],
         typeData: [
@@ -177,11 +179,11 @@ export default class Index extends React.Component {
     }
 
     //动态查询房源信息
-
     combineSelect () {
+
         const data = this.state.queryDataCom;
-        this.props.dispatch(get_combine_flat(data)).then(()=>{
-            console.log("sssss====>",this.props.combineFlatData);
+        Axios.post(`/flat/combineselect`,data).then((result) => {
+            console.log("现在的信息", result.data);
         })
     }
 
@@ -194,10 +196,10 @@ export default class Index extends React.Component {
             this.props.cityDataByCName[0].streets.map((item) => {
                 streetsData = streetsData.concat(item);
             })
-            const { cId } = this.props.cityDataByCName[0];
+            const { pId } = this.props.provinceDataByName[0];
             this.setState({
                 streetsData: streetsData,
-                currentCityData: cId,
+                currentProvinceData: pId,
             })
         })
     }
@@ -210,6 +212,7 @@ export default class Index extends React.Component {
             queryDataCom: withLimitPosition
         },() => {
             console.log("去掉区域入参", this.state.queryDataCom);
+            this.combineSelect();
         })
     }
 
@@ -217,25 +220,27 @@ export default class Index extends React.Component {
     priceClick(e, j) {
         this.setState({currentActive1: j-1, priceCheckedFlag: false});
         const temp = e.target.innerText.substr(0,e.target.innerText.length-1).split("~");
-        const pData = {minPrice: temp[0], maxPrice: temp[1] };
+        const pData = {fMinPrice: temp[0], fMaxPrice: temp[1] };
         console.log("pData",pData)
         let PQueryData = {...this.state.queryDataCom, ...pData };
         this.setState({
             queryDataCom: PQueryData,
         }, () => {
             console.log("加入租金入参：",this.state.queryDataCom);
+            this.combineSelect();
         })
-        this.combineSelect();
+
     }
 
     //租金‘不限’按钮
     aPriceClick() {
         this.setState({priceCheckedFlag: !this.state.priceCheckedFlag, currentActive1: null})
-        const withLimitPrice = { ...this.state.queryDataCom, minPrice: '', maxPrice: '' }
+        const withLimitPrice = { ...this.state.queryDataCom, fMinPrice: '', fMaxPrice: '' }
         this.setState({
             queryDataCom: withLimitPrice
         },() => {
             console.log("去掉租金入参：", this.state.queryDataCom);
+            this.combineSelect();
         })
     }
 
@@ -248,8 +253,10 @@ export default class Index extends React.Component {
             queryDataCom: HQueryData
         }, () => {
             console.log("加入居室入参：",this.state.queryDataCom);
+            this.combineSelect();
         })
-        this.combineSelect();
+
+
     }
 
     //居室‘不限’按钮
@@ -260,6 +267,7 @@ export default class Index extends React.Component {
             queryDataCom: withLimitHabitable
         }, () => {
             console.log("去掉居室入参：",this.state.queryDataCom);
+            this.combineSelect();
         })
     }
 
@@ -272,9 +280,9 @@ export default class Index extends React.Component {
             queryDataCom: TQueryData
         },() => {
             console.log("加入房屋类型入参：",this.state.queryDataCom);
+            this.combineSelect();
         })
 
-        this.combineSelect();
     }
 
     //类型‘不限’按钮
@@ -285,31 +293,25 @@ export default class Index extends React.Component {
             queryDataCom: withLimitType
         }, () => {
             console.log("去掉类型入参：",this.state.queryDataCom);
+            this.combineSelect();
         })
     }
 
     //街道点击查询处理
     handleClickA (e, key, k) {
-
+        console.log("读取位置信息====>",this.props.provinceDataByName)
         this.setState({
             currentActive4: k,
         })
-        //按sId查询所有的房源信息
         const sId = key;
-        this.props.dispatch(get_flat_by_sId(sId)).then(() => {
-            console.log("房屋信息",this.props.flatData);
-                let { flatData = [] } = this.props;
-                const streetQueryData = { sId : sId };
-                const cityQueryData = { cId :  this.state.currentCityData };
-                this.setState({
-                    queryDataCom: { ...this.state.queryDataCom, ...streetQueryData, ...cityQueryData},
-                    //flatData:  flatData,
-                }, () => {
-                    console.log("按‘地域’查询的入参：",this.state.queryDataCom);
-                })
+        const streetQueryData = { sId : sId };
+        const cityQueryData = { pId :  this.state.currentProvinceData };
+        this.setState({
+            queryDataCom: { ...this.state.queryDataCom, ...streetQueryData, ...cityQueryData},
+        }, () => {
+            console.log("按‘地域’查询的入参：",this.state.queryDataCom);
+            this.combineSelect();
         })
-
-        this.combineSelect();
     }
 
     render() {
@@ -320,7 +322,7 @@ export default class Index extends React.Component {
        // console.log("flatData",flatData)
         const habitable = this.mockData.habitableData;
         const type = this.mockData.typeData;
-       // console.log("读取位置信息====>",this.props.provinceDataByName)
+        //console.log("读取位置信息====>",this.props.provinceDataByName)
         return (
             <div>
                 <Card className="wrapper" style={{marginTop: 50}} noHovering={true}>

@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "antd": "^2.13.9",
+    "axios": "^0.18.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "bundle-loader": "^0.5.5",
     "echarts": "3.8.2",

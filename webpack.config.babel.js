@@ -110,7 +110,7 @@ export default {
         contentBase: [path.join(__dirname, 'public')],//t
         historyApiFallback: true,
         disableHostCheck: true,
-        https:true,
+        https:false,
     },
     plugins: [
         new webpack.BannerPlugin('This file is created by Jerry'),

@@ -32,7 +32,7 @@ export const FetchAPI = (url,method,data)=>{
             body: JSON.stringify(data),
             credentials: 'include',
             headers: {
-                "Content-Type": ' application/json',
+                "Content-Type": 'application/json',
                 "auth-token": $.cookie('token'),
             }});
         try {

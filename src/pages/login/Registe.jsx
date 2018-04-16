@@ -2,9 +2,18 @@ import React from 'react';
 import '../../style/login.less';
 import '../../style/footer.less';
 import logo from '../../img/logo.png';
+import { Form, Button, Input } from 'antd';
 import pay from '../../img/pay.jpg';
 import weixin from '../../img/wexin.jpg';
-
+const FormItem = Form.Item;
+import {Containerization} from '../../common/PublicComponent';
+import {
+    get_user_register
+} from '../../../src/actions/platfrontAction';
+@Containerization(state => ({
+    registerData: state.PlatReducer.registerData,
+}))
+@Form.create()
 export default class Register extends React.Component {
 
     state = {
@@ -20,12 +29,23 @@ export default class Register extends React.Component {
                 this.setState({"info": ""});
             }.bind(this), 1000);
         } else {
-            this.setState({"info": "请输入符合格式的手机号或邮箱"});
+            this.setState({"info": "请输入符合格式的手机号"});
         }
         this.setState({"val": val, userName: 'block',});
     }
 
+    handleRegister () {
+        this.props.form.validateFields((err, values) => {
+            if(!err) {
+                const formData = this.props.form.getFieldsValue();
+                console.log("你提交的信息：",formData);
+            }
+        })
+        //this.props.dispatch(get_user_register())
+    }
+
     render() {
+        const {getFieldDecorator} = this.props.form;
         return (
             <div>
                 <div className="m-content">
@@ -33,41 +53,66 @@ export default class Register extends React.Component {
                         <div className="modal" id="modal" style={{display: 'block'}}>
                             <div className="modal-content signup" id="signup" style={{display: 'block'}}>
                                 <div className="separator m_icon"></div>
-                                <form action="/api/index.php?r=user/register" method="post" id="m-j-sign_Form">
+                                <Form >
+                                    <div>
+                                        <FormItem>
+                                            { getFieldDecorator('uNickname',{
 
-                                    <div className="control-group">
-                                        <span className="m_icon tel_icon"></span>
-                                        <input type="text" name="phone" onChange={(e) => this.phoneCheck(e)}
-                                               id="sign_name" placeholder="建议使用常用手机号" className="inp_txt"/>
-                                        <p htmlFor="sign_name" className="invalid"
-                                           style={{display: this.state.userName}}>{this.state.info}</p>
+                                            })(
+                                                <div className="control-group">
+                                                    <span className="m_icon pas"></span>
+                                                    <input type="password" name="password1" id="sign_pas_two" placeholder="请填入昵称"
+                                                           className="inp_txt"/>
+                                                </div>
+                                            )}
+
+                                        </FormItem>
                                     </div>
-                                    <div className="control-group">
-                                        <span className="m_icon pas"></span>
-                                        <input type="password" name="password" id="sign_pas" placeholder="请输入6-16位密码"
-                                               className="inp_txt"/>
-                                        <p htmlFor="sign_pas" className="invalid" style={{display: 'none'}}>
-                                            请输入6-16位密码</p>
-
+                                    <div>
+                                        <FormItem>
+                                            { getFieldDecorator('uPhone', {
+                                                initialValue: '',
+                                                rules: [{
+                                                    //required: true, message: '用户名必须填写☺'
+                                                }]
+                                            })(
+                                                <div className="control-group" >
+                                                    <span className="m_icon tel_icon"></span>
+                                                    <input  text = "text" name="phone" onChange={(e) => this.phoneCheck(e)}
+                                                            id="sign_name" placeholder="建议使用常用手机号" className="inp_txt"/>
+                                                    <p htmlFor="sign_name" className="invalid"
+                                                       style={{display: this.state.userName}}>{this.state.info}</p>
+                                                </div>
+                                            )}
+                                        </FormItem>
                                     </div>
+                                    <div>
+                                        <FormItem>
+                                            { getFieldDecorator('uPwd', {
+                                                initialValue:'',
+                                                rules: [{
 
-                                    <div className="control-group">
-                                        <span className="m_icon pas"></span>
-                                        <input type="password" name="password1" id="sign_pas_two" placeholder="请确认密码"
-                                               className="inp_txt"/>
-                                        <p htmlFor="sign_pas_two" className="invalid" style={{display: 'none'}}>
-                                            请确认密码一致且符合格式</p>
-
+                                                }]
+                                            })(
+                                                <div className="control-group">
+                                                    <span className="m_icon pas"></span>
+                                                    <input type="password" name="password" id="sign_pas" placeholder="请输入6-16位密码"
+                                                           className="inp_txt"/>
+                                                    <p htmlFor="sign_pas" className="invalid" style={{display: 'none'}}>
+                                                        请输入6-16位密码</p>
+                                                </div>
+                                            )}
+                                        </FormItem>
                                     </div>
                                     <div className="control-group clearfix">
-                                        <input type="button" value="注 册" className="org_btn" id="signup_button"/>
+                                        <Button htmlType="submit" value="注 册" onClick = { () => { this.handleRegister()} } className="org_btn" id="signup_button"/>
                                     </div>
 
 
                                     <div className="control-group clearfix tc bottom">
                                         已有账号？现在就 <a href="/login" id="toLogin" className="org">登录</a>
                                     </div>
-                                </form>
+                                </Form>
                             </div>
                         </div>
                     </div>
