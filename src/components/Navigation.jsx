@@ -15,9 +15,14 @@ import {
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 const {Option, OptGroup} = Select;
+
+import {
+    get_flat_all,
+}from '../../src/actions/platfrontAction';
 @Containerization(state => ({
     provinceData: state.PlatReducer.NavProvinceData,
     provinceDataByName: state.PlatReducer.NavProvinceDataByPName,
+    flatAllDataInit: state.PlatReducer.flatAllData,
 }))
 class Navigation extends React.Component {
     state = {
@@ -46,8 +51,13 @@ class Navigation extends React.Component {
         const pName = $("#dropdownMenu1").text();
       //  console.log("当前位置：====》",$("#dropdownMenu1").text())
         this.props.dispatch(get_province_by_pname(pName)).then(() => {
-                //console.log("按pName：===》",this.props.provinceDataByName)
         })
+        // //查询所有的房源信息
+        // this.props.dispatch(get_flat_all(pName)).then((result) => {
+        //     console.log("本市，所有房源信息",result.data)
+        //     debugger
+        //     this.props.dispatch({type: 'API_GET_FLAT_ALL', data: result.data })
+        // })
     }
 
     componentWillMount() {

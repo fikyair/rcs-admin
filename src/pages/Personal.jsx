@@ -40,13 +40,13 @@ export default class Personal extends React.Component {
                             <div className="information fl">
                                 <p className="p1">下午好，
                                     <span>
-                                    <a href="http://passport.ziroom.com/index.php?r=user/index">
+                                    <a href="#">
                                         爱家客
                                     </a>
                                 </span>
                                 </p>
                                 <p className="p2">
-                                    <a href="http://passport.ziroom.com/index.php?r=user/index">修改个人资料<i></i></a>
+                                    <a href="#">修改个人资料<i></i></a>
                                 </p>
                                 <p className="p3">
                                     <span className="active">已绑定手机号</span>

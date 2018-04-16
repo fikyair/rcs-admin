@@ -24,7 +24,7 @@ export const get_flat_by_sId =  (sId) => ActionCreator(API_GET_FLAT_BY_SID, `/ap
 
 //查询所有房源信息
 
-export const get_flat_all = () => ActionCreator(API_GET_FLAT_ALL, `/api/flat/queryall`, 'GET')();
+export const get_flat_all = (pName) => ActionCreator(API_GET_FLAT_ALL, `/api/flat/queryall/${pName}`, 'GET')();
 
 //动态查询房源信息
 
