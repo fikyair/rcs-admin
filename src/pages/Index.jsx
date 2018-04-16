@@ -10,10 +10,39 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 
+import {Containerization} from '../common/PublicComponent';
+import {
+    get_flat_all,
+}from '../../src/actions/platfrontAction';
+@Containerization(state => ({
+    flatAllDataInit: state.PlatReducer.flatAllData,
+}))
 export default class Index extends React.Component {
 
     handleChange(value) {
         console.log(`selected ${value}`);
+    }
+
+    state = {
+        flatData: [],
+    }
+
+
+    componentWillMount (){
+        //查询所有的房源信息
+        this.props.dispatch(get_flat_all()).then(() => {
+
+            if(this.props.flatAllDataInit != null){
+                let arr = [];
+                for ( let i = 0; i <= 2; i++){
+                    arr = arr.concat(this.props.flatAllDataInit[i]);
+                }
+                console.log("推荐的三个房屋：", arr);
+                this.setState({
+                    flatData: arr,
+                })
+            }
+        })
     }
 
     mockData = {
@@ -58,7 +87,7 @@ export default class Index extends React.Component {
     }
 
     render() {
-        const houseData = this.mockData.houseData;
+        const houseData = this.state.flatData;
 
         return (
             <div>
@@ -69,16 +98,6 @@ export default class Index extends React.Component {
                     <div><img src={nav4} width={'100%'} height={332}/></div>
                 </Carousel>
                 <div className="g-center">
-                    <Select defaultValue="销售" style={{width: 95, marginRight: 50, marginTop: 50}}
-                            onChange={this.handleChange}>
-                        <Option value="price">销售</Option>
-                        <Option value="area">租赁</Option>
-                    </Select>
-                    <Select defaultValue="地域" style={{width: 95, marginRight: 50, marginTop: 50}}
-                            onChange={this.handleChange}>
-                        <Option value="price">价格</Option>
-                        <Option value="area">地域</Option>
-                    </Select>
                     <div className="sear_menu">
                         <input type="text" className="sear_input" name="search_text"
                                placeholder="例如: 3D全景、10号线、四惠、天通苑等"/>
@@ -103,16 +122,16 @@ export default class Index extends React.Component {
                                     return (
                                         <Col span={8}>
                                         <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}} noHovering={true}>
-                                            <img alt="example" width="100%" src={data.img}/>
+                                            <img alt="example" width="100%" src={data.fPic}/>
                                             <div className="room_ti">
-                                                <a href="#">{data.address}</a>
+                                                <a href="#">{data.fStreet}</a>
                                             </div>
                                             <div className="roo_ads">
                                                 <div className="roo_ads fl">
-                                                    {data.ground} / {data.platDetails.area} / 独卫
+                                                    {data.fFloor}楼 / {data.fArea}㎡ / {data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'}
                                                 </div>
                                                 <div className="room_money fr">
-                                                    {data.price}<span>元/月</span>
+                                                    {data.fPrice}<span>元/月</span>
                                                 </div>
                                             </div>
                                         </Card>
@@ -122,9 +141,9 @@ export default class Index extends React.Component {
                             }
                     </Row>
                 </div>
-                <div className="lk_more">
-                    <a href="#">更多房源</a>
-                </div>
+                {/*<div className="lk_more">*/}
+                    {/*<a href="/rent">更多房源</a>*/}
+                {/*</div>*/}
                 <div className="footer">
                     <div className="wibsite-center">
                         <div className="footer-chain">爱家公寓连锁</div>
