@@ -5,8 +5,11 @@ import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
 import { Axios } from "../utils/Axios";
+import { Form, Input, Button} from 'antd';
+const FormItem = Form.Item;
+const {TextArea} = Input;
 
-
+@Form.create()
 export default class PlatDetails extends React.Component {
 
     state = {
@@ -32,9 +35,19 @@ export default class PlatDetails extends React.Component {
         // const flatDetailsData = this.state.flatDetailsData;
         // console.log("dsds",flatDetailsData[0].fPic);
         const data = this.state.flatDetailsData[0];
-
+        const {getFieldDecorator} = this.props.form;
         return (
             <div>
+                <div style={{ margin:'0 5px 0 5px'}}>
+                    <div data-show="true" className="ant-alert ant-alert-error ant-alert-no-icon">
+                        <span className="ant-alert-message">
+                            <span className="marquee">
+                                 <span style={{ fontWeight: 'bold'}}>新闻消息：</span>
+                            此房源即将售罄
+                            </span>
+                        </span>
+                    </div>
+                </div>
                 <div className="wrapper" style={{marginTop: 50}}>
                     <div className="room-detail">
                         <div className="room-detail-left">
@@ -44,6 +57,25 @@ export default class PlatDetails extends React.Component {
                                          width="600" height="450"
                                          src={data?data.fPic:''}
                                     />
+                                    <div style = {{marginTop: 10, fontSize: 14, fontWeight: 500, color: '#3dbcc6'}}>
+                                        <span className="ant-divider"/> 给房东留言:
+                                    </div>
+                                        <Form>
+                                            <FormItem
+                                                style = {{marginTop: 10 }}
+                                            >
+                                                {
+                                                    getFieldDecorator('fRemark',{
+                                                        initialValue: '',
+                                                    })(
+                                                        <TextArea autosize={{ minRows: 2, maxRows: 18 }}
+                                                                  placeholder = "想说点什么都可以写在这里..."
+                                                                  style={{minWidth: '150px'}}/>
+                                                    )
+                                                }
+                                            </FormItem>
+                                            <Button htmlType = "submit">留言</Button>
+                                        </Form>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +143,7 @@ export default class PlatDetails extends React.Component {
                                     <strong>400 - 818 - 5656</strong>
                                     <em>服务时间：9:00 - 21:00（节假日照常）</em>
                                 </div>
-                                <div className="viewroom" data-toggle="modal" data-target="#myroom">我要看房</div>
+                                <div className="viewroom" data-toggle="modal" data-target="#myroom">我要收藏</div>
                             </div>
                         </div>
 
