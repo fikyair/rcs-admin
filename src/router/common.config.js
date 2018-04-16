@@ -60,11 +60,3 @@ export const commontLimtRouter = [
     }
 ]
 
-
-export const adminRouter = [
-    {
-        path: '/admin',
-        exact: true,
-        component: (props) => BundleCom(props,AdminIndex),
-    }
-]

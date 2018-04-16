@@ -24,7 +24,6 @@ export default {
         jquery: 'jQuery',
         fastclick: 'FastClick',
         lodash: '_',
-        moment:'moment'
     },
     module: {
         rules:[

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Carousel, Row, Input, Button, Col, Card, Select} from 'antd';
+import {Carousel, Row, Input, Button, Col, Card, Select, Form} from 'antd';
 import '../style/style.less';
 import nav1 from '../img/nav1.gif';
 import nav2 from '../img/nav2.jpg';
@@ -9,14 +9,16 @@ import logo from '../img/logo.png';
 import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
-
+const FormItem = Form.Item;
 import {Containerization} from '../common/PublicComponent';
 import {
     get_flat_all,
 }from '../../src/actions/platfrontAction';
+import {Axios} from "../utils/Axios";
 @Containerization(state => ({
     flatAllDataInit: state.PlatReducer.flatAllData,
 }))
+@Form.create()
 export default class Index extends React.Component {
 
     handleChange(value) {
@@ -85,10 +87,34 @@ export default class Index extends React.Component {
             price: '3330',
         }]
     }
-
+    puzzySearch () {
+        this.props.form.validateFields((err, values) => {
+            if(!err&&values.fStreet!= '') {
+                const formData = this.props.form.getFieldsValue();
+                console.log("模糊查询的信息==>", values);
+                Axios.post(`/flat/fuzzysearch`,values).then((result) => {
+                    console.log("模糊查询返回的信息：",result.data);
+                    const { data } = result.data;
+                    this.setState({
+                        flatData: data,
+                    })
+                })
+            }
+        })
+    }
     render() {
         const houseData = this.state.flatData;
-
+        const {getFieldDecorator} = this.props.form;
+        const formLayout = {
+            labelCol: {
+                xs: {span: 12},
+                sm: {span: 10},
+            },
+            wrapperCol: {
+                xs: {span: 12},
+                sm: {span: 6},
+            },
+        }
         return (
             <div>
                 <Carousel autoplay>
@@ -97,13 +123,27 @@ export default class Index extends React.Component {
                     <div><img src={nav3} width={'100%'} height={332}/></div>
                     <div><img src={nav4} width={'100%'} height={332}/></div>
                 </Carousel>
-                <div className="g-center">
-                    <div className="sear_menu">
-                        <input type="text" className="sear_input" name="search_text"
-                               placeholder="例如: 3D全景、10号线、四惠、天通苑等"/>
-                        <button type="submit" className="search_btn">搜索</button>
-                    </div>
-                </div>
+                <Form>
+                            <FormItem
+                                className = "g-center"
+                               // label = { <span style={{marginTop: 50, fontSize: 18, color: '#4bb4bb', fontWeight: 500}}>价格</span>}
+                                style = {{marginTop: 50 }}
+                            >
+                                {
+                                    getFieldDecorator('fStreet',{
+                                        initialValue: ''
+                                    })(
+                                        <div className={"g-center"}>
+                                            <div className="sear_menu">
+                                                <input type="text" placeholder = "例如：东城区、崇文门、广渠门" className="sear_input" name="search_text"/>
+                                                <button type="submit" onClick={() => {this.puzzySearch()}} className="search_btn">搜索</button>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            </FormItem>
+                </Form>
+
                 <div className="col_row line">
                     <h1 className="title_sec gred3">
                         爱家精选房源
