@@ -56,12 +56,46 @@ export default class Register extends React.Component {
                                 <Form >
                                     <div>
                                         <FormItem>
-                                            { getFieldDecorator('uNickname',{
+                                            { getFieldDecorator('uName',{
                                                 rules: [{
-                                                    required: true, message: '昵称必须填写☺'
+                                                    required: true, message: '用户名必须填写～'
                                                 }]
                                             })(
                                                 <div className="control-group">
+                                                    <span className="m_icon pas"></span>
+                                                    <input type="password" name="password1" id="sign_pas_two" placeholder="请填入用户名"
+                                                           className="inp_txt"/>
+                                                </div>
+                                            )}
+
+                                        </FormItem>
+                                    </div>
+                                    <div>
+                                        <FormItem>
+                                            { getFieldDecorator('uPwd', {
+                                                initialValue:'',
+                                                rules: [{
+                                                    required: true, message: '密码必须填写～'
+                                                }]
+                                            })(
+                                                <div className="control-group-withoutTop">
+                                                    <span className="m_icon pas"></span>
+                                                    <input type="password" name="password" id="sign_pas" placeholder="请输入密码"
+                                                           className="inp_txt"/>
+                                                    <p htmlFor="sign_pas" className="invalid" style={{display: 'none'}}>
+                                                        请输入位密码</p>
+                                                </div>
+                                            )}
+                                        </FormItem>
+                                    </div>
+                                    <div>
+                                        <FormItem>
+                                            { getFieldDecorator('uNickname',{
+                                                rules: [{
+                                                    required: true, message: '昵称必须填写～'
+                                                }]
+                                            })(
+                                                <div className="control-group-withoutTop">
                                                     <span className="m_icon pas"></span>
                                                     <input type="password" name="password1" id="sign_pas_two" placeholder="请填入昵称"
                                                            className="inp_txt"/>
@@ -75,33 +109,15 @@ export default class Register extends React.Component {
                                             { getFieldDecorator('uPhone', {
                                                 initialValue: '',
                                                 rules: [{
-                                                    required: true, message: '手机号必须填写☺'
+                                                    required: true, message: '手机号必须填写～'
                                                 }]
                                             })(
-                                                <div className="control-group" >
+                                                <div className="control-group-withoutTop" >
                                                     <span className="m_icon tel_icon"></span>
                                                     <input  text = "text" name="phone" onChange={(e) => this.phoneCheck(e)}
                                                             id="sign_name" placeholder="建议使用常用手机号" className="inp_txt"/>
                                                     <p htmlFor="sign_name" className="invalid"
                                                        style={{display: this.state.userName}}>{this.state.info}</p>
-                                                </div>
-                                            )}
-                                        </FormItem>
-                                    </div>
-                                    <div>
-                                        <FormItem>
-                                            { getFieldDecorator('uPwd', {
-                                                initialValue:'',
-                                                rules: [{
-                                                    required: true, message: '密码必须填写☺'
-                                                }]
-                                            })(
-                                                <div className="control-group">
-                                                    <span className="m_icon pas"></span>
-                                                    <input type="password" name="password" id="sign_pas" placeholder="请输入6-16位密码"
-                                                           className="inp_txt"/>
-                                                    <p htmlFor="sign_pas" className="invalid" style={{display: 'none'}}>
-                                                        请输入6-16位密码</p>
                                                 </div>
                                             )}
                                         </FormItem>

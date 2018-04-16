@@ -84,9 +84,9 @@ export default class Login extends React.Component {
                                                 required: true, message: '密码必须填写☺'
                                             }]
                                         })(
-                                            <div className="control-group">
+                                            <div className="control-group-withoutTop">
                                                 <span className="m_icon pas"></span>
-                                                <input type="password" name="user_pas" id="user_pas" placeholder="请输入6-16位密码"
+                                                <input type="password" name="user_pas" id="user_pas" placeholder="请输入密码"
                                                        className="inp_txt" tabIndex="2"/>
                                                 <p htmlFor="user_pas" className="invalid" style={{display: 'none'}}></p>
                                             </div>
