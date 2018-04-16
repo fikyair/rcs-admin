@@ -50,7 +50,7 @@ export const commontLimtRouter = [
         exact: true,
         component: (props) => BundleCom(props,Registe),
     },{
-        path: '/platDetails',
+        path: '/rent/+flatdetails/:id',
         exact: true,
         component: (props) => BundleCom(props,PlatDetails),
     },{

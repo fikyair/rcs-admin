@@ -326,7 +326,7 @@ export default class Index extends React.Component {
         const street = this.props.cityDataByCName;
         const price = this.mockData.priceData;
         const flatData = this.state.flatData;
-       // console.log("flatData",flatData)
+        console.log("flatData",flatData)
         const habitable = this.mockData.habitableData;
         const type = this.mockData.typeData;
         //console.log("读取位置信息====>",this.props.provinceDataByName)
@@ -364,7 +364,6 @@ export default class Index extends React.Component {
                                 </div>
                             </dd>
                         </dl>
-
                         <dl className="dl_lst">
                             <dt>居室：</dt>
                             <dd>
@@ -383,7 +382,6 @@ export default class Index extends React.Component {
                                 </div>
                             </dd>
                         </dl>
-
                         <dl className="dl_lst">
                             <dt>租金：</dt>
                             <dd>
@@ -420,8 +418,6 @@ export default class Index extends React.Component {
                                 </div>
                             </dd>
                         </dl>
-
-
                     </div>
                 </Card>
                 <Card className="roomlist wrapper" style={{marginTop: 20}} noHovering={true}>
@@ -443,13 +439,13 @@ export default class Index extends React.Component {
                                 const fType = data.fType.substr(0, data.fType.length-1);
                                 return (
                                     <div className="r_lbx">
-                                        <Link to="/platDetails" className="rimg" target="_blank"><img
+                                        <Link to ={`/rent/+flatdetails/${data.fId}`} className="rimg" target="_blank"><img
                                             src={fUrl[0]}
                                             width="300" height="240" title={data.fName} alt={data.fName}/>
                                         </Link>
                                         <div className="r_lbx_cen">
                                             <div className="r_lbx_cena">
-                                                <Link to="/platDetails" target="_blank">{data.fStreet} <span> { data.fName }</span></Link>
+                                                <Link to ={`/rent/+flatdetails/${data.fId}`} target="_blank">{data.fStreet} <span> { data.fName }</span></Link>
                                                 <div className="r_lbx_cena">
                                                     地铁三号线
                                                 </div>
@@ -472,7 +468,7 @@ export default class Index extends React.Component {
                                                       style={{fontSize: 40}}>{data.fPrice}</span>&nbsp;
                                                 元/月
                                             </div>
-                                            <Link className="lk_more_rent" to="/platDetails" target="_blank">
+                                            <Link className="lk_more_rent" to ={`/rent/+flatdetails/${data.fId}`} target="_blank">
                                                 查看房间详情
                                             </Link>
                                         </div>

@@ -4,11 +4,34 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
+import { Axios } from "../utils/Axios";
 
 
 export default class PlatDetails extends React.Component {
 
+    state = {
+        flatDetailsData: []
+    }
+
+    componentWillMount () {
+        const { id: flatId} = this.props.match.params;
+        console.log("ssss",flatId);
+        Axios.get(`/flat/flatbyid/${flatId}`).then((result) => {
+            const { data = [] } = result.data;
+            this.setState({
+                flatDetailsData: data,
+            },() => {
+                console.log("房屋详情：",this.state.flatDetailsData);
+            })
+        })
+    }
+
+
+
     render() {
+        // const flatDetailsData = this.state.flatDetailsData;
+        // console.log("dsds",flatDetailsData[0].fPic);
+        const data = this.state.flatDetailsData[0];
 
         return (
             <div>
@@ -17,74 +40,68 @@ export default class PlatDetails extends React.Component {
                         <div className="room-detail-left">
                             <div className="carousel-inner">
                                 <div className=" " data-slide-number="0">
-                                    <img className="img-responsive" title="营口道 金街庭苑 主卧 朝西 C室" alt="营口道 金街庭苑 主卧 朝西 C室图片"
+                                    <img className="img-responsive" title={ data?data.fName:'' } alt={ data?data.fName:'' }
                                          width="600" height="450"
-                                         src="http://public.wutongwan.org/public-20171220-Fj4IZAx9QuukYPDuVe0y_F1b8G3P-roomPcRent.jpg"/>
+                                         src={data?data.fPic:''}
+                                    />
                                 </div>
                             </div>
                         </div>
                         <div className="room-detail-right">
                             <div className="room-name">
-                                <h1>物资学院路 悦澜水岸家园 主卧 朝南 A室</h1>
+                                <h1>{ data?data.fName:'' }
+                                    <span> { data?data.fOrientation:''} </span>
+                                </h1>
                             </div>
                             <div className="room-title">
-                                <span>独立阳台</span>
-                                <span>独立淋浴</span>
-                                <span>集中供暖</span>
+                                <span>{data?(data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'):''}</span>
+                                <span>{data?(data.fHeating==1?'集中供暖':''):''}</span>
                             </div>
-
-
                             <div className="room-price">
                                 <div className="price-list moth">
                                     <label>月租金</label>
-                                    <div className="room-price-sale">1760 <em>元/月</em></div>
+                                    <div className="room-price-sale">{ data?data.fPrice:'' }<em>元/月</em></div>
                                 </div>
                             </div>
 
                             <div className="room-list-box">
                                 <div className="room-detail-box">
                                     <div className="room-list">
-                                        <label>面积：约19㎡（以现场勘察为准）</label>
+                                        <label>面积：约{ data?data.fArea:''}㎡（以现场勘察为准）</label>
                                     </div>
                                     <div className="room-list">
-                                        <label>编号：14169-C</label>
+                                        <label>编号：{ data?data.fId:''}</label>
                                     </div>
                                     <div className="room-list">
                                         <label>
-                                            户型：1室1卫
-                                            <b className="methodroom-rent">合</b>
+                                            户型：{ data?data.fHabitable:''}
+                                            <b className="methodroom-rent">{ data?data.fType.substr(0,data.fType.length-1):''}</b>
                                         </label>
                                     </div>
                                     <div className="room-list">
-                                        <label>付款：<a href="/zhuanti/20170821instalment" className="instalment"
-                                                     target="_blank">可支持分期月付</a>[不收中介费]</label>
+                                        <label>房龄：{ data?data.fAge:''}年</label>
                                     </div>
                                 </div>
 
                                 <div className="room-detail-box   on ">
                                     <div className="room-list">
-                                        <label>朝向：南</label>
+                                        <label>朝向：{ data?data.fOrientation:''}</label>
                                     </div>
                                     <div className="room-list">
-                                        <label>楼层：18层</label>
+                                        <label>楼层：{ data?data.fFloor:''}层</label>
                                     </div>
                                     <div className="room-list">
                                         <label>
-                                            <em>区域：</em>
-                                            <div className="detail-roombox" title="营口道 金街庭苑 主卧 朝西 C室">
-                                                <a href="http://www.dankegongyu.com/room/tj?search_text=%E5%92%8C%E5%B9%B3%E5%8C%BA"
-                                                   className="room-detail-sq" target="_blank">和平区</a>
-                                                <a href="http://www.dankegongyu.com/room/tj?search_text=%E8%90%A5%E5%8F%A3%E9%81%93"
-                                                   className="room-detail-sq" target="_blank">营口道</a>
-                                                <a href="http://www.dankegongyu.com/room/tj?search_text=%E9%87%91%E8%A1%97%E5%BA%AD%E8%8B%91"
-                                                   className="room-detail-sq" target="_blank">金街庭苑</a>
-                                            </div>
-                                            <a href="javascript:void(0)" className="map-link-title">查看地图</a>
+                                            <em>区域：{ data?data.fStreet:''}</em>
                                         </label>
                                     </div>
                                     <div className="room-list">
 
-                                        <label title="距1号线,3号线营口道站600米">地铁：距1号线,3号线营口道站600米</label>
+                                        <label >房屋描述：{ data?data.fDetails:''}</label>
+                                    </div>
+                                    <div className="room-list">
+
+                                        <label >对住户的要求：{ data?data.fRequire:''}</label>
                                     </div>
                                 </div>
                             </div>
