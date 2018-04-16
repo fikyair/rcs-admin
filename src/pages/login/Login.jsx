@@ -43,7 +43,10 @@ export default class Login extends React.Component {
                     if(result.data == false){
                       message.error("用户名或密码不正确！");
                     }else{
-                        window.location.href = '/personal';
+                        message.success("登录成功～")
+                        setTimeout(() => {
+                            window.location.href = '/personal'
+                        },5000);
                     }
                 })
             }

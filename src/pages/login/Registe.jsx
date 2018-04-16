@@ -2,9 +2,10 @@ import React from 'react';
 import '../../style/login.less';
 import '../../style/footer.less';
 import logo from '../../img/logo.png';
-import { Form, Button, Input } from 'antd';
+import { Form, Button, Input, message } from 'antd';
 import pay from '../../img/pay.jpg';
 import weixin from '../../img/wexin.jpg';
+import { Axios } from '../../utils/Axios';
 const FormItem = Form.Item;
 import {Containerization} from '../../common/PublicComponent';
 import {
@@ -39,6 +40,13 @@ export default class Register extends React.Component {
             if(!err) {
                 const formData = this.props.form.getFieldsValue();
                 console.log("你提交的信息：",formData);
+                Axios.post(`/user/addUser`, formData).then((result) => {
+                    //console.log("注册返回的信息：",result.data);
+                    setTimeout(() => {
+                        window.location.href = '/login'
+                    },5000);
+                })
+                message.success("用户注册成功～");
             }
         })
         //this.props.dispatch(get_user_register())
@@ -62,8 +70,8 @@ export default class Register extends React.Component {
                                                 }]
                                             })(
                                                 <div className="control-group">
-                                                    <span className="m_icon pas"></span>
-                                                    <input type="password" name="password1" id="sign_pas_two" placeholder="请填入用户名"
+                                                    <span className="m_icon user"></span>
+                                                    <input type="text"  id="sign_pas_two" placeholder="请填入用户名"
                                                            className="inp_txt"/>
                                                 </div>
                                             )}
@@ -80,7 +88,7 @@ export default class Register extends React.Component {
                                             })(
                                                 <div className="control-group-withoutTop">
                                                     <span className="m_icon pas"></span>
-                                                    <input type="password" name="password" id="sign_pas" placeholder="请输入密码"
+                                                    <input type="password"  id="sign_pas" placeholder="请输入密码"
                                                            className="inp_txt"/>
                                                     <p htmlFor="sign_pas" className="invalid" style={{display: 'none'}}>
                                                         请输入位密码</p>
@@ -96,8 +104,8 @@ export default class Register extends React.Component {
                                                 }]
                                             })(
                                                 <div className="control-group-withoutTop">
-                                                    <span className="m_icon pas"></span>
-                                                    <input type="password" name="password1" id="sign_pas_two" placeholder="请填入昵称"
+                                                    <span className="m_icon user"></span>
+                                                    <input type="text"  id="sign_pas_two" placeholder="请填入昵称"
                                                            className="inp_txt"/>
                                                 </div>
                                             )}
@@ -114,7 +122,7 @@ export default class Register extends React.Component {
                                             })(
                                                 <div className="control-group-withoutTop" >
                                                     <span className="m_icon tel_icon"></span>
-                                                    <input  text = "text" name="phone" onChange={(e) => this.phoneCheck(e)}
+                                                    <input  text = "text"  onChange={(e) => this.phoneCheck(e)}
                                                             id="sign_name" placeholder="建议使用常用手机号" className="inp_txt"/>
                                                     <p htmlFor="sign_name" className="invalid"
                                                        style={{display: this.state.userName}}>{this.state.info}</p>
