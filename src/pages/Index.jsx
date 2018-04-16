@@ -32,7 +32,7 @@ export default class Index extends React.Component {
 
     componentWillMount (){
         //查询所有的房源信息
-        this.props.dispatch(get_flat_all()).then(() => {
+        this.props.dispatch(get_flat_all('北京市')).then(() => {
 
             if(this.props.flatAllDataInit != null){
                 let arr = [];
