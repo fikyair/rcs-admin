@@ -46,7 +46,7 @@ export default class Login extends React.Component {
                         message.success("登录成功～")
                         setTimeout(() => {
                             window.location.href = '/personal'
-                        },5000);
+                        },2000);
                     }
                 })
             }

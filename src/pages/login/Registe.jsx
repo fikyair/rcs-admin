@@ -44,7 +44,7 @@ export default class Register extends React.Component {
                     //console.log("注册返回的信息：",result.data);
                     setTimeout(() => {
                         window.location.href = '/login'
-                    },5000);
+                    },2000);
                 })
                 message.success("用户注册成功～");
             }
