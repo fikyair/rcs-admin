@@ -26,7 +26,7 @@ export default class Personal extends React.Component {
                     <div className="slideLeft">
                         <ul>
                             <li className="myStore"><b></b><a href="#">我的收藏</a></li>
-                            <li className="myLook"><b></b><a href="#">发布房屋</a></li>
+                            <li className="myLook"><b></b><a href="/personal/personalissue">发布房屋</a></li>
                             <li className="myContract"><b></b><a href="#">我的订单</a></li>
                             <li className="myChange"><b></b><a href="#">我的留言</a></li>
                         </ul>

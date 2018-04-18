@@ -7,6 +7,7 @@ import Login from 'bundle-loader?lazy!../pages/login/Login';
 import Registe from 'bundle-loader?lazy!../pages/login/Registe';
 import PlatDetails from 'bundle-loader?lazy!../pages/platDetails';
 import Personal from 'bundle-loader?lazy!../pages/Personal';
+import PersonalIssue from 'bundle-loader?lazy!../pages/PersonalIssue';
 import AdminIndex from "bundle-loader?lazy!../pages/admin/AdminIndex";
 import NoMatch from "../pages/error/NoMatch";
 
@@ -57,6 +58,10 @@ export const commontLimtRouter = [
         path: '/personal',
         exact: true,
         component: (props) => BundleCom(props, Personal),
+    },{
+        path: '/personal/personalissue',
+        exact: true,
+        component: (props) => BundleCom(props, PersonalIssue),
     }
 ]
 
