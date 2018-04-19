@@ -5,7 +5,7 @@ import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
 import { Axios } from "../utils/Axios";
-import { Form, Input, Button, Icon} from 'antd';
+import { Form, Input, Button, Icon, message} from 'antd';
 const FormItem = Form.Item;
 const {TextArea} = Input;
 
@@ -28,8 +28,32 @@ export default class PlatDetails extends React.Component {
             })
         })
     }
+    handleFavorite () {
+            if(localStorage.getItem("User_Authorization")==null){
+                message.info("你还没有登录，请登录！")
+                this.props.history.push('/login');
+            }else {
+                message.success("收藏成功！");
+            }
+    }
 
+    handleBooking () {
+        if(localStorage.getItem("User_Authorization")==null){
+            message.info("你还没有登录，请登录！")
+            this.props.history.push('/login');
+        }else {
+            message.success("预定成功！请到个人中心查看！");
+        }
+    }
 
+    handleRemark () {
+        if(localStorage.getItem("User_Authorization")==null){
+            message.info("你还没有登录，请登录！")
+            this.props.history.push('/login');
+        }else {
+            message.success("留言成功！请到个人中心查看！");
+        }
+    }
 
     render() {
         // const flatDetailsData = this.state.flatDetailsData;
@@ -74,7 +98,7 @@ export default class PlatDetails extends React.Component {
                                                     )
                                                 }
                                             </FormItem>
-                                            <Button htmlType = "submit">留言</Button>
+                                            <Button htmlType = "submit" onClick={this.handleRemark}>留言</Button>
                                         </Form>
                                 </div>
                             </div>
@@ -138,12 +162,12 @@ export default class PlatDetails extends React.Component {
                                 </div>
                             </div>
                             <div className="room-detail-user">
-                                <Button type="danger" className="user-phone">
+                                <Button type="danger" onClick={this.handleFavorite} className="user-phone">
                                     <span>我要收藏</span>
                                     <strong><Icon type="heart-o" /></strong>
                                     <em>服务时间：9:00 - 21:00（节假日照常）</em>
                                 </Button>
-                                <div className="viewroom" data-toggle="modal" data-target="#myroom">立即下单</div>
+                                <div className="viewroom" data-toggle="modal" onClick={this.handleBooking} data-target="#myroom">立即预定</div>
                             </div>
                         </div>
 

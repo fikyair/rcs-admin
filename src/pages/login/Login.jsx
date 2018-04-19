@@ -48,7 +48,7 @@ export default class Login extends React.Component {
                             //判断本地有user信息
                             localStorage.setItem("User_Authorization",JSON.stringify(result.data));
                             setTimeout(() => {
-                                this.props.history.push('/personal');
+                                this.props.history.push('/rent');
                             },1000);
                         }else {
                             message.error("密码不正确！");

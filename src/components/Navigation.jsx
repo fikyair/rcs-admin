@@ -91,7 +91,7 @@ class Navigation extends React.Component {
                         loginName == '登录'?
                             <div className="wibsite-center">
                                 <div className="danke-login fl">
-                                    <span className="welcome-text">欢迎来到蛋壳公寓</span>
+                                    <span className="welcome-text">欢迎来到爱家房屋</span>
                                     请<Link className="sign-btn js-sign-btn login" to="/login">登录</Link>
                                 </div>
                             </div>:
