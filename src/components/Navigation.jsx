@@ -60,19 +60,9 @@ class Navigation extends React.Component {
         // })
     }
 
-    logout =(e)=> {
-        if(e.key == 'logout') {
-            if(arguments.length == 1) {
-                return localStorage.removeItem(key);
-            } else {
-                this.props.history.push('/login');
-                localStorage.clear();
-            }
-
-        }
-        if(e.key == 'personal') {
-            this.props.history.push('/personal');
-        }
+    logout =()=> {
+        this.props.history.push('/login');
+        localStorage.clear();
     }
 
     componentWillMount() {
@@ -87,7 +77,7 @@ class Navigation extends React.Component {
         if(localStorage.getItem("User_Authorization")!=null){
             const userInfo = localStorage.getItem("User_Authorization");
             const userInfoJSON = JSON.parse(userInfo);
-            loginName = '您好，'+userInfoJSON.uName;
+            loginName = userInfoJSON.uName;
         }else{
             loginName = '登录';
         }
@@ -95,6 +85,36 @@ class Navigation extends React.Component {
         return (
 
             <div>
+                <div className="danke_hd_menu" id="hd_menu">
+
+                    {
+                        loginName == '登录'?
+                            <div className="wibsite-center">
+                                <div className="danke-login fl">
+                                    <span className="welcome-text">欢迎来到蛋壳公寓</span>
+                                    请<Link cla="sign-btn js-sign-btn login" to="/login">登录</Link>
+                                </div>
+                            </div>:
+                            <div className="wibsite-center">
+
+                                <div className="danke-login fl">
+                                    Hi， <a href="/user-center/index.html"><span className="name">{loginName}</span></a>
+                                    <span className="sign-btn js-sign-btn logout" onClick={ this.logout }>注销</span>
+                                </div>
+                                <ul className="hd_menu fr">
+                                    <li className="type-center"><Link className="hd-sprite-ab" to="/personal">个人中心</Link></li>
+                                    <li className="type-app line">
+                                        <a className="hd-sprite-ab" href="/about/download.html">手机版</a>
+                                        <div className="scan-code">
+                                            <img src="//public.wutongwan.org/public-20180103-FloDHvXgSwGp4ugxhIa1gMuuE81T" alt="APP二维码"/>
+                                            <span className="text gred9">扫码下载App</span>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                    }
+                </div>
                 <Menu
                     onClick={this.handleClick}
                     selectedKeys={[this.state.current]}
@@ -149,15 +169,7 @@ class Navigation extends React.Component {
                         <div className="phonenum">
                             400-818-5656
                         </div>
-                            {
-                                loginName == '登录'?(<Link to = '/login'><Button className="fr user"> 登录</Button></Link>):
-                                    <Menu mode="horizontal" onClick={this.logout} className="fr user">
-                                        <SubMenu title={<span><Icon type="user" />{loginName}</span>}>
-                                            <Menu.Item key="personal">个人中心</Menu.Item>
-                                            <Menu.Item key="logout">注销</Menu.Item>
-                                        </SubMenu>
-                                    </Menu>
-                            }
+
                     </div>
                 </Menu>
             </div>
@@ -166,3 +178,17 @@ class Navigation extends React.Component {
 }
 
 export default Navigation = withRouter(Navigation)
+
+/*
+* <span className="welcome-text">欢迎来到蛋壳公寓</span>
+                            {
+                                loginName == '登录'?(<Link to = '/login'>请<span className="sign-btn js-sign-btn login"> 登录</span></Link>):
+                                    <Menu mode="horizontal" onClick={this.logout} className="sign-btn js-sign-btn login menu-fl">
+                                        <SubMenu title={<span><Icon type="user" />{loginName}</span>}>
+                                            <Menu.Item key="personal">个人中心</Menu.Item>
+                                            <Menu.Item key="logout">注销</Menu.Item>
+                                        </SubMenu>
+                                    </Menu>
+                            }
+
+* */

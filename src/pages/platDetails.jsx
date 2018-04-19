@@ -5,7 +5,7 @@ import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
 import { Axios } from "../utils/Axios";
-import { Form, Input, Button} from 'antd';
+import { Form, Input, Button, Icon} from 'antd';
 const FormItem = Form.Item;
 const {TextArea} = Input;
 
@@ -58,7 +58,7 @@ export default class PlatDetails extends React.Component {
                                          src={data?data.fPic:''}
                                     />
                                     <div style = {{marginTop: 10, fontSize: 14, fontWeight: 500, color: '#3dbcc6'}}>
-                                        <span className="ant-divider"/> 给房东留言:
+                                        <span className="ant-divider"/>给房东留言： <Icon type="message" />
                                     </div>
                                         <Form>
                                             <FormItem
@@ -138,12 +138,12 @@ export default class PlatDetails extends React.Component {
                                 </div>
                             </div>
                             <div className="room-detail-user">
-                                <div className="user-phone">
-                                    <span>电话预约</span>
-                                    <strong>400 - 818 - 5656</strong>
+                                <Button type="danger" className="user-phone">
+                                    <span>我要收藏</span>
+                                    <strong><Icon type="heart-o" /></strong>
                                     <em>服务时间：9:00 - 21:00（节假日照常）</em>
-                                </div>
-                                <div className="viewroom" data-toggle="modal" data-target="#myroom">我要收藏</div>
+                                </Button>
+                                <div className="viewroom" data-toggle="modal" data-target="#myroom">立即下单</div>
                             </div>
                         </div>
 

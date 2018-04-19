@@ -144,7 +144,7 @@ export default class Index extends React.Component {
                             </FormItem>
                 </Form>
 
-                <div className="col_row line">
+                <div className="col_row index-line">
                     <h1 className="title_sec gred3">
                         爱家精选房源
                     </h1>
