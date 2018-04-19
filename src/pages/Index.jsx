@@ -10,6 +10,7 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 const FormItem = Form.Item;
+import { Link } from 'react-router-dom';
 import {Containerization} from '../common/PublicComponent';
 import {
     get_flat_all,
@@ -162,7 +163,7 @@ export default class Index extends React.Component {
                                     return (
                                         <Col span={8}>
                                         <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}} noHovering={true}>
-                                            <img alt="example" width="100%" src={data.fPic}/>
+                                            <Link to = {`/rent/+flatdetails/${data.fId}`}><img alt="example" width="100%" src={data.fPic}/></Link>
                                             <div className="room_ti">
                                                 <a href="#">{data.fStreet}</a>
                                             </div>

@@ -92,7 +92,7 @@ class Navigation extends React.Component {
                             <div className="wibsite-center">
                                 <div className="danke-login fl">
                                     <span className="welcome-text">欢迎来到蛋壳公寓</span>
-                                    请<Link cla="sign-btn js-sign-btn login" to="/login">登录</Link>
+                                    请<Link className="sign-btn js-sign-btn login" to="/login">登录</Link>
                                 </div>
                             </div>:
                             <div className="wibsite-center">
@@ -123,7 +123,7 @@ class Navigation extends React.Component {
                 >
                     <div>
                         <div className="fr logo" onClick={() => this.props.history.push('/index')}>
-                            <img style={{ marginTop: 10 }} src={logo} alt="logo" width="130" height="28"/>
+                            <img  src={logo} alt="logo" width="130" height="28"/>
                         </div>
                     </div>
                     <div className="fl dkcity">
