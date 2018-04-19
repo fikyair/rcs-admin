@@ -39,14 +39,20 @@ export default class Login extends React.Component {
                 const formData = this.props.form.getFieldsValue();
                 console.log("你提交的信息：",formData);
                 Axios.post(`/user/userlogin`,formData).then((result) => {
-                    //console.log("登录返回的信息：",result.data);
-                    if(result.data == false){
-                      message.error("用户名或密码不正确！");
-                    }else{
-                        message.success("登录成功～")
-                        setTimeout(() => {
-                            window.location.href = '/personal'
-                        },2000);
+                    console.log("登录返回的信息：",result.data);
+                    if(result.data == null){
+                      message.error("用户名不存在！");
+                    }else {
+                        if(result.data.uPwd == formData.uPwd) {
+                            message.success("登录成功～")
+                            //判断本地有user信息
+                            localStorage.setItem("User_Authorization",JSON.stringify(result.data));
+                            setTimeout(() => {
+                                this.props.history.push('/personal');
+                            },1000);
+                        }else {
+                            message.error("密码不正确！");
+                        }
                     }
                 })
             }
@@ -117,8 +123,8 @@ export default class Login extends React.Component {
                                 </div>
 
                                 <div className="control-group clearfix tc bottom">
-                                    没有账号？现在就 <a href="/register" className="org"
-                                                id="toSignup">注册</a>
+                                    没有账号？现在就 <Link to="/register" className="org"
+                                                id="toSignup">注册</Link>
                                 </div>
                             </Form>
                         </div>

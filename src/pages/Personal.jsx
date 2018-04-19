@@ -6,7 +6,18 @@ import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 export default class Personal extends React.Component {
 
+
     render() {
+
+        let  displayName;
+        if(localStorage.getItem("User_Authorization")!=null){
+            const userInfo = localStorage.getItem("User_Authorization");
+            const userInfoJSON = JSON.parse(userInfo);
+            displayName = userInfoJSON.uName;
+        }else{
+            displayName = '爱家客';
+        }
+
         return (
             <div>
                 <div className="clearfix area mainCon">
@@ -38,10 +49,10 @@ export default class Personal extends React.Component {
                                      onerror="this.src='http://i.ziroom.com/static/2014/images/gjnone.png'"/>
                             </div>
                             <div className="information fl">
-                                <p className="p1">下午好，
+                                <p className="p1">您好，
                                     <span>
                                     <a href="#">
-                                        爱家客
+                                        { displayName }
                                     </a>
                                 </span>
                                 </p>

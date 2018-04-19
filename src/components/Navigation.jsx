@@ -1,6 +1,6 @@
 import React from 'react';
 import {Containerization} from '../common/PublicComponent';
-import {Menu, Button, Select} from 'antd';
+import {Menu, Button,Icon, Select} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
 import '../style/navigation.less';
 import logo from '../img/logo.png';
@@ -60,6 +60,21 @@ class Navigation extends React.Component {
         // })
     }
 
+    logout =(e)=> {
+        if(e.key == 'logout') {
+            if(arguments.length == 1) {
+                return localStorage.removeItem(key);
+            } else {
+                this.props.history.push('/login');
+                localStorage.clear();
+            }
+
+        }
+        if(e.key == 'personal') {
+            this.props.history.push('/personal');
+        }
+    }
+
     componentWillMount() {
         this.props.dispatch(get_province_by_pname('北京市')).then(() => {
 
@@ -68,6 +83,14 @@ class Navigation extends React.Component {
 
     render() {
         const positionData = this.props.provinceData;
+        let loginName = '';
+        if(localStorage.getItem("User_Authorization")!=null){
+            const userInfo = localStorage.getItem("User_Authorization");
+            const userInfoJSON = JSON.parse(userInfo);
+            loginName = '您好，'+userInfoJSON.uName;
+        }else{
+            loginName = '登录';
+        }
 
         return (
 
@@ -80,7 +103,7 @@ class Navigation extends React.Component {
                 >
                     <div>
                         <div className="fr logo" onClick={() => this.props.history.push('/index')}>
-                            <img src={logo} alt="logo" width="130" height="28"/>
+                            <img style={{ marginTop: 10 }} src={logo} alt="logo" width="130" height="28"/>
                         </div>
                     </div>
                     <div className="fl dkcity">
@@ -121,12 +144,20 @@ class Navigation extends React.Component {
                     </Menu.Item>
                     <div className="serphone">
                         <div className="phonetime">
-                            客服热线：09:00 ~ 21:00
+                            预约热线：09:00 ~ 21:00
                         </div>
                         <div className="phonenum">
                             400-818-5656
                         </div>
-                        <Link to="/login"><span className="fr user">登录</span></Link>
+                            {
+                                loginName == '登录'?(<Link to = '/login'><Button className="fr user"> 登录</Button></Link>):
+                                    <Menu mode="horizontal" onClick={this.logout} className="fr user">
+                                        <SubMenu title={<span><Icon type="user" />{loginName}</span>}>
+                                            <Menu.Item key="personal">个人中心</Menu.Item>
+                                            <Menu.Item key="logout">注销</Menu.Item>
+                                        </SubMenu>
+                                    </Menu>
+                            }
                     </div>
                 </Menu>
             </div>

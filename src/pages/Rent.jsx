@@ -439,13 +439,13 @@ export default class Index extends React.Component {
                                 const fType = data.fType.substr(0, data.fType.length-1);
                                 return (
                                     <div className="r_lbx">
-                                        <Link to ={`/rent/+flatdetails/${data.fId}`} className="rimg" target="_blank"><img
+                                        <Link to ={`/rent/+flatdetails/${data.fId}`} className="rimg" ><img
                                             src={fUrl[0]}
                                             width="300" height="240" title={data.fName} alt={data.fName}/>
                                         </Link>
                                         <div className="r_lbx_cen">
                                             <div className="r_lbx_cena">
-                                                <Link to ={`/rent/+flatdetails/${data.fId}`} target="_blank">{data.fStreet} <span> { data.fName }</span></Link>
+                                                <Link to ={`/rent/+flatdetails/${data.fId}`} >{data.fStreet} <span> { data.fName }</span></Link>
                                                 <div className="r_lbx_cena">
                                                     地铁三号线
                                                 </div>
@@ -468,7 +468,7 @@ export default class Index extends React.Component {
                                                       style={{fontSize: 40}}>{data.fPrice}</span>&nbsp;
                                                 元/月
                                             </div>
-                                            <Link className="lk_more_rent" to ={`/rent/+flatdetails/${data.fId}`} target="_blank">
+                                            <Link className="lk_more_rent" to ={`/rent/+flatdetails/${data.fId}`} >
                                                 查看房间详情
                                             </Link>
                                         </div>
