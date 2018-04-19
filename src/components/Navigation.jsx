@@ -98,7 +98,7 @@ class Navigation extends React.Component {
                             <div className="wibsite-center">
 
                                 <div className="danke-login fl">
-                                    Hi， <a href="/user-center/index.html"><span className="name">{loginName}</span></a>
+                                    Hi， <span className="name">{loginName}</span>
                                     <span className="sign-btn js-sign-btn logout" onClick={ this.logout }>注销</span>
                                 </div>
                                 <ul className="hd_menu fr">
