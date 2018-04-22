@@ -5,33 +5,176 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import { Link } from 'react-router-dom';
-import { Card } from 'antd';
+import { Icon, message } from 'antd';
+import { Favor, Issue, Appoint, Order, Message } from '../components/PersonalItems';
+
+let  displayName;
+if(localStorage.getItem("User_Authorization")!=null){
+    const userInfo = localStorage.getItem("User_Authorization");
+    const userInfoJSON = JSON.parse(userInfo);
+    displayName = userInfoJSON.uName;
+}else{
+    displayName = '爱家客';
+}
 export default class Personal extends React.Component {
 
     state = {
-        welcomeMainRight: 'display',
-        favorMainRight: 'none',
+        personal: true,
+        favor: false,
+        issue: false,
+        appoint: false,
+        order: false,
+        message: false,
+        flag: 'personal',
     }
 
-    myBooking () {
-        alert("dddd")
-        this.setState({
-            welcomeMainRight: 'none',
-            favorMainRight: 'display',
-        })
+    left = () =>{
+        if(this.state.personal){
+            return (
+                <div className="mainRight"  style = {{ display: this.state.welcomeMainRight}}>
+                    <div className="person clearfix">
+                        <div className="photo fl">
+                            <img src="http://pic.ziroom.com.cn/static/images/girl.png"
+                                 onerror="this.src='http://i.ziroom.com/static/2014/images/gjnone.png'"/>
+                        </div>
+                        <div className="information fl">
+                            <p className="p1">您好，
+                                <span>
+                                    <a href="#">
+                                        { displayName }
+                                    </a>
+                                </span>
+                            </p>
+                            <p className="p2">
+                                <a href="#">修改个人资料<i></i></a>
+                            </p>
+                            <p className="p3">
+                                <span className="active">已绑定手机号</span>
+                                <i className="phone active"></i>
+                                <span>未绑定邮箱</span>
+                                <i className="email "></i>
+                            </p>
+                        </div>
+                        <div className="line fr"></div>
+                    </div>
+
+                    <div className="collection">
+                        <h5>最近收藏</h5>
+                        <ul className="clearfix">
+                            <li>
+                                <a href="http://www.ziroom.com/z/vr/60815029">
+                                    <div className="img">
+                                        <img width="285" height="190"
+                                             src="http://pic.ziroom.com/house_images/g2/M00/ED/EC/ChAFfVpXVsmAfbUeAAzILUhLTBI245.jpg"/>
+                                    </div>
+                                    <div className="clearfix">
+                                        <p className="name fl">东城安定门2号线,8号线鼓楼大街安德里北街25号院3居室-南卧</p>
+                                        <p className="price fr">¥3290/月</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            )
+        }else if (this.state.favor) {
+            return (
+                <div className="mainRight">
+                    <div className="person clearfix">
+                        <b>我的收藏</b>
+                    </div>
+                    <div className="person">
+                        收藏详情
+                    </div>
+                </div>
+            )
+        } else if (this.state.issue){
+            return (
+                <div className="mainRight">
+                    发布房屋
+                </div>
+            )
+        } else if (this.state.appoint){
+            return (
+                <div className="mainRight">
+                    我的约看
+                </div>
+            )
+        }else if (this.state.order){
+            return (
+                <div className="mainRight">
+                    我的订单
+                </div>
+            )
+        }else {
+            return (
+                <div className="mainRight">
+                    我的留言
+                </div>
+            )
+        }
+    }
+    itemClick =(flag)=> {
+        switch (flag){
+            case 'personal': this.setState({
+                personal: true,
+                favor: false,
+                issue: false,
+                appoint: false,
+                order: false,
+                message: false,
+            })
+                break;
+            case 'favor': this.setState({
+                personal: false,
+                favor: true,
+                issue: false,
+                appoint: false,
+                order: false,
+                message: false,
+            })
+                break;
+            case 'issue': this.setState({
+                personal: false,
+                favor: false,
+                issue: true,
+                appoint: false,
+                order: false,
+                message: false,
+            })
+                break;
+            case 'appoint': this.setState({
+                personal: false,
+                favor: false,
+                issue: false,
+                appoint: true,
+                order: false,
+                message: false,
+            })
+                break;
+            case 'order': this.setState({
+                personal: false,
+                favor: false,
+                issue: false,
+                appoint: false,
+                order: true,
+                message: false,
+            })
+                break;
+            case 'message': this.setState({
+                personal: false,
+                favor: false,
+                issue: false,
+                appoint: false,
+                order: false,
+                message: true,
+            })
+                break;
+            default: message.error("没有这个选项！")
+        }
     }
 
     render() {
-
-        let  displayName;
-        if(localStorage.getItem("User_Authorization")!=null){
-            const userInfo = localStorage.getItem("User_Authorization");
-            const userInfoJSON = JSON.parse(userInfo);
-            displayName = userInfoJSON.uName;
-        }else{
-            displayName = '爱家客';
-        }
-
         return (
             <div>
                 <div className="clearfix area mainCon">
@@ -50,103 +193,16 @@ export default class Personal extends React.Component {
                     </div>
                     <div className="slideLeft">
                         <ul>
-                            <li className="myStore"><b></b><a href="#">我的收藏</a></li>
-                            <li className="myChange"><b></b><Link to="/personal/personalissue">发布房屋</Link></li>
-                            <li className="myLook"><b></b><Link to="">我的约看</Link></li>
-                            <li className="myContract"><b></b><Link to="/personal" onClick={this.myBooking} >我的订单</Link></li>
-                            <li className="myTousu"><b className="libmy"></b><Link to="">我的留言</Link></li>
+                            <li className="myStore" onClick={()=>{this.itemClick('personal')}}><Icon type="user" className="personallib"/><Link to="/personal">个人中心</Link></li>
+                            <li className="myStore" onClick={()=>{this.itemClick('favor')}}><b></b><Link to="/personal">我的收藏</Link></li>
+                            <li className="myChange"onClick={()=>{this.itemClick('issue')}} ><b></b><Link to="/personal">发布房屋</Link></li>
+                            <li className="myLook" onClick={()=>{this.itemClick('appoint')}}><b></b><Link to="/personal">我的约看</Link></li>
+                            <li className="myContract" onClick={()=>{this.itemClick('order')}}><b></b><Link to="/personal">我的订单</Link></li>
+                            <li className="myTousu" onClick={()=>{this.itemClick('message')}}><b className="libmy"></b><Link to="/personal">我的留言</Link></li>
                         </ul>
                     </div>
-                    <div className="mainRight" style = {{ display: 'display' }}>
-                        <div className="collection">
-                            <tbody id="tbody">
-                            <tr className="ttl_cs">
-                                <td className="td_firsr">房源信息</td>
-                                <td className="td_second">价格</td>
-                                <td className="td_second">状态</td>
-                                <td className="td_second">收藏时间</td>
-                                <td className="td_second">操作</td>
-                            </tr><tr className="content_cs"><td>
-                                <div className="left_imgs clearfix">
-                                    <div className="imgs">
-                                        <a href="http://www.ziroom.com/z/vr/60815029.html" target="_blank">
-                                            <img src="http://pic.ziroom.com/house_images/g2/M00/ED/EC/v180x135_ChAFfVpXVsmAfbUeAAzILUhLTBI245.jpg" width="137" height="91" onerror="this.src='http://pic.ziroom.com/static/images/slist_1207/small_pzz.jpg'"/>
-                                        </a>
-                                    </div>
-                                    <div className="txt_li">
-                                        <p className="p1">
-                                            <a href="http://www.ziroom.com/z/vr/60815029.html" target="_blank">东城安定门8号线,2号线鼓楼大街安德里北街25号院3居室</a>
-                                        </p>
-                                        <p className="p2">5/6层 | 15.8 平方米 |合租</p>
-                                    </div>
-                                </div>
-                            </td>
-                                <td className="price_c">3290元/月</td>
-                                <td>已入住</td>
-                                <td>2018-01-05</td>
-                                <td>11</td>
-                                <td>
-                                    <div className="de_v_box" style={{position: 'relative'}}>
-                                        <a href="javascript:;" className="delete">删除</a>
-                                        <div className="delete_box" style={{display: 'none'}}>
-                                            <p className="con_de">确认要删除该收藏吗？</p>
-                                            <div className="d_btn">
-                                                <a href="javascript:;" onClick="delCollect('60815029',1)" className="confirm">确认</a>
-                                                <a href="javascript:;" className="cancel">取消</a>
-                                            </div>
-                                            <div className="cl_close"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </div>
-                    </div>
-                    <div className="mainRight"  style = {{ display: this.state.welcomeMainRight}}>
-                        <div className="person clearfix">
-                            <div className="photo fl">
-                                <img src="http://pic.ziroom.com.cn/static/images/girl.png"
-                                     onerror="this.src='http://i.ziroom.com/static/2014/images/gjnone.png'"/>
-                            </div>
-                            <div className="information fl">
-                                <p className="p1">您好，
-                                    <span>
-                                    <a href="#">
-                                        { displayName }
-                                    </a>
-                                </span>
-                                </p>
-                                <p className="p2">
-                                    <a href="#">修改个人资料<i></i></a>
-                                </p>
-                                <p className="p3">
-                                    <span className="active">已绑定手机号</span>
-                                    <i className="phone active"></i>
-                                    <span>未绑定邮箱</span>
-                                    <i className="email "></i>
-                                </p>
-                            </div>
-                            <div className="line fr"></div>
-                        </div>
 
-                        <div className="collection">
-                            <h5>最近收藏</h5>
-                            <ul className="clearfix">
-                                <li>
-                                    <a href="http://www.ziroom.com/z/vr/60815029">
-                                        <div className="img">
-                                            <img width="285" height="190"
-                                                 src="http://pic.ziroom.com/house_images/g2/M00/ED/EC/ChAFfVpXVsmAfbUeAAzILUhLTBI245.jpg"/>
-                                        </div>
-                                        <div className="clearfix">
-                                            <p className="name fl">东城安定门2号线,8号线鼓楼大街安德里北街25号院3居室-南卧</p>
-                                            <p className="price fr">¥3290/月</p>
-                                        </div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    { this.left()}
                 </div>
                 <div className="footer">
                     <div className="wibsite-center">
