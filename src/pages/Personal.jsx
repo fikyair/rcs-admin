@@ -5,7 +5,8 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import { Link } from 'react-router-dom';
-import { Icon, message } from 'antd';
+import { Icon, message, Row, Col } from 'antd';
+import moment from 'moment';
 import { Favor, Issue, Appoint, Order, Message } from '../components/PersonalItems';
 
 let  displayName;
@@ -26,6 +27,7 @@ export default class Personal extends React.Component {
         order: false,
         message: false,
         flag: 'personal',
+        img: 'ss'
     }
 
     left = () =>{
@@ -101,6 +103,42 @@ export default class Personal extends React.Component {
                 <div className="mainRight">
                     <div className="person clearfix">
                         <b>我的约看</b>
+                    </div>
+                    <div className="person">
+                           <Row >
+                               <Col span = {10}>
+                                   <Col span = {12}>
+                                       房屋信息
+                                       <Col span = {24} style = {{ marginTop: 15 }} >
+                                           <img width="130" height="90" src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
+                                       </Col>
+                                   </Col>
+                                   <Col span = {12} >
+                                       价格
+                                       <Col span = {24} style = {{ marginTop: 45 }} >
+                                           2630元
+                                       </Col>
+                                   </Col>
+                               </Col>
+                               <Col span = {6}>
+                                    预约时间
+                                   <Col span = {24} style = {{ marginTop: 45 }} >
+                                       { moment().format("YYYY-MM-DD")}
+                                   </Col>
+                               </Col>
+                               <Col span = {6}>
+                                    预约人
+                                   <Col span = {24} style = {{ marginTop: 45 }} >
+                                       薛时鸣
+                                   </Col>
+                               </Col>
+                               <Col span = {2}>
+                                    操作
+                                   <Col span = {24} style = {{ marginTop: 45 }} >
+                                       <a href="#">删除</a>
+                                   </Col>
+                               </Col>
+                           </Row>
                     </div>
                 </div>
             )
