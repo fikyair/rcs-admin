@@ -5,7 +5,8 @@ import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
 import { Axios } from "../utils/Axios";
-import { Form, Input, Button, Icon, message} from 'antd';
+import moment from 'moment';
+import { Form,DatePicker, Input, Button, Icon, message, Modal, Row, Col} from 'antd';
 const FormItem = Form.Item;
 const {TextArea} = Input;
 
@@ -13,7 +14,10 @@ const {TextArea} = Input;
 export default class PlatDetails extends React.Component {
 
     state = {
-        flatDetailsData: []
+        flatDetailsData: [],
+        loading: false,
+        visible: false,
+
     }
 
     componentWillMount () {
@@ -37,13 +41,27 @@ export default class PlatDetails extends React.Component {
             }
     }
 
-    handleBooking () {
+    handleBooking = () => {
         if(localStorage.getItem("User_Authorization")==null){
             message.info("你还没有登录，请登录！")
             this.props.history.push('/login');
         }else {
-            message.success("预定成功！请到个人中心查看！");
+                this.setState({
+                    visible: true,
+                })
         }
+    }
+
+    //对话框的两个按钮
+    handleOk = () => {
+        this.setState({ loading: true });
+        setTimeout(() => {
+            this.setState({ loading: false, visible: false });
+            message.success("约看成功！请到个人中心查看！");
+        }, 500);
+    }
+    handleCancel = () => {
+        this.setState({ visible: false });
     }
 
     handleRemark () {
@@ -60,6 +78,10 @@ export default class PlatDetails extends React.Component {
         // console.log("dsds",flatDetailsData[0].fPic);
         const data = this.state.flatDetailsData[0];
         const {getFieldDecorator} = this.props.form;
+        //确认约看弹框
+        const { visible, loading } = this.state;
+        const dateFormat = 'YYYY-MM-DD';
+        const monthFormat = 'YYYY-MM';
         return (
             <div>
                 <div style={{ margin:'0 5px 0 5px'}}>
@@ -167,7 +189,7 @@ export default class PlatDetails extends React.Component {
                                     <strong><Icon type="heart-o" /></strong>
                                     <em>服务时间：9:00 - 21:00（节假日照常）</em>
                                 </Button>
-                                <div className="viewroom" data-toggle="modal" onClick={this.handleBooking} data-target="#myroom">立即预定</div>
+                                <div className="viewroom" data-toggle="modal" onClick={this.handleBooking} data-target="#myroom">我要约看</div>
                             </div>
                         </div>
 
@@ -238,6 +260,34 @@ export default class PlatDetails extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Modal
+                    visible={visible}
+                    title="确认约看信息"
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                    footer={[
+                        <Button key="back" size="small" onClick={this.handleCancel}>取消</Button>,
+                        <Button key="submit" type="primary" size="small" loading={loading} onClick={this.handleOk}>
+                            约看
+                        </Button>,
+                    ]}
+                >
+                        <Row style = {{ padding: 20 ,fontSize: 13}}>
+                            <Col span={24}>
+                               <span style={{ fontWeight: 500,padding: 5, fontSize: 14 }}>房屋名称</span> ： { data?data.fName: '' }
+                            </Col>
+                            <Col span={24}>
+                                <span style={{ fontWeight: 500, padding: 5, fontSize: 14 }}>地址</span>： { data?data.fStreet: '' }
+                            </Col>
+                            <Col span={24}>
+                                <span style={{ fontWeight: 500, padding: 5, fontSize: 14 }}>价格</span>： { data?data.fPrice: '' }元
+                            </Col><br/>
+                            <Col span={24}>
+                                <span style={{ fontWeight: 500, padding: 5, fontSize: 14 }}>请选择约看时间</span>：
+                                <DatePicker defaultValue={moment(moment().format(), dateFormat)} format={dateFormat} />
+                            </Col>
+                        </Row>
+                </Modal>
             </div>
         )
     }

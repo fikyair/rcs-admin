@@ -56,7 +56,7 @@ export default class Personal extends React.Component {
                             <li className="myChange"><b></b><Link to="">我的留言</Link></li>
                         </ul>
                     </div>
-                    <div className="mainRight" style = {{ display: this.state.favorMainRight }}>
+                    <div className="mainRight" style = {{ display: 'display' }}>
                         <div className="collection">
                             <tbody id="tbody">
                             <tr className="ttl_cs">
