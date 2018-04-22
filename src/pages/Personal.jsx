@@ -91,25 +91,33 @@ export default class Personal extends React.Component {
         } else if (this.state.issue){
             return (
                 <div className="mainRight">
-                    发布房屋
+                    <div className="person clearfix">
+                        <b>发布房屋</b>
+                    </div>
                 </div>
             )
         } else if (this.state.appoint){
             return (
                 <div className="mainRight">
-                    我的约看
+                    <div className="person clearfix">
+                        <b>我的约看</b>
+                    </div>
                 </div>
             )
         }else if (this.state.order){
             return (
                 <div className="mainRight">
-                    我的订单
+                    <div className="person clearfix">
+                        <b>我的订单</b>
+                    </div>
                 </div>
             )
         }else {
             return (
                 <div className="mainRight">
-                    我的留言
+                    <div className="person clearfix">
+                        <b>我的留言</b>
+                    </div>
                 </div>
             )
         }
