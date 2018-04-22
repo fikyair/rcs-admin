@@ -78,7 +78,7 @@ export default class Login extends React.Component {
                                         })(
                                             <div className="control-group">
                                                 <span className="m_icon user"></span>
-                                                <input type="text" name="user_name" onChange={(e)=>this.phoneCheck(e)} id="user_name" placeholder="请输入用户名或手机号或邮箱"
+                                                <input type="text" name="user_name" onChange={(e)=>this.phoneCheck(e)} id="user_name" placeholder="请输入用户名"
                                                        className="inp_txt" tabIndex="1"/>
                                                 <p htmlFor="user_name" className="invalid" style={{display: this.state.userName}}>{this.state.info}</p>
                                             </div>
