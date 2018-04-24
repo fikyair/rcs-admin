@@ -109,36 +109,50 @@ export default class Personal extends React.Component {
                                <Col span = {10}>
                                    <Col span = {12}>
                                        房屋信息
-                                       <Col span = {24} style = {{ marginTop: 15 }} >
-                                           <img width="130" height="90" src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
-                                       </Col>
                                    </Col>
                                    <Col span = {12} >
                                        价格
-                                       <Col span = {24} style = {{ marginTop: 45 }} >
-                                           2630元
-                                       </Col>
                                    </Col>
                                </Col>
                                <Col span = {6}>
                                     预约时间
-                                   <Col span = {24} style = {{ marginTop: 45 }} >
-                                       { moment().format("YYYY-MM-DD")}
-                                   </Col>
                                </Col>
                                <Col span = {6}>
                                     预约人
-                                   <Col span = {24} style = {{ marginTop: 45 }} >
-                                       薛时鸣
-                                   </Col>
                                </Col>
                                <Col span = {2}>
                                     操作
-                                   <Col span = {24} style = {{ marginTop: 45 }} >
-                                       <a href="#">删除</a>
-                                   </Col>
                                </Col>
                            </Row>
+                        <Row >
+                            <Col span = {10}>
+                                <Col span = {12}>
+                                    <Col span = {24} style = {{ marginTop: 15 }} >
+                                        <img width="130" height="90" src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
+                                    </Col>
+                                </Col>
+                                <Col span = {12} >
+                                    <Col span = {24} style = {{ marginTop: 45 }} >
+                                        2630元
+                                    </Col>
+                                </Col>
+                            </Col>
+                            <Col span = {6}>
+                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                    { moment().format("YYYY-MM-DD")}
+                                </Col>
+                            </Col>
+                            <Col span = {6}>
+                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                    薛时鸣
+                                </Col>
+                            </Col>
+                            <Col span = {2}>
+                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                    <a href="#">删除</a>
+                                </Col>
+                            </Col>
+                        </Row>
                     </div>
                 </div>
             )
