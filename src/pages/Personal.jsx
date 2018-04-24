@@ -5,7 +5,7 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import { Link } from 'react-router-dom';
-import { Icon, message, Row, Col } from 'antd';
+import { Icon, message, Row, Col, Popconfirm } from 'antd';
 import moment from 'moment';
 import { Favor, Issue, Appoint, Order, Message } from '../components/PersonalItems';
 
@@ -28,6 +28,10 @@ export default class Personal extends React.Component {
         message: false,
         flag: 'personal',
         img: 'ss'
+    }
+
+    ordering = () =>{
+        console.log("嗯哼")
     }
 
     left = () =>{
@@ -114,13 +118,13 @@ export default class Personal extends React.Component {
                                        价格
                                    </Col>
                                </Col>
-                               <Col span = {6}>
+                               <Col span = {4}>
                                     预约时间
                                </Col>
-                               <Col span = {6}>
+                               <Col span = {4}>
                                     预约人
                                </Col>
-                               <Col span = {2}>
+                               <Col span = {6}>
                                     操作
                                </Col>
                            </Row>
@@ -137,19 +141,25 @@ export default class Personal extends React.Component {
                                     </Col>
                                 </Col>
                             </Col>
-                            <Col span = {6}>
+                            <Col span = {4}>
                                 <Col span = {24} style = {{ marginTop: 45 }} >
                                     { moment().format("YYYY-MM-DD")}
                                 </Col>
                             </Col>
-                            <Col span = {6}>
+                            <Col span = {4}>
                                 <Col span = {24} style = {{ marginTop: 45 }} >
                                     薛时鸣
                                 </Col>
                             </Col>
-                            <Col span = {2}>
+                            <Col span = {6}>
                                 <Col span = {24} style = {{ marginTop: 45 }} >
-                                    <a href="#">删除</a>
+                                    <Popconfirm title="是否删除?" onConfirm={() => this.ordering()}>
+                                        <a>删除</a>
+                                    </Popconfirm>
+                                    <span className="ant-divider"/>
+                                    <Popconfirm title="是否下单?" onConfirm={() => this.ordering()}>
+                                        <a>下单</a>
+                                    </Popconfirm>
                                 </Col>
                             </Col>
                         </Row>
