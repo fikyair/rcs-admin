@@ -5,7 +5,7 @@ import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import { Link } from 'react-router-dom';
-import { Icon, message, Row, Col, Popconfirm } from 'antd';
+import { Icon, message, Row, Col, Popconfirm, Card } from 'antd';
 import moment from 'moment';
 import { Favor, Issue, Appoint, Order, Message } from '../components/PersonalItems';
 
@@ -89,8 +89,25 @@ export default class Personal extends React.Component {
                     <div className="person clearfix">
                         <b>我的收藏</b>
                     </div>
-                    <div className="person">
-                        收藏详情
+                    <div className="person" >
+                        <Card style={{ width: '100%', marginRight: 5, background: '#D6D6D6'}} bodyStyle={{ padding: 0 , display: 'inline-flex' }}>
+                            <div className="custom-image" style={{  padding: '10px 10px', }}>
+                                <img alt="example" width="240px" height="240px" src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG" />
+                            </div>
+                            <div className="custom-card">
+                                <h3>北京市&nbsp; &nbsp;西城区</h3>
+                                <p>景观花园</p>
+                            </div>
+                        </Card>
+                        <Card style={{ width: 280, marginRight: 5 }} bodyStyle={{ padding: 0 }}>
+                            <div className="custom-image">
+                                <img alt="example" width="100%" height="280px" src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG" />
+                            </div>
+                            <div className="custom-card">
+                                <h3>北京市&nbsp; &nbsp;西城区</h3>
+                                <p>景观花园</p>
+                            </div>
+                        </Card>
                     </div>
                 </div>
             )
@@ -171,6 +188,62 @@ export default class Personal extends React.Component {
                 <div className="mainRight">
                     <div className="person clearfix">
                         <b>我的订单</b>
+                    </div>
+                    <div className="person">
+                        <Row >
+                            <Col span = {10}>
+                                <Col span = {12}>
+                                    房屋信息
+                                </Col>
+                                <Col span = {12} >
+                                    价格
+                                </Col>
+                            </Col>
+                            <Col span = {4}>
+                                下单时间
+                            </Col>
+                            <Col span = {4}>
+                                下单人
+                            </Col>
+                            <Col span = {6}>
+                                操作
+                            </Col>
+                        </Row>
+                        <Row >
+                            <Col span = {10}>
+                                <Col span = {12}>
+                                    <Col span = {24} style = {{ marginTop: 15 }} >
+                                        <img width="130" height="90" src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
+                                    </Col>
+                                </Col>
+                                <Col span = {12} >
+                                    <Col span = {24} style = {{ marginTop: 45 }} >
+                                        2630元
+                                    </Col>
+                                </Col>
+                            </Col>
+                            <Col span = {4}>
+                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                    { moment().format("YYYY-MM-DD")}
+                                </Col>
+                            </Col>
+                            <Col span = {4}>
+                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                    薛时鸣
+                                </Col>
+                            </Col>
+                            <Col span = {6}>
+                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                    <Popconfirm title="是否预定?" onConfirm={() => this.ordering()}>
+                                        <a>预定</a>
+                                    </Popconfirm>
+                                    <span className="ant-divider"/>
+                                    <Popconfirm title="是否导出合同?" onConfirm={() => this.ordering()}>
+                                        <a>导出合同</a>
+                                    </Popconfirm>
+                                </Col>
+                            </Col>
+                        </Row>
                     </div>
                 </div>
             )
