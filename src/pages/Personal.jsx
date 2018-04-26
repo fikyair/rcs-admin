@@ -82,6 +82,23 @@ export default class Personal extends React.Component {
                             </li>
                         </ul>
                     </div>
+                    <div className="collection">
+                        <h5>我发布的房源</h5>
+                        <ul className="clearfix">
+                            <li>
+                                <Link to="/personal">
+                                    <div className="img">
+                                        <img width="285" height="190"
+                                             src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
+                                    </div>
+                                    <div className="clearfix">
+                                        <p className="name fl">南开广开街2号线,1号线西南角蘭园3居室</p>
+                                        <p className="price fr">¥2560/月</p>
+                                    </div>
+                                </Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             )
         }else if (this.state.favor) {
@@ -273,7 +290,7 @@ export default class Personal extends React.Component {
                                     </Popconfirm>
                                     <span className="ant-divider"/>
                                     <Popconfirm title="是否签约?" onConfirm={() => this.ordering()}>
-                                        <a>我要签约</a>
+                                        <a disabled={true}>我要签约</a>
                                     </Popconfirm>
                                 </Col>
                             </Col>
