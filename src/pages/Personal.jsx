@@ -4,6 +4,7 @@ import logo from '../img/logo.png';
 import '../style/footer.less';
 import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
+import './style/personalissue.less';
 import { Link } from 'react-router-dom';
 import { Icon, message, Row, Col, Popconfirm, Card } from 'antd';
 import moment from 'moment';
@@ -52,13 +53,13 @@ export default class Personal extends React.Component {
                                 </span>
                             </p>
                             <p className="p2">
-                                <a href="#">修改个人资料<i></i></a>
+                                {/*<a href="#">修改个人资料<i></i></a>*/}
                             </p>
                             <p className="p3">
-                                <span className="active">已绑定手机号</span>
-                                <i className="phone active"></i>
-                                <span>未绑定邮箱</span>
-                                <i className="email "></i>
+                                {/*<span className="active">已绑定手机号</span>*/}
+                                {/*<i className="phone active"></i>*/}
+                                {/*<span>未绑定邮箱</span>*/}
+                                {/*<i className="email "></i>*/}
                             </p>
                         </div>
                         <div className="line fr"></div>
@@ -90,23 +91,37 @@ export default class Personal extends React.Component {
                         <b>我的收藏</b>
                     </div>
                     <div className="person" >
-                        <Card style={{ width: '100%', marginRight: 5, background: '#D6D6D6'}} bodyStyle={{ padding: 0 , display: 'inline-flex' }}>
+                        <Row style = {{ marginBottom: 10, marginLeft: 10}}>
+                            <Col span = {14}>
+                                    房源信息
+                            </Col>
+                            <Col span = {2} >
+                                    价格
+                            </Col>
+                            <Col span = {2}>
+                                状态
+                            </Col>
+                            <Col span = {4}>
+                                收藏时间
+                            </Col>
+                            <Col span = {2}>
+                                操作
+                            </Col>
+                        </Row>
+                        <Card style={{ width: '100%', marginRight: 5, background: '', bordered: 'false', marginBottom: 15}} bodyStyle={{ padding: 0 , display: 'inline-flex' }}>
                             <div className="custom-image" style={{  padding: '10px 10px', }}>
-                                <img alt="example" width="240px" height="240px" src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG" />
+                                <img alt="example" width="137px" height="91px" src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG" />
                             </div>
-                            <div className="custom-card">
-                                <h3>北京市&nbsp; &nbsp;西城区</h3>
-                                <p>景观花园</p>
+                            <div className="txt_li">
+                                <p className="p1">
+                                    南开广开街2号线,1号线西南角蘭园3居室
+                                </p>
+                                <p className="p2">29/34层 | 11.6 平方米 |合租</p>
                             </div>
-                        </Card>
-                        <Card style={{ width: 280, marginRight: 5 }} bodyStyle={{ padding: 0 }}>
-                            <div className="custom-image">
-                                <img alt="example" width="100%" height="280px" src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG" />
-                            </div>
-                            <div className="custom-card">
-                                <h3>北京市&nbsp; &nbsp;西城区</h3>
-                                <p>景观花园</p>
-                            </div>
+                            <p style={{ marginTop: 12, marginLeft: 119 }}>2500元</p>
+                            <p style={{ marginTop: 12, marginLeft: 28 }}>已入住</p>
+                            <p style={{ marginTop: 12, marginLeft: 31 }}>2018-4-26</p>
+                            <p style={{ marginTop: 12, marginLeft: 79 }}>删除</p>
                         </Card>
                     </div>
                 </div>
@@ -117,6 +132,83 @@ export default class Personal extends React.Component {
                     <div className="person clearfix">
                         <b>发布房屋</b>
                     </div>
+                    <div className="person">
+                        <div className="m-form">
+                            <div className="box-l m-entry">
+                                <form  >
+                                    <dl className="compact">
+                                        <dt>小区所在城市</dt>
+                                        <dd>
+                                            <input className="sugInput" name="fCity" value={this.state.fCity} onChange={e=>this.setState({fCity:e.target.value})} type="text"  placeholder="请输入所在城市"/>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>小区</dt>
+                                        <dd className="wrap-sug">
+                                            <div className="u-sug" id="u-sug">
+                                                <input className="sugInput" name="fName" value={this.state.fName} onChange={e=>this.setState({fName:e.target.value})} type="text"  placeholder="请输入小区名"/>
+                                                <ul style={{display: 'none'}}></ul>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>房屋地址</dt>
+                                        <dd>
+                                            <div className="u-select u-select-build">
+                                                <input placeholder="楼栋号" name="fBuilding" className="u-select-selected"
+                                                       onChange={e=>this.setState({fBuilding: e.target.value})}
+                                                       type="text" value={this.state.fBuilding}/>
+                                                <ul className="u-select-options hide" style={{display: 'none'}}></ul>
+                                            </div>
+                                            <div className="u-select u-select-build" >
+                                                <input placeholder="单元号" name="fUnit" className="u-select-selected" type="text"
+                                                       onChange={e=>this.setState({fUnit: e.target.value})}
+                                                       value={this.state.fUnit}/>
+                                                <ul className="u-select-options hide" style={{display: 'none'}}></ul>
+                                            </div>
+                                            <div className="u-select u-select-build" >
+                                                <input placeholder="门牌号" name="fHouse" className="u-select-selected" type="text"
+                                                       onChange={e=>this.setState({fHouse: e.target.value})}
+                                                       value={ this.state.fHouse }/>
+                                                <ul className="u-select-options hide"style={{display: 'none'}}></ul>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>期望价格</dt>
+                                        <dd>
+                                            <input name="fExpectPrice" value={ this.state.fExpectPrice } type="text"
+                                                   placeholder="请输入您期望出租的价格"
+                                                   onChange={e=>this.setState({fExpectPrice: e.target.value})}
+                                                   style= {{width: 210}}/>
+                                            <div className="unit">元/月</div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>称呼</dt>
+                                        <dd>
+                                            <input name="fOwnerName" value={ this.state.fOwnerName }
+                                                   onChange={e=>this.setState({fOwnerName: e.target.value})}
+                                                   type="text"
+                                                   placeholder="我们应该如何称呼您"
+                                                   style= {{width: 210}}/>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>手机号码</dt>
+                                        <dd>
+                                            <input name="fOwnerMobile" value={ this.state.fOwnerMobile }
+                                                   onChange={e=>this.setState({fOwnerMobile: e.target.value})}
+                                                   type="text"
+                                                   placeholder="您的联系方式"
+                                                   style= {{width: 210}}/>
+                                        </dd>
+                                    </dl>
+                                    <input className="btn-submit" type="submit" onClick={this.onSubmit}  value="提交委托"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )
         } else if (this.state.appoint){
@@ -126,7 +218,7 @@ export default class Personal extends React.Component {
                         <b>我的约看</b>
                     </div>
                     <div className="person">
-                           <Row >
+                           <Row style = {{ lineHeight: '28px', background: '#eee'}}>
                                <Col span = {10}>
                                    <Col span = {12}>
                                        房屋信息
@@ -135,13 +227,16 @@ export default class Personal extends React.Component {
                                        价格
                                    </Col>
                                </Col>
+                               <Col span = {2}>
+                                   状态
+                               </Col>
                                <Col span = {4}>
                                     预约时间
                                </Col>
                                <Col span = {4}>
                                     预约人
                                </Col>
-                               <Col span = {6}>
+                               <Col span = {4}>
                                     操作
                                </Col>
                            </Row>
@@ -158,6 +253,9 @@ export default class Personal extends React.Component {
                                     </Col>
                                 </Col>
                             </Col>
+                            <Col span = {2} style = {{ marginTop: 45 }} >
+                                未约看
+                            </Col>
                             <Col span = {4}>
                                 <Col span = {24} style = {{ marginTop: 45 }} >
                                     { moment().format("YYYY-MM-DD")}
@@ -168,14 +266,14 @@ export default class Personal extends React.Component {
                                     薛时鸣
                                 </Col>
                             </Col>
-                            <Col span = {6}>
+                            <Col span = {4}>
                                 <Col span = {24} style = {{ marginTop: 45 }} >
                                     <Popconfirm title="是否删除?" onConfirm={() => this.ordering()}>
                                         <a>删除</a>
                                     </Popconfirm>
                                     <span className="ant-divider"/>
-                                    <Popconfirm title="是否下单?" onConfirm={() => this.ordering()}>
-                                        <a>下单</a>
+                                    <Popconfirm title="是否签约?" onConfirm={() => this.ordering()}>
+                                        <a>我要签约</a>
                                     </Popconfirm>
                                 </Col>
                             </Col>
@@ -190,7 +288,7 @@ export default class Personal extends React.Component {
                         <b>我的订单</b>
                     </div>
                     <div className="person">
-                        <Row >
+                        <Row style = {{ lineHeight: '28px', background: '#eee'}} >
                             <Col span = {10}>
                                 <Col span = {12}>
                                     房屋信息
@@ -234,10 +332,6 @@ export default class Personal extends React.Component {
                             </Col>
                             <Col span = {6}>
                                 <Col span = {24} style = {{ marginTop: 45 }} >
-                                    <Popconfirm title="是否预定?" onConfirm={() => this.ordering()}>
-                                        <a>预定</a>
-                                    </Popconfirm>
-                                    <span className="ant-divider"/>
                                     <Popconfirm title="是否导出合同?" onConfirm={() => this.ordering()}>
                                         <a>导出合同</a>
                                     </Popconfirm>
