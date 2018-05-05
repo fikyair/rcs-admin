@@ -8,6 +8,7 @@ import './style/personalissue.less';
 import { Link } from 'react-router-dom';
 import { Icon, message, Row, Col, Popconfirm, Card } from 'antd';
 import moment from 'moment';
+import {Axios} from "../utils/Axios";
 import { Favor, Issue, Appoint, Order, Message } from '../components/PersonalItems';
 
 let  displayName;
@@ -27,12 +28,49 @@ export default class Personal extends React.Component {
         appoint: false,
         order: false,
         message: false,
+        verify: false,
+        verifyInfo: [],
         flag: 'personal',
-        img: 'ss'
+        img: 'ss',
+        fCity: '',
+        fName: '',
+        fBuilding: '',
+        fUnit: '',
+        fHouse: '',
+        fExpectprice: '',
+        fOwnername: '',
+        fOwnermobile: '',
+        fVtime: '',
     }
 
     ordering = () =>{
         console.log("嗯哼")
+    }
+
+    componentDidMount () {
+        Axios.post(`/verify/queryVerifyStatus/${displayName}`).then((result) => {
+             const { data } = result.data;
+             this.setState({
+                 verifyInfo: data,
+             },() => {
+                 console.log("审核信息：",this.state.verifyInfo);
+             })
+        })
+    }
+
+    onSubmitIssue = (e) => {
+        const { fCity, fName, fBuilding, fUnit, fHouse, fExpectprice, fOwnername, fOwnermobile } = this.state;
+        const uId = displayName;
+        const issueData = { fCity, fName, fBuilding, fUnit, fHouse, fExpectprice, fOwnername, fOwnermobile, uId };
+        console.log("发布信息：",issueData);
+        Axios.post(`/verify/addFlatVerify`, issueData).then((result) => {
+           // console.log("返回信息",result.data);
+        })
+        message.success("您提交的房源信息已经提交审核，烦请等工作人员与您联系！");
+        setTimeout(() => {
+            window.location.href = "/personal";
+        },2000);
+        e.preventDefault()
     }
 
     left = () =>{
@@ -174,19 +212,19 @@ export default class Personal extends React.Component {
                                             <div className="u-select u-select-build">
                                                 <input placeholder="楼栋号" name="fBuilding" className="u-select-selected"
                                                        onChange={e=>this.setState({fBuilding: e.target.value})}
-                                                       type="text" value={this.state.fBuilding}/>
+                                                       type="text" value={this.state.fBuilding}/>号楼&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <ul className="u-select-options hide" style={{display: 'none'}}></ul>
                                             </div>
                                             <div className="u-select u-select-build" >
                                                 <input placeholder="单元号" name="fUnit" className="u-select-selected" type="text"
                                                        onChange={e=>this.setState({fUnit: e.target.value})}
-                                                       value={this.state.fUnit}/>
+                                                       value={this.state.fUnit}/>单元&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <ul className="u-select-options hide" style={{display: 'none'}}></ul>
                                             </div>
                                             <div className="u-select u-select-build" >
                                                 <input placeholder="门牌号" name="fHouse" className="u-select-selected" type="text"
                                                        onChange={e=>this.setState({fHouse: e.target.value})}
-                                                       value={ this.state.fHouse }/>
+                                                       value={ this.state.fHouse }/>室&nbsp;&nbsp;&nbsp;&nbsp;
                                                 <ul className="u-select-options hide"style={{display: 'none'}}></ul>
                                             </div>
                                         </dd>
@@ -194,9 +232,9 @@ export default class Personal extends React.Component {
                                     <dl>
                                         <dt>期望价格</dt>
                                         <dd>
-                                            <input name="fExpectPrice" value={ this.state.fExpectPrice } type="text"
+                                            <input name="fExpectprice" value={ this.state.fExpectprice } type="text"
                                                    placeholder="请输入您期望出租的价格"
-                                                   onChange={e=>this.setState({fExpectPrice: e.target.value})}
+                                                   onChange={e=>this.setState({fExpectprice: e.target.value})}
                                                    style= {{width: 210}}/>
                                             <div className="unit">元/月</div>
                                         </dd>
@@ -204,8 +242,8 @@ export default class Personal extends React.Component {
                                     <dl>
                                         <dt>称呼</dt>
                                         <dd>
-                                            <input name="fOwnerName" value={ this.state.fOwnerName }
-                                                   onChange={e=>this.setState({fOwnerName: e.target.value})}
+                                            <input name="fOwnername" value={ this.state.fOwnername }
+                                                   onChange={e=>this.setState({fOwnername: e.target.value})}
                                                    type="text"
                                                    placeholder="我们应该如何称呼您"
                                                    style= {{width: 210}}/>
@@ -214,21 +252,86 @@ export default class Personal extends React.Component {
                                     <dl>
                                         <dt>手机号码</dt>
                                         <dd>
-                                            <input name="fOwnerMobile" value={ this.state.fOwnerMobile }
-                                                   onChange={e=>this.setState({fOwnerMobile: e.target.value})}
+                                            <input name="fOwnermobile" value={ this.state.fOwnermobile }
+                                                   onChange={e=>this.setState({fOwnermobile: e.target.value})}
                                                    type="text"
                                                    placeholder="您的联系方式"
                                                    style= {{width: 210}}/>
                                         </dd>
                                     </dl>
-                                    <input className="btn-submit" type="submit" onClick={this.onSubmit}  value="提交委托"/>
+                                    <input className="btn-submit" type="submit" onClick={this.onSubmitIssue}  value="提交委托"/>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
             )
-        } else if (this.state.appoint){
+        } else if (this.state.verify){
+            const verifyInfo = this.state.verifyInfo;
+            console.log("sddddddddd", verifyInfo);
+            return (
+                <div className="mainRight">
+                    <div className="person clearfix">
+                        <b>房屋发布审核结果</b>
+                    </div>
+                    <div className="person">
+                        <Row style = {{ lineHeight: '28px', background: '#eee'}}>
+                            <Col span = {10}>
+                                <Col span = {12}>
+                                    房源地址
+                                </Col>
+                                <Col span = {12} >
+                                    期望价格
+                                </Col>
+                            </Col>
+                            <Col span = {2}>
+                                状态
+                            </Col>
+                            <Col span = {4}>
+                                提交时间
+                            </Col>
+                            <Col span = {4}>
+                                提交人
+                            </Col>
+                        </Row>
+                        {
+                            verifyInfo.map((data, k) =>{
+                                return (
+                                    <Row key = {k} >
+                                        <Col span = {10}>
+                                            <Col span = {12}>
+                                                <Col span = { 20 } style = {{ marginTop: 45 }} >
+                                                    {data.fCity+" "+ data.fName+" "+data.fBuilding+"号楼 "+data.fUnit+"单元 "+data.fHouse+"室 "}
+                                                </Col>
+                                            </Col>
+                                            <Col span = {12} >
+                                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                                    {data.fExpectprice+" 元"}
+                                                </Col>
+                                            </Col>
+                                        </Col>
+                                        <Col span = {2} style = {{ marginTop: 45 }} >
+                                            {data.fStatus==1?'审核通过':'未审核'}
+                                        </Col>
+                                        <Col span = {4}>
+                                            <Col span = {24} style = {{ marginTop: 45 }} >
+                                                { data.fVtime == ''?'':moment(data.fVtime).format("YYYY-MM-DD") }
+                                            </Col>
+                                        </Col>
+                                        <Col span = {4}>
+                                            <Col span = {24} style = {{ marginTop: 45 }} >
+                                                {data.fOwnername}
+                                            </Col>
+                                        </Col>
+                                    </Row>
+                                    )
+                            })
+                        }
+                    </div>
+                </div>
+            )
+
+        }else if (this.state.appoint){
             return (
                 <div className="mainRight">
                     <div className="person clearfix">
@@ -374,6 +477,7 @@ export default class Personal extends React.Component {
                 personal: true,
                 favor: false,
                 issue: false,
+                verify: false,
                 appoint: false,
                 order: false,
                 message: false,
@@ -383,6 +487,7 @@ export default class Personal extends React.Component {
                 personal: false,
                 favor: true,
                 issue: false,
+                verify: false,
                 appoint: false,
                 order: false,
                 message: false,
@@ -392,6 +497,17 @@ export default class Personal extends React.Component {
                 personal: false,
                 favor: false,
                 issue: true,
+                verify: false,
+                appoint: false,
+                order: false,
+                message: false,
+            })
+                break;
+            case 'verify': this.setState({
+                personal: false,
+                favor: false,
+                issue: false,
+                verify: true,
                 appoint: false,
                 order: false,
                 message: false,
@@ -401,6 +517,7 @@ export default class Personal extends React.Component {
                 personal: false,
                 favor: false,
                 issue: false,
+                verify: false,
                 appoint: true,
                 order: false,
                 message: false,
@@ -410,6 +527,7 @@ export default class Personal extends React.Component {
                 personal: false,
                 favor: false,
                 issue: false,
+                verify: false,
                 appoint: false,
                 order: true,
                 message: false,
@@ -419,6 +537,7 @@ export default class Personal extends React.Component {
                 personal: false,
                 favor: false,
                 issue: false,
+                verify: false,
                 appoint: false,
                 order: false,
                 message: true,
@@ -450,6 +569,7 @@ export default class Personal extends React.Component {
                             <li className="myStore" onClick={()=>{this.itemClick('personal')}}><Icon type="user" className="personallib"/><Link to="/personal">个人中心</Link></li>
                             <li className="myStore" onClick={()=>{this.itemClick('favor')}}><b></b><Link to="/personal">我的收藏</Link></li>
                             <li className="myChange"onClick={()=>{this.itemClick('issue')}} ><b></b><Link to="/personal">发布房屋</Link></li>
+                            <li className="myChange"onClick={()=>{this.itemClick('verify')}} ><b></b><Link to="/personal">房屋审核</Link></li>
                             <li className="myLook" onClick={()=>{this.itemClick('appoint')}}><b></b><Link to="/personal">我的约看</Link></li>
                             <li className="myContract" onClick={()=>{this.itemClick('order')}}><b></b><Link to="/personal">我的订单</Link></li>
                             <li className="myTousu" onClick={()=>{this.itemClick('message')}}><b className="libmy"></b><Link to="/personal">我的留言</Link></li>
