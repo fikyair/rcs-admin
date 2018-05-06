@@ -6,10 +6,28 @@ import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
 import { Axios } from "../utils/Axios";
 import moment from 'moment';
-import { Form, DatePicker , Input, Button, Icon, message, Modal, Row, Col} from 'antd';
+import { Form, DatePicker , Input, Button, Icon, message, Modal, Row,Select, Col} from 'antd';
 const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
 const {TextArea} = Input;
+const Option = Select.Option;
+let flatTime=[];
+function  dealWithflatTime(timeArr){
+    flatTime=[];
+    for (let i = -1; i < 12; i++) {
+        if(i===-1){
+            flatTime.push(<Option value="-1">请选择时间段</Option>);
+        }else{
+            if(timeArr.indexOf(i.toString())>-1){
+                flatTime.push(<Option value={i.toString()} disabled key={i.toString(36) + i}>{i*2}:00-{(i+1)*2}:00</Option>);
+            }else{
+                flatTime.push(<Option value={i.toString()} key={i.toString(36) + i}>{i*2}:00-{(i+1)*2}:00</Option>);
+            }
+         }
+    }
+    return flatTime;
+}
+
 
 @Form.create()
 export default class PlatDetails extends React.Component {
@@ -19,6 +37,14 @@ export default class PlatDetails extends React.Component {
         loading: false,
         visible: false,
         assFlag: true,
+        /*flatTime:[{val:'1',label:'00:00-02:00'},
+            {val:'1',label:'02:00-04:00'},
+            {val:'2',label:'04:00-06:00'},
+            {val:'3',label:'06:00-08:00'},
+            {val:'1',label:'08:00-10:00'},
+            {val:'1',label:'10:00-12:00'},
+            {val:'1',label:'12:00-14:00'},
+            {val:'1',label:'14:00-16:00'}]*/
     }
 
     componentWillMount () {
@@ -31,6 +57,19 @@ export default class PlatDetails extends React.Component {
             },() => {
                 console.log("房屋详情：",this.state.flatDetailsData);
             })
+        })
+    }
+    getAllTimeByFid () {
+        const { id: fId} = this.props.match.params;
+        debugger
+        Axios.get(`/assumpsit/getAllTimeByFid/${fId}`).then((result) => {
+            const { data = [] } = result===null?[]:result;
+            dealWithflatTime(data);
+            /*this.setState({
+                flatDetailsData: data,
+            },() => {
+                console.log("房屋详情：",this.state.flatDetailsData);
+            })*/
         })
     }
     handleFavorite () {
@@ -50,6 +89,7 @@ export default class PlatDetails extends React.Component {
                 this.setState({
                     visible: true,
                 })
+            this.getAllTimeByFid();
         }
     }
 
@@ -79,7 +119,10 @@ export default class PlatDetails extends React.Component {
         const startTime = dateString[0];    //根据时间戳生成的时间对象
         const endTime = dateString[1];
         console.log(startTime+"----"+endTime);
-        //Axios.get()
+        const assData = {}
+        Axios.get(`/assumpsit/asscheck/${startTime}/${endTime}`).then((result) => {
+            console.log("result", result)
+        })
     }
 
     //判断本时间段是否有人预约
@@ -96,7 +139,9 @@ export default class PlatDetails extends React.Component {
      disabledDate(current) {
         return current && current.valueOf() < Date.now();
     }
-
+    handleChangeSelect(value){
+        console.log(`selected ${value}`);
+    }
     render() {
         // const flatDetailsData = this.state.flatDetailsData;
         // console.log("dsds",flatDetailsData[0].fPic);
@@ -104,7 +149,7 @@ export default class PlatDetails extends React.Component {
         const {getFieldDecorator} = this.props.form;
         //确认约看弹框
         const { visible, loading } = this.state;
-        const dateFormat = 'YYYY-MM-DD HH:mm:ss';
+        const dateFormat = 'YYYY-MM-DD HH';
         return (
             <div>
                 <div style={{ margin:'0 5px 0 5px'}}>
@@ -308,21 +353,19 @@ export default class PlatDetails extends React.Component {
                             <Col span={24}>
                                 <span style={{ fontWeight: 500, padding: 5, fontSize: 14 }}>请选择约看时间</span>：
                                 <FormItem>
-                                    {
+                                        {
                                         getFieldDecorator('ass_time', {
                                         rules: [{
                                             required: true, message: '请选择约看日期',
                                         },{
                                             validator: this.checkConfirm,
                                         }],
+                                            //initialValue: '0'
                                     })  (
-                                            <RangePicker
-                                                disabledDate={this.disabledDate}
-                                                showTime
-                                                format={dateFormat}
-                                                onChange = {this.handleTime }
-                                            />
+                                                <Select defaultValue="0" style={{ width: 120 }} onChange={this.handleChangeSelect}>
 
+                                                     {flatTime}
+                                                </Select>
                                         )
                                     }
                                 </FormItem>
