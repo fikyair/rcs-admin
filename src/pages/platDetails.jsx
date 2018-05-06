@@ -11,14 +11,14 @@ const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
 const {TextArea} = Input;
 const Option = Select.Option;
-let flatTime=[];
-function  dealWithflatTime(timeArr){
+let flatTime=[],flatDate='',selectTime='-1',timeArr=[];
+function  dealWithflatTime(){
     flatTime=[];
     for (let i = -1; i < 12; i++) {
         if(i===-1){
             flatTime.push(<Option value="-1">请选择时间段</Option>);
         }else{
-            if(timeArr.indexOf(i.toString())>-1){
+            if(timeArr.indexOf(flatDate+'T'+i)>-1){
                 flatTime.push(<Option value={i.toString()} disabled key={i.toString(36) + i}>{i*2}:00-{(i+1)*2}:00</Option>);
             }else{
                 flatTime.push(<Option value={i.toString()} key={i.toString(36) + i}>{i*2}:00-{(i+1)*2}:00</Option>);
@@ -37,6 +37,9 @@ export default class PlatDetails extends React.Component {
         loading: false,
         visible: false,
         assFlag: true,
+        fId: '',
+        uId: '',
+        assStarttime: '',
         /*flatTime:[{val:'1',label:'00:00-02:00'},
             {val:'1',label:'02:00-04:00'},
             {val:'2',label:'04:00-06:00'},
@@ -61,10 +64,21 @@ export default class PlatDetails extends React.Component {
     }
     getAllTimeByFid () {
         const { id: fId} = this.props.match.params;
-        debugger
+        const userInfo = localStorage.getItem("User_Authorization");
+        const userInfoJSON = JSON.parse(userInfo);
+        const userId = userInfoJSON.uId;
+
+        this.setState({
+            uId: userId,
+            fId: fId,
+        })
         Axios.get(`/assumpsit/getAllTimeByFid/${fId}`).then((result) => {
             const { data = [] } = result===null?[]:result;
-            dealWithflatTime(data);
+            timeArr = data;
+            dealWithflatTime();
+            this.setState({
+                visible: true,
+            })
             /*this.setState({
                 flatDetailsData: data,
             },() => {
@@ -86,20 +100,29 @@ export default class PlatDetails extends React.Component {
             message.info("你还没有登录，请登录！")
             this.props.history.push('/login');
         }else {
-                this.setState({
-                    visible: true,
-                })
+
             this.getAllTimeByFid();
         }
     }
 
     //对话框的两个按钮
     handleOk = () => {
+debugger
+        const { uId, fId, assStarttime } = this.state;
+        const insertdata = { uId, fId, assStarttime }
         this.setState({ loading: true });
-        setTimeout(() => {
-            this.setState({ loading: false, visible: false });
-            message.success("约看成功！请到个人中心查看！");
-        }, 500);
+        console.log("插入参数:",insertdata)
+        Axios.post(`/assumpsit/assinsert`,insertdata).then((result) => {
+            console.log("hahah:",result)
+            setTimeout(() => {
+                this.setState({ loading: false, visible: false });
+                message.success("约看成功！请到个人中心查看！");
+            }, 500);
+        })
+        this.setState({ loading: false });
+
+
+
     }
     handleCancel = () => {
         this.setState({ visible: false });
@@ -115,16 +138,6 @@ export default class PlatDetails extends React.Component {
     }
 
 
-    handleTime  (dates, dateString)  {
-        const startTime = dateString[0];    //根据时间戳生成的时间对象
-        const endTime = dateString[1];
-        console.log(startTime+"----"+endTime);
-        const assData = {}
-        Axios.get(`/assumpsit/asscheck/${startTime}/${endTime}`).then((result) => {
-            console.log("result", result)
-        })
-    }
-
     //判断本时间段是否有人预约
     checkConfirm = (rule, value, callback) => {
 
@@ -139,8 +152,25 @@ export default class PlatDetails extends React.Component {
      disabledDate(current) {
         return current && current.valueOf() < Date.now();
     }
-    handleChangeSelect(value){
+    onChangeDate = (value,dateString)=>{
+        selectTime='-1';
+        flatDate = dateString;
+        this.setState({
+            assStarttime: flatDate+'T'+selectTime,
+        },()=>{
+            console.log("addd",flatDate+'T'+selectTime);
+        })
+        dealWithflatTime();
+    }
+    handleChangeSelect = (value)=>{
         console.log(`selected ${value}`);
+        selectTime = value;
+        this.setState({
+            assStarttime: flatDate+'T'+selectTime,
+        },()=>{
+            console.log("addd",flatDate+'T'+selectTime);
+        })
+        dealWithflatTime();
     }
     render() {
         // const flatDetailsData = this.state.flatDetailsData;
@@ -362,10 +392,13 @@ export default class PlatDetails extends React.Component {
                                         }],
                                             //initialValue: '0'
                                     })  (
-                                                <Select defaultValue="0" style={{ width: 120 }} onChange={this.handleChangeSelect}>
+                                            <div>
+                                                <DatePicker onChange={this.onChangeDate} />
+                                                <Select defaultValue="-1" value={selectTime} style={{ width: 120 }} onChange={this.handleChangeSelect}>
 
-                                                     {flatTime}
+                                                    {flatTime}
                                                 </Select>
+                                            </div>
                                         )
                                     }
                                 </FormItem>
