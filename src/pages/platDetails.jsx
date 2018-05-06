@@ -40,14 +40,6 @@ export default class PlatDetails extends React.Component {
         fId: '',
         uId: '',
         assStarttime: '',
-        /*flatTime:[{val:'1',label:'00:00-02:00'},
-            {val:'1',label:'02:00-04:00'},
-            {val:'2',label:'04:00-06:00'},
-            {val:'3',label:'06:00-08:00'},
-            {val:'1',label:'08:00-10:00'},
-            {val:'1',label:'10:00-12:00'},
-            {val:'1',label:'12:00-14:00'},
-            {val:'1',label:'14:00-16:00'}]*/
     }
 
     componentWillMount () {
@@ -395,7 +387,6 @@ debugger
                                             <div>
                                                 <DatePicker onChange={this.onChangeDate} />
                                                 <Select defaultValue="-1" value={selectTime} style={{ width: 120 }} onChange={this.handleChangeSelect}>
-
                                                     {flatTime}
                                                 </Select>
                                             </div>
