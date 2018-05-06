@@ -6,7 +6,8 @@ import weixin from '../img/wexin.jpg';
 import logo from '../img/logo.png';
 import { Axios } from "../utils/Axios";
 import moment from 'moment';
-import { Form,DatePicker, Input, Button, Icon, message, Modal, Row, Col} from 'antd';
+import { Form, DatePicker , Input, Button, Icon, message, Modal, Row, Col} from 'antd';
+const { RangePicker } = DatePicker;
 const FormItem = Form.Item;
 const {TextArea} = Input;
 
@@ -17,7 +18,7 @@ export default class PlatDetails extends React.Component {
         flatDetailsData: [],
         loading: false,
         visible: false,
-
+        assFlag: true,
     }
 
     componentWillMount () {
@@ -73,6 +74,29 @@ export default class PlatDetails extends React.Component {
         }
     }
 
+
+    handleTime  (dates, dateString)  {
+        const startTime = dateString[0];    //根据时间戳生成的时间对象
+        const endTime = dateString[1];
+        console.log(startTime+"----"+endTime);
+        //Axios.get()
+    }
+
+    //判断本时间段是否有人预约
+    checkConfirm = (rule, value, callback) => {
+
+        if (value.length!=0 && this.state.assFlag) {
+            callback('抱歉，本时间段已有人预约！');
+        } else {
+            callback();
+        }
+    }
+
+
+     disabledDate(current) {
+        return current && current.valueOf() < Date.now();
+    }
+
     render() {
         // const flatDetailsData = this.state.flatDetailsData;
         // console.log("dsds",flatDetailsData[0].fPic);
@@ -80,8 +104,7 @@ export default class PlatDetails extends React.Component {
         const {getFieldDecorator} = this.props.form;
         //确认约看弹框
         const { visible, loading } = this.state;
-        const dateFormat = 'YYYY-MM-DD';
-        const monthFormat = 'YYYY-MM';
+        const dateFormat = 'YYYY-MM-DD HH:mm:ss';
         return (
             <div>
                 <div style={{ margin:'0 5px 0 5px'}}>
@@ -284,7 +307,25 @@ export default class PlatDetails extends React.Component {
                             </Col><br/>
                             <Col span={24}>
                                 <span style={{ fontWeight: 500, padding: 5, fontSize: 14 }}>请选择约看时间</span>：
-                                <DatePicker defaultValue={moment(moment().format(), dateFormat)} format={dateFormat} />
+                                <FormItem>
+                                    {
+                                        getFieldDecorator('ass_time', {
+                                        rules: [{
+                                            required: true, message: '请选择约看日期',
+                                        },{
+                                            validator: this.checkConfirm,
+                                        }],
+                                    })  (
+                                            <RangePicker
+                                                disabledDate={this.disabledDate}
+                                                showTime
+                                                format={dateFormat}
+                                                onChange = {this.handleTime }
+                                            />
+
+                                        )
+                                    }
+                                </FormItem>
                             </Col>
                         </Row>
                 </Modal>
