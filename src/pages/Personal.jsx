@@ -300,7 +300,7 @@ export default class Personal extends React.Component {
                                     <Row key = {k} >
                                         <Col span = {10}>
                                             <Col span = {12}>
-                                                <Col span = { 20 } style = {{ marginTop: 45, lineHeight: 1.5}} >
+                                                <Col span = { 20 } style = {{ marginTop: 43, lineHeight: 1.5}} >
                                                     {data.fCity+" "+ data.fName+" "+data.fBuilding+"号楼 "+data.fUnit+"单元 "+data.fHouse+"室 "}
                                                 </Col>
                                             </Col>
@@ -365,7 +365,7 @@ export default class Personal extends React.Component {
                                 <Col span = {12}>
                                     <Col span = {24} style = {{ marginTop: 15 }} >
                                         <img width="130" height="90"
-                                             src = "https://aijiaflat-1253646934.cos.ap-beijing.myqcloud.com/yuekan.JPG?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDfcPiyVS8AFX330mAtwawCBk1rEL1AXLv%26q-sign-time%3D1525659447%3B1525661247%26q-key-time%3D1525659447%3B1525661247%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D4d5642350f7e18aaffc950800ec532d6270b0b73&token=8f71e8e5ab2437251339eda72c1dbd61a3b1c0b010001&clientIP=123.150.108.204&clientUA=a5837701-9834-4aa0-af42-a560ce061776"/>
+                                             src = "https://aijia-flat-sh-1253646934.cos.ap-shanghai.myqcloud.com/liuyan.JPG"/>
                                     </Col>
                                 </Col>
                                 <Col span = {12} >
@@ -433,7 +433,7 @@ export default class Personal extends React.Component {
                                 <Col span = {12}>
                                     <Col span = {24} style = {{ marginTop: 15 }} >
                                         <img width="130" height="90"
-                                             src = "https://aijiaflat-1253646934.cos.ap-beijing.myqcloud.com/dingdan.JPG?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKID08Zb14BIug3exS4EkZepRk0KOGX78xnG%26q-sign-time%3D1525659581%3B1525661381%26q-key-time%3D1525659581%3B1525661381%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D25a9c5e13b246178c786bfb4decf35e4af517ecb&token=af5a3174a3bbd4f200c7006bc50a59138bab7ef410001&clientIP=123.150.108.204&clientUA=1c404d01-abad-4464-9bb5-3bd30d3b8e17"/>
+                                             src = "https://aijia-flat-sh-1253646934.cos.ap-shanghai.myqcloud.com/dingdan.JPG"/>
                                     </Col>
                                 </Col>
                                 <Col span = {12} >
@@ -494,11 +494,11 @@ export default class Personal extends React.Component {
                                 <Col span = {12}>
                                     <Col span = {24} style = {{ marginTop: 15 }} >
                                         <img width="130" height="90"
-                                             src = "https://aijiaflat-1253646934.cos.ap-beijing.myqcloud.com/liuyan.JPG?sign=q-sign-algorithm%3Dsha1%26q-ak%3DAKIDmahfeQeDmUOgndr1O9gg9z3Aj8oZDk0I%26q-sign-time%3D1525659512%3B1525661312%26q-key-time%3D1525659512%3B1525661312%26q-header-list%3D%26q-url-param-list%3D%26q-signature%3D7c3c2688e6796cfde3faebd64973a7aca53d087d&token=b368d4ec664f504a685ca2a894875e8ace6b6b8710001&clientIP=123.150.108.204&clientUA=7f24dc2a-9a67-4405-8011-d05270ec03d6"/>
+                                             src = "https://aijia-flat-sh-1253646934.cos.ap-shanghai.myqcloud.com/yuekan.JPG"/>
                                     </Col>
                                 </Col>
                                 <Col span = {12} >
-                                    <Col span = {24} style = {{ marginTop: 45 ,lineHeight: 1.5}} >
+                                    <Col span = {20} style = {{ marginTop: 43 ,lineHeight: 1.5}} >
                                         北京市石景山区实兴大街首钢小区
                                     </Col>
                                 </Col>
