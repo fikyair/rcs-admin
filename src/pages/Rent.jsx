@@ -447,16 +447,16 @@ export default class Index extends React.Component {
                                             <div className="r_lbx_cena">
                                                 <Link to ={`/rent/+flatdetails/${data.fId}`} >{data.fStreet} <span> { data.fName }</span></Link>
                                                 <div className="r_lbx_cena">
-                                                    地铁三号线
+
                                                 </div>
                                             </div>
-                                            <div className="r_lbx_cenb">
+                                            <div className="r_lbx_cenb" style={{ marginTop: 42}}>
 
                                                 {data.fArea}m² | {data.fFloor}楼
                                                 | {data.fHabitable} | {data.fOrientation}
                                                 &nbsp;&nbsp;<em>{fType}</em>
                                             </div>
-                                            <div className="r_lbx_cenc">
+                                            <div className="r_lbx_cenc" style={{ marginTop: 38}}>
 
                                                 <span>{data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'}</span>
                                                 <span>{data.fHeating==1?'集中供暖':'无集中供暖'}</span>

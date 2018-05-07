@@ -104,7 +104,7 @@ class Navigation extends React.Component {
                                 <ul className="hd_menu fr">
                                     <li className="type-center"><Link className="hd-sprite-ab" to="/personal">个人中心</Link></li>
                                     <li className="type-app line">
-                                        <a className="hd-sprite-ab" href="#">手机版</a>
+                                        <a className="hd-sprite-ab" href="#">电脑版</a>
                                         <div className="scan-code">
                                             <img src="//public.wutongwan.org/public-20180103-FloDHvXgSwGp4ugxhIa1gMuuE81T" alt="APP二维码"/>
                                             <span className="text gred9">扫码下载App</span>
