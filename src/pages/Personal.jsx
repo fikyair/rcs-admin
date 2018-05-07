@@ -365,7 +365,7 @@ export default class Personal extends React.Component {
                                 <Col span = {12}>
                                     <Col span = {24} style = {{ marginTop: 15 }} >
                                         <img width="130" height="90"
-                                             src = "https://aijia-flat-sh-1253646934.cos.ap-shanghai.myqcloud.com/liuyan.JPG"/>
+                                             src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
                                     </Col>
                                 </Col>
                                 <Col span = {12} >
