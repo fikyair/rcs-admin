@@ -164,6 +164,10 @@ debugger
         })
         dealWithflatTime();
     }
+    disabledDate(current) {
+        // Can not select days before today and today
+        return current && current.valueOf() < Date.now();
+    }
     render() {
         // const flatDetailsData = this.state.flatDetailsData;
         // console.log("dsds",flatDetailsData[0].fPic);
@@ -385,7 +389,10 @@ debugger
                                             //initialValue: '0'
                                     })  (
                                             <div>
-                                                <DatePicker onChange={this.onChangeDate} />
+                                                <DatePicker
+                                                    onChange={this.onChangeDate}
+                                                    disabledDate={this.disabledDate}
+                                                />
                                                 <Select defaultValue="-1" value={selectTime} style={{ width: 120 }} onChange={this.handleChangeSelect}>
                                                     {flatTime}
                                                 </Select>

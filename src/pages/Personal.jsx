@@ -30,6 +30,8 @@ export default class Personal extends React.Component {
         message: false,
         verify: false,
         verifyInfo: [],
+        assumpitInfo: [],
+        userId: '',
         flag: 'personal',
         img: 'ss',
         fCity: '',
@@ -48,6 +50,7 @@ export default class Personal extends React.Component {
     }
 
     componentDidMount () {
+        //查询房屋审核信息
         Axios.post(`/verify/queryVerifyStatus/${displayName}`).then((result) => {
              const { data } = result.data;
              this.setState({
@@ -56,11 +59,26 @@ export default class Personal extends React.Component {
                  console.log("审核信息：",this.state.verifyInfo);
              })
         })
+        const userInfo = localStorage.getItem("User_Authorization");
+        const userInfoJSON = JSON.parse(userInfo);
+        const userId = userInfoJSON.uId;
+        this.setState({
+            userId : userId,
+        })
+        //查询约看信息
+        Axios.get(`/assumpsit/getAssInfoByUid/${userId}`).then((result) => {
+            const { data = [] } = result;
+            this.setState({
+                assumpitInfo: data,
+            },()=>{
+                console.log("约看信息==>",this.state.assumpitInfo);
+            })
+        })
     }
 
     onSubmitIssue = (e) => {
         const { fCity, fName, fBuilding, fUnit, fHouse, fExpectprice, fOwnername, fOwnermobile } = this.state;
-        const uId = displayName;
+        const uId = this.state.userId;
         const issueData = { fCity, fName, fBuilding, fUnit, fHouse, fExpectprice, fOwnername, fOwnermobile, uId };
         console.log("发布信息：",issueData);
         Axios.post(`/verify/addFlatVerify`, issueData).then((result) => {
@@ -332,6 +350,8 @@ export default class Personal extends React.Component {
             )
 
         }else if (this.state.appoint){
+            const assData = this.state.assumpitInfo.length==0?[]:this.state.assumpitInfo;
+            console.log("===》》》》", assData);
             return (
                 <div className="mainRight">
                     <div className="person clearfix">
@@ -360,45 +380,55 @@ export default class Personal extends React.Component {
                                     操作
                                </Col>
                            </Row>
-                        <Row >
-                            <Col span = {10}>
-                                <Col span = {12}>
-                                    <Col span = {24} style = {{ marginTop: 15 }} >
-                                        <img width="130" height="90"
-                                             src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
-                                    </Col>
-                                </Col>
-                                <Col span = {12} >
-                                    <Col span = {24} style = {{ marginTop: 45 }} >
-                                        2630元
-                                    </Col>
-                                </Col>
-                            </Col>
-                            <Col span = {2} style = {{ marginTop: 45 }} >
-                                未约看
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    { moment().format("YYYY-MM-DD")}
-                                </Col>
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    薛时鸣
-                                </Col>
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    <Popconfirm title="是否删除?" onConfirm={() => this.ordering()}>
-                                        <a>删除</a>
-                                    </Popconfirm>
-                                    <span className="ant-divider"/>
-                                    <Popconfirm title="是否签约?" onConfirm={() => this.ordering()}>
-                                        <a disabled={true}>我要签约</a>
-                                    </Popconfirm>
-                                </Col>
-                            </Col>
-                        </Row>
+                        {
+                            assData.data.map((v, k) => {
+                                const time = v.assStarttime.split("T");
+                               return(
+                                   <Row key = {k}>
+                                       <Col span = {10}>
+                                           <Col span = {12}>
+                                               <Col span = {24} style = {{ marginTop: 15 }} >
+                                                   <img width="130" height="90"
+                                                        src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
+                                               </Col>
+                                           </Col>
+                                           <Col span = {12} >
+                                               <Col span = {24} style = {{ marginTop: 45 }} >
+                                                   2630元
+                                               </Col>
+                                           </Col>
+                                       </Col>
+                                       <Col span = {2} style = {{ marginTop: 45 }} >
+                                           { v.assStatus ==0?'未约看':'已约看'}
+                                       </Col>
+                                       <Col span = {4}>
+                                           <Col span = {24} style = {{ marginTop: 45 }} >
+                                               {
+
+                                                   v.assStarttime ==''?'':time[0]
+                                               }
+                                           </Col>
+                                       </Col>
+                                       <Col span = {4}>
+                                           <Col span = {24} style = {{ marginTop: 45 }} >
+                                               薛时鸣
+                                           </Col>
+                                       </Col>
+                                       <Col span = {4}>
+                                           <Col span = {24} style = {{ marginTop: 45 }} >
+                                               <Popconfirm title="是否删除?" onConfirm={() => this.ordering()}>
+                                                   <a>删除</a>
+                                               </Popconfirm>
+                                               <span className="ant-divider"/>
+                                               <Popconfirm title="是否签约?" onConfirm={() => this.ordering()}>
+                                                   <a disabled={true}>我要签约</a>
+                                               </Popconfirm>
+                                           </Col>
+                                       </Col>
+                                   </Row>
+                                   )
+                            })
+                        }
                     </div>
                 </div>
             )
