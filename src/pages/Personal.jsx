@@ -31,6 +31,7 @@ export default class Personal extends React.Component {
         verify: false,
         verifyInfo: [],
         assumpitInfo: [],
+        sign:false,
         userId: '',
         flag: 'personal',
         img: 'ss',
@@ -383,18 +384,22 @@ export default class Personal extends React.Component {
                         {
                             assData.data.map((v, k) => {
                                 const time = v.assStarttime.split("T");
+                                let asssign = false;
+                                if(v.assStatus == 0){
+                                        asssign = true;
+                                }
                                return(
                                    <Row key = {k}>
                                        <Col span = {10}>
                                            <Col span = {12}>
                                                <Col span = {24} style = {{ marginTop: 15 }} >
                                                    <img width="130" height="90"
-                                                        src = "http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG"/>
+                                                        src = { v.flat.fPic=''?'':v.flat.fPic}/>
                                                </Col>
                                            </Col>
                                            <Col span = {12} >
                                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                                   2630元
+                                                   { v.flat.fPrice=''?'':v.flat.fPrice}元
                                                </Col>
                                            </Col>
                                        </Col>
@@ -411,7 +416,7 @@ export default class Personal extends React.Component {
                                        </Col>
                                        <Col span = {4}>
                                            <Col span = {24} style = {{ marginTop: 45 }} >
-                                               薛时鸣
+                                               {v.userName=''?'':v.userName}
                                            </Col>
                                        </Col>
                                        <Col span = {4}>
@@ -421,7 +426,7 @@ export default class Personal extends React.Component {
                                                </Popconfirm>
                                                <span className="ant-divider"/>
                                                <Popconfirm title="是否签约?" onConfirm={() => this.ordering()}>
-                                                   <a disabled={true}>我要签约</a>
+                                                   <a disabled={asssign}>我要签约</a>
                                                </Popconfirm>
                                            </Col>
                                        </Col>

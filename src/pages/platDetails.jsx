@@ -99,7 +99,6 @@ export default class PlatDetails extends React.Component {
 
     //对话框的两个按钮
     handleOk = () => {
-debugger
         const { uId, fId, assStarttime } = this.state;
         const insertdata = { uId, fId, assStarttime }
         this.setState({ loading: true });

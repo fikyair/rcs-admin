@@ -22,7 +22,6 @@ const initialState = {
 export default function (state = initialState, actions) {
     switch (actions.type){
         case API_GET_PROVINCE[1]:
-            debugger
             return {
                 ...state,
                 NavProvinceData: _.map(actions.data, (v) =>{
@@ -44,7 +43,6 @@ export default function (state = initialState, actions) {
             }
 
         case API_GET_PROVINCE_BY_PNAME[1]:
-            debugger
             return {
                 ...state,
                 NavProvinceDataByPName: _.map(actions.data, (v) =>{
@@ -65,7 +63,6 @@ export default function (state = initialState, actions) {
                 })
             }
         case API_GET_CITY_BY_CNAME[1]:
-            debugger
             return {
                 ...state,
                 NavCityDataByCName: _.map(actions.data, (v) => {
