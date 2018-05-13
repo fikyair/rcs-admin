@@ -105,10 +105,15 @@ export default class PlatDetails extends React.Component {
         console.log("插入参数:",insertdata)
         Axios.post(`/assumpsit/assinsert`,insertdata).then((result) => {
             console.log("hahah:",result)
-            setTimeout(() => {
-                this.setState({ loading: false, visible: false });
-                message.success("约看成功！请到个人中心查看！");
-            }, 500);
+            if(result.data.state == 200){
+                setTimeout(() => {
+                    this.setState({ loading: false, visible: false });
+                    message.success("约看成功！请到个人中心查看！");
+                }, 500);
+            }
+            if(result.data.state == 999){
+                message.warn("这间房屋您只能约看一次!")
+            }
         })
         this.setState({ loading: false });
 
