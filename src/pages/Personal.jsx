@@ -35,6 +35,7 @@ export default class Personal extends React.Component {
         verifyInfo: [],
         assumpitInfo: [],
         sign:false,
+        stateFlag:'是否签约',
         userId: '',
         flag: 'personal',
         img: 'ss',
@@ -56,6 +57,10 @@ export default class Personal extends React.Component {
         Axios.post(`/order/orderinsert`,orderData).then((result) => {
             if(result.data.state == 200){
                 message.success("恭喜您，下单成功，请到我的订单操作！")
+                this.assOnOff(fId);
+            }
+            if(result.data.state == 999){
+                message.warn("已经有此房屋的订单！")
             }
         })
     }
@@ -94,8 +99,20 @@ export default class Personal extends React.Component {
      console.log("看这个：",assId);
     }
 
-    unSatisfy(e){
-      /*发请求该数据库*/
+    unSatisfy(e,fId){
+      /*前提是一个房间，每个用户只能约看一次。。。发请求该数据库*/
+       this.assOnOff(fId);
+        message.info("您没有签约")
+    }
+
+    /*assOnOff,将点击签约和不签约之后置为灰色*/
+    assOnOff(fId){
+        const uId = userId;
+        const OnOffData = { fId, uId };
+        Axios.post(`/assumpsit/assOnOff`,OnOffData).then((result) => {
+            console.log("result",result);
+            this.queryassInfo(userId);
+        })
     }
 
     onSubmitIssue = (e) => {
@@ -408,9 +425,11 @@ export default class Personal extends React.Component {
                                 const assId = v.assId;
                                 const fId = v.fId;
                                 let asssign = false;
-                                if(v.assStatus == 0){
+                                if( v.assOnOff == 0 || v.assStatus == 0){
                                         asssign = true;
                                 }
+                                /*后台管理员等到约看结束之后将assStatus=1，前台用户就可选择签约不签约，若不签约将assOnOff（默认为1）改为0，
+                                签约的话，就生成订单信息*/
                                return(
                                    <Row key = {k}>
                                        <Col span = {10}>
@@ -451,7 +470,7 @@ export default class Personal extends React.Component {
                                                <Popconfirm title="是否签约?"
                                                            cancelText = '不签约'
                                                            okText = '签约'
-                                                           onCancel={(e) => this.unSatisfy(e)}
+                                                           onCancel={(e) => this.unSatisfy(e,fId)}
                                                            onConfirm={(e) => this.ordering(e,fId)}>
                                                    <a disabled={asssign}>是否签约</a>
                                                </Popconfirm>
