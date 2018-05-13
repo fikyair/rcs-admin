@@ -19,6 +19,9 @@ if(localStorage.getItem("User_Authorization")!=null){
 }else{
     displayName = '爱家客';
 }
+const userInfo = localStorage.getItem("User_Authorization");
+const userInfoJSON = JSON.parse(userInfo);
+const userId = userInfoJSON.uId;
 export default class Personal extends React.Component {
 
     state = {
@@ -46,8 +49,15 @@ export default class Personal extends React.Component {
         fVtime: '',
     }
 
-    ordering = () =>{
-        console.log("嗯哼")
+    ordering = (e,fId) =>{
+        const uId = userId;
+        const orderData = {fId, uId}
+        console.log("嗯哼fId:",orderData);
+        Axios.post(`/order/orderinsert`,orderData).then((result) => {
+            if(result.data.state == 200){
+                message.success("恭喜您，下单成功，请到我的订单操作！")
+            }
+        })
     }
 
     componentDidMount () {
@@ -60,12 +70,12 @@ export default class Personal extends React.Component {
                  console.log("审核信息：",this.state.verifyInfo);
              })
         })
-        const userInfo = localStorage.getItem("User_Authorization");
-        const userInfoJSON = JSON.parse(userInfo);
-        const userId = userInfoJSON.uId;
         this.setState({
             userId : userId,
         })
+        this.queryassInfo(userId);
+    }
+    queryassInfo(userId){
         //查询约看信息
         Axios.get(`/assumpsit/getAssInfoByUid/${userId}`).then((result) => {
             const { data = [] } = result;
@@ -75,6 +85,17 @@ export default class Personal extends React.Component {
                 console.log("约看信息==>",this.state.assumpitInfo);
             })
         })
+    };
+    assDelete (e,assId) {
+        Axios.get(`/assumpsit/assdelete/${assId}`).then((result) => {
+            console.log("result",result);
+           this.queryassInfo(userId)
+        })
+     console.log("看这个：",assId);
+    }
+
+    unSatisfy(e){
+      /*发请求该数据库*/
     }
 
     onSubmitIssue = (e) => {
@@ -352,7 +373,7 @@ export default class Personal extends React.Component {
 
         }else if (this.state.appoint){
             const assData = this.state.assumpitInfo.length==0?[]:this.state.assumpitInfo;
-            console.log("===》》》》", assData);
+            console.log("===>>>", assData);
             return (
                 <div className="mainRight">
                     <div className="person clearfix">
@@ -384,6 +405,8 @@ export default class Personal extends React.Component {
                         {
                             assData.data.map((v, k) => {
                                 const time = v.assStarttime.split("T");
+                                const assId = v.assId;
+                                const fId = v.fId;
                                 let asssign = false;
                                 if(v.assStatus == 0){
                                         asssign = true;
@@ -420,13 +443,17 @@ export default class Personal extends React.Component {
                                            </Col>
                                        </Col>
                                        <Col span = {4}>
-                                           <Col span = {24} style = {{ marginTop: 45 }} >
-                                               <Popconfirm title="是否删除?" onConfirm={() => this.ordering()}>
+                                           <Col span = {24} style = {{ marginTop: 45 }} key = {assId}>
+                                               <Popconfirm title="是否删除?" onConfirm={(e) => this.assDelete(e,assId)}>
                                                    <a>删除</a>
                                                </Popconfirm>
-                                               <span className="ant-divider"/>
-                                               <Popconfirm title="是否签约?" onConfirm={() => this.ordering()}>
-                                                   <a disabled={asssign}>我要签约</a>
+                                               <span className="ant-divider" key = {fId}/>
+                                               <Popconfirm title="是否签约?"
+                                                           cancelText = '不签约'
+                                                           okText = '签约'
+                                                           onCancel={(e) => this.unSatisfy(e)}
+                                                           onConfirm={(e) => this.ordering(e,fId)}>
+                                                   <a disabled={asssign}>是否签约</a>
                                                </Popconfirm>
                                            </Col>
                                        </Col>
