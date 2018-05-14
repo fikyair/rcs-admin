@@ -35,6 +35,7 @@ export default class Personal extends React.Component {
         verifyInfo: [],
         assumpitInfo: [],
         orderInfo:[],
+        favInfo:[],
         sign:false,
         stateFlag:'是否签约',
         userId: '',
@@ -93,6 +94,10 @@ export default class Personal extends React.Component {
             })
         })
 
+        //查询收藏信息
+        this.queryFav(userId);
+
+
     }
     queryassInfo(userId){
         //查询约看信息
@@ -105,12 +110,34 @@ export default class Personal extends React.Component {
             })
         })
     };
+
+    queryFav(userId){
+        const uId = userId;
+        const favquery = {uId};
+        Axios.post(`/fav/getAllFav`,favquery).then((result) => {
+            const { data } = result.data;
+            this.setState({
+                favInfo: data,
+            },() => {
+                console.log("收藏信息：",this.state.favInfo);
+            })
+        })
+    }
     assDelete (e,assId) {
         Axios.get(`/assumpsit/assdelete/${assId}`).then((result) => {
             console.log("result",result);
            this.queryassInfo(userId)
         })
      console.log("看这个：",assId);
+    }
+
+    favDelete (e, favId) {
+        console.log("favId：",favId);
+        const favData = { favId }
+        Axios.post(`/fav/deleteFav`,favData).then((result) => {
+            console.log("result",result);
+            this.queryFav(userId);
+        })
     }
 
     unSatisfy(e,fId){
@@ -211,6 +238,7 @@ export default class Personal extends React.Component {
                 </div>
             )
         }else if (this.state.favor) {
+            const favInfo = this.state.favInfo;
             return (
                 <div className="mainRight">
                     <div className="person clearfix">
@@ -218,7 +246,7 @@ export default class Personal extends React.Component {
                     </div>
                     <div className="person" >
                         <Row style = {{ marginBottom: 10, marginLeft: 10}}>
-                            <Col span = {14}>
+                            <Col span = {11}>
                                     房源信息
                             </Col>
                             <Col span = {2} >
@@ -234,21 +262,35 @@ export default class Personal extends React.Component {
                                 操作
                             </Col>
                         </Row>
-                        <Card style={{ width: '100%', marginRight: 5, background: '', bordered: 'false', marginBottom: 15}} bodyStyle={{ padding: 0 , display: 'inline-flex' }}>
-                            <div className="custom-image" style={{  padding: '10px 10px', }}>
-                                <img alt="example" width="137px" height="91px" src="http://aijia-flat-sh-1253646934.picsh.myqcloud.com/v800x600_ChAFD1qjq2iAJzjVAAJBuhFRSeI953.JPG" />
-                            </div>
-                            <div className="txt_li">
-                                <p className="p1" style = {{lineHeight: 1.5}}>
-                                    南开广开街2号线,1号线西南角蘭园3居室
-                                </p>
-                                <p className="p2" style = {{lineHeight: 1.5}} >29/34层 | 11.6 平方米 |合租</p>
-                            </div>
-                            <p style={{ marginTop: 12, marginLeft: 119 }}>2500元</p>
-                            <p style={{ marginTop: 12, marginLeft: 28 }}>已入住</p>
-                            <p style={{ marginTop: 12, marginLeft: 31 }}>2018-4-26</p>
-                            <p style={{ marginTop: 12, marginLeft: 79 }}>删除</p>
-                        </Card>
+                        {
+                            favInfo.map((v, k)=>{
+                                const time = v.fCreatime.split(" ");
+                                const favId = v.favId;
+                                return (
+                                    <Card key = {favId} style={{ width: '100%', marginRight: 5, background: '', bordered: 'false', marginBottom: 15}} bodyStyle={{ padding: 0 , display: 'inline-flex' }}>
+                                        <div className="custom-image" style={{  padding: '10px 10px', }}>
+                                            <img alt="example" width="137px" height="91px"
+                                                 src={ v.flat.fPic} />
+                                        </div>
+                                        <div className="txt_li">
+                                            <p className="p1" style = {{lineHeight: 1.5}}>
+                                                { v.flat.fStreet }
+                                            </p>
+                                            <p className="p2" style = {{lineHeight: 1.5}} >{ v.flat.fFloor }层 | { v.flat.fArea} 平方米 |{ v.flat.fType }</p>
+                                        </div>
+                                        <p style={{ marginTop: 12, marginLeft: 119 }}>{ v.flat.fPrice }元</p>
+                                        <p style={{ marginTop: 12, marginLeft: 28 }}>{ v.flat.fStatus==1?'已签约':'未签约'}</p>
+                                        <p style={{ marginTop: 12, marginLeft: 31 }}>{ time[0] }</p>
+                                        <p style={{ marginTop: 12, marginLeft: 79 }}>
+                                            <Popconfirm title="是否删除?" onConfirm={(e) => this.favDelete(e,favId)}>
+                                                <a>删除</a>
+                                            </Popconfirm>
+                                        </p>
+                                    </Card>
+                                )
+                            })
+                        }
+
                     </div>
                 </div>
             )
