@@ -34,6 +34,7 @@ export default class Personal extends React.Component {
         verify: false,
         verifyInfo: [],
         assumpitInfo: [],
+        orderInfo:[],
         sign:false,
         stateFlag:'是否签约',
         userId: '',
@@ -79,6 +80,19 @@ export default class Personal extends React.Component {
             userId : userId,
         })
         this.queryassInfo(userId);
+
+        //查询本人订单信息
+        const uId = userId;
+        const orderquery = {uId};
+        Axios.post(`/order/getAllOrders`,orderquery).then((result) => {
+            const { data } = result.data;
+            this.setState({
+                orderInfo: data,
+            },() => {
+                console.log("订单信息：",this.state.orderInfo);
+            })
+        })
+
     }
     queryassInfo(userId){
         //查询约看信息
@@ -409,10 +423,10 @@ export default class Personal extends React.Component {
                                <Col span = {2}>
                                    状态
                                </Col>
-                               <Col span = {4}>
+                               <Col span = {5}>
                                     预约时间
                                </Col>
-                               <Col span = {4}>
+                               <Col span = {3}>
                                     预约人
                                </Col>
                                <Col span = {4}>
@@ -422,6 +436,36 @@ export default class Personal extends React.Component {
                         {
                             assData.data.map((v, k) => {
                                 const time = v.assStarttime.split("T");
+                                let timeTemp = '';
+                                let ky = '';
+                                ky = time[1];
+                                switch (ky) {
+                                    case '0': timeTemp ='00:00-02:00'
+                                        break;
+                                    case '1': timeTemp ='02:00-04:00'
+                                        break;
+                                    case '2': timeTemp ='04:00-06:00'
+                                        break;
+                                    case '3': timeTemp ='06:00-08:00'
+                                        break;
+                                    case '4': timeTemp ='08:00-10:00'
+                                        break;
+                                    case '5': timeTemp ='10:00-12:00'
+                                        break;
+                                    case '6': timeTemp ='12:00-14:00'
+                                        break;
+                                    case '7': timeTemp ='14:00-16:00'
+                                        break;
+                                    case '8': timeTemp ='16:00-18:00'
+                                        break;
+                                    case '9': timeTemp ='18:00-20:00'
+                                        break;
+                                    case '10': timeTemp ='20:00-22-00'
+                                        break;
+                                    case '11': timeTemp ='22:00-24:00'
+                                        break;
+                                }
+                                console.log("dsdsds"+timeTemp)
                                 const assId = v.assId;
                                 const fId = v.fId;
                                 let asssign = false;
@@ -448,15 +492,15 @@ export default class Personal extends React.Component {
                                        <Col span = {2} style = {{ marginTop: 45 }} >
                                            { v.assStatus ==0?'未约看':'已约看'}
                                        </Col>
-                                       <Col span = {4}>
+                                       <Col span = {5}>
                                            <Col span = {24} style = {{ marginTop: 45 }} >
                                                {
 
-                                                   v.assStarttime ==''?'':time[0]
+                                                   v.assStarttime ==''?'':time[0]+" "+timeTemp
                                                }
                                            </Col>
                                        </Col>
-                                       <Col span = {4}>
+                                       <Col span = {3}>
                                            <Col span = {24} style = {{ marginTop: 45 }} >
                                                {v.userName=''?'':v.userName}
                                            </Col>
@@ -484,6 +528,7 @@ export default class Personal extends React.Component {
                 </div>
             )
         }else if (this.state.order){
+            const orderInfo = this.state.orderInfo;
             return (
                 <div className="mainRight">
                     <div className="person clearfix">
@@ -499,48 +544,57 @@ export default class Personal extends React.Component {
                                     价格
                                 </Col>
                             </Col>
-                            <Col span = {4}>
+                            <Col span = {5}>
                                 下单时间
                             </Col>
-                            <Col span = {4}>
+                            <Col span = {3}>
                                 下单人
                             </Col>
                             <Col span = {6}>
                                 操作
                             </Col>
                         </Row>
-                        <Row >
-                            <Col span = {10}>
-                                <Col span = {12}>
-                                    <Col span = {24} style = {{ marginTop: 15 }} >
-                                        <img width="130" height="90"
-                                             src = "https://aijia-flat-sh-1253646934.cos.ap-shanghai.myqcloud.com/dingdan.JPG"/>
-                                    </Col>
-                                </Col>
-                                <Col span = {12} >
-                                    <Col span = {24} style = {{ marginTop: 45 }} >
-                                        2630元
-                                    </Col>
-                                </Col>
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    { moment().format("YYYY-MM-DD")}
-                                </Col>
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    薛时鸣
-                                </Col>
-                            </Col>
-                            <Col span = {6}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    <Popconfirm title="是否导出合同?" onConfirm={() => this.ordering()}>
-                                        <a>导出合同</a>
-                                    </Popconfirm>
-                                </Col>
-                            </Col>
-                        </Row>
+                        {
+                            orderInfo.map((v,k) =>{
+                                let temp = v.oTime.split(".");
+                                return (
+                                    <Row key = { k }>
+                                        <Col span = {10}>
+                                            <Col span = {12}>
+                                                <Col span = {24} style = {{ marginTop: 15 }} >
+                                                    <img width="130" height="90"
+                                                         src = { v.flat.fPic }/>
+                                                </Col>
+                                            </Col>
+                                            <Col span = {12} >
+                                                <Col span = {24} style = {{ marginTop: 45 }} >
+                                                    { v.flat.fPrice }元
+                                                </Col>
+                                            </Col>
+                                        </Col>
+                                        <Col span = {5}>
+                                            <Col span = {24} style = {{ marginTop: 45 }} >
+                                                { temp[0] }
+                                            </Col>
+                                        </Col>
+                                        <Col span = {3}>
+                                            <Col span = {24} style = {{ marginTop: 45 }} >
+                                                { v.userName }
+                                            </Col>
+                                        </Col>
+                                        <Col span = {6}>
+                                            <Col span = {24} style = {{ marginTop: 45 }} >
+                                                <Popconfirm title="是否导出合同?" onConfirm={() => this.ordering()}>
+                                                    <a>导出合同</a>
+                                                </Popconfirm>
+                                            </Col>
+                                        </Col>
+                                    </Row>
+                                )
+                            })
+
+                        }
+
                     </div>
                 </div>
             )
