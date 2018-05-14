@@ -28,7 +28,9 @@ function  dealWithflatTime(){
     return flatTime;
 }
 
-
+const userInfo = localStorage.getItem("User_Authorization");
+const userInfoJSON = JSON.parse(userInfo);
+const uId = userInfoJSON.uId;
 @Form.create()
 export default class PlatDetails extends React.Component {
 
@@ -45,6 +47,7 @@ export default class PlatDetails extends React.Component {
     componentWillMount () {
         const { id: flatId} = this.props.match.params;
         console.log("ssss",flatId);
+
         Axios.get(`/flat/flatbyid/${flatId}`).then((result) => {
             const { data = [] } = result.data;
             this.setState({
@@ -78,12 +81,25 @@ export default class PlatDetails extends React.Component {
             })*/
         })
     }
-    handleFavorite () {
-            if(localStorage.getItem("User_Authorization")==null){
+    handleFavorite = ()=> {
+      //  const { id: fId } = this.props.match.params;
+        const { id: flatId} = this.props.match.params;
+        const fId = flatId;
+        if(localStorage.getItem("User_Authorization")==null){
                 message.info("你还没有登录，请登录！")
                 this.props.history.push('/login');
             }else {
-                message.success("收藏成功！");
+                //message.success("收藏成功！");
+                const favData = { uId, fId }
+                Axios.post(`/fav/favinsert`, favData).then((result) => {
+                    console.log("收藏信息：",result.data);
+                    if(result.data.state == 200){
+                        message.success("恭喜您，收藏成功，请到我的收藏查看！")
+                    }
+                    if(result.data.state == 999){
+                        message.warn("您已经收藏过本房屋了！")
+                    }
+                })
             }
     }
 

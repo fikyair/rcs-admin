@@ -61,7 +61,7 @@ class Navigation extends React.Component {
     }
 
     logout =()=> {
-        this.props.history.push('/login');
+        window.location.href='/login';
         localStorage.clear();
     }
 
