@@ -22,6 +22,7 @@ if(localStorage.getItem("User_Authorization")!=null){
 const userInfo = localStorage.getItem("User_Authorization");
 const userInfoJSON = JSON.parse(userInfo);
 const userId = userInfoJSON.uId;
+const uName = userInfoJSON.uName;
 export default class Personal extends React.Component {
 
     state = {
@@ -36,6 +37,7 @@ export default class Personal extends React.Component {
         assumpitInfo: [],
         orderInfo:[],
         favInfo:[],
+        remarkInfo:[],
         sign:false,
         stateFlag:'是否签约',
         userId: '',
@@ -94,10 +96,19 @@ export default class Personal extends React.Component {
             })
         })
 
+        //查询本人留言信息
+        const remarkquery = { uName };
+        Axios.post(`/remark/getAllRemark`,remarkquery).then((result) => {
+            const { data } = result.data;
+            this.setState({
+                remarkInfo: data,
+            },() => {
+                console.log("留言信息：",this.state.remarkInfo);
+            })
+        })
+
         //查询收藏信息
         this.queryFav(userId);
-
-
     }
     queryassInfo(userId){
         //查询约看信息
@@ -641,7 +652,9 @@ export default class Personal extends React.Component {
                 </div>
             )
         }else {
+            const remarkInfo = this.state.remarkInfo;
             return (
+
                 <div className="mainRight">
                     <div className="person clearfix">
                         <b>我的留言</b>
@@ -656,9 +669,9 @@ export default class Personal extends React.Component {
                                     地址
                                 </Col>
                             </Col>
-                            <Col span = {4}>
-                                留言时间
-                            </Col>
+                            {/*<Col span = {4}>*/}
+                                {/*留言时间*/}
+                            {/*</Col>*/}
                             <Col span = {4}>
                                 留言人
                             </Col>
@@ -666,34 +679,41 @@ export default class Personal extends React.Component {
                                 留言内容
                             </Col>
                         </Row>
-                        <Row >
-                            <Col span = {10}>
-                                <Col span = {12}>
-                                    <Col span = {24} style = {{ marginTop: 15 }} >
-                                        <img width="130" height="90"
-                                             src = "https://aijia-flat-sh-1253646934.cos.ap-shanghai.myqcloud.com/yuekan.JPG"/>
-                                    </Col>
-                                </Col>
-                                <Col span = {12} >
-                                    <Col span = {20} style = {{ marginTop: 43 ,lineHeight: 1.5}} >
-                                        北京市石景山区实兴大街首钢小区
-                                    </Col>
-                                </Col>
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    { moment().format("YYYY-MM-DD")}
-                                </Col>
-                            </Col>
-                            <Col span = {4}>
-                                <Col span = {24} style = {{ marginTop: 45 }} >
-                                    薛时鸣
-                                </Col>
-                            </Col>
-                            <Col span = {6} style = {{ marginTop: 45 ,lineHeight: 1.5}}>
-                               这个房子周边有健身房么，买菜容易么。
-                            </Col>
-                        </Row>
+                        {
+                            remarkInfo.map((v, k)=>{
+                                return(
+                                    <Row >
+                                        <Col span = {10}>
+                                            <Col span = {12}>
+                                                <Col span = {24} style = {{ marginTop: 15 }} >
+                                                    <img width="130" height="90"
+                                                         src = {v.flat.fPic}/>
+                                                </Col>
+                                            </Col>
+                                            <Col span = {12} >
+                                                <Col span = {20} style = {{ marginTop: 43 ,lineHeight: 1.5}} >
+                                                    { v.flat.fStreet}
+                                                </Col>
+                                            </Col>
+                                        </Col>
+                                        {/*<Col span = {4}>*/}
+                                            {/*<Col span = {24} style = {{ marginTop: 45 }} >*/}
+                                                {/*{ moment().format("YYYY-MM-DD")}*/}
+                                            {/*</Col>*/}
+                                        {/*</Col>*/}
+                                        <Col span = {4}>
+                                            <Col span = {24} style = {{ marginTop: 45 }} >
+                                                { v.rSendname }
+                                            </Col>
+                                        </Col>
+                                        <Col span = {6} style = {{ marginTop: 45 ,lineHeight: 1.5}}>
+                                            { v.rInfo }
+                                        </Col>
+                                    </Row>
+                                )
+                            })
+                        }
+
                     </div>
                 </div>
             )
