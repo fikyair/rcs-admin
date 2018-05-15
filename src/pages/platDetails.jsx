@@ -31,6 +31,7 @@ function  dealWithflatTime(){
 const userInfo = localStorage.getItem("User_Authorization");
 const userInfoJSON = JSON.parse(userInfo);
 const uId = userInfoJSON.uId;
+const rSendname = userInfoJSON.uName;
 @Form.create()
 export default class PlatDetails extends React.Component {
 
@@ -140,25 +141,36 @@ export default class PlatDetails extends React.Component {
         this.setState({ visible: false });
     }
 
-    handleRemark () {
+    handleRemark = () => {
+        const { id: flatId} = this.props.match.params;
+        const fId = flatId;
         if(localStorage.getItem("User_Authorization")==null){
             message.info("你还没有登录，请登录！")
             this.props.history.push('/login');
         }else {
-            message.success("留言成功！请到个人中心查看！");
+            this.props.form.validateFields((err, values) => {
+                if(!err) {
+                    const remarkData = { fId, rSendname, ...values}
+                    console.log("留言内容==>", remarkData);
+                    Axios.post(`/remark/remarkInsert`,remarkData).then((result) => {
+                        console.log("插入留言的信息：",result.data);
+                        message.success("留言成功！请到个人中心查看！");
+                    })
+                }
+            })
         }
     }
 
 
     //判断本时间段是否有人预约
-    checkConfirm = (rule, value, callback) => {
-
-        if (value.length!=0 && this.state.assFlag) {
-            callback('抱歉，本时间段已有人预约！');
-        } else {
-            callback();
-        }
-    }
+    // checkConfirm = (rule, value, callback) => {
+    //
+    //     if (value.length!=0 && this.state.assFlag) {
+    //         callback('抱歉，本时间段已有人预约！');
+    //     } else {
+    //         callback();
+    //     }
+    // }
 
 
      disabledDate(current) {
@@ -225,8 +237,11 @@ export default class PlatDetails extends React.Component {
                                                 style = {{marginTop: 10 }}
                                             >
                                                 {
-                                                    getFieldDecorator('fRemark',{
+                                                    getFieldDecorator('rInfo',{
                                                         initialValue: '',
+                                                        rules: [{
+                                                            required: true, message: '请填写留言',
+                                                        }]
                                                     })(
                                                         <TextArea autosize={{ minRows: 2, maxRows: 18 }}
                                                                   placeholder = "想说点什么都可以写在这里..."
@@ -399,15 +414,8 @@ export default class PlatDetails extends React.Component {
                             <Col span={24}>
                                 <span style={{ fontWeight: 500, padding: 5, fontSize: 14 }}>请选择约看时间</span>：
                                 <FormItem>
-                                        {
-                                        getFieldDecorator('ass_time', {
-                                        rules: [{
-                                            required: true, message: '请选择约看日期',
-                                        },{
-                                            validator: this.checkConfirm,
-                                        }],
-                                            //initialValue: '0'
-                                    })  (
+                                    {
+                                         (
                                             <div>
                                                 <DatePicker
                                                     onChange={this.onChangeDate}
