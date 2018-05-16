@@ -210,15 +210,25 @@ export default class Personal extends React.Component {
     }
 
     handleonCancel =(e)=>{
-        console.log("cancel",e)
         this.setState({ visible: false });
     }
 
     handleonOk =(e)=>{
-        console.log("ok",e);
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                console.log('表单信息: ', values);
+                const uId = userId;
+                const updateUserInfo = {uId, ...values};
+                Axios.post(`/user/updateUserInfo`,updateUserInfo).then((result) =>{
+                    console.log("ESWWWWW",result.data);
+                    if(result.data.state == 200){
+                        message.success("恭喜您，修改成功！")
+                    }
+                    if(result.data.state == 999){
+                        message.warn("您的原密码不正确！")
+                    }
+                })
+
                 this.setState({ visible: false });
             }
         });
