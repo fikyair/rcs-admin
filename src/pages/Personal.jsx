@@ -275,8 +275,10 @@ export default class Personal extends React.Component {
                                                 <li>
                                                 <div key={k}>
                                                     <div className="img">
-                                                        <img width="285" height="190"
-                                                             src={ v.flat.fPic}/>
+                                                        <Link to={`/rent/+flatdetails/${v.flat.fId}`}>
+                                                            <img width="285" height="190"
+                                                                 src={ v.flat.fPic}/>
+                                                        </Link>
                                                     </div>
                                                     <div className="clearfix">
                                                         <p className="name fl">{ v.flat.fStreet+" "+v.flat.fType+" "+v.flat.fHabitable }</p>
@@ -341,8 +343,11 @@ export default class Personal extends React.Component {
                                 return (
                                     <Card key = {favId} style={{ width: '100%', marginRight: 5, background: '', bordered: 'false', marginBottom: 15}} bodyStyle={{ padding: 0 , display: 'inline-flex' }}>
                                         <div className="custom-image" style={{  padding: '10px 10px', }}>
+                                            <Link to={`/rent/+flatdetails/${v.flat.fId}`}>
+
                                             <img alt="example" width="137px" height="91px"
                                                  src={ v.flat.fPic} />
+                                            </Link>
                                         </div>
                                         <div className="txt_li">
                                             <p className="p1" style = {{lineHeight: 1.5}}>
@@ -593,8 +598,11 @@ export default class Personal extends React.Component {
                                        <Col span = {10}>
                                            <Col span = {12}>
                                                <Col span = {24} style = {{ marginTop: 15 }} >
-                                                   <img width="130" height="90"
-                                                        src = { v.flat.fPic=''?'':v.flat.fPic}/>
+                                                   <Link to={`/rent/+flatdetails/${v.flat.fId}`}>
+                                                       <img width="130" height="90"
+                                                            src = { v.flat.fPic=''?'':v.flat.fPic}/>
+
+                                                   </Link>
                                                </Col>
                                            </Col>
                                            <Col span = {12} >
@@ -676,8 +684,10 @@ export default class Personal extends React.Component {
                                         <Col span = {10}>
                                             <Col span = {12}>
                                                 <Col span = {24} style = {{ marginTop: 15 }} >
-                                                    <img width="130" height="90"
-                                                         src = { v.flat.fPic }/>
+                                                    <Link to={`/rent/+flatdetails/${v.flat.fId}`}>
+                                                        <img width="130" height="90"
+                                                             src = { v.flat.fPic }/>
+                                                    </Link>
                                                 </Col>
                                             </Col>
                                             <Col span = {12} >
@@ -747,8 +757,10 @@ export default class Personal extends React.Component {
                                         <Col span = {10}>
                                             <Col span = {12}>
                                                 <Col span = {24} style = {{ marginTop: 15 }} >
-                                                    <img width="130" height="90"
-                                                         src = {v.flat.fPic}/>
+                                                    <Link to={`/rent/+flatdetails/${v.flat.fId}`}>
+                                                        <img width="130" height="90"
+                                                             src = {v.flat.fPic}/>
+                                                    </Link>
                                                 </Col>
                                             </Col>
                                             <Col span = {12} >
@@ -982,7 +994,7 @@ export default class Personal extends React.Component {
                                                 required: true, message: '请填写姓名'
                                             }
                                         ]})(
-                                        <Input style={{width: 180}} />
+                                        <Input style={{width: 180}} placeholder="姓名"/>
                                         )}
                                 </FormItem>
                             </Col>
@@ -996,7 +1008,7 @@ export default class Personal extends React.Component {
                                                 required: true, message: '请填写昵称'
                                             }
                                         ]})(
-                                        <Input style={{width: 180}}/>
+                                        <Input style={{width: 180}} placeholder="昵称"/>
                                     )}
                                 </FormItem>
                             </Col>
@@ -1010,7 +1022,7 @@ export default class Personal extends React.Component {
                                                 required: true, message: '请填写原密码'
                                             }
                                         ]})(
-                                        <Input style={{width: 180}}/>
+                                        <Input style={{width: 180}} type="password" placeholder="原始密码"/>
                                     )}
                                 </FormItem>
                             </Col>
@@ -1027,7 +1039,7 @@ export default class Personal extends React.Component {
                                                     ]
                                     })
                                     (
-                                        <Input style={{width: 180}}/>
+                                        <Input style={{width: 180}} type="password" placeholder="新密码"/>
                                     )}
                                 </FormItem>
                             </Col>
@@ -1041,7 +1053,7 @@ export default class Personal extends React.Component {
                                                 required: true, message: '请填写电话'
                                             }
                                         ]})(
-                                        <Input style={{width: 180}}/>
+                                        <Input style={{width: 180}} placeholder="联系电话"/>
                                     )}
                                 </FormItem>
                             </Col>
