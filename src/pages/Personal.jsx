@@ -6,11 +6,11 @@ import pay from '../img/pay.jpg';
 import weixin from '../img/wexin.jpg';
 import './style/personalissue.less';
 import { Link } from 'react-router-dom';
-import { Icon, message, Row, Col, Popconfirm, Card } from 'antd';
+import { Icon, message, Row, Col, Popconfirm, Card, Modal, Form, Input } from 'antd';
 import moment from 'moment';
 import {Axios} from "../utils/Axios";
 import { Favor, Issue, Appoint, Order, Message } from '../components/PersonalItems';
-
+const FormItem = Form.Item;
 let  displayName;
 if(localStorage.getItem("User_Authorization")!=null){
     const userInfo = localStorage.getItem("User_Authorization");
@@ -23,9 +23,11 @@ const userInfo = localStorage.getItem("User_Authorization");
 const userInfoJSON = JSON.parse(userInfo);
 const userId = userInfoJSON.uId;
 const uName = userInfoJSON.uName;
+@Form.create()
 export default class Personal extends React.Component {
 
     state = {
+        visible: false,
         personal: true,
         favor: false,
         issue: false,
@@ -38,6 +40,7 @@ export default class Personal extends React.Component {
         orderInfo:[],
         favInfo:[],
         remarkInfo:[],
+        favByTimeInfo:[],
         sign:false,
         stateFlag:'是否签约',
         userId: '',
@@ -109,6 +112,17 @@ export default class Personal extends React.Component {
 
         //查询收藏信息
         this.queryFav(userId);
+
+        //查询最近收藏的房源
+        const favByTimequery = {uId};
+        Axios.post(`/fav/getFavByTime`,favByTimequery).then((result) => {
+            const { data } = result.data;
+            this.setState({
+                favByTimeInfo: data,
+            },() => {
+                console.log("最新shoucang信息：",this.state.favByTimeInfo);
+            })
+        })
     }
     queryassInfo(userId){
         //查询约看信息
@@ -182,8 +196,36 @@ export default class Personal extends React.Component {
         e.preventDefault()
     }
 
+    //在显示房屋的时候需要判断是否已经签约了
+
+    outContract () {
+        //导出和同时将房屋状态改成“已入住”
+    }
+
+    //修改个人资料
+    updateUserInfo =()=> {
+        this.setState({
+            visible: true,
+        })
+    }
+
+    handleonCancel =(e)=>{
+        console.log("cancel",e)
+        this.setState({ visible: false });
+    }
+
+    handleonOk =(e)=>{
+        console.log("ok",e);
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+                this.setState({ visible: false });
+            }
+        });
+    }
     left = () =>{
         if(this.state.personal){
+            const favByTimeInfo = this.state.favByTimeInfo;
             return (
                 <div className="mainRight"  style = {{ display: this.state.welcomeMainRight}}>
                     <div className="person clearfix">
@@ -200,7 +242,7 @@ export default class Personal extends React.Component {
                                 </span>
                             </p>
                             <p className="p2">
-                                {/*<a href="#">修改个人资料<i></i></a>*/}
+                                <a onClick={this.updateUserInfo}>修改个人资料<i></i></a>
                             </p>
                             <p className="p3">
                                 {/*<span className="active">已绑定手机号</span>*/}
@@ -215,21 +257,29 @@ export default class Personal extends React.Component {
                     <div className="collection">
                         <h5>最近收藏</h5>
                         <ul className="clearfix">
-                            <li>
-                                <a href="http://www.ziroom.com/z/vr/60815029">
-                                    <div className="img">
-                                        <img width="285" height="190"
-                                             src="http://pic.ziroom.com/house_images/g2/M00/ED/EC/ChAFfVpXVsmAfbUeAAzILUhLTBI245.jpg"/>
-                                    </div>
-                                    <div className="clearfix">
-                                        <p className="name fl">东城安定门2号线,8号线鼓楼大街安德里北街25号院3居室-南卧</p>
-                                        <p className="price fr">¥3290/月</p>
-                                    </div>
-                                </a>
-                            </li>
+
+                                {
+                                    favByTimeInfo.map((v, k)=>{
+                                            return(
+                                                <li>
+                                                <div key={k}>
+                                                    <div className="img">
+                                                        <img width="285" height="190"
+                                                             src={ v.flat.fPic}/>
+                                                    </div>
+                                                    <div className="clearfix">
+                                                        <p className="name fl">{ v.flat.fStreet+" "+v.flat.fType+" "+v.flat.fHabitable }</p>
+                                                        <p className="price fr">¥{ v.flat.fPrice }/月</p>
+                                                    </div>
+                                                </div>
+                                                </li>
+                                            )
+                                    })
+                                }
                         </ul>
                     </div>
-                    <div className="collection">
+                    {/*我发布的房源*/}
+                   {/* <div className="collection">
                         <h5>我发布的房源</h5>
                         <ul className="clearfix">
                             <li>
@@ -245,7 +295,7 @@ export default class Personal extends React.Component {
                                 </Link>
                             </li>
                         </ul>
-                    </div>
+                    </div>*/}
                 </div>
             )
         }else if (this.state.favor) {
@@ -637,7 +687,7 @@ export default class Personal extends React.Component {
                                         </Col>
                                         <Col span = {6}>
                                             <Col span = {24} style = {{ marginTop: 45 }} >
-                                                <Popconfirm title="是否导出合同?" onConfirm={() => this.ordering()}>
+                                                <Popconfirm title="是否导出合同?" onConfirm={() => this.outContract()}>
                                                     <a>导出合同</a>
                                                 </Popconfirm>
                                             </Col>
@@ -796,6 +846,17 @@ export default class Personal extends React.Component {
     }
 
     render() {
+       const formLayout = {
+           labelCol: {
+               xs: {span: 12},
+               sm: {span: 8},
+           },
+           wrapperCol: {
+               xs: {span: 12},
+               sm: {span: 8},
+           },
+        }
+        const {getFieldDecorator} = this.props.form
         return (
             <div>
                 <div className="clearfix area mainCon">
@@ -891,6 +952,91 @@ export default class Personal extends React.Component {
                         </div>
                     </div>
                 </div>
+                <Modal
+                    visible={this.state.visible}
+                    title="修改个人资料"
+                    okText="ok"
+                    onCancel={this.handleonCancel}
+                    onOk={this.handleonOk}
+                >
+                    <Form >
+                        <Row style={{marginTop: 40}}>
+                            <Col span={24}>
+                                <FormItem label="姓名:"
+                                          {...formLayout}
+                                >
+                                    {getFieldDecorator('uName',{initialValue: userInfoJSON.uName,
+                                        rules: [
+                                            {
+                                                required: true, message: '请填写姓名'
+                                            }
+                                        ]})(
+                                        <Input style={{width: 180}} />
+                                        )}
+                                </FormItem>
+                            </Col>
+                            <Col span={24}>
+                                <FormItem label="昵称:"
+                                          {...formLayout}
+                                >
+                                    {getFieldDecorator('uNickname',{initialValue: userInfoJSON.uNickname,
+                                        rules: [
+                                            {
+                                                required: true, message: '请填写昵称'
+                                            }
+                                        ]})(
+                                        <Input style={{width: 180}}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={24}>
+                                <FormItem label="原密码:"
+                                          {...formLayout}
+                                >
+                                    {getFieldDecorator('uPwd',{initialValue: '',
+                                        rules: [
+                                            {
+                                                required: true, message: '请填写原密码'
+                                            }
+                                        ]})(
+                                        <Input style={{width: 180}}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={24}>
+                                <FormItem label="新密码:"
+                                          {...formLayout}
+                                >
+                                    {getFieldDecorator('uPwdnew', {
+                                        initialValue: '',
+                                             rules: [
+                                                        {
+                                                            required: true, message: '请填写新密码'
+                                                         }
+                                                    ]
+                                    })
+                                    (
+                                        <Input style={{width: 180}}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                            <Col span={24}>
+                                <FormItem label="电话:"
+                                          {...formLayout}
+                                >
+                                    {getFieldDecorator('uPhone',{initialValue: userInfoJSON.uPhone,
+                                        rules: [
+                                            {
+                                                required: true, message: '请填写电话'
+                                            }
+                                        ]})(
+                                        <Input style={{width: 180}}/>
+                                    )}
+                                </FormItem>
+                            </Col>
+                        </Row>
+                    </Form>
+                </Modal>
             </div>
         )
     }

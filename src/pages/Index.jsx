@@ -160,24 +160,26 @@ export default class Index extends React.Component {
                     <Row>
                             {
                                 houseData.map((data, k) => {
-                                    return (
-                                        <Col span={8}>
-                                        <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}} noHovering={true}>
-                                            <Link to = {`/rent/+flatdetails/${data.fId}`}><img alt="example" width="100%" src={data.fPic}/></Link>
-                                            <div className="room_ti">
-                                                <a href="#">{data.fStreet}</a>
-                                            </div>
-                                            <div className="roo_ads">
-                                                <div className="roo_ads fl">
-                                                    {data.fFloor}楼 / {data.fArea}㎡ / {data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'}
-                                                </div>
-                                                <div className="room_money fr">
-                                                    {data.fPrice}<span>元/月</span>
-                                                </div>
-                                            </div>
-                                        </Card>
-                                        </Col>
-                                    )
+                                    if(data.fStatus == '0'){
+                                        return (
+                                            <Col span={8}>
+                                                <Card key={k} style={{width: 380}} bodyStyle={{padding: 0}} noHovering={true}>
+                                                    <Link to = {`/rent/+flatdetails/${data.fId}`}><img alt="example" width="100%" src={data.fPic}/></Link>
+                                                    <div className="room_ti">
+                                                        <a href="#">{data.fStreet}</a>
+                                                    </div>
+                                                    <div className="roo_ads">
+                                                        <div className="roo_ads fl">
+                                                            {data.fFloor}楼 / {data.fArea}㎡ / {data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'}
+                                                        </div>
+                                                        <div className="room_money fr">
+                                                            {data.fPrice}<span>元/月</span>
+                                                        </div>
+                                                    </div>
+                                                </Card>
+                                            </Col>
+                                        )
+                                    }
                                 })
                             }
                     </Row>

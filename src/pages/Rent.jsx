@@ -437,43 +437,47 @@ export default class Index extends React.Component {
                                 //取第一张房屋图片展示
                                 const fUrl = data.fPic.split(' ');
                                 const fType = data.fType.substr(0, data.fType.length-1);
-                                return (
-                                    <div className="r_lbx">
-                                        <Link to ={`/rent/+flatdetails/${data.fId}`} className="rimg" ><img
-                                            src={fUrl[0]}
-                                            width="300" height="240" title={data.fName} alt={data.fName}/>
-                                        </Link>
-                                        <div className="r_lbx_cen">
-                                            <div className="r_lbx_cena">
-                                                <Link to ={`/rent/+flatdetails/${data.fId}`} >{data.fStreet} <span> { data.fName }</span></Link>
+                                if(data.fStatus == '0') {
+                                    return (
+                                        <div className="r_lbx">
+                                            <Link to={`/rent/+flatdetails/${data.fId}`} className="rimg"><img
+                                                src={fUrl[0]}
+                                                width="300" height="240" title={data.fName} alt={data.fName}/>
+                                            </Link>
+                                            <div className="r_lbx_cen">
                                                 <div className="r_lbx_cena">
+                                                    <Link to={`/rent/+flatdetails/${data.fId}`}>{data.fStreet}
+                                                        <span> {data.fName}</span></Link>
+                                                    <div className="r_lbx_cena">
 
+                                                    </div>
+                                                </div>
+                                                <div className="r_lbx_cenb" style={{marginTop: 42}}>
+
+                                                    {data.fArea}m² | {data.fFloor}楼
+                                                    | {data.fHabitable} | {data.fOrientation}
+                                                    &nbsp;&nbsp;<em>{fType}</em>
+                                                </div>
+                                                <div className="r_lbx_cenc" style={{marginTop: 38}}>
+
+                                                    <span>{data.fShower == 1 && data.fToilet == 1 ? '独立卫浴' : '无独立卫浴'}</span>
+                                                    <span>{data.fHeating == 1 ? '集中供暖' : '无集中供暖'}</span>
                                                 </div>
                                             </div>
-                                            <div className="r_lbx_cenb" style={{ marginTop: 42}}>
-
-                                                {data.fArea}m² | {data.fFloor}楼
-                                                | {data.fHabitable} | {data.fOrientation}
-                                                &nbsp;&nbsp;<em>{fType}</em>
-                                            </div>
-                                            <div className="r_lbx_cenc" style={{ marginTop: 38}}>
-
-                                                <span>{data.fShower==1&&data.fToilet==1?'独立卫浴':'无独立卫浴'}</span>
-                                                <span>{data.fHeating==1?'集中供暖':'无集中供暖'}</span>
-                                            </div>
-                                        </div>
-                                        <div className="r_lbx_money">
-                                            <div className="r_lbx_moneya" style={{textAlign: 'center', paddingTop: 30}}>
+                                            <div className="r_lbx_money">
+                                                <div className="r_lbx_moneya"
+                                                     style={{textAlign: 'center', paddingTop: 30}}>
                                                 <span className="ty_b"
                                                       style={{fontSize: 40}}>{data.fPrice}</span>&nbsp;
-                                                元/月
+                                                    元/月
+                                                </div>
+                                                <Link className="lk_more_rent" to={`/rent/+flatdetails/${data.fId}`}>
+                                                    查看房间详情
+                                                </Link>
                                             </div>
-                                            <Link className="lk_more_rent" to ={`/rent/+flatdetails/${data.fId}`} >
-                                                查看房间详情
-                                            </Link>
                                         </div>
-                                    </div>
-                                )
+                                    )
+                                }
                             })
                         }
                     </div>
