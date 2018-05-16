@@ -229,6 +229,7 @@ export default class Personal extends React.Component {
                     }
                 })
 
+
                 this.setState({ visible: false });
             }
         });
