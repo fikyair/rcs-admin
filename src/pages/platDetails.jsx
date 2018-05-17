@@ -40,6 +40,7 @@ export default class PlatDetails extends React.Component {
         loading: false,
         visible: false,
         assFlag: true,
+        newsInfo: [],
         fId: '',
         uId: '',
         assStarttime: '',
@@ -55,6 +56,16 @@ export default class PlatDetails extends React.Component {
                 flatDetailsData: data,
             },() => {
                 console.log("房屋详情：",this.state.flatDetailsData);
+            })
+        })
+        const fId = flatId;
+        const newsdata = { fId };
+        Axios.post(`/news/getNewsByFid`,newsdata).then((result) => {
+            const { data = [] } = result.data;
+            this.setState({
+                newsInfo: data,
+            },() => {
+                console.log("新闻详情：",this.state.newsInfo);
             })
         })
     }
@@ -208,6 +219,16 @@ export default class PlatDetails extends React.Component {
         //确认约看弹框
         const { visible, loading } = this.state;
         const dateFormat = 'YYYY-MM-DD HH';
+        const newsInfo = this.state.newsInfo;
+        let nInfo ='';
+        if(newsInfo.length!=0){
+            newsInfo.map((v)=>{
+                 nInfo +=  v.nInfo
+            })
+        }else {
+            nInfo = '暂无新闻通告！'
+        }
+
         return (
             <div>
                 <div style={{ margin:'0 5px 0 5px'}}>
@@ -215,7 +236,7 @@ export default class PlatDetails extends React.Component {
                         <span className="ant-alert-message">
                             <span className="marquee">
                                  <span style={{ fontWeight: 'bold'}}>新闻消息：</span>
-                            此房源即将售罄
+                                {nInfo}
                             </span>
                         </span>
                     </div>
