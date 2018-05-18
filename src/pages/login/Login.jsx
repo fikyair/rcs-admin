@@ -8,8 +8,10 @@ import pay from '../../img/pay.jpg';
 import weixin from '../../img/wexin.jpg';
 import { Form, Button, Input } from 'antd';
 import {Axios} from "../../utils/Axios";
+import moment from 'moment';
 const FormItem = Form.Item;
 
+const Pwd_Flag = localStorage.getItem("Pwd_Flag");
 @Form.create()
 export default class Login extends React.Component {
 
@@ -17,10 +19,47 @@ export default class Login extends React.Component {
         className: false,
         userName: 'none',
         info: '',
+        u_name:'',
+        u_pwd:'',
+    }
+
+    componentDidMount() {
+        let user_name  = document.getElementById('user_name');
+        let user_pas  = document.getElementById('user_pas');
+        let within_a_week  = document.getElementById('within_a_week');
+        within_a_week.checked = false;
+        if($.cookie('user') && $.cookie('pswd')){
+            user_name.value = $.cookie('user');
+            user_pas.value = $.cookie('pswd');
+            this.props.form.setFields({
+                uName: {
+                    value: $.cookie('user'),
+                },
+                uPwd: {
+                    value: $.cookie('pswd'),
+                }
+            });
+            within_a_week.checked = true;
+            $("#J-m-isSeven").addClass("m_icon_active");
+            this.setState({className: true});
+        }
+        within_a_week.onchange = function () {
+            if(!this.checked){
+                $.cookie('user', '', { expires: -1 });
+                $.cookie('pswd', '', { expires: -1 });
+            }
+        }
     }
 
     spanClick(){
-        this.setState({className: !this.state.className})
+        let within_a_week  = document.getElementById('within_a_week');
+        this.setState({className: !this.state.className});
+        if(within_a_week.checked == true){
+            within_a_week.checked == false;
+            $("#J-m-isSeven").removeClass("m_icon_active");
+        }else {
+            within_a_week.checked == true;
+        }
     }
     phoneCheck(e){
         let val = e.target.value;
@@ -47,6 +86,13 @@ export default class Login extends React.Component {
                             message.success("登录成功～")
                             //判断本地有user信息
                             localStorage.setItem("User_Authorization",JSON.stringify(result.data));
+                            let checkboxes = document.getElementById('within_a_week');
+                            let username  = document.getElementById('user_name');
+                            let pwd  = document.getElementById('user_pas');
+                            if(checkboxes.checked){
+                                $.cookie('user',username.value, { expires: 7 }); //保存帐号到cookie，有效期7天
+                                $.cookie('pswd',pwd.value, { expires: 7 }); //保存密码到cookie，有效期7天
+                            }
                             setTimeout(() => {
                                 this.props.history.push('/rent');
                             },1000);
@@ -68,7 +114,7 @@ export default class Login extends React.Component {
                     <div className="m-content_mid">
                         <div className="modal-content logins" id="logins" style={{display: 'block'}}>
                             <div className="separator m_icon"></div>
-                            <Form>
+                            <Form id='form'>
                                 <div>
                                     <FormItem>
                                         { getFieldDecorator('uName',{
@@ -89,6 +135,7 @@ export default class Login extends React.Component {
                                 <div>
                                     <FormItem>
                                         { getFieldDecorator('uPwd',{
+                                            initialValue: '',
                                             rules: [{
                                                 required: true, message: '密码必须填写☺'
                                             }]
