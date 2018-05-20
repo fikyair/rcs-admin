@@ -28,10 +28,16 @@ function  dealWithflatTime(){
     return flatTime;
 }
 
+
 const userInfo = localStorage.getItem("User_Authorization");
-const userInfoJSON = JSON.parse(userInfo);
-const uId = userInfoJSON.uId;
-const rSendname = userInfoJSON.uName;
+let userInfoJSON ='';
+let uId = '';
+let rSendname ='';
+if(userInfo!=null){
+     userInfoJSON = JSON.parse(userInfo);
+     uId = userInfoJSON.uId;
+     rSendname = userInfoJSON.uName;
+}
 @Form.create()
 export default class PlatDetails extends React.Component {
 
