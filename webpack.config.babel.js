@@ -97,7 +97,7 @@ export default {
     devServer: {
         proxy: {
             '/api':{
-                 target: 'http://localhost:8081',
+                 target: 'http://localhost:8085',
                 pathRewrite: {"^/api" : ""},
                 secure:false,
                 changeOrigin: true

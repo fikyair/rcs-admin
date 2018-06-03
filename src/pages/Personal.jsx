@@ -213,6 +213,17 @@ export default class Personal extends React.Component {
         this.setState({ visible: false });
     }
 
+    outPdf () {
+        Axios.post(`/order/outPdf`).then((result)=>{
+            console.log("result ", result);
+            if(result.status == 200 ){
+                message.success("导出成功！请到桌面查看！")
+            }else{
+                message.error("导出错误！")
+            }
+        })
+    }
+
     handleonOk =(e)=>{
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
@@ -709,7 +720,7 @@ export default class Personal extends React.Component {
                                         <Col span = {6}>
                                             <Col span = {24} style = {{ marginTop: 45 }} >
                                                 <Popconfirm title="是否导出合同?" onConfirm={() => this.outContract()}>
-                                                    <a>导出合同</a>
+                                                    <a onClick={this.outPdf}>导出合同</a>
                                                 </Popconfirm>
                                             </Col>
                                         </Col>
