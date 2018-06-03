@@ -74,7 +74,7 @@ export default class Personal extends React.Component {
 
     componentDidMount () {
         //查询房屋审核信息
-        Axios.post(`/verify/queryVerifyStatus/${displayName}`).then((result) => {
+        Axios.post(`/verify/queryVerifyStatus/${userId}`).then((result) => {
              const { data } = result.data;
              this.setState({
                  verifyInfo: data,
