@@ -37,7 +37,7 @@ export default class Index extends React.Component {
 
             if(this.props.flatAllDataInit != null){
                 let arr = [];
-                for ( let i = 0; i <= 2; i++){
+                for ( let i = 1; i <= 3; i++){
                     arr = arr.concat(this.props.flatAllDataInit[i]);
                 }
                 console.log("推荐的三个房屋：", arr);
@@ -157,7 +157,7 @@ export default class Index extends React.Component {
                     </div>
                 </div>
                 <div style={{maxWidth: 1190, margin: '0 auto'}}>
-                    <Row>
+                    <Row>{/*...d*/}
                             {
                                 houseData.map((data, k) => {
                                     if(data.fStatus == '0'){
