@@ -67,7 +67,7 @@ export default class Personal extends React.Component {
                 this.assOnOff(fId);
             }
             if(result.data.state == 999){
-                message.warn("已经有此房屋的订单！")
+                message.warn("已经有此房屋的订单！或已有人下单但未签约！")
             }
         })
     }

@@ -157,7 +157,7 @@ export default class Login extends React.Component {
                                             <input type="checkbox" id="within_a_week"/>一周内免登录
                                         </label>
                                     </p>
-                                    <a href="#" className="fr org">忘记密码？</a>
+                                    {/*<a href="#" className="fr org">忘记密码？</a>*/}
                                 </div>
                                 <div className="control-group clearfix">
                                         <Button htmlType="submit" onClick={() => { this.loginClick()}} className="org_btn" id="login_button">
