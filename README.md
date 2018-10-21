@@ -14,8 +14,6 @@
 
 <img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E6%88%BF%E6%BA%90%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2.png"/>
 
-<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E6%88%BF%E6%BA%90%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2.png"/>
-
 <img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2.png"/>
 
 <img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png"/>
