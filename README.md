@@ -4,6 +4,22 @@
 
 后台管理请见  [flat](https://github.com/fikyair/flat)
 
+### 效果图
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E4%B8%AA%E4%BA%BA%E4%B8%AD%E5%BF%83%E6%A8%A1%E5%9D%97%E9%A1%B5%E9%9D%A2.png"/>
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E5%9C%B0%E5%9F%9F%E4%BF%A1%E6%81%AF%E9%A1%B5%E9%9D%A2.png"/>
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E6%88%91%E8%A6%81%E7%A7%9F%E6%88%BF%E6%90%9C%E7%B4%A2%E9%A1%B5%E9%9D%A2.png"/>
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E6%88%BF%E6%BA%90%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2.png"/>
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E6%88%BF%E6%BA%90%E5%8F%91%E5%B8%83%E9%A1%B5%E9%9D%A2.png"/>
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2.png"/>
+
+<img width="800" height="373" src="http://oziqlv1ur.bkt.clouddn.com/%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png"/>
+
 ### 接口列表(Updating)
 
 \* client与admin共用接口
