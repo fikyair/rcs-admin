@@ -1,8 +1,14 @@
+### react-antd
+![Redux](https://img.shields.io/badge/redux-^4.4.5-yellowgreen.svg?style=flat-square)](https://github.com/reactjs/redux)
+[![Redux Immutablejs](https://img.shields.io/badge/immutablejs-^0.0.8-orange.svg?style=flat-square)](https://github.com/indexiatech/redux-immutablejs)
+[![Ant Design](https://img.shields.io/badge/ant--design-^2.7.2-yellowgreen.svg?style=flat-square)](https://github.com/ant-design/ant-design)
+
 ### 项目介绍
 
 爱家公寓前端项目
 
-后台管理请见  [flat](https://github.com/fikyair/flat)
+后台管理接口请戳  [flat](https://github.com/fikyair/flat)
+中后台管理系统请戳 [house-admin](https://github.com/fikyair/house-admin)
 
 ### 效果图
 
