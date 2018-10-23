@@ -6,7 +6,7 @@
 
 ### 项目介绍
 
-#### 爱家公寓前端项目
+#### 爱家公寓客户端
 
 后台管理接口请戳  [flat](https://github.com/fikyair/flat)
 
