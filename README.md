@@ -14,7 +14,7 @@
 
 ### 效果图
 
-<img width="800" height="373" src="http://qiniu.xueshiming.cn/%E9%A6%96%E9%A1%B5%E6%90%9C%E7%B4%A2%E9%A1%B5%E9%9D%A2.png"/>
+<img src="http://qiniu.xueshiming.cn/%E9%A6%96%E9%A1%B5%E6%90%9C%E7%B4%A2%E9%A1%B5%E9%9D%A2.png"/>
 
 <img width="800" height="373" src="http://qiniu.xueshiming.cn/%E7%BA%A6%E7%9C%8B%E6%A8%A1%E5%9D%97%E9%A1%B5%E9%9D%A2.png"/>
 
